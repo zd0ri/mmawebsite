@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rotoscope & Space Studio ✦</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ★ STAR CANVAS (background layer) -->
+  <canvas id="starCanvas"></canvas>
+
+  <!-- ★ CUSTOM CURSOR -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="#home" class="logo" aria-label="Home">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">ROTO<em>SPACE</em></span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="#home"      class="nav-link active" data-section="home">Home</a>
+        <a href="#portfolio" class="nav-link"        data-section="portfolio">Portfolio</a>
+        <a href="#about"     class="nav-link"        data-section="about">About</a>
+      </nav>
+
+      <!-- Right controls -->
+      <div class="header-controls">
+        <!-- Dark / Light toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-icon sun">☀</span>
+          <span class="theme-icon moon">☽</span>
+        </button>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#home"      class="mobile-link" data-section="home">Home</a>
+      <a href="#portfolio" class="mobile-link" data-section="portfolio">Portfolio</a>
+      <a href="#about"     class="mobile-link" data-section="about">About</a>
+    </div>
+  </header>
+
+  <!-- ==================== HOME SECTION ==================== -->
+  <section id="home" class="section section--home">
+
+    <!-- Floating orbs (decorative) -->
+    <div class="orb orb--1" aria-hidden="true"></div>
+    <div class="orb orb--2" aria-hidden="true"></div>
+    <div class="orb orb--3" aria-hidden="true"></div>
+
+    <!-- Parallax layer that follows mouse -->
+    <div class="parallax-layer" id="parallaxLayer" aria-hidden="true">
+      <div class="float-shape shape-ring"></div>
+      <div class="float-shape shape-dot-grid"></div>
+      <div class="float-shape shape-triangle"></div>
+    </div>
+
+    <!-- Hero content -->
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal-up">Welcome to my creative universe ✦</p>
+
+      <h1 class="hero-title">
+        <span class="line line--1 reveal-up" style="--delay:.1s">Where</span>
+        <span class="line line--2 reveal-up" style="--delay:.25s">
+          <em class="glitch" data-text="Drawings">Drawings</em>
+        </span>
+        <span class="line line--3 reveal-up" style="--delay:.4s">Come Alive</span>
+      </h1>
+
+      <!-- Typing subtitle -->
+      <p class="hero-subtitle reveal-up" style="--delay:.55s">
+        <span id="typingText"></span><span class="cursor-blink">|</span>
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="hero-ctas reveal-up" style="--delay:.7s">
+        <a href="#portfolio" class="btn btn--primary">Explore Work ↓</a>
+        <a href="#about"     class="btn btn--ghost">About Me</a>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint reveal-up" style="--delay:.85s" aria-hidden="true">
+        <span class="scroll-wheel"></span>
+        <span>scroll</span>
+      </div>
+    </div>
+
+    <!-- Mini solar system decoration -->
+    <div class="mini-system" aria-hidden="true" id="miniSystem">
+      <div class="mini-sun"></div>
+      <div class="mini-orbit orbit-1"><div class="mini-planet p1"></div></div>
+      <div class="mini-orbit orbit-2"><div class="mini-planet p2"></div></div>
+      <div class="mini-orbit orbit-3"><div class="mini-planet p3"></div></div>
+    </div>
+
+  </section>
+
+  <!-- ==================== PORTFOLIO SECTION ==================== -->
+  <section id="portfolio" class="section section--portfolio">
+
+    <div class="section-header">
+      <span class="section-tag">✦ My Work</span>
+      <h2 class="section-title reveal-up">Creative <em>Portfolio</em></h2>
+      <p class="section-desc reveal-up">Two worlds, one passion — hand-drawn magic &amp; cosmic simulation.</p>
+    </div>
+
+    <!-- Portfolio Tabs -->
+    <div class="port-tabs" role="tablist" aria-label="Portfolio categories">
+      <button class="port-tab active" id="tab-roto"  role="tab" aria-selected="true"  aria-controls="panel-roto"  data-tab="roto">
+        <span class="tab-icon">🎨</span> Rotoscoping
+      </button>
+      <button class="port-tab"        id="tab-solar" role="tab" aria-selected="false" aria-controls="panel-solar" data-tab="solar">
+        <span class="tab-icon">🪐</span> 3D Solar System
+      </button>
+    </div>
+
+    <!-- ── ROTOSCOPING PANEL ── -->
+    <div class="port-panel active" id="panel-roto" role="tabpanel" aria-labelledby="tab-roto">
+
+      <!-- Intro -->
+      <div class="roto-intro reveal-up">
+        <div class="roto-intro__text">
+          <h3>What is Rotoscoping?</h3>
+          <p>
+            Rotoscoping is the art of tracing over live-action footage, frame by frame,
+            to create stunningly fluid animations. Think of it as the bridge between
+            reality and imagination — where every movement breathes with organic life. ✨
+          </p>
+          <ul class="materials-list">
+            <li><span class="pill">Adobe Animate</span></li>
+            <li><span class="pill">Procreate</span></li>
+            <li><span class="pill">After Effects</span></li>
+            <li><span class="pill">Clip Studio Paint</span></li>
+            <li><span class="pill">Wacom Tablet</span></li>
+            <li><span class="pill">Light Table</span></li>
+          </ul>
+        </div>
+        <div class="roto-intro__visual" aria-hidden="true">
+          <div class="film-strip">
+            <div class="film-frame f1"></div>
+            <div class="film-frame f2"></div>
+            <div class="film-frame f3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video grid -->
+      <div class="video-grid">
+        <!-- 12 video placeholders -->
+        <div class="video-card" data-title="Roto Study #01" data-vid="dQw4w9WgXcQ">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Roto Study 01" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Roto Study #01</p>
+        </div>
+        <div class="video-card" data-title="Walking Cycle" data-vid="L_jWHffIx5E">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/L_jWHffIx5E/mqdefault.jpg" alt="Walking Cycle" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Walking Cycle</p>
+        </div>
+        <div class="video-card" data-title="Dance Roto" data-vid="kJQP7kiw5Fk">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" alt="Dance Roto" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Dance Roto</p>
+        </div>
+        <div class="video-card" data-title="Hand Study" data-vid="9bZkp7q19f0">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/9bZkp7q19f0/mqdefault.jpg" alt="Hand Study" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Hand Study</p>
+        </div>
+        <div class="video-card" data-title="Run Cycle" data-vid="JGwWNGJdvx8">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" alt="Run Cycle" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Run Cycle</p>
+        </div>
+        <div class="video-card" data-title="Face Trace" data-vid="SlPhMPnQ58k">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/SlPhMPnQ58k/mqdefault.jpg" alt="Face Trace" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Face Trace</p>
+        </div>
+        <div class="video-card" data-title="Fluid Motion" data-vid="fHI8X4OXluQ">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/fHI8X4OXluQ/mqdefault.jpg" alt="Fluid Motion" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Fluid Motion</p>
+        </div>
+        <div class="video-card" data-title="Jump Loop" data-vid="uelHwf8o7_U">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/uelHwf8o7_U/mqdefault.jpg" alt="Jump Loop" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Jump Loop</p>
+        </div>
+        <div class="video-card" data-title="Shadow Play" data-vid="hT_nvWreIhg">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/hT_nvWreIhg/mqdefault.jpg" alt="Shadow Play" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Shadow Play</p>
+        </div>
+        <div class="video-card" data-title="Crowd Scene" data-vid="8UVNT4wvIGY">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/8UVNT4wvIGY/mqdefault.jpg" alt="Crowd Scene" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Crowd Scene</p>
+        </div>
+        <div class="video-card" data-title="Spin &amp; Flip" data-vid="WPni755-Krg">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/WPni755-Krg/mqdefault.jpg" alt="Spin and Flip" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Spin &amp; Flip</p>
+        </div>
+        <div class="video-card" data-title="Finale Piece" data-vid="M7FIvfx5J10">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/M7FIvfx5J10/mqdefault.jpg" alt="Finale Piece" loading="lazy" />
+            <div class="video-overlay"><span class="play-btn">▶</span></div>
+          </div>
+          <p class="video-label">Finale Piece</p>
+        </div>
+      </div><!-- /video-grid -->
+
+    </div><!-- /panel-roto -->
+
+    <!-- ── SOLAR SYSTEM PANEL ── -->
+    <div class="port-panel" id="panel-solar" role="tabpanel" aria-labelledby="tab-solar">
+
+      <!-- Space canvas -->
+      <canvas id="solarCanvas" aria-label="Interactive solar system simulation"></canvas>
+
+      <!-- Planet tooltip -->
+      <div class="planet-tooltip" id="planetTooltip" aria-live="polite"></div>
+
+      <!-- Planet Age Calculator -->
+      <div class="age-calc reveal-up">
+        <h3 class="age-calc__title">🪐 Planet Age Calculator</h3>
+        <p class="age-calc__desc">Enter your Earth age to discover how old you'd be on other planets!</p>
+
+        <div class="age-calc__input-row">
+          <label for="earthAge">Your age on Earth</label>
+          <input type="number" id="earthAge" min="1" max="120" placeholder="e.g. 22" />
+          <button class="btn btn--primary" id="calcBtn">Calculate ✦</button>
+        </div>
+
+        <div class="age-results" id="ageResults" aria-live="polite">
+          <!-- JS fills this -->
+        </div>
+      </div>
+
+    </div><!-- /panel-solar -->
+
+  </section>
+
+  <!-- ==================== ABOUT SECTION ==================== -->
+  <section id="about" class="section section--about">
+
+    <div class="section-header">
+      <span class="section-tag">✦ The Creator</span>
+      <h2 class="section-title reveal-up">About <em>Me</em></h2>
+    </div>
+
+    <!-- About grid -->
+    <div class="about-grid">
+
+      <!-- Avatar card -->
+      <div class="about-avatar reveal-up">
+        <div class="avatar-wrap">
+          <div class="avatar-ring r1" aria-hidden="true"></div>
+          <div class="avatar-ring r2" aria-hidden="true"></div>
+          <div class="avatar-face" aria-hidden="true">
+            <span class="avatar-emoji">🌌</span>
+          </div>
+          <!-- Floating icons -->
+          <div class="float-icon fi1" aria-hidden="true">🎨</div>
+          <div class="float-icon fi2" aria-hidden="true">🪐</div>
+          <div class="float-icon fi3" aria-hidden="true">✏️</div>
+          <div class="float-icon fi4" aria-hidden="true">⭐</div>
+        </div>
+        <h3 class="avatar-name">Creative Artist</h3>
+        <p class="avatar-sub">Rotoscoper · 3D Designer · Space Nerd</p>
+      </div>
+
+      <!-- Bio + skills -->
+      <div class="about-info">
+
+        <!-- Bio panel -->
+        <div class="about-bio reveal-up">
+          <p>
+            Hey there! I'm a passionate animator and 3D artist obsessed with the intersection
+            of <strong>hand-drawn animation</strong> and <strong>digital cosmos</strong>.
+            I believe every frame tells a story — whether it's a dancing figure
+            traced from life, or a planet spinning in virtual space.
+          </p>
+          <p>
+            My love for rotoscoping started with a single flip-book and grew into full
+            animated shorts. My solar system work started as a school project and evolved
+            into an interactive digital experience. Two worlds, one soul. ✨
+          </p>
+        </div>
+
+        <!-- Flip skill cards -->
+        <div class="skills-grid">
+          <div class="skill-card flip-card reveal-up" style="--delay:.05s">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="skill-icon">🎞️</span><span>Rotoscoping</span></div>
+              <div class="flip-back"><p>Frame-by-frame tracing over video to produce fluid, lifelike animation.</p></div>
+            </div>
+          </div>
+          <div class="skill-card flip-card reveal-up" style="--delay:.15s">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="skill-icon">🪐</span><span>3D Modeling</span></div>
+              <div class="flip-back"><p>Building planetary systems and environments in Blender &amp; Cinema 4D.</p></div>
+            </div>
+          </div>
+          <div class="skill-card flip-card reveal-up" style="--delay:.25s">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="skill-icon">🌈</span><span>Color Theory</span></div>
+              <div class="flip-back"><p>Crafting vibrant palettes that evoke emotion and guide the eye.</p></div>
+            </div>
+          </div>
+          <div class="skill-card flip-card reveal-up" style="--delay:.35s">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="skill-icon">⚡</span><span>After Effects</span></div>
+              <div class="flip-back"><p>Motion graphics, compositing, and post-production magic.</p></div>
+            </div>
+          </div>
+          <div class="skill-card flip-card reveal-up" style="--delay:.45s">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="skill-icon">🎵</span><span>Sound Sync</span></div>
+              <div class="flip-back"><p>Aligning animation rhythm to music for a multi-sensory experience.</p></div>
+            </div>
+          </div>
+          <div class="skill-card flip-card reveal-up" style="--delay:.55s">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="skill-icon">🔭</span><span>Space Science</span></div>
+              <div class="flip-back"><p>Using real orbital mechanics &amp; NASA data to power realistic simulations.</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /about-info -->
+    </div><!-- /about-grid -->
+
+    <!-- Expanding fun facts -->
+    <div class="fun-facts reveal-up">
+      <h3 class="fun-facts__title">Fun Facts ✦</h3>
+      <div class="facts-list">
+        <details class="fact-item">
+          <summary>🎬 How I started rotoscoping</summary>
+          <p>It all started with a childhood obsession with a Rotoscope scene in a classic film. I paused every frame and traced it on tracing paper. 500 sheets later, I had my first animation!</p>
+        </details>
+        <details class="fact-item">
+          <summary>🌍 My favourite planet</summary>
+          <p>Saturn — obviously. Those rings look hand-drawn by the universe itself. Nature's own rotoscoping masterpiece.</p>
+        </details>
+        <details class="fact-item">
+          <summary>✨ Dream project</summary>
+          <p>A full-length animated short set entirely in space, combining rotoscoped astronauts against 3D rendered nebulas. Coming soon... maybe. 🚀</p>
+        </details>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-logo">✦ ROTO<em>SPACE</em></span>
+      <p>Made with ☕ + stardust · <span id="footerYear"></span></p>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- YouTube Modal -->
+  <div class="yt-modal" id="ytModal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <div class="yt-modal__backdrop" id="ytBackdrop"></div>
+    <div class="yt-modal__box">
+      <button class="yt-modal__close" id="ytClose" aria-label="Close video">✕</button>
+      <div class="yt-modal__frame">
+        <iframe id="ytIframe" src="" frameborder="0"
+          allow="autoplay; encrypted-media" allowfullscreen
+          title="YouTube video player"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Script -->
+  <script src="script.js"></script>
+</body>
+</html>

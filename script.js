@@ -504,42 +504,61 @@ function hexToRgb(hex) {
 /* ─────────────────────────────────────────
    14. PLANET AGE CALCULATOR
 ───────────────────────────────────────── */
+/* ─────────────────────────────────────────
+   14. PLANET AGE CALCULATOR
+───────────────────────────────────────── */
 const PLANET_YEARS = [
-  { name:'Mercury', emoji:'☿', period:.241   },
-  { name:'Venus',   emoji:'♀', period:.615   },
-  { name:'Mars',    emoji:'♂', period:1.881  },
-  { name:'Jupiter', emoji:'♃', period:11.86  },
-  { name:'Saturn',  emoji:'♄', period:29.46  },
-  { name:'Uranus',  emoji:'⛢', period:84.01  },
-  { name:'Neptune', emoji:'♆', period:164.8  },
+  { name: 'Mercury', emoji: '☿', period: 0.241  },
+  { name: 'Venus',   emoji: '♀', period: 0.615  },
+  { name: 'Mars',    emoji: '♂', period: 1.881  },
+  { name: 'Jupiter', emoji: '♃', period: 11.86  },
+  { name: 'Saturn',  emoji: '♄', period: 29.46  },
+  { name: 'Uranus',  emoji: '⛢', period: 84.01  },
+  { name: 'Neptune', emoji: '♆', period: 164.8  },
 ];
+
 function initAgeCalculator() {
   const btn     = document.getElementById('calcBtn');
   const input   = document.getElementById('earthAge');
   const results = document.getElementById('ageResults');
-  btn.addEventListener('click', calculate);
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+
+  if (!btn || !input || !results) return; // safety guard
+
   function calculate() {
     const age = parseFloat(input.value);
-    if (isNaN(age) || age <= 0 || age > 999) {
-      results.innerHTML = `<p style="color:var(--accent-3);font-family:var(--font-mono);font-size:.85rem;padding:10px 0;">
-        Please enter a valid age (1–999) 🙏</p>`;
+
+    if (!input.value || isNaN(age) || age <= 0 || age > 999) {
+      results.innerHTML = `<p style="
+        color: var(--accent-3);
+        font-family: var(--font-mono);
+        font-size: .85rem;
+        padding: 10px 0;
+        grid-column: 1 / -1;
+      ">Please enter a valid age between 1 and 999 🙏</p>`;
       return;
     }
-    results.innerHTML = '';
+
+    results.innerHTML = ''; // clear previous results
+
     PLANET_YEARS.forEach((p, i) => {
       const planetAge = (age / p.period).toFixed(2);
       const card = document.createElement('div');
       card.className = 'planet-result';
-      card.style.animationDelay = `${i * .07}s`;
+      card.style.animationDelay = `${i * 0.07}s`;
       card.innerHTML = `
         <div class="p-emoji">${p.emoji}</div>
         <div class="p-name">${p.name}</div>
         <div class="p-age">${planetAge}</div>
-        <div class="p-years">planet years old</div>`;
+        <div class="p-years">planet years old</div>
+      `;
       results.appendChild(card);
     });
   }
+
+  btn.addEventListener('click', calculate);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') calculate();
+  });
 }
 /* ─────────────────────────────────────────
    15. YOUTUBE MODAL

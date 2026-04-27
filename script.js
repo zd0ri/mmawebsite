@@ -550,7 +550,7 @@ function initYouTubeModal() {
   const closeBtn = document.getElementById('ytClose');
   const backdrop = document.getElementById('ytBackdrop');
   function openModal(videoId) {
-    iframe.src = `[youtube.com](https://www.youtube.com/embed/${videoId}?autoplay=1)`;
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     modal.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
   }

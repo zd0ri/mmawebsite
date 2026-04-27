@@ -4,83 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rotoscope & Space Studio ✦</title>
-
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
-
-  <!-- Main Stylesheet -->
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)" />
+  <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin />
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital@0;1&display=swap)" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- ★ STAR CANVAS (background layer) -->
+  <!-- STAR CANVAS -->
   <canvas id="starCanvas"></canvas>
-
-  <!-- ★ CUSTOM CURSOR -->
+  <!-- CUSTOM CURSOR -->
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
-
+  <!-- PARTICLE BURST (click effect) -->
+  <canvas id="burstCanvas"></canvas>
   <!-- ==================== HEADER ==================== -->
   <header class="site-header" id="siteHeader">
     <div class="header-inner">
-
-      <!-- Logo -->
       <a href="#home" class="logo" aria-label="Home">
         <span class="logo-icon">✦</span>
         <span class="logo-text">ROTO<em>SPACE</em></span>
       </a>
-
-      <!-- Navigation -->
       <nav class="main-nav" id="mainNav" aria-label="Main navigation">
         <a href="#home"      class="nav-link active" data-section="home">Home</a>
         <a href="#portfolio" class="nav-link"        data-section="portfolio">Portfolio</a>
         <a href="#about"     class="nav-link"        data-section="about">About</a>
       </nav>
-
-      <!-- Right controls -->
       <div class="header-controls">
-        <!-- Dark / Light toggle -->
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
           <span class="theme-icon sun">☀</span>
           <span class="theme-icon moon">☽</span>
         </button>
-
-        <!-- Hamburger (mobile) -->
         <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
-
-    <!-- Mobile menu -->
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
       <a href="#home"      class="mobile-link" data-section="home">Home</a>
       <a href="#portfolio" class="mobile-link" data-section="portfolio">Portfolio</a>
       <a href="#about"     class="mobile-link" data-section="about">About</a>
     </div>
   </header>
-
   <!-- ==================== HOME SECTION ==================== -->
   <section id="home" class="section section--home">
-
-    <!-- Floating orbs (decorative) -->
     <div class="orb orb--1" aria-hidden="true"></div>
     <div class="orb orb--2" aria-hidden="true"></div>
     <div class="orb orb--3" aria-hidden="true"></div>
-
-    <!-- Parallax layer that follows mouse -->
     <div class="parallax-layer" id="parallaxLayer" aria-hidden="true">
       <div class="float-shape shape-ring"></div>
       <div class="float-shape shape-dot-grid"></div>
       <div class="float-shape shape-triangle"></div>
     </div>
-
-    <!-- Hero content -->
     <div class="hero-content">
       <p class="hero-eyebrow reveal-up">Welcome to my creative universe ✦</p>
-
       <h1 class="hero-title">
         <span class="line line--1 reveal-up" style="--delay:.1s">Where</span>
         <span class="line line--2 reveal-up" style="--delay:.25s">
@@ -88,45 +65,49 @@
         </span>
         <span class="line line--3 reveal-up" style="--delay:.4s">Come Alive</span>
       </h1>
-
-      <!-- Typing subtitle -->
       <p class="hero-subtitle reveal-up" style="--delay:.55s">
         <span id="typingText"></span><span class="cursor-blink">|</span>
       </p>
-
-      <!-- CTA buttons -->
       <div class="hero-ctas reveal-up" style="--delay:.7s">
-        <a href="#portfolio" class="btn btn--primary">Explore Work ↓</a>
-        <a href="#about"     class="btn btn--ghost">About Me</a>
+        <a href="#portfolio" class="btn btn--primary magnetic-btn">Explore Work ↓</a>
+        <a href="#about"     class="btn btn--ghost magnetic-btn">About Me</a>
       </div>
-
-      <!-- Scroll hint -->
       <div class="scroll-hint reveal-up" style="--delay:.85s" aria-hidden="true">
         <span class="scroll-wheel"></span>
         <span>scroll</span>
       </div>
     </div>
-
-    <!-- Mini solar system decoration -->
     <div class="mini-system" aria-hidden="true" id="miniSystem">
       <div class="mini-sun"></div>
       <div class="mini-orbit orbit-1"><div class="mini-planet p1"></div></div>
       <div class="mini-orbit orbit-2"><div class="mini-planet p2"></div></div>
       <div class="mini-orbit orbit-3"><div class="mini-planet p3"></div></div>
     </div>
-
+    <!-- HERO STATS TICKER -->
+    <div class="hero-stats reveal-up" style="--delay:1s" aria-hidden="true">
+      <div class="stat-item">
+        <span class="stat-num" data-target="12">0</span>
+        <span class="stat-label">Weeks</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="3">0</span>
+        <span class="stat-label">Animations Live</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="8">0</span>
+        <span class="stat-label">Planets Simulated</span>
+      </div>
+    </div>
   </section>
-
   <!-- ==================== PORTFOLIO SECTION ==================== -->
   <section id="portfolio" class="section section--portfolio">
-
     <div class="section-header">
       <span class="section-tag">✦ My Work</span>
       <h2 class="section-title reveal-up">Creative <em>Portfolio</em></h2>
       <p class="section-desc reveal-up">Two worlds, one passion — hand-drawn magic &amp; cosmic simulation.</p>
     </div>
-
-    <!-- Portfolio Tabs -->
     <div class="port-tabs" role="tablist" aria-label="Portfolio categories">
       <button class="port-tab active" id="tab-roto"  role="tab" aria-selected="true"  aria-controls="panel-roto"  data-tab="roto">
         <span class="tab-icon">🎨</span> Rotoscoping
@@ -135,11 +116,8 @@
         <span class="tab-icon">🪐</span> 3D Solar System
       </button>
     </div>
-
     <!-- ── ROTOSCOPING PANEL ── -->
     <div class="port-panel active" id="panel-roto" role="tabpanel" aria-labelledby="tab-roto">
-
-      <!-- Intro -->
       <div class="roto-intro reveal-up">
         <div class="roto-intro__text">
           <h3>What is Rotoscoping?</h3>
@@ -165,8 +143,7 @@
           </div>
         </div>
       </div>
-
-      <!-- Reference video highlight -->
+      <!-- Reference video -->
       <div class="reference-video reveal-up">
         <div class="reference-video__header">
           <span class="reference-video__week">Reference Video</span>
@@ -174,7 +151,7 @@
         <div class="reference-video__frame-shell">
           <div class="reference-video__player-wrap">
             <iframe
-              src="https://www.youtube.com/embed/83X6PWqvnfE?rel=0&modestbranding=1"
+              src="[youtube.com](https://www.youtube.com/embed/83X6PWqvnfE?rel=0&modestbranding=1)"
               title="Rotoscope reference video"
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -188,138 +165,193 @@
           </div>
         </div>
       </div>
-
-      <!-- Video grid -->
-      <div class="video-grid">
-        <!-- 12 video placeholders -->
-        <div class="video-card" data-title="Roto Study #01" data-vid="dQw4w9WgXcQ">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Roto Study 01" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
-          </div>
-          <p class="video-label">Roto Study #01</p>
+      <!-- Progress bar -->
+      <div class="progress-banner reveal-up">
+        <div class="progress-banner__label">
+          <span>Rotoscope Journey</span>
+          <span class="progress-banner__fraction">3 / 12 Weeks Complete</span>
         </div>
-        <div class="video-card" data-title="Walking Cycle" data-vid="L_jWHffIx5E">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/L_jWHffIx5E/mqdefault.jpg" alt="Walking Cycle" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="--prog:25%"></div>
+          <div class="progress-milestones">
+            <span style="left:8.33%"  class="pm-dot pm-done"  title="Week 1"></span>
+            <span style="left:16.66%" class="pm-dot pm-done"  title="Week 2"></span>
+            <span style="left:25%"    class="pm-dot pm-done"  title="Week 3"></span>
+            <span style="left:33.33%" class="pm-dot"          title="Week 4"></span>
+            <span style="left:41.66%" class="pm-dot"          title="Week 5"></span>
+            <span style="left:50%"    class="pm-dot"          title="Week 6"></span>
+            <span style="left:58.33%" class="pm-dot"          title="Week 7"></span>
+            <span style="left:66.66%" class="pm-dot"          title="Week 8"></span>
+            <span style="left:75%"    class="pm-dot"          title="Week 9"></span>
+            <span style="left:83.33%" class="pm-dot"          title="Week 10"></span>
+            <span style="left:91.66%" class="pm-dot"          title="Week 11"></span>
+            <span style="left:100%"   class="pm-dot"          title="Week 12"></span>
           </div>
-          <p class="video-label">Walking Cycle</p>
         </div>
-        <div class="video-card" data-title="Dance Roto" data-vid="kJQP7kiw5Fk">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" alt="Dance Roto" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+      </div>
+      <!-- Week Grid -->
+      <div class="video-grid" id="weekGrid">
+        <!-- WEEK 1 — inline playable short -->
+        <div class="video-card week-card week-done" data-week="1">
+          <div class="week-badge">Week 1</div>
+          <div class="video-thumb inline-short">
+            <iframe
+              src="[youtube.com](https://www.youtube.com/embed/9jchSxiI1Wo?rel=0&modestbranding=1)"
+              title="Week 1 Rotoscope"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
-          <p class="video-label">Dance Roto</p>
+          <p class="video-label">Week 1 — First Steps</p>
         </div>
-        <div class="video-card" data-title="Hand Study" data-vid="9bZkp7q19f0">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/9bZkp7q19f0/mqdefault.jpg" alt="Hand Study" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <!-- WEEK 2 — inline playable short -->
+        <div class="video-card week-card week-done" data-week="2">
+          <div class="week-badge">Week 2</div>
+          <div class="video-thumb inline-short">
+            <iframe
+              src="[youtube.com](https://www.youtube.com/embed/BclVEvWFb5Q?rel=0&modestbranding=1)"
+              title="Week 2 Rotoscope"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
-          <p class="video-label">Hand Study</p>
+          <p class="video-label">Week 2 — Motion Study</p>
         </div>
-        <div class="video-card" data-title="Run Cycle" data-vid="JGwWNGJdvx8">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" alt="Run Cycle" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <!-- WEEK 3 — inline playable short -->
+        <div class="video-card week-card week-done" data-week="3">
+          <div class="week-badge">Week 3</div>
+          <div class="video-thumb inline-short">
+            <iframe
+              src="[youtube.com](https://www.youtube.com/embed/SJ9Qt4SAGp4?rel=0&modestbranding=1)"
+              title="Week 3 Rotoscope"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
-          <p class="video-label">Run Cycle</p>
+          <p class="video-label">Week 3 — Flow &amp; Rhythm</p>
         </div>
-        <div class="video-card" data-title="Face Trace" data-vid="SlPhMPnQ58k">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/SlPhMPnQ58k/mqdefault.jpg" alt="Face Trace" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <!-- WEEKS 4–12 — coming soon placeholders -->
+        <div class="video-card week-card week-pending" data-week="4">
+          <div class="week-badge">Week 4</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
           </div>
-          <p class="video-label">Face Trace</p>
+          <p class="video-label">Week 4 — In Progress</p>
         </div>
-        <div class="video-card" data-title="Fluid Motion" data-vid="fHI8X4OXluQ">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/fHI8X4OXluQ/mqdefault.jpg" alt="Fluid Motion" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <div class="video-card week-card week-pending" data-week="5">
+          <div class="week-badge">Week 5</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
           </div>
-          <p class="video-label">Fluid Motion</p>
+          <p class="video-label">Week 5 — In Progress</p>
         </div>
-        <div class="video-card" data-title="Jump Loop" data-vid="uelHwf8o7_U">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/uelHwf8o7_U/mqdefault.jpg" alt="Jump Loop" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <div class="video-card week-card week-pending" data-week="6">
+          <div class="week-badge">Week 6</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
           </div>
-          <p class="video-label">Jump Loop</p>
+          <p class="video-label">Week 6 — In Progress</p>
         </div>
-        <div class="video-card" data-title="Shadow Play" data-vid="hT_nvWreIhg">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/hT_nvWreIhg/mqdefault.jpg" alt="Shadow Play" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <div class="video-card week-card week-pending" data-week="7">
+          <div class="week-badge">Week 7</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
           </div>
-          <p class="video-label">Shadow Play</p>
+          <p class="video-label">Week 7 — In Progress</p>
         </div>
-        <div class="video-card" data-title="Crowd Scene" data-vid="8UVNT4wvIGY">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/8UVNT4wvIGY/mqdefault.jpg" alt="Crowd Scene" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <div class="video-card week-card week-pending" data-week="8">
+          <div class="week-badge">Week 8</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
           </div>
-          <p class="video-label">Crowd Scene</p>
+          <p class="video-label">Week 8 — In Progress</p>
         </div>
-        <div class="video-card" data-title="Spin &amp; Flip" data-vid="WPni755-Krg">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/WPni755-Krg/mqdefault.jpg" alt="Spin and Flip" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <div class="video-card week-card week-pending" data-week="9">
+          <div class="week-badge">Week 9</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
           </div>
-          <p class="video-label">Spin &amp; Flip</p>
+          <p class="video-label">Week 9 — In Progress</p>
         </div>
-        <div class="video-card" data-title="Finale Piece" data-vid="M7FIvfx5J10">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/M7FIvfx5J10/mqdefault.jpg" alt="Finale Piece" loading="lazy" />
-            <div class="video-overlay"><span class="play-btn">▶</span></div>
+        <div class="video-card week-card week-pending" data-week="10">
+          <div class="week-badge">Week 10</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
           </div>
-          <p class="video-label">Finale Piece</p>
+          <p class="video-label">Week 10 — In Progress</p>
+        </div>
+        <div class="video-card week-card week-pending" data-week="11">
+          <div class="week-badge">Week 11</div>
+          <div class="video-thumb coming-soon-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🎬</span>
+              <span class="cs-text">Coming Soon</span>
+            </div>
+          </div>
+          <p class="video-label">Week 11 — In Progress</p>
+        </div>
+        <div class="video-card week-card week-pending" data-week="12">
+          <div class="week-badge week-badge--finale">Week 12</div>
+          <div class="video-thumb coming-soon-thumb finale-thumb">
+            <div class="cs-inner">
+              <span class="cs-icon">🏆</span>
+              <span class="cs-text">Finale</span>
+            </div>
+          </div>
+          <p class="video-label">Week 12 — Grand Finale</p>
         </div>
       </div><!-- /video-grid -->
-
     </div><!-- /panel-roto -->
-
     <!-- ── SOLAR SYSTEM PANEL ── -->
     <div class="port-panel" id="panel-solar" role="tabpanel" aria-labelledby="tab-solar">
-
-      <!-- Space canvas -->
       <canvas id="solarCanvas" aria-label="Interactive solar system simulation"></canvas>
-
-      <!-- Planet tooltip -->
       <div class="planet-tooltip" id="planetTooltip" aria-live="polite"></div>
-
-      <!-- Planet Age Calculator -->
       <div class="age-calc reveal-up">
         <h3 class="age-calc__title">🪐 Planet Age Calculator</h3>
         <p class="age-calc__desc">Enter your Earth age to discover how old you'd be on other planets!</p>
-
         <div class="age-calc__input-row">
           <label for="earthAge">Your age on Earth</label>
           <input type="number" id="earthAge" min="1" max="120" placeholder="e.g. 22" />
           <button class="btn btn--primary" id="calcBtn">Calculate ✦</button>
         </div>
-
-        <div class="age-results" id="ageResults" aria-live="polite">
-          <!-- JS fills this -->
-        </div>
+        <div class="age-results" id="ageResults" aria-live="polite"></div>
       </div>
-
     </div><!-- /panel-solar -->
-
   </section>
-
   <!-- ==================== ABOUT SECTION ==================== -->
   <section id="about" class="section section--about">
-
     <div class="section-header">
       <span class="section-tag">✦ The Creator</span>
       <h2 class="section-title reveal-up">About <em>Me</em></h2>
     </div>
-
+    <!-- Constellation canvas (decorative) -->
+    <canvas class="constellation-canvas" id="constellationCanvas" aria-hidden="true"></canvas>
     <!-- About grid -->
     <div class="about-grid">
-
       <!-- Avatar card -->
       <div class="about-avatar reveal-up">
         <div class="avatar-wrap">
@@ -328,34 +360,68 @@
           <div class="avatar-face" aria-hidden="true">
             <span class="avatar-emoji">🌌</span>
           </div>
-          <!-- Floating icons -->
           <div class="float-icon fi1" aria-hidden="true">🎨</div>
           <div class="float-icon fi2" aria-hidden="true">🪐</div>
           <div class="float-icon fi3" aria-hidden="true">✏️</div>
           <div class="float-icon fi4" aria-hidden="true">⭐</div>
         </div>
-        <h3 class="avatar-name">Creative Artist</h3>
+        <h3 class="avatar-name">Meriel N. Lanuza</h3>
         <p class="avatar-sub">Rotoscoper · 3D Designer · Space Nerd</p>
+        <!-- ID card chip -->
+        <div class="id-chip">
+          <span class="id-chip__dot"></span>
+          <span>BSIT-NS-2A</span>
+        </div>
       </div>
-
       <!-- Bio + skills -->
       <div class="about-info">
-
-        <!-- Bio panel -->
         <div class="about-bio reveal-up">
           <p>
-            Hey there! I'm a passionate animator and 3D artist obsessed with the intersection
-            of <strong>hand-drawn animation</strong> and <strong>digital cosmos</strong>.
-            I believe every frame tells a story — whether it's a dancing figure
-            traced from life, or a planet spinning in virtual space.
+            Hey there! I'm <strong>Meriel N. Lanuza</strong>, a second-year Information Technology student
+            from <strong>BSIT-NS-2A</strong> — a passionate animator and digital artist obsessed with the
+            intersection of <strong>hand-drawn animation</strong> and <strong>digital cosmos</strong>.
           </p>
           <p>
-            My love for rotoscoping started with a single flip-book and grew into full
-            animated shorts. My solar system work started as a school project and evolved
-            into an interactive digital experience. Two worlds, one soul. ✨
+            I believe every frame tells a story — whether it's a dancing figure
+            traced from life, or a planet spinning in virtual space.
+            My love for rotoscoping started with a single flip-book and grew into
+            frame-by-frame animated shorts. Two worlds, one soul. ✨
           </p>
         </div>
-
+        <!-- Timeline -->
+        <div class="timeline reveal-up">
+          <h4 class="timeline__heading">My Journey</h4>
+          <div class="timeline__track">
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-content">
+                <strong>Flip-book Era</strong>
+                <p>Discovered animation by obsessively tracing classic film frames on 500 sheets of tracing paper.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-content">
+                <strong>Digital Leap</strong>
+                <p>Moved to Procreate &amp; Adobe Animate — unlocking infinite frames without the paper cuts.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-content">
+                <strong>Space Chapter</strong>
+                <p>A school project on orbital mechanics turned into a full interactive 3D solar system sim.</p>
+              </div>
+            </div>
+            <div class="tl-item tl-item--now">
+              <div class="tl-dot tl-dot--now"></div>
+              <div class="tl-content">
+                <strong>Now — BSIT-NS-2A</strong>
+                <p>12-week rotoscope challenge, building this portfolio, and dreaming bigger every day. 🚀</p>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Flip skill cards -->
         <div class="skills-grid">
           <div class="skill-card flip-card reveal-up" style="--delay:.05s">
@@ -395,11 +461,9 @@
             </div>
           </div>
         </div>
-
       </div><!-- /about-info -->
     </div><!-- /about-grid -->
-
-    <!-- Expanding fun facts -->
+    <!-- Fun facts -->
     <div class="fun-facts reveal-up">
       <h3 class="fun-facts__title">Fun Facts ✦</h3>
       <div class="facts-list">
@@ -415,25 +479,49 @@
           <summary>✨ Dream project</summary>
           <p>A full-length animated short set entirely in space, combining rotoscoped astronauts against 3D rendered nebulas. Coming soon... maybe. 🚀</p>
         </details>
+        <details class="fact-item">
+          <summary>📚 Course &amp; Section</summary>
+          <p>Currently enrolled in BSIT (Bachelor of Science in Information Technology) — NS-2A. Where tech meets creativity every single day.</p>
+        </details>
       </div>
     </div>
-
   </section>
-
   <!-- ==================== FOOTER ==================== -->
   <footer class="site-footer">
+    <!-- Nebula glow bg -->
+    <div class="footer-nebula" aria-hidden="true"></div>
     <div class="footer-inner">
-      <span class="footer-logo">✦ ROTO<em>SPACE</em></span>
-      <p>Made with ☕ + stardust · <span id="footerYear"></span></p>
+      <!-- Brand -->
+      <div class="footer-brand">
+        <span class="footer-logo">✦ ROTO<em>SPACE</em></span>
+        <p class="footer-tagline">Where drawings come alive &amp; planets orbit in code.</p>
+      </div>
+      <!-- Creator card -->
+      <div class="footer-creator">
+        <div class="creator-avatar" aria-hidden="true">🌌</div>
+        <div class="creator-info">
+          <p class="creator-name">Meriel N. Lanuza</p>
+          <p class="creator-course">BSIT-NS-2A</p>
+          <p class="creator-note">For Academic Purposes Only · 2026</p>
+        </div>
+      </div>
+      <!-- Nav links -->
       <div class="footer-links">
+        <p class="footer-links__heading">Navigate</p>
         <a href="#home">Home</a>
         <a href="#portfolio">Portfolio</a>
         <a href="#about">About</a>
       </div>
     </div>
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p>© <span id="footerYear"></span> Meriel N. Lanuza · BSIT-NS-2A · All Rights Reserved</p>
+      <div class="footer-stars-row" aria-hidden="true">
+        <span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span>
+      </div>
+    </div>
   </footer>
-
-  <!-- YouTube Modal -->
+  <!-- YouTube Modal (kept for any future modal use) -->
   <div class="yt-modal" id="ytModal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
     <div class="yt-modal__backdrop" id="ytBackdrop"></div>
     <div class="yt-modal__box">
@@ -445,8 +533,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Main Script -->
   <script src="script.js"></script>
 </body>
 </html>

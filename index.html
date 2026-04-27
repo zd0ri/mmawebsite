@@ -6,12 +6,9 @@
 <title>Multimedia & Authoring | Meriel N. Lanuza</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100;0,300;0,400;0,600;0,700;1,300&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100;0,300;0,400;0,600;0,700;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
-/* ============================================================
-   CSS VARIABLES & RESET
-   ============================================================ */
 :root {
   --bg:        #04060f;
   --bg2:       #070a1a;
@@ -34,9 +31,7 @@ body{
   cursor:none;
 }
 
-/* ============================================================
-   CUSTOM CURSOR
-   ============================================================ */
+/* ====== CURSOR ====== */
 #cursor{
   position:fixed;width:22px;height:22px;
   border:1.5px solid var(--cyan);border-radius:50%;
@@ -53,18 +48,65 @@ body{
 }
 #cursor.hover{width:44px;height:44px;border-color:var(--magenta);background:rgba(200,0,255,.08);}
 
-/* ============================================================
-   STARFIELD CANVAS
-   ============================================================ */
-#starfield{
-  position:fixed;top:0;left:0;
-  width:100%;height:100%;
-  z-index:0;pointer-events:none;
+/* ====== CLICK RIPPLE ====== */
+.ripple-burst{
+  position:fixed;pointer-events:none;z-index:9998;
+  width:60px;height:60px;border-radius:50%;
+  border:2px solid var(--cyan);
+  transform:translate(-50%,-50%) scale(0);
+  animation:ripplePop .6s ease-out forwards;
+}
+@keyframes ripplePop{
+  0%{transform:translate(-50%,-50%) scale(0);opacity:1;}
+  100%{transform:translate(-50%,-50%) scale(2.5);opacity:0;}
 }
 
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
+/* ====== STARS ====== */
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+
+/* ====== GLITCH LOADER ====== */
+#loader{
+  position:fixed;inset:0;z-index:99999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;transition:opacity .5s, visibility .5s;
+}
+#loader.done{opacity:0;visibility:hidden;}
+.loader-text{
+  font-family:'Orbitron',sans-serif;font-size:clamp(28px,6vw,56px);
+  letter-spacing:8px;text-transform:uppercase;
+  color:var(--cyan);text-shadow:var(--glow-c);
+  animation:glitch 1.2s infinite;
+}
+.loader-bar-wrap{width:260px;height:2px;background:rgba(0,229,255,.15);border-radius:4px;overflow:hidden;}
+.loader-bar{height:100%;background:linear-gradient(to right,var(--cyan),var(--magenta));width:0;border-radius:4px;transition:width .05s;}
+.loader-sub{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--muted);}
+@keyframes glitch{
+  0%,90%,100%{clip-path:none;transform:none;}
+  92%{clip-path:polygon(0 10%,100% 10%,100% 30%,0 30%);transform:translateX(4px);}
+  94%{clip-path:polygon(0 50%,100% 50%,100% 70%,0 70%);transform:translateX(-3px);}
+  96%{clip-path:polygon(0 80%,100% 80%,100% 95%,0 95%);transform:translateX(2px);}
+}
+
+/* ====== PAGE TRANSITION ====== */
+#page-wipe{
+  position:fixed;inset:0;z-index:9997;
+  background:var(--bg2);
+  clip-path:polygon(0 0,0 0,0 100%,0 100%);
+  pointer-events:none;
+}
+#page-wipe.in{animation:wipeIn .45s cubic-bezier(.77,0,.18,1) forwards;}
+#page-wipe.out{animation:wipeOut .45s cubic-bezier(.77,0,.18,1) forwards;}
+@keyframes wipeIn{
+  0%{clip-path:polygon(0 0,0 0,0 100%,0 100%);}
+  100%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);}
+}
+@keyframes wipeOut{
+  0%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);}
+  100%{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%);}
+}
+
+/* ====== NAV ====== */
 nav{
   position:fixed;top:0;width:100%;z-index:1000;
   padding:0 50px;
@@ -73,62 +115,62 @@ nav{
   background:rgba(4,6,15,.65);
   backdrop-filter:blur(24px);
   border-bottom:1px solid rgba(0,229,255,.08);
+  transition:background .4s;
 }
-.nav-logo{
-  display:flex;align-items:center;gap:14px;
-}
+nav.scrolled{background:rgba(4,6,15,.92);border-bottom-color:rgba(0,229,255,.18);}
+.nav-logo{display:flex;align-items:center;gap:14px;}
 .nav-logo-circle{
   width:38px;height:38px;border-radius:50%;
   border:2px solid var(--cyan);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Michroma',sans-serif;font-size:9px;letter-spacing:1px;
+  font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:1px;
   color:var(--cyan);text-align:center;line-height:1.2;
+  animation:rotateBorder 8s linear infinite;
+  background:radial-gradient(circle,rgba(0,229,255,.08),transparent);
+}
+@keyframes rotateBorder{
+  0%{box-shadow:0 0 0 2px rgba(0,229,255,.3),var(--glow-c);}
+  50%{box-shadow:0 0 0 2px rgba(200,0,255,.3),var(--glow-m);}
+  100%{box-shadow:0 0 0 2px rgba(0,229,255,.3),var(--glow-c);}
 }
 .nav-logo-text{
-  font-family:'Michroma',sans-serif;font-size:11px;
+  font-family:'Orbitron',sans-serif;font-size:9px;
   letter-spacing:3px;text-transform:uppercase;color:var(--white);
 }
 .nav-links{display:flex;gap:6px;list-style:none;}
 .nav-links a{
-  font-family:'Michroma',sans-serif;font-size:11px;
+  font-family:'Orbitron',sans-serif;font-size:9px;
   text-decoration:none;color:var(--muted);
   padding:7px 18px;border-radius:40px;
   text-transform:uppercase;letter-spacing:2px;
   border:1px solid transparent;
-  transition:all .3s;position:relative;
+  transition:all .3s;position:relative;overflow:hidden;
 }
+.nav-links a::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,.12),transparent);
+  transform:translateX(-100%);transition:.5s;
+}
+.nav-links a:hover::before{transform:translateX(100%);}
 .nav-links a:hover,.nav-links a.active{
   color:var(--white);border-color:rgba(0,229,255,.3);
   background:rgba(0,229,255,.07);
 }
 .nav-links a.active{color:var(--cyan);}
-.nav-hamburger{
-  display:flex;flex-direction:column;gap:5px;cursor:pointer;
-  padding:8px;
-}
-.nav-hamburger span{
-  display:block;width:22px;height:1.5px;background:var(--muted);
-  transition:.3s;
-}
 
-/* ============================================================
-   PAGES
-   ============================================================ */
+/* ====== PAGES ====== */
 .page{display:none;min-height:100vh;position:relative;z-index:1;}
 .page.active{display:block;}
+.page.enter{animation:pageEnter .6s cubic-bezier(.23,1,.32,1) forwards;}
+@keyframes pageEnter{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
 
-/* ============================================================
-   HOME — PLANET EXPLORER HERO
-   ============================================================ */
+/* ====== HERO ====== */
 #home{padding-top:68px;}
-
 .hero-stage{
   position:relative;width:100%;height:calc(100vh - 68px);
   overflow:hidden;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
 }
-
-/* planet orbs */
 .planet-bg{
   position:absolute;bottom:-10%;left:50%;
   transform:translateX(-50%);
@@ -139,28 +181,55 @@ nav{
   box-shadow:inset -40px -40px 80px rgba(0,0,0,.8),
              0 0 120px rgba(0,229,255,.12);
   animation:planetFloat 8s ease-in-out infinite;
-  transition:background .8s;
+  transition:background 1.2s cubic-bezier(.23,1,.32,1);
+  cursor:pointer;
 }
 .planet-bg::after{
   content:'';position:absolute;inset:0;border-radius:50%;
   background:radial-gradient(ellipse at 30% 28%,
     rgba(255,255,255,.18) 0%,transparent 50%);
 }
+.planet-bg:hover{
+  box-shadow:inset -40px -40px 80px rgba(0,0,0,.8),
+             0 0 180px rgba(0,229,255,.35),
+             0 0 60px rgba(200,0,255,.2);
+}
+/* planet rings on hover */
+.planet-ring{
+  position:absolute;top:50%;left:50%;
+  border:1px solid rgba(0,229,255,.15);
+  border-radius:50%;
+  transform:translate(-50%,-50%) rotateX(75deg);
+  pointer-events:none;animation:ringPulse 4s ease-in-out infinite;
+}
+.planet-ring:nth-child(1){width:110%;height:110%;animation-delay:0s;}
+.planet-ring:nth-child(2){width:130%;height:130%;animation-delay:.8s;border-color:rgba(200,0,255,.08);}
+.planet-ring:nth-child(3){width:150%;height:150%;animation-delay:1.6s;border-color:rgba(255,98,32,.06);}
+@keyframes ringPulse{
+  0%,100%{opacity:.4;}50%{opacity:1;}
+}
+@keyframes planetFloat{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  50%{transform:translateX(-50%) translateY(-18px);}
+}
 
 /* side planets */
 .side-planet{
   position:absolute;top:50%;transform:translateY(-50%);
   display:flex;flex-direction:column;align-items:center;gap:14px;
-  cursor:pointer;transition:all .5s;
+  cursor:pointer;transition:all .5s cubic-bezier(.23,1,.32,1);
   user-select:none;
 }
 .side-planet-left{left:4%;}
 .side-planet-right{right:4%;}
-.side-planet:hover{transform:translateY(-50%) scale(1.08);}
+.side-planet:hover{transform:translateY(-50%) scale(1.12);}
 .side-orb{
   border-radius:50%;
   box-shadow:0 4px 30px rgba(0,0,0,.6);
-  transition:all .5s;
+  transition:all .5s cubic-bezier(.23,1,.32,1);
+}
+.side-planet:hover .side-orb{
+  box-shadow:0 4px 30px rgba(0,0,0,.6),0 0 40px rgba(0,229,255,.3);
 }
 .side-planet-left .side-orb{
   width:min(15vw,160px);height:min(15vw,160px);
@@ -171,11 +240,11 @@ nav{
   background:radial-gradient(ellipse at 35% 30%,#a3f0c0 0%,#5bb888 20%,#2a7a5c 50%,#0e3d2e 80%,#04150f 100%);
 }
 .side-label{
-  font-family:'Michroma',sans-serif;font-size:11px;
+  font-family:'Orbitron',sans-serif;font-size:9px;
   letter-spacing:4px;text-transform:uppercase;color:var(--muted);
 }
 
-/* nav arrows */
+/* arrows */
 .hero-arrow{
   position:absolute;top:50%;transform:translateY(-50%);
   width:44px;height:44px;border-radius:50%;
@@ -186,7 +255,14 @@ nav{
   transition:all .3s;z-index:10;
   backdrop-filter:blur(8px);
 }
-.hero-arrow:hover{border-color:var(--cyan);background:rgba(0,229,255,.1);color:var(--cyan);}
+.hero-arrow:hover{
+  border-color:var(--cyan);
+  background:rgba(0,229,255,.1);
+  color:var(--cyan);
+  box-shadow:var(--glow-c);
+  transform:translateY(-50%) scale(1.1);
+}
+.hero-arrow:active{transform:translateY(-50%) scale(.95);}
 .hero-arrow-left{left:calc(4% + min(15vw,160px) + 30px);}
 .hero-arrow-right{right:calc(4% + min(14vw,145px) + 30px);}
 
@@ -198,72 +274,106 @@ nav{
 }
 .hero-eyebrow{
   display:flex;align-items:center;justify-content:center;gap:20px;
-  font-family:'Michroma',sans-serif;font-size:11px;letter-spacing:5px;
+  font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:5px;
   color:var(--muted);text-transform:uppercase;margin-bottom:10px;
+  animation:fadeInDown .8s ease both;
 }
 .hero-eyebrow-line{width:50px;height:1px;background:var(--muted);}
 .hero-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(70px,14vw,160px);
-  line-height:.9;letter-spacing:4px;
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(50px,10vw,120px);
+  font-weight:900;
+  line-height:.95;letter-spacing:4px;
   color:var(--white);
-  filter:drop-shadow(0 0 40px rgba(0,229,255,.25));
-  transition:all .6s;
+  filter:drop-shadow(0 0 40px rgba(0,229,255,.35));
+  transition:all .8s cubic-bezier(.23,1,.32,1);
+  animation:fadeInUp .9s ease both .1s;
+  text-transform:uppercase;
 }
+.hero-title span{
+  display:inline-block;
+  animation:charFloat 4s ease-in-out infinite;
+}
+.hero-title span:nth-child(odd){animation-delay:.3s;}
 .hero-sub{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(22px,4vw,42px);
+  font-family:'Share Tech Mono',monospace;
+  font-size:clamp(14px,2.5vw,22px);
   letter-spacing:8px;color:var(--orange);
-  margin-top:4px;
+  margin-top:8px;
   text-shadow:var(--glow-o);
+  animation:fadeInUp .9s ease both .2s;
 }
 .hero-cta{
   pointer-events:all;margin-top:30px;
   display:inline-block;
-  font-family:'Michroma',sans-serif;font-size:11px;letter-spacing:3px;
+  font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;
   text-transform:uppercase;color:var(--white);text-decoration:none;
-  padding:12px 34px;border-radius:40px;
+  padding:14px 40px;border-radius:40px;
   border:1px solid rgba(255,255,255,.35);
   background:rgba(255,255,255,.03);
   backdrop-filter:blur(10px);
   transition:all .35s;cursor:pointer;
+  position:relative;overflow:hidden;
+  animation:fadeInUp .9s ease both .3s;
 }
-.hero-cta:hover{border-color:var(--cyan);background:rgba(0,229,255,.1);color:var(--cyan);}
+.hero-cta::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,.2),transparent);
+  transform:translateX(-100%);
+  transition:.5s;
+}
+.hero-cta:hover::before{transform:translateX(100%);}
+.hero-cta:hover{
+  border-color:var(--cyan);background:rgba(0,229,255,.1);
+  color:var(--cyan);box-shadow:var(--glow-c);
+  transform:translateY(-3px);
+}
+.hero-cta:active{transform:translateY(0) scale(.96);}
 
-/* hero stats bar */
+@keyframes charFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:none;}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+
+/* hero stats */
 .hero-stats{
   position:absolute;bottom:0;left:0;right:0;
-  display:flex;justify-content:center;gap:0;
+  display:flex;justify-content:center;
   background:rgba(4,6,15,.75);
   backdrop-filter:blur(20px);
   border-top:1px solid rgba(0,229,255,.08);
   padding:20px 40px;
   z-index:10;
+  transition:all .5s;
 }
 .stat-item{
   flex:1;max-width:180px;
   padding:0 30px;
   border-right:1px solid rgba(255,255,255,.07);
+  transition:all .3s;
+  cursor:default;
 }
 .stat-item:last-child{border-right:none;}
+.stat-item:hover{background:rgba(0,229,255,.04);border-radius:8px;}
 .stat-label{
-  font-family:'Michroma',sans-serif;font-size:9px;
+  font-family:'Orbitron',sans-serif;font-size:8px;
   letter-spacing:3px;text-transform:uppercase;
   color:var(--cyan);margin-bottom:6px;
 }
 .stat-value{
-  font-family:'Bebas Neue',sans-serif;font-size:22px;
+  font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;
   color:var(--white);letter-spacing:1px;
+  transition:.3s;
 }
-.stat-sub{font-family:'Exo 2',sans-serif;font-size:11px;color:var(--muted);}
+.stat-item:hover .stat-value{color:var(--cyan);text-shadow:var(--glow-c);}
+.stat-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);}
 
-/* home sections */
-.home-projects{
-  max-width:1200px;margin:0 auto;
-  padding:100px 50px;
-}
+/* ====== HOME PROJECTS ====== */
+.home-projects{max-width:1200px;margin:0 auto;padding:100px 50px;}
 .section-eyebrow{
-  font-family:'Michroma',sans-serif;font-size:10px;
+  font-family:'Orbitron',sans-serif;font-size:9px;
   letter-spacing:5px;text-transform:uppercase;
   color:var(--cyan);margin-bottom:14px;
   display:flex;align-items:center;gap:16px;
@@ -273,12 +383,21 @@ nav{
   background:linear-gradient(to right,rgba(0,229,255,.5),transparent);
 }
 .section-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(40px,6vw,72px);
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(32px,5vw,60px);font-weight:900;
   letter-spacing:3px;margin-bottom:60px;
+  background:linear-gradient(135deg,#ffffff,#00e5ff 50%,#c800ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:gradShift 4s linear infinite;
+  background-size:200% 200%;
+}
+@keyframes gradShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
-/* project cards — big asymmetric layout */
+/* project cards */
 .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
 .proj-card{
   position:relative;overflow:hidden;border-radius:20px;
@@ -294,22 +413,33 @@ nav{
   background:linear-gradient(135deg,rgba(0,229,255,.06),transparent 60%);
   opacity:0;transition:.5s;
 }
-.proj-card:hover{border-color:rgba(0,229,255,.35);transform:translateY(-10px);}
+.proj-card::after{
+  content:'';position:absolute;top:0;left:-100%;
+  width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);
+  transition:left .6s ease;
+}
+.proj-card:hover::after{left:150%;}
+.proj-card:hover{
+  border-color:rgba(0,229,255,.35);
+  transform:translateY(-12px) scale(1.01);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 40px rgba(0,229,255,.12);
+}
 .proj-card:hover::before{opacity:1;}
-.proj-card.magenta{border-color:rgba(200,0,255,.08);}
+.proj-card:active{transform:translateY(-6px) scale(.99);}
 .proj-card.magenta::before{background:linear-gradient(135deg,rgba(200,0,255,.06),transparent 60%);}
-.proj-card.magenta:hover{border-color:rgba(200,0,255,.35);}
-
+.proj-card.magenta:hover{
+  border-color:rgba(200,0,255,.35);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 40px rgba(200,0,255,.12);
+}
 .proj-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:100px;line-height:1;
+  font-family:'Orbitron',sans-serif;font-size:80px;font-weight:900;line-height:1;
   position:absolute;top:10px;right:24px;
   color:rgba(255,255,255,.04);
   transition:.4s;
 }
 .proj-card:hover .proj-num{color:rgba(0,229,255,.07);}
 .proj-card.magenta:hover .proj-num{color:rgba(200,0,255,.07);}
-
 .proj-icon{
   width:56px;height:56px;margin-bottom:28px;
   border-radius:14px;
@@ -317,17 +447,16 @@ nav{
   font-size:26px;
   background:rgba(0,229,255,.08);
   border:1px solid rgba(0,229,255,.2);
-  transition:.4s;
+  transition:all .4s;
 }
-.proj-card.magenta .proj-icon{
-  background:rgba(200,0,255,.08);
-  border-color:rgba(200,0,255,.2);
+.proj-card.magenta .proj-icon{background:rgba(200,0,255,.08);border-color:rgba(200,0,255,.2);}
+.proj-card:hover .proj-icon{
+  box-shadow:var(--glow-c);
+  transform:scale(1.1) rotate(5deg);
 }
-.proj-card:hover .proj-icon{box-shadow:var(--glow-c);}
-.proj-card.magenta:hover .proj-icon{box-shadow:var(--glow-m);}
-
+.proj-card.magenta:hover .proj-icon{box-shadow:var(--glow-m);transform:scale(1.1) rotate(-5deg);}
 .proj-tag{
-  font-family:'Michroma',sans-serif;font-size:9px;
+  font-family:'Orbitron',sans-serif;font-size:8px;
   letter-spacing:4px;text-transform:uppercase;
   color:var(--cyan);
   background:rgba(0,229,255,.08);
@@ -335,34 +464,31 @@ nav{
   padding:4px 12px;border-radius:30px;
   display:inline-block;margin-bottom:14px;
 }
-.proj-card.magenta .proj-tag{
-  color:var(--magenta);
-  background:rgba(200,0,255,.08);
-  border-color:rgba(200,0,255,.2);
-}
+.proj-card.magenta .proj-tag{color:var(--magenta);background:rgba(200,0,255,.08);border-color:rgba(200,0,255,.2);}
 .proj-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:36px;letter-spacing:2px;margin-bottom:14px;
+  font-family:'Orbitron',sans-serif;
+  font-size:28px;font-weight:800;letter-spacing:2px;margin-bottom:14px;
 }
-.proj-desc{
-  font-family:'Exo 2',sans-serif;font-size:15px;
-  color:var(--muted);line-height:1.75;margin-bottom:30px;
-}
+.proj-desc{font-family:'Exo 2',sans-serif;font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:30px;}
 .proj-btn{
   display:inline-flex;align-items:center;gap:8px;
-  font-family:'Michroma',sans-serif;font-size:10px;
+  font-family:'Orbitron',sans-serif;font-size:9px;
   letter-spacing:3px;text-transform:uppercase;
   color:var(--cyan);border:1px solid rgba(0,229,255,.3);
   padding:10px 24px;border-radius:30px;
   background:rgba(0,229,255,.05);
   transition:all .3s;text-decoration:none;cursor:pointer;
+  position:relative;overflow:hidden;
 }
-.proj-card.magenta .proj-btn{
-  color:var(--magenta);border-color:rgba(200,0,255,.3);
-  background:rgba(200,0,255,.05);
+.proj-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,.15),transparent);
+  transform:translateX(-100%);transition:.4s;
 }
-.proj-btn:hover{background:rgba(0,229,255,.15);}
-.proj-card.magenta .proj-btn:hover{background:rgba(200,0,255,.15);}
+.proj-btn:hover::before{transform:translateX(100%);}
+.proj-card.magenta .proj-btn{color:var(--magenta);border-color:rgba(200,0,255,.3);background:rgba(200,0,255,.05);}
+.proj-btn:hover{box-shadow:var(--glow-c);transform:scale(1.05);}
+.proj-card.magenta .proj-btn:hover{box-shadow:var(--glow-m);}
 .proj-glow{
   position:absolute;bottom:-60px;left:50%;
   transform:translateX(-50%);
@@ -370,14 +496,10 @@ nav{
   background:radial-gradient(ellipse,rgba(0,229,255,.18),transparent 70%);
   pointer-events:none;transition:.5s;
 }
-.proj-card:hover .proj-glow{transform:translateX(-50%) scale(1.5);opacity:1.5;}
+.proj-card:hover .proj-glow{transform:translateX(-50%) scale(1.5);}
 .proj-card.magenta .proj-glow{background:radial-gradient(ellipse,rgba(200,0,255,.18),transparent 70%);}
 
-/* ============================================================
-   ROTOSCOPING PAGE
-   ============================================================ */
-#rotoscoping{padding-top:68px;}
-
+/* ====== PAGE BANNER ====== */
 .page-banner{
   position:relative;overflow:hidden;
   padding:80px 50px 60px;
@@ -390,36 +512,60 @@ nav{
   pointer-events:none;
 }
 .page-banner-label{
-  font-family:'Michroma',sans-serif;font-size:10px;
+  font-family:'Share Tech Mono',monospace;font-size:10px;
   letter-spacing:6px;text-transform:uppercase;color:var(--cyan);
   display:flex;align-items:center;justify-content:center;gap:18px;
   margin-bottom:18px;
+  animation:fadeInDown .8s ease both;
 }
 .page-banner-label::before,.page-banner-label::after{
   content:'';width:60px;height:1px;
   background:linear-gradient(to right,transparent,rgba(0,229,255,.5));
 }
 .page-banner-label::after{transform:scaleX(-1);}
+
+/* THE BIG ORBITRON HEADINGS — like the reference pic */
 .page-banner-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(50px,10vw,110px);
-  letter-spacing:5px;
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(48px,10vw,110px);
+  font-weight:900;
+  letter-spacing:6px;
   background:linear-gradient(135deg,#00e5ff,#c800ff);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 30px rgba(0,229,255,.3));
   margin-bottom:16px;
+  animation:fadeInUp .9s ease both .1s, titleGlow 3s ease-in-out infinite .9s;
+  text-transform:uppercase;
+  position:relative;
+  display:inline-block;
+}
+@keyframes titleGlow{
+  0%,100%{filter:drop-shadow(0 0 30px rgba(0,229,255,.3));}
+  50%{filter:drop-shadow(0 0 60px rgba(200,0,255,.5)) drop-shadow(0 0 30px rgba(0,229,255,.4));}
 }
 .page-banner-desc{
   font-family:'Exo 2',sans-serif;font-size:16px;
   color:var(--muted);max-width:620px;margin:0 auto;line-height:1.75;
+  animation:fadeInUp .9s ease both .2s;
+}
+
+/* scan line across banner */
+.page-banner::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  animation:scanBanner 3s ease-in-out infinite;
+}
+@keyframes scanBanner{
+  0%{left:-100%;right:100%;}
+  100%{left:100%;right:-100%;}
 }
 
 .page-content{max-width:1280px;margin:0 auto;padding:70px 50px 100px;}
 
-/* Reference video */
-.ref-block{margin-bottom:80px;}
+/* ====== BLOCK LABELS ====== */
 .block-label{
-  font-family:'Michroma',sans-serif;font-size:10px;letter-spacing:5px;
+  font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;
   text-transform:uppercase;color:var(--cyan);
   display:flex;align-items:center;gap:16px;margin-bottom:26px;
 }
@@ -428,7 +574,7 @@ nav{
   background:linear-gradient(to right,rgba(0,229,255,.4),transparent);
 }
 
-/* cinematic video player */
+/* ====== CINEMATIC PLAYER ====== */
 .cine-frame{
   border-radius:18px;overflow:hidden;
   border:1px solid rgba(0,229,255,.15);
@@ -447,16 +593,14 @@ nav{
   border-bottom:1px solid rgba(0,229,255,.08);
 }
 .cine-dots{display:flex;gap:7px;}
-.cine-dot{width:11px;height:11px;border-radius:50%;}
+.cine-dot{width:11px;height:11px;border-radius:50%;transition:.3s;cursor:pointer;}
 .cine-dot:nth-child(1){background:#ff5f57;}
 .cine-dot:nth-child(2){background:#febc2e;}
 .cine-dot:nth-child(3){background:#28c840;}
-.cine-bar-title{
-  flex:1;font-family:'Michroma',sans-serif;font-size:10px;
-  letter-spacing:2px;color:var(--muted);
-}
+.cine-dot:hover{transform:scale(1.3);}
+.cine-bar-title{flex:1;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);}
 .cine-bar-tag{
-  font-family:'Michroma',sans-serif;font-size:8px;
+  font-family:'Orbitron',sans-serif;font-size:7px;
   letter-spacing:2px;text-transform:uppercase;
   color:var(--cyan);border:1px solid rgba(0,229,255,.25);
   padding:3px 10px;border-radius:20px;background:rgba(0,229,255,.06);
@@ -464,31 +608,19 @@ nav{
 .cine-embed{position:relative;padding-bottom:52.7%;height:0;}
 .cine-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
 
-/* WEEKLY PROGRESS */
+/* ====== WEEKLY INTRO ====== */
 .weekly-intro{
   font-family:'Exo 2',sans-serif;font-size:15px;
   color:var(--muted);line-height:1.75;margin-bottom:50px;
   max-width:700px;
 }
-
-/* 12 unique week frames grid */
 .weeks-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
   gap:28px;
 }
 
-.week-frame{
-  position:relative;overflow:hidden;
-  border-radius:16px;
-  background:rgba(7,10,26,.85);
-  border:1px solid rgba(255,255,255,.06);
-  backdrop-filter:blur(12px);
-  transition:all .45s cubic-bezier(.23,1,.32,1);
-}
-.week-frame:hover{transform:translateY(-8px);}
-
-/* Each week gets a unique accent color & style */
+/* week frame */
 .week-frame[data-week="1"]  { --wc:#00e5ff; --wc2:#0099ff; }
 .week-frame[data-week="2"]  { --wc:#c800ff; --wc2:#7700cc; }
 .week-frame[data-week="3"]  { --wc:#ff6220; --wc2:#cc3300; }
@@ -502,36 +634,59 @@ nav{
 .week-frame[data-week="11"] { --wc:#ff1f8e; --wc2:#cc005f; }
 .week-frame[data-week="12"] { --wc:#c8ff00; --wc2:#99cc00; }
 
+.week-frame{
+  position:relative;overflow:hidden;
+  border-radius:16px;
+  background:rgba(7,10,26,.85);
+  border:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);
+  transition:all .45s cubic-bezier(.23,1,.32,1);
+  cursor:pointer;
+}
 .week-frame:hover{
+  transform:translateY(-10px) scale(1.01);
   border-color:var(--wc);
   box-shadow:0 20px 60px rgba(0,0,0,.5),
-             0 0 30px rgba(0,0,0,.3),
-             inset 0 0 0 1px rgba(255,255,255,.04);
+             0 0 40px color-mix(in srgb,var(--wc) 20%,transparent);
 }
+.week-frame:active{transform:translateY(-4px) scale(.99);}
 
-/* top accent bar */
+/* shimmer sweep on hover */
+.week-frame::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;z-index:2;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);
+  transition:left .7s ease;pointer-events:none;
+}
+.week-frame:hover::before{left:150%;}
+
 .week-topbar{
   height:3px;
   background:linear-gradient(to right,var(--wc),var(--wc2),transparent);
+  transition:height .3s;
 }
-
-/* frame header */
+.week-frame:hover .week-topbar{height:4px;}
 .week-head{
   padding:14px 18px;
   display:flex;align-items:center;justify-content:space-between;
   border-bottom:1px solid rgba(255,255,255,.05);
 }
 .week-num-badge{
-  font-family:'Michroma',sans-serif;font-size:9px;
+  font-family:'Orbitron',sans-serif;font-size:8px;
   letter-spacing:3px;text-transform:uppercase;
   padding:4px 12px;border-radius:30px;
   color:var(--wc);
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
+  transition:.3s;
+}
+.week-frame:hover .week-num-badge{
+  border-color:var(--wc);
+  background:color-mix(in srgb,var(--wc) 12%,transparent);
 }
 .week-status-dot{
   display:flex;align-items:center;gap:7px;
-  font-family:'Michroma',sans-serif;font-size:9px;
+  font-family:'Share Tech Mono',monospace;font-size:9px;
   letter-spacing:2px;color:var(--wc);
 }
 .week-status-dot::before{
@@ -540,97 +695,40 @@ nav{
   animation:blink 2s infinite;
 }
 .week-status-dot.locked{color:var(--muted);}
-.week-status-dot.locked::before{
-  background:var(--muted);box-shadow:none;animation:none;
-}
-
-/* video area */
-.week-video-area{
-  position:relative;
-  aspect-ratio:16/9;overflow:hidden;
-}
-.week-video-area iframe{
-  position:absolute;inset:0;width:100%;height:100%;border:none;
-}
+.week-status-dot.locked::before{background:var(--muted);box-shadow:none;animation:none;}
+.week-video-area{position:relative;aspect-ratio:16/9;overflow:hidden;}
+.week-video-area iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
 .week-placeholder-area{
   position:absolute;inset:0;
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:16px;
+  align-items:center;justify-content:center;gap:16px;
+  background:linear-gradient(135deg,rgba(7,10,26,.98),rgba(4,6,15,1));
 }
-.week-placeholder-area::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(7,10,26,.95),rgba(4,6,15,1));
-}
-.week-placeholder-icon{
-  position:relative;z-index:1;
-  font-size:42px;
-  filter:drop-shadow(0 0 20px var(--wc));
-  animation:floatIcon 3s ease-in-out infinite;
-}
+.week-placeholder-icon{font-size:42px;filter:drop-shadow(0 0 20px var(--wc));animation:floatIcon 3s ease-in-out infinite;}
 .week-placeholder-text{
-  position:relative;z-index:1;
-  font-family:'Michroma',sans-serif;font-size:10px;
-  letter-spacing:4px;text-transform:uppercase;
-  color:rgba(255,255,255,.2);
+  font-family:'Orbitron',sans-serif;font-size:9px;
+  letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.18);
 }
-/* unique corner decoration */
 .week-corner{
-  position:absolute;top:0;right:0;
-  width:60px;height:60px;
-  border-left:1px solid rgba(255,255,255,.06);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  position:absolute;top:0;right:0;width:60px;height:60px;
+  border-left:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
   border-bottom-left-radius:14px;
   background:linear-gradient(225deg,rgba(255,255,255,.04),transparent);
   pointer-events:none;
 }
 .week-corner-num{
   position:absolute;top:8px;right:10px;
-  font-family:'Bebas Neue',sans-serif;font-size:18px;
+  font-family:'Orbitron',sans-serif;font-size:14px;font-weight:900;
   color:rgba(255,255,255,.1);
 }
+.week-foot{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+.week-foot-title{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;}
+.week-foot-progress{display:flex;gap:4px;}
+.week-pip{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.1);transition:.3s;}
+.week-frame.done .week-pip{background:var(--wc);box-shadow:0 0 6px var(--wc);}
 
-/* week footer */
-.week-foot{
-  padding:14px 18px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.week-foot-title{
-  font-family:'Bebas Neue',sans-serif;font-size:20px;
-  letter-spacing:1px;
-}
-.week-foot-progress{
-  display:flex;gap:4px;
-}
-.week-pip{
-  width:6px;height:6px;border-radius:50%;
-  background:rgba(255,255,255,.1);
-  transition:.3s;
-}
-.week-frame.done .week-pip:nth-child(1),
-.week-frame.done .week-pip:nth-child(2),
-.week-frame.done .week-pip:nth-child(3){
-  background:var(--wc);
-  box-shadow:0 0 6px var(--wc);
-}
-
-/* scan line animation on hover */
-.week-frame::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(transparent 0%,rgba(var(--wc),0.03) 50%,transparent 100%);
-  background-size:100% 4px;
-  pointer-events:none;
-  opacity:0;transition:opacity .4s;
-}
-.week-frame:hover::after{opacity:1;}
-
-/* ============================================================
-   3D RENDERING PAGE
-   ============================================================ */
-#rendering{padding-top:68px;}
-#rendering .page-banner::before{
-  background:radial-gradient(ellipse at 50% 0%,rgba(200,0,255,.1),transparent 65%);
-}
+/* ====== 3D RENDERING ====== */
+#rendering .page-banner::before{background:radial-gradient(ellipse at 50% 0%,rgba(200,0,255,.1),transparent 65%);}
 #rendering .page-banner-title{
   background:linear-gradient(135deg,#c800ff,#ff6220);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -638,104 +736,104 @@ nav{
 }
 #rendering .page-banner-label{color:var(--magenta);}
 #rendering .page-banner-label::before,
-#rendering .page-banner-label::after{
-  background:linear-gradient(to right,transparent,rgba(200,0,255,.5));
-}
+#rendering .page-banner-label::after{background:linear-gradient(to right,transparent,rgba(200,0,255,.5));}
 
 .render-status{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   min-height:420px;
-  border:1px solid rgba(200,0,255,.15);
-  border-radius:22px;
-  background:radial-gradient(ellipse at 50% 0%,rgba(200,0,255,.06),transparent 70%),
-             rgba(7,10,26,.7);
+  border:1px solid rgba(200,0,255,.15);border-radius:22px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(200,0,255,.06),transparent 70%),rgba(7,10,26,.7);
   text-align:center;padding:70px 40px;
-  position:relative;overflow:hidden;
-  margin-bottom:70px;
+  position:relative;overflow:hidden;margin-bottom:70px;
+  transition:.4s;cursor:default;
 }
-.render-status::before{
-  content:'';position:absolute;
-  inset:-1px;border-radius:22px;
-  background:linear-gradient(135deg,rgba(200,0,255,.3),transparent,rgba(255,98,32,.3));
-  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:destination-out;
-  mask-composite:exclude;
-  padding:1px;
-  pointer-events:none;
+.render-status:hover{
+  border-color:rgba(200,0,255,.4);
+  box-shadow:0 0 80px rgba(200,0,255,.15);
 }
 .rs-planet{
   font-size:90px;margin-bottom:24px;
   animation:planetFloat 5s ease-in-out infinite;
   filter:drop-shadow(0 0 30px rgba(200,0,255,.4));
+  transition:.3s;cursor:pointer;
 }
+.rs-planet:hover{transform:scale(1.1);filter:drop-shadow(0 0 60px rgba(200,0,255,.7));}
 .rs-title{
-  font-family:'Bebas Neue',sans-serif;font-size:44px;
-  letter-spacing:4px;
-  color:var(--magenta);text-shadow:var(--glow-m);
-  margin-bottom:14px;
+  font-family:'Orbitron',sans-serif;font-size:36px;font-weight:900;
+  letter-spacing:4px;color:var(--magenta);text-shadow:var(--glow-m);margin-bottom:14px;
 }
-.rs-desc{
-  font-family:'Exo 2',sans-serif;font-size:16px;
-  color:var(--muted);max-width:520px;line-height:1.75;margin:0 auto;
-}
+.rs-desc{font-family:'Exo 2',sans-serif;font-size:16px;color:var(--muted);max-width:520px;line-height:1.75;margin:0 auto;}
 
-/* render feature cards */
-.render-features{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:22px;
-}
+/* render features */
+.render-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px;}
 .rf-card{
   padding:32px 28px;border-radius:16px;
   border:1px solid rgba(255,255,255,.06);
   background:rgba(7,10,26,.8);
-  transition:all .4s;position:relative;overflow:hidden;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  position:relative;overflow:hidden;cursor:pointer;
 }
 .rf-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;
-  height:2px;
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(to right,var(--accent-c,var(--magenta)),transparent);
 }
+.rf-card::after{
+  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);
+  transition:left .5s;
+}
+.rf-card:hover::after{left:150%;}
 .rf-card:nth-child(1){--accent-c:#c800ff;}
 .rf-card:nth-child(2){--accent-c:#ff6220;}
 .rf-card:nth-child(3){--accent-c:#00e5ff;}
 .rf-card:nth-child(4){--accent-c:#ffd600;}
 .rf-card:hover{
-  border-color:rgba(200,0,255,.3);transform:translateY(-6px);
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
+  border-color:var(--accent-c);
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 30px color-mix(in srgb,var(--accent-c) 15%,transparent);
 }
-.rf-icon{font-size:38px;margin-bottom:18px;}
-.rf-title{
-  font-family:'Bebas Neue',sans-serif;font-size:22px;
-  letter-spacing:1px;margin-bottom:10px;
-  color:var(--accent-c,var(--magenta));
-}
+.rf-icon{font-size:38px;margin-bottom:18px;transition:.3s;}
+.rf-card:hover .rf-icon{transform:scale(1.2) rotate(10deg);}
+.rf-title{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;margin-bottom:10px;color:var(--accent-c,var(--magenta));}
 .rf-desc{font-family:'Exo 2',sans-serif;font-size:13px;color:var(--muted);line-height:1.7;}
 
-/* ============================================================
-   ABOUT PAGE
-   ============================================================ */
-#about{padding-top:68px;}
-
-.about-layout{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:30px;
+/* ====== ABOUT ====== */
+#about .page-banner-title{
+  background:linear-gradient(135deg,#00e5ff,#ffd600);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
 .about-card{
   border-radius:20px;padding:44px;
   border:1px solid rgba(0,229,255,.1);
   background:rgba(7,10,26,.8);
   backdrop-filter:blur(16px);
-  transition:.4s;
+  transition:all .4s cubic-bezier(.23,1,.32,1);
+  position:relative;overflow:hidden;
 }
-.about-card:hover{border-color:rgba(0,229,255,.3);transform:translateY(-6px);}
+.about-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,229,255,.04),transparent 60%);
+  opacity:0;transition:.5s;
+}
+.about-card:hover::before{opacity:1;}
+.about-card:hover{
+  border-color:rgba(0,229,255,.3);
+  transform:translateY(-8px);
+  box-shadow:0 30px 60px rgba(0,0,0,.4),var(--glow-c);
+}
 .about-avatar{
-  width:110px;height:110px;border-radius:50%;
-  margin:0 auto 28px;
+  width:110px;height:110px;border-radius:50%;margin:0 auto 28px;
   background:linear-gradient(135deg,rgba(0,229,255,.25),rgba(200,0,255,.25));
   display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',sans-serif;font-size:38px;
+  font-family:'Orbitron',sans-serif;font-size:32px;font-weight:900;
   color:var(--cyan);border:2px solid rgba(0,229,255,.3);
-  position:relative;
+  position:relative;cursor:pointer;transition:.3s;
+}
+.about-avatar:hover{
+  box-shadow:var(--glow-c);
+  border-color:var(--cyan);
+  transform:scale(1.05);
 }
 .about-avatar::before{
   content:'';position:absolute;inset:-10px;border-radius:50%;
@@ -743,47 +841,49 @@ nav{
   animation:spin 10s linear infinite;
 }
 .about-name{
-  font-family:'Bebas Neue',sans-serif;font-size:28px;
+  font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;
   letter-spacing:2px;text-align:center;margin-bottom:6px;
 }
 .about-course{
-  font-family:'Michroma',sans-serif;font-size:10px;
+  font-family:'Share Tech Mono',monospace;font-size:10px;
   letter-spacing:3px;text-transform:uppercase;
   color:var(--cyan);text-align:center;margin-bottom:28px;
 }
-.info-row{
-  display:flex;gap:14px;align-items:baseline;
-  margin-bottom:14px;font-family:'Exo 2',sans-serif;font-size:15px;
-}
+.info-row{display:flex;gap:14px;align-items:baseline;margin-bottom:14px;font-family:'Exo 2',sans-serif;font-size:15px;}
 .info-row-label{
-  font-family:'Michroma',sans-serif;font-size:9px;
+  font-family:'Orbitron',sans-serif;font-size:8px;
   letter-spacing:2px;text-transform:uppercase;
   color:var(--cyan);min-width:70px;
 }
 .info-row-val{color:var(--muted);}
-
 .skills-card{border-color:rgba(200,0,255,.1);}
-.skills-card:hover{border-color:rgba(200,0,255,.3);}
-.skill-title{
-  font-family:'Bebas Neue',sans-serif;font-size:22px;
-  letter-spacing:2px;color:var(--magenta);margin-bottom:28px;
-}
-.skill-row{margin-bottom:22px;}
+.skills-card:hover{border-color:rgba(200,0,255,.3);box-shadow:0 30px 60px rgba(0,0,0,.4),var(--glow-m);}
+.skill-title{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;letter-spacing:2px;color:var(--magenta);margin-bottom:28px;}
+.skill-row{margin-bottom:22px;cursor:default;}
 .skill-row-head{
   display:flex;justify-content:space-between;
-  font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;
-  margin-bottom:8px;
+  font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;margin-bottom:8px;
+  transition:.3s;
 }
+.skill-row:hover .skill-row-head{color:var(--cyan);}
 .skill-bar-bg{height:3px;background:rgba(255,255,255,.07);border-radius:10px;overflow:hidden;}
 .skill-bar-fill{
   height:100%;border-radius:10px;
   background:linear-gradient(to right,var(--cyan),var(--magenta));
   width:0;transition:width 1.4s cubic-bezier(.23,1,.32,1);
+  position:relative;overflow:hidden;
+}
+.skill-bar-fill::after{
+  content:'';position:absolute;top:0;left:-100%;
+  width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+  animation:barShimmer 2s ease-in-out infinite;
+}
+@keyframes barShimmer{
+  0%{left:-100%;}100%{left:200%;}
 }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* ====== FOOTER ====== */
 footer{
   position:relative;z-index:1;
   border-top:1px solid rgba(0,229,255,.06);
@@ -796,56 +896,121 @@ footer{
   margin:14px auto;
 }
 .footer-name{
-  font-family:'Michroma',sans-serif;font-size:13px;
+  font-family:'Orbitron',sans-serif;font-size:11px;
   letter-spacing:3px;text-transform:uppercase;color:var(--muted);
 }
 .footer-name span{color:var(--cyan);}
-.footer-sub{
-  font-family:'Exo 2',sans-serif;font-size:12px;
-  color:rgba(90,106,153,.6);letter-spacing:3px;
-  text-transform:uppercase;margin-top:6px;
-}
+.footer-sub{font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(90,106,153,.6);letter-spacing:3px;text-transform:uppercase;margin-top:6px;}
 
-/* ============================================================
-   SHARED UTILITIES
-   ============================================================ */
+/* ====== DARK/LIGHT TOGGLE ====== */
+.toggle-btn{
+  position:fixed;bottom:30px;right:30px;z-index:2000;
+  width:52px;height:52px;border-radius:50%;
+  border:1px solid rgba(0,229,255,.3);
+  background:rgba(4,6,15,.8);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;cursor:pointer;
+  transition:all .3s;
+  box-shadow:var(--glow-c);
+}
+.toggle-btn:hover{
+  transform:scale(1.15) rotate(20deg);
+  background:rgba(0,229,255,.1);
+  border-color:var(--cyan);
+}
+.toggle-btn:active{transform:scale(.9);}
+
+/* light mode overrides */
+body.light{
+  --bg:#f0f4ff;--bg2:#e4eaff;--white:#0a0f2e;
+  --muted:#6070a0;background:var(--bg);color:var(--white);
+}
+body.light .week-frame,body.light .proj-card,body.light .about-card,body.light .rf-card{
+  background:rgba(255,255,255,.8);border-color:rgba(0,100,200,.2);
+}
+body.light nav{background:rgba(240,244,255,.8);}
+body.light .hero-stats,body.light footer{background:rgba(240,244,255,.9);}
+
+/* ====== SCROLLBAR ====== */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,var(--cyan),var(--magenta));border-radius:10px;}
+
+/* ====== REVEAL ====== */
 .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.23,1,.32,1);}
 .reveal.revealed{opacity:1;transform:none;}
 
-/* ============================================================
-   ANIMATIONS
-   ============================================================ */
-@keyframes planetFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-18px)}
-}
+/* ====== SHARED ANIMATIONS ====== */
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes scanH{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 
-/* scanline overlay */
+/* scanlines */
 body::after{
   content:'';position:fixed;inset:0;
   background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);
   pointer-events:none;z-index:800;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* ====== RESPONSIVE ====== */
 @media(max-width:900px){
   .proj-grid,.about-layout{grid-template-columns:1fr;}
   .hero-stats{flex-wrap:wrap;}
   nav{padding:0 20px;}
-  .nav-links a{padding:5px 10px;font-size:9px;}
+  .nav-links a{padding:5px 10px;font-size:8px;}
   .page-content,.home-projects{padding:50px 24px 80px;}
   .page-banner{padding:60px 24px 40px;}
+}
+
+/* ====== PARTICLE CONTAINER ====== */
+.particle{
+  position:fixed;pointer-events:none;z-index:2;
+  border-radius:50%;
+  animation:particleFade linear infinite;
+}
+@keyframes particleFade{
+  0%{transform:translateY(0) scale(1);opacity:.8;}
+  100%{transform:translateY(-200px) scale(0);opacity:0;}
+}
+
+/* ====== TOOLTIP ====== */
+[data-tip]{position:relative;}
+[data-tip]:hover::after{
+  content:attr(data-tip);
+  position:absolute;bottom:110%;left:50%;transform:translateX(-50%);
+  background:rgba(0,229,255,.15);border:1px solid rgba(0,229,255,.3);
+  color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:10px;
+  letter-spacing:2px;padding:6px 14px;border-radius:8px;
+  white-space:nowrap;pointer-events:none;z-index:1000;
+  backdrop-filter:blur(8px);
+  animation:fadeInDown .2s ease;
+}
+
+/* ====== SPARKLE on click ====== */
+.spark{
+  position:fixed;pointer-events:none;z-index:9990;
+  width:4px;height:4px;border-radius:50%;
+  background:var(--cyan);
+  animation:sparkFly .7s ease-out forwards;
+}
+@keyframes sparkFly{
+  0%{transform:translate(-50%,-50%) scale(1);opacity:1;}
+  100%{transform:translate(var(--sx),var(--sy)) scale(0);opacity:0;}
 }
 </style>
 </head>
 <body>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-text" id="loaderText">INITIALIZING</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-sub" id="loaderSub">LOADING MULTIMEDIA SYSTEMS...</div>
+</div>
+
+<!-- Page wipe -->
+<div id="page-wipe"></div>
 
 <!-- Cursor -->
 <div id="cursor"></div>
@@ -854,31 +1019,36 @@ body::after{
 <!-- Starfield -->
 <canvas id="starfield"></canvas>
 
-<!-- ======================== NAV ======================== -->
-<nav>
+<!-- Dark/Light Toggle -->
+<div class="toggle-btn" onclick="toggleMode()" data-tip="Toggle Theme" id="themeBtn">🌙</div>
+
+<!-- NAV -->
+<nav id="mainNav">
   <div class="nav-logo">
-    <div class="nav-logo-circle">M&amp;A</div>
+    <div class="nav-logo-circle">M&A</div>
     <div class="nav-logo-text">Studio</div>
   </div>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
-    <li><a href="#" onclick="showPage('rotoscoping')" id="nav-rotoscoping">Rotoscoping</a></li>
-    <li><a href="#" onclick="showPage('rendering')" id="nav-rendering">3D Blender</a></li>
-    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="navTo('home')" class="active" id="nav-home"><span class="nav-dot"></span>Home</a></li>
+    <li><a href="#" onclick="navTo('rotoscoping')" id="nav-rotoscoping"><span class="nav-dot"></span>Rotoscoping</a></li>
+    <li><a href="#" onclick="navTo('rendering')" id="nav-rendering"><span class="nav-dot"></span>3D Blender</a></li>
+    <li><a href="#" onclick="navTo('about')" id="nav-about"><span class="nav-dot"></span>About</a></li>
   </ul>
-  <div class="nav-hamburger" aria-label="menu">
-    <span></span><span></span><span></span>
+  <div class="nav-hamburger" style="display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;">
+    <span style="display:block;width:22px;height:1.5px;background:var(--muted);transition:.3s;"></span>
+    <span style="display:block;width:14px;height:1.5px;background:var(--muted);transition:.3s;"></span>
+    <span style="display:block;width:18px;height:1.5px;background:var(--muted);transition:.3s;"></span>
   </div>
 </nav>
 
 <!-- ======================== HOME ======================== -->
 <div class="page active" id="home">
-
   <section class="hero-stage">
-    <!-- main planet -->
-    <div class="planet-bg" id="mainPlanet"></div>
-
-    <!-- side planets -->
+    <div class="planet-bg" id="mainPlanet">
+      <div class="planet-ring"></div>
+      <div class="planet-ring"></div>
+      <div class="planet-ring"></div>
+    </div>
     <div class="side-planet side-planet-left" onclick="cycleLeft()">
       <div class="side-orb" id="leftOrb"></div>
       <div class="side-label" id="leftLabel">Venus</div>
@@ -887,12 +1057,8 @@ body::after{
       <div class="side-orb" id="rightOrb"></div>
       <div class="side-label" id="rightLabel">Neptune</div>
     </div>
-
-    <!-- arrows -->
-    <div class="hero-arrow hero-arrow-left" onclick="cycleLeft()">&#8592;</div>
-    <div class="hero-arrow hero-arrow-right" onclick="cycleRight()">&#8594;</div>
-
-    <!-- text -->
+    <div class="hero-arrow hero-arrow-left" onclick="cycleLeft()" data-tip="Previous">&#8592;</div>
+    <div class="hero-arrow hero-arrow-right" onclick="cycleRight()" data-tip="Next">&#8594;</div>
     <div class="hero-text">
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-line"></div>
@@ -901,62 +1067,37 @@ body::after{
       </div>
       <div class="hero-title" id="heroTitle">ROTOSCOPING</div>
       <div class="hero-sub" id="heroSub">Frame by Frame</div>
-      <a class="hero-cta" id="heroCta" onclick="showPage('rotoscoping')">VIEW MORE</a>
+      <a class="hero-cta" id="heroCta" onclick="navTo('rotoscoping')">VIEW MORE</a>
     </div>
-
-    <!-- stats bar -->
     <div class="hero-stats" id="heroStats">
-      <div class="stat-item">
-        <div class="stat-label">Technique</div>
-        <div class="stat-value">Rotoscoping</div>
-        <div class="stat-sub">Frame-by-frame</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Duration</div>
-        <div class="stat-value">12 WEEKS</div>
-        <div class="stat-sub">Progressive</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Software</div>
-        <div class="stat-value">Adobe</div>
-        <div class="stat-sub">After Effects / PS</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Status</div>
-        <div class="stat-value">ACTIVE</div>
-        <div class="stat-sub">Week 1–3 done</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Frames</div>
-        <div class="stat-value">100+</div>
-        <div class="stat-sub">Hand-traced</div>
-      </div>
+      <div class="stat-item"><div class="stat-label">Technique</div><div class="stat-value">Rotoscoping</div><div class="stat-sub">Frame-by-frame</div></div>
+      <div class="stat-item"><div class="stat-label">Duration</div><div class="stat-value">12 WEEKS</div><div class="stat-sub">Progressive</div></div>
+      <div class="stat-item"><div class="stat-label">Software</div><div class="stat-value">Adobe</div><div class="stat-sub">After Effects / PS</div></div>
+      <div class="stat-item"><div class="stat-label">Status</div><div class="stat-value">ACTIVE</div><div class="stat-sub">Week 1–3 done</div></div>
+      <div class="stat-item"><div class="stat-label">Frames</div><div class="stat-value">100+</div><div class="stat-sub">Hand-traced</div></div>
     </div>
   </section>
 
-  <!-- Projects section -->
   <section class="home-projects">
     <div class="section-eyebrow reveal">✦ Featured Projects</div>
     <h2 class="section-heading reveal">Explore the Cosmos</h2>
     <div class="proj-grid">
-      <!-- Rotoscoping -->
-      <div class="proj-card reveal" onclick="showPage('rotoscoping')">
+      <div class="proj-card reveal" onclick="navTo('rotoscoping')">
         <div class="proj-num">01</div>
         <div class="proj-icon">🎬</div>
         <span class="proj-tag">Project 01</span>
         <h3 class="proj-title">Rotoscoping</h3>
         <p class="proj-desc">Frame-by-frame animation technique tracing over live-action footage, creating fluid, lifelike movement infused with artistic interpretation across 12 progressive weeks.</p>
-        <a class="proj-btn" onclick="event.stopPropagation();showPage('rotoscoping')">Explore →</a>
+        <a class="proj-btn" onclick="event.stopPropagation();navTo('rotoscoping')">Explore →</a>
         <div class="proj-glow"></div>
       </div>
-      <!-- 3D Blender -->
-      <div class="proj-card magenta reveal" onclick="showPage('rendering')">
+      <div class="proj-card magenta reveal" onclick="navTo('rendering')">
         <div class="proj-num">02</div>
-        <div class="proj-icon" style="font-size:26px;">🪐</div>
+        <div class="proj-icon">🪐</div>
         <span class="proj-tag">Project 02</span>
         <h3 class="proj-title">3D Blender</h3>
         <p class="proj-desc">Three-dimensional modeling, texturing, lighting, and rendering using Blender's powerful toolset to sculpt and illuminate imagined worlds with cinematic quality.</p>
-        <a class="proj-btn" onclick="event.stopPropagation();showPage('rendering')">Explore →</a>
+        <a class="proj-btn" onclick="event.stopPropagation();navTo('rendering')">Explore →</a>
         <div class="proj-glow"></div>
       </div>
     </div>
@@ -972,24 +1113,18 @@ body::after{
 
 <!-- ======================== ROTOSCOPING ======================== -->
 <div class="page" id="rotoscoping">
-
   <div class="page-banner">
     <div class="page-banner-label">Project 01</div>
     <h1 class="page-banner-title">Rotoscoping</h1>
     <p class="page-banner-desc">Tracing life, frame by frame — transforming reality into animated art through meticulous digital craftsmanship and 12 weeks of progressive mastery.</p>
   </div>
-
   <div class="page-content">
-
-    <!-- Reference video -->
     <div class="ref-block reveal">
       <div class="block-label">Reference Material</div>
       <div class="cine-frame">
         <div class="cine-bar">
           <div class="cine-dots">
-            <div class="cine-dot"></div>
-            <div class="cine-dot"></div>
-            <div class="cine-dot"></div>
+            <div class="cine-dot"></div><div class="cine-dot"></div><div class="cine-dot"></div>
           </div>
           <div class="cine-bar-title">Reference Video — Rotoscoping Source Material</div>
           <div class="cine-bar-tag">REFERENCE</div>
@@ -999,77 +1134,38 @@ body::after{
         </div>
       </div>
     </div>
-
-    <!-- Weekly Progress -->
     <div class="block-label reveal">Weekly Progress Log</div>
-    <p class="weekly-intro reveal">
-      A 12-week journey of rotoscoping mastery — each week building upon the last, refining technique and artistic vision frame by frame.
-    </p>
-
+    <p class="weekly-intro reveal">A 12-week journey of rotoscoping mastery — each week building upon the last, refining technique and artistic vision frame by frame.</p>
     <div class="weeks-grid" id="weeks-grid">
-
-      <!-- WEEK 1 -->
       <div class="week-frame done reveal" data-week="1">
         <div class="week-topbar"></div>
-        <div class="week-head">
-          <span class="week-num-badge">Week 01</span>
-          <span class="week-status-dot">Live</span>
-        </div>
+        <div class="week-head"><span class="week-num-badge">Week 01</span><span class="week-status-dot">Live</span></div>
         <div class="week-video-area">
           <iframe src="https://www.youtube.com/embed/9jchSxiI1Wo" title="Week 1" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           <div class="week-corner"><div class="week-corner-num">01</div></div>
         </div>
-        <div class="week-foot">
-          <div class="week-foot-title">Week 01 — Foundation</div>
-          <div class="week-foot-progress">
-            <div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div>
-          </div>
-        </div>
+        <div class="week-foot"><div class="week-foot-title">Week 01 — Foundation</div><div class="week-foot-progress"><div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div></div></div>
       </div>
-
-      <!-- WEEK 2 -->
       <div class="week-frame done reveal" data-week="2">
         <div class="week-topbar"></div>
-        <div class="week-head">
-          <span class="week-num-badge">Week 02</span>
-          <span class="week-status-dot">Live</span>
-        </div>
+        <div class="week-head"><span class="week-num-badge">Week 02</span><span class="week-status-dot">Live</span></div>
         <div class="week-video-area">
           <iframe src="https://www.youtube.com/embed/BclVEvWFb5Q" title="Week 2" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           <div class="week-corner"><div class="week-corner-num">02</div></div>
         </div>
-        <div class="week-foot">
-          <div class="week-foot-title">Week 02 — Tracing</div>
-          <div class="week-foot-progress">
-            <div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div>
-          </div>
-        </div>
+        <div class="week-foot"><div class="week-foot-title">Week 02 — Tracing</div><div class="week-foot-progress"><div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div></div></div>
       </div>
-
-      <!-- WEEK 3 -->
       <div class="week-frame done reveal" data-week="3">
         <div class="week-topbar"></div>
-        <div class="week-head">
-          <span class="week-num-badge">Week 03</span>
-          <span class="week-status-dot">Live</span>
-        </div>
+        <div class="week-head"><span class="week-num-badge">Week 03</span><span class="week-status-dot">Live</span></div>
         <div class="week-video-area">
           <iframe src="https://www.youtube.com/embed/SJ9Qt4SAGp4" title="Week 3" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           <div class="week-corner"><div class="week-corner-num">03</div></div>
         </div>
-        <div class="week-foot">
-          <div class="week-foot-title">Week 03 — Motion</div>
-          <div class="week-foot-progress">
-            <div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div>
-          </div>
-        </div>
+        <div class="week-foot"><div class="week-foot-title">Week 03 — Motion</div><div class="week-foot-progress"><div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div></div></div>
       </div>
-
-      <!-- WEEKS 4–12 placeholders (unique icons & subtitles) -->
-    </div><!-- /weeks-grid -->
-
+    </div>
   </div>
-
   <footer>
     <div class="footer-line"></div>
     <div class="footer-name">Crafted by <span>Meriel N. Lanuza</span></div>
@@ -1080,56 +1176,26 @@ body::after{
 
 <!-- ======================== 3D RENDERING ======================== -->
 <div class="page" id="rendering">
-
   <div class="page-banner">
     <div class="page-banner-label" style="color:var(--magenta);">Project 02</div>
     <h1 class="page-banner-title">3D Blender</h1>
     <p class="page-banner-desc">Sculpting dimensions from the void — building three-dimensional worlds with light, shadow, and imagination using Blender's powerhouse tools.</p>
   </div>
-
   <div class="page-content">
-
-    <!-- Coming soon -->
-    <div class="block-label reveal" style="--cyan:var(--magenta);">
-      <span style="color:var(--magenta);">Project Status</span>
-    </div>
-
+    <div class="block-label reveal"><span style="color:var(--magenta);">Project Status</span></div>
     <div class="render-status reveal">
-      <div class="rs-planet">🪐</div>
+      <div class="rs-planet" data-tip="Click me!">🪐</div>
       <div class="rs-title">Coming Soon</div>
       <div class="rs-desc">3D Blender renders are currently being sculpted in the creative nebula. Check back soon for stunning artwork and weekly progress updates.</div>
     </div>
-
-    <!-- What to expect -->
-    <div class="block-label reveal" style="color:var(--magenta);">
-      <span style="color:var(--magenta);">What to Expect</span>
-      <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);"></div>
-    </div>
-
+    <div class="block-label reveal"><span style="color:var(--magenta);">What to Expect</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
     <div class="render-features reveal">
-      <div class="rf-card">
-        <div class="rf-icon">🧊</div>
-        <div class="rf-title">3D Modeling</div>
-        <div class="rf-desc">Creating detailed 3D meshes and sculptures using Blender's powerful modeling tools and modifiers.</div>
-      </div>
-      <div class="rf-card">
-        <div class="rf-icon">🎨</div>
-        <div class="rf-title">Texturing</div>
-        <div class="rf-desc">Applying realistic materials, UV mapping, and procedural textures for lifelike, painterly surfaces.</div>
-      </div>
-      <div class="rf-card">
-        <div class="rf-icon">💡</div>
-        <div class="rf-title">Lighting</div>
-        <div class="rf-desc">Dramatic lighting setups with HDRI environments, area lights, and custom rigs for cinematic mood.</div>
-      </div>
-      <div class="rf-card">
-        <div class="rf-icon">✨</div>
-        <div class="rf-title">Final Render</div>
-        <div class="rf-desc">Cycles / EEVEE final renders with post-processing compositing for breathtaking quality output.</div>
-      </div>
+      <div class="rf-card"><div class="rf-icon">🧊</div><div class="rf-title">3D Modeling</div><div class="rf-desc">Creating detailed 3D meshes and sculptures using Blender's powerful modeling tools and modifiers.</div></div>
+      <div class="rf-card"><div class="rf-icon">🎨</div><div class="rf-title">Texturing</div><div class="rf-desc">Applying realistic materials, UV mapping, and procedural textures for lifelike, painterly surfaces.</div></div>
+      <div class="rf-card"><div class="rf-icon">💡</div><div class="rf-title">Lighting</div><div class="rf-desc">Dramatic lighting setups with HDRI environments, area lights, and custom rigs for cinematic mood.</div></div>
+      <div class="rf-card"><div class="rf-icon">✨</div><div class="rf-title">Final Render</div><div class="rf-desc">Cycles / EEVEE final renders with post-processing compositing for breathtaking quality output.</div></div>
     </div>
   </div>
-
   <footer>
     <div class="footer-line" style="background:linear-gradient(to right,transparent,var(--magenta),transparent);"></div>
     <div class="footer-name">Crafted by <span style="color:var(--magenta);">Meriel N. Lanuza</span></div>
@@ -1140,17 +1206,15 @@ body::after{
 
 <!-- ======================== ABOUT ======================== -->
 <div class="page" id="about">
-
   <div class="page-banner">
     <div class="page-banner-label">Mission Control</div>
-    <h1 class="page-banner-title" style="background:linear-gradient(135deg,#00e5ff,#ffd600);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">About</h1>
+    <h1 class="page-banner-title">About</h1>
     <p class="page-banner-desc">The creative mind navigating the cosmos of multimedia arts and digital authoring.</p>
   </div>
-
   <div class="page-content">
     <div class="about-layout">
       <div class="about-card reveal">
-        <div class="about-avatar">ML</div>
+        <div class="about-avatar" data-tip="Hello!">ML</div>
         <div class="about-name">Meriel N. Lanuza</div>
         <div class="about-course">BSIT-NS-2A</div>
         <div style="border-top:1px solid rgba(0,229,255,.1);padding-top:22px;">
@@ -1162,30 +1226,14 @@ body::after{
       </div>
       <div class="about-card skills-card reveal">
         <div class="skill-title">Creative Toolkit</div>
-        <div class="skill-row">
-          <div class="skill-row-head"><span>Rotoscoping</span><span style="color:var(--cyan);">Active</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75%"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-head"><span>3D Modeling (Blender)</span><span style="color:var(--magenta);">Learning</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="50%" style="background:linear-gradient(to right,var(--magenta),var(--orange));"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-head"><span>Video Editing</span><span style="color:var(--cyan);">Proficient</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="65%"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-head"><span>Digital Animation</span><span style="color:var(--magenta);">Growing</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="45%" style="background:linear-gradient(to right,var(--magenta),var(--orange));"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-row-head"><span>Creative Storytelling</span><span style="color:var(--cyan);">Strong</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80%"></div></div>
-        </div>
+        <div class="skill-row"><div class="skill-row-head"><span>Rotoscoping</span><span style="color:var(--cyan);">Active</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75%"></div></div></div>
+        <div class="skill-row"><div class="skill-row-head"><span>3D Modeling (Blender)</span><span style="color:var(--magenta);">Learning</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="50%" style="background:linear-gradient(to right,var(--magenta),var(--orange));"></div></div></div>
+        <div class="skill-row"><div class="skill-row-head"><span>Video Editing</span><span style="color:var(--cyan);">Proficient</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="65%"></div></div></div>
+        <div class="skill-row"><div class="skill-row-head"><span>Digital Animation</span><span style="color:var(--magenta);">Growing</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="45%" style="background:linear-gradient(to right,var(--magenta),var(--orange));"></div></div></div>
+        <div class="skill-row"><div class="skill-row-head"><span>Creative Storytelling</span><span style="color:var(--cyan);">Strong</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80%"></div></div></div>
       </div>
     </div>
   </div>
-
   <footer>
     <div class="footer-line"></div>
     <div class="footer-name">Crafted by <span>Meriel N. Lanuza</span></div>
@@ -1194,233 +1242,255 @@ body::after{
   </footer>
 </div>
 
-<!-- ======================== SCRIPTS ======================== -->
 <script>
-/* ============================================================
-   STARFIELD
-   ============================================================ */
-const canvas = document.getElementById('starfield');
-const ctx    = canvas.getContext('2d');
-let W, H, stars = [], shooters = [];
-
-function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', () => { resize(); buildStars(); });
-
+/* ====== STARFIELD ====== */
+const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');
+let W,H,stars=[],shooters=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',()=>{resize();buildStars();});
 function buildStars(){
-  stars = Array.from({length:320}, () => ({
-    x: Math.random()*W, y: Math.random()*H,
-    r: Math.random()*1.4+.2,
-    a: Math.random()*.7+.2,
-    tw: Math.random()*Math.PI*2,
+  stars=Array.from({length:340},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    r:Math.random()*1.4+.2,a:Math.random()*.7+.2,
+    tw:Math.random()*Math.PI*2,
   }));
 }
 buildStars();
-
 function maybeShooter(){
   if(Math.random()>.985){
     shooters.push({
-      x: Math.random()*W*.6, y: Math.random()*H*.3,
-      vx:4+Math.random()*3, vy:2+Math.random()*2,
-      len:100+Math.random()*120, a:1,
-      c: Math.random()>.5 ? '#00e5ff' : '#c800ff'
+      x:Math.random()*W*.6,y:Math.random()*H*.3,
+      vx:4+Math.random()*3,vy:2+Math.random()*2,
+      len:100+Math.random()*120,a:1,
+      c:Math.random()>.5?'#00e5ff':'#c800ff'
     });
   }
 }
-
 (function draw(){
   ctx.clearRect(0,0,W,H);
-  stars.forEach(s => {
+  stars.forEach(s=>{
     s.tw+=.018;
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,255,255,${s.a*(0.7+0.3*Math.sin(s.tw))})`;
-    ctx.fill();
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${s.a*(0.7+0.3*Math.sin(s.tw))})`;ctx.fill();
   });
   maybeShooter();
-  shooters = shooters.filter(s=>s.a>0);
+  shooters=shooters.filter(s=>s.a>0);
   shooters.forEach(s=>{
-    ctx.beginPath();
-    const g = ctx.createLinearGradient(s.x,s.y,s.x-s.len*.7,s.y-s.len*.35);
-    g.addColorStop(0,s.c.replace(')',`,${s.a})`).replace('#','rgba(').split('#').join('rgba('));
-    // simple approach:
-    ctx.save();
-    ctx.globalAlpha = s.a;
-    ctx.strokeStyle = s.c;
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(s.x,s.y);
-    ctx.lineTo(s.x+s.len*.7,s.y+s.len*.35);
-    ctx.stroke();
-    ctx.restore();
-    s.x+=s.vx*2; s.y+=s.vy*2; s.a-=.018;
+    ctx.save();ctx.globalAlpha=s.a;ctx.strokeStyle=s.c;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x+s.len*.7,s.y+s.len*.35);ctx.stroke();ctx.restore();
+    s.x+=s.vx*2;s.y+=s.vy*2;s.a-=.018;
   });
   requestAnimationFrame(draw);
 })();
 
-/* ============================================================
-   CURSOR
-   ============================================================ */
-const cursorEl = document.getElementById('cursor');
-const dotEl    = document.getElementById('cursor-dot');
+/* ====== CURSOR ====== */
+const cursorEl=document.getElementById('cursor'),dotEl=document.getElementById('cursor-dot');
 let mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function animCursor(){
-  cx+=(mx-cx)*.14; cy+=(my-cy)*.14;
-  cursorEl.style.left=cx+'px'; cursorEl.style.top=cy+'px';
-  dotEl.style.left=mx+'px'; dotEl.style.top=my+'px';
-  requestAnimationFrame(animCursor);
-})();
-function addHover(els){ els.forEach(el=>{ el.addEventListener('mouseenter',()=>cursorEl.classList.add('hover')); el.addEventListener('mouseleave',()=>cursorEl.classList.remove('hover')); }); }
-addHover(document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.card-btn'));
+(function animCursor(){cx+=(mx-cx)*.14;cy+=(my-cy)*.14;cursorEl.style.left=cx+'px';cursorEl.style.top=cy+'px';dotEl.style.left=mx+'px';dotEl.style.top=my+'px';requestAnimationFrame(animCursor);})();
+function addHover(els){els.forEach(el=>{el.addEventListener('mouseenter',()=>cursorEl.classList.add('hover'));el.addEventListener('mouseleave',()=>cursorEl.classList.remove('hover'));});}
+setTimeout(()=>addHover(document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.toggle-btn,.rs-planet,.about-avatar,.stat-item,.cine-dot')),500);
 
-/* ============================================================
-   PLANET CAROUSEL
-   ============================================================ */
-const planets = [
-  {
-    name:'ROTOSCOPING', sub:'Frame by Frame',
-    eyebrow:'Project 01 — Rotoscoping',
-    page:'rotoscoping',
-    stat:['Rotoscoping','Frame-by-frame','12 WEEKS','Progressive','Adobe','After Effects/PS','ACTIVE','Week 1–3 done','100+','Hand-traced'],
-    bg:'radial-gradient(ellipse at 35% 35%,#1a3a6e 0%,#0a1e45 30%,#030918 70%,#000 100%)',
-  },
-  {
-    name:'3D BLENDER', sub:'Into the Void',
-    eyebrow:'Project 02 — 3D Rendering',
-    page:'rendering',
-    stat:['3D Modeling','Mesh & Sculpt','12 WEEKS','Upcoming','Blender','Cycles / EEVEE','SOON','Coming up','∞','Polygons'],
-    bg:'radial-gradient(ellipse at 35% 35%,#3a1a6e 0%,#200a45 30%,#100318 70%,#000 100%)',
-  },
-  {
-    name:'ABOUT', sub:'The Creator',
-    eyebrow:'Mission Control — About',
-    page:'about',
-    stat:['Student','BSIT-NS-2A','Sections','NS-2A','Subject','Multimedia','Projects','2 Active','Weeks','12 Total'],
-    bg:'radial-gradient(ellipse at 35% 35%,#1a6e3a 0%,#0a4520 30%,#031808 70%,#000 100%)',
-  },
-];
-let pIdx = 0;
+/* ====== CLICK RIPPLE + SPARKS ====== */
+document.addEventListener('click',e=>{
+  // ripple
+  const r=document.createElement('div');
+  r.className='ripple-burst';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';
+  document.body.appendChild(r);setTimeout(()=>r.remove(),700);
+  // sparks
+  for(let i=0;i<8;i++){
+    const s=document.createElement('div');s.className='spark';
+    const angle=Math.random()*Math.PI*2;const dist=40+Math.random()*60;
+    s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';
+    s.style.setProperty('--sx',Math.cos(angle)*dist+'px');
+    s.style.setProperty('--sy',Math.sin(angle)*dist+'px');
+    s.style.background=Math.random()>.5?'var(--cyan)':'var(--magenta)';
+    s.style.animationDuration=(.4+Math.random()*.4)+'s';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),800);
+  }
+});
 
-const sideLeft  = ['Venus','Blender','Jupiter'];
-const sideRight = ['Neptune','Mars','Saturn'];
-
-function applyPlanet(i){
-  const p = planets[i];
-  document.getElementById('mainPlanet').style.background = p.bg;
-  document.getElementById('heroTitle').textContent = p.name;
-  document.getElementById('heroSub').textContent   = p.sub;
-  document.getElementById('heroEyebrow').textContent = p.eyebrow;
-  const cta = document.getElementById('heroCta');
-  cta.textContent = 'VIEW MORE';
-  cta.onclick = ()=>showPage(p.page);
-  const li = (i-1+planets.length)%planets.length;
-  const ri = (i+1)%planets.length;
-  document.getElementById('leftLabel').textContent  = sideLeft[i]||'Venus';
-  document.getElementById('rightLabel').textContent = sideRight[i]||'Neptune';
+/* ====== LOADER ====== */
+const loaderTexts=['INITIALIZING','LOADING ASSETS','WARMING ENGINES','ENGAGING WARP'];
+const loaderSubs=['LOADING MULTIMEDIA SYSTEMS...','CALIBRATING STARFIELD...','SYNCING MODULES...','LAUNCH SEQUENCE ACTIVE...'];
+let lp=0;
+const bar=document.getElementById('loaderBar');
+const lt=document.getElementById('loaderText');
+const ls=document.getElementById('loaderSub');
+function runLoader(){
+  if(lp>100){document.getElementById('loader').classList.add('done');return;}
+  bar.style.width=lp+'%';
+  const i=Math.floor(lp/33);
+  lt.textContent=loaderTexts[Math.min(i,loaderTexts.length-1)];
+  ls.textContent=loaderSubs[Math.min(i,loaderSubs.length-1)];
+  lp+=Math.random()*4+1;
+  setTimeout(runLoader,30+(Math.random()*40));
 }
-applyPlanet(0);
+runLoader();
 
-function cycleLeft(){ pIdx=(pIdx-1+planets.length)%planets.length; applyPlanet(pIdx); }
-function cycleRight(){ pIdx=(pIdx+1)%planets.length; applyPlanet(pIdx); }
-
-/* ============================================================
-   PAGE SWITCHING
-   ============================================================ */
-function showPage(id){
+/* ====== PAGE TRANSITION ====== */
+const wipe=document.getElementById('page-wipe');
+let transitioning=false;
+function navTo(id){
+  if(transitioning)return;
+  const curr=document.querySelector('.page.active');
+  if(curr&&curr.id===id)return;
+  transitioning=true;
+  wipe.className='in';
+  setTimeout(()=>{
+    showPageInner(id);
+    wipe.className='out';
+    setTimeout(()=>{wipe.className='';transitioning=false;},450);
+  },450);
+}
+function showPageInner(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-  const pg = document.getElementById(id);
-  if(pg) pg.classList.add('active');
-  const nav = document.getElementById('nav-'+id);
-  if(nav) nav.classList.add('active');
+  const pg=document.getElementById(id);
+  if(pg){pg.classList.add('active');pg.classList.add('enter');setTimeout(()=>pg.classList.remove('enter'),700);}
+  const nav=document.getElementById('nav-'+id);
+  if(nav)nav.classList.add('active');
   window.scrollTo(0,0);
-  setTimeout(triggerReveal,120);
+  setTimeout(triggerReveal,200);
   if(id==='about'){
     setTimeout(()=>{
-      document.querySelectorAll('.skill-bar-fill').forEach(el=>{
-        el.style.width = el.dataset.w||'0%';
-      });
-    },500);
+      document.querySelectorAll('.skill-bar-fill').forEach(el=>{el.style.width=el.dataset.w||'0%';});
+    },600);
   }
 }
 
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
+/* ====== SCROLL REVEAL ====== */
 function triggerReveal(){
   document.querySelectorAll('.page.active .reveal').forEach((el,i)=>{
-    const r = el.getBoundingClientRect();
-    if(r.top < window.innerHeight - 60){
-      setTimeout(()=>el.classList.add('revealed'), i*70);
-    }
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight-60)setTimeout(()=>el.classList.add('revealed'),i*70);
   });
 }
 window.addEventListener('scroll',triggerReveal);
-setTimeout(triggerReveal,250);
+setTimeout(triggerReveal,800);
 
-/* ============================================================
-   BUILD PLACEHOLDER WEEKS 4–12
-   ============================================================ */
-const phWeeks = [
-  {w:4,  icon:'🖌️', title:'Coloring'},
-  {w:5,  icon:'✏️', title:'Refinement'},
-  {w:6,  icon:'🎨', title:'Stylization'},
-  {w:7,  icon:'🔮', title:'Depth'},
-  {w:8,  icon:'⚡', title:'Effects'},
-  {w:9,  icon:'🌀', title:'Flow'},
-  {w:10, icon:'🌌', title:'Atmosphere'},
-  {w:11, icon:'🎞️', title:'Compositing'},
-  {w:12, icon:'🏆', title:'Final Cut'},
+/* ====== PLANET CAROUSEL ====== */
+const planets=[
+  {name:'ROTOSCOPING',sub:'Frame by Frame',eyebrow:'Project 01 — Rotoscoping',page:'rotoscoping',
+   bg:'radial-gradient(ellipse at 35% 35%,#1a3a6e 0%,#0a1e45 30%,#030918 70%,#000 100%)'},
+  {name:'3D BLENDER',sub:'Into the Void',eyebrow:'Project 02 — 3D Rendering',page:'rendering',
+   bg:'radial-gradient(ellipse at 35% 35%,#3a1a6e 0%,#200a45 30%,#100318 70%,#000 100%)'},
+  {name:'ABOUT',sub:'The Creator',eyebrow:'Mission Control — About',page:'about',
+   bg:'radial-gradient(ellipse at 35% 35%,#1a6e3a 0%,#0a4520 30%,#031808 70%,#000 100%)'},
 ];
+let pIdx=0;
+const sideLeft=['Venus','Blender','Jupiter'],sideRight=['Neptune','Mars','Saturn'];
+function applyPlanet(i,dir){
+  const p=planets[i];
+  const titleEl=document.getElementById('heroTitle');
+  // animate out
+  titleEl.style.transform='translateY(20px)';titleEl.style.opacity='0';
+  setTimeout(()=>{
+    document.getElementById('mainPlanet').style.background=p.bg;
+    titleEl.textContent=p.name;
+    document.getElementById('heroSub').textContent=p.sub;
+    document.getElementById('heroEyebrow').textContent=p.eyebrow;
+    document.getElementById('heroCta').onclick=()=>navTo(p.page);
+    document.getElementById('leftLabel').textContent=sideLeft[i]||'Venus';
+    document.getElementById('rightLabel').textContent=sideRight[i]||'Neptune';
+    titleEl.style.transform='none';titleEl.style.opacity='1';
+    titleEl.style.transition='transform .5s cubic-bezier(.23,1,.32,1),opacity .5s';
+    setTimeout(()=>titleEl.style.transition='',600);
+  },200);
+}
+applyPlanet(0);
+function cycleLeft(){pIdx=(pIdx-1+planets.length)%planets.length;applyPlanet(pIdx,'left');}
+function cycleRight(){pIdx=(pIdx+1)%planets.length;applyPlanet(pIdx,'right');}
 
-document.addEventListener('DOMContentLoaded', ()=>{
-  const grid = document.getElementById('weeks-grid');
-  phWeeks.forEach(({w,icon,title})=>{
-    const wn = String(w).padStart(2,'0');
-    const el = document.createElement('div');
-    el.className = 'week-frame reveal';
-    el.dataset.week = w;
-    el.innerHTML = `
-      <div class="week-topbar"></div>
-      <div class="week-head">
-        <span class="week-num-badge">Week ${wn}</span>
-        <span class="week-status-dot locked">Pending</span>
+/* ====== BUILD PLACEHOLDER WEEKS ====== */
+const phWeeks=[
+  {w:4,icon:'🖌️',title:'Coloring'},{w:5,icon:'✏️',title:'Refinement'},
+  {w:6,icon:'🎨',title:'Stylization'},{w:7,icon:'🔮',title:'Depth'},
+  {w:8,icon:'⚡',title:'Effects'},{w:9,icon:'🌀',title:'Flow'},
+  {w:10,icon:'🌌',title:'Atmosphere'},{w:11,icon:'🎞️',title:'Compositing'},
+  {w:12,icon:'🏆',title:'Final Cut'},
+];
+const grid=document.getElementById('weeks-grid');
+phWeeks.forEach(({w,icon,title})=>{
+  const wn=String(w).padStart(2,'0');
+  const el=document.createElement('div');
+  el.className='week-frame reveal';el.dataset.week=w;
+  el.innerHTML=`
+    <div class="week-topbar"></div>
+    <div class="week-head">
+      <span class="week-num-badge">Week ${wn}</span>
+      <span class="week-status-dot locked">Pending</span>
+    </div>
+    <div class="week-video-area">
+      <div class="week-placeholder-area">
+        <div class="week-placeholder-icon">${icon}</div>
+        <div class="week-placeholder-text">Coming Soon</div>
       </div>
-      <div class="week-video-area">
-        <div class="week-placeholder-area">
-          <div class="week-placeholder-icon">${icon}</div>
-          <div class="week-placeholder-text">Coming Soon</div>
-        </div>
-        <div class="week-corner"><div class="week-corner-num">${wn}</div></div>
+      <div class="week-corner"><div class="week-corner-num">${wn}</div></div>
+    </div>
+    <div class="week-foot">
+      <div class="week-foot-title">Week ${wn} — ${title}</div>
+      <div class="week-foot-progress">
+        <div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div>
       </div>
-      <div class="week-foot">
-        <div class="week-foot-title">Week ${wn} — ${title}</div>
-        <div class="week-foot-progress">
-          <div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div>
-        </div>
-      </div>
-    `;
-    grid.appendChild(el);
-  });
+    </div>
+  `;
+  grid.appendChild(el);
 });
 
-/* ============================================================
-   CARD TILT
-   ============================================================ */
-document.addEventListener('mousemove', e=>{
-  document.querySelectorAll('.proj-card, .week-frame').forEach(card=>{
-    const r = card.getBoundingClientRect();
-    const inside = e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
+/* ====== CARD 3D TILT ====== */
+document.addEventListener('mousemove',e=>{
+  document.querySelectorAll('.proj-card,.week-frame,.rf-card,.about-card').forEach(card=>{
+    const r=card.getBoundingClientRect();
+    const inside=e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
     if(inside){
-      const x = e.clientX-r.left-r.width/2;
-      const y = e.clientY-r.top-r.height/2;
-      card.style.transform=`perspective(900px) rotateY(${x/28}deg) rotateX(${-y/28}deg) translateY(-8px)`;
+      const x=(e.clientX-r.left-r.width/2);const y=(e.clientY-r.top-r.height/2);
+      card.style.transform=`perspective(900px) rotateY(${x/32}deg) rotateX(${-y/32}deg) translateY(-10px)`;
     } else {
       card.style.transform='';
     }
   });
 });
+
+/* ====== SCROLL NAV ====== */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('mainNav');
+  if(window.scrollY>40)nav.classList.add('scrolled');else nav.classList.remove('scrolled');
+  triggerReveal();
+});
+
+/* ====== DARK/LIGHT TOGGLE ====== */
+let isLight=false;
+function toggleMode(){
+  isLight=!isLight;
+  document.body.classList.toggle('light',isLight);
+  document.getElementById('themeBtn').textContent=isLight?'🌑':'🌙';
+}
+
+/* ====== FLOATING PARTICLES on mouse move ====== */
+let lastParticle=0;
+document.addEventListener('mousemove',e=>{
+  const now=Date.now();
+  if(now-lastParticle<80)return;
+  lastParticle=now;
+  if(Math.random()>.7)return;
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';
+  p.style.width=p.style.height=(2+Math.random()*3)+'px';
+  p.style.background=Math.random()>.5?'var(--cyan)':'var(--magenta)';
+  p.style.animationDuration=(1+Math.random()*2)+'s';
+  p.style.animationDelay='0s';
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),3000);
+});
+
+/* ====== NAV HOVER RE-BIND ====== */
+setTimeout(()=>addHover(document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.toggle-btn,.stat-item,.about-avatar,.cine-dot')),1200);
+
+/* ====== CURSOR DOT STYLE on cursor ====== */
+document.addEventListener('mousedown',()=>{cursorEl.style.transform='translate(-50%,-50%) scale(.7)';});
+document.addEventListener('mouseup',()=>{cursorEl.style.transform='translate(-50%,-50%) scale(1)';});
 </script>
 </body>
 </html>

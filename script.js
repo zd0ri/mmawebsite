@@ -1,662 +1,120 @@
-/* ============================================================
-   ROTOSPACE · script.js
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', () => {
-  initStarField();
-  initBurstCanvas();
-  initCustomCursor();
-  initTypingEffect();
-  initParallax();
-  initMagneticButtons();
-  initHeader();
-  initMobileMenu();
-  initThemeToggle();
-  initPortfolioTabs();
-  initScrollReveal();
-  initSolarSystem();
-  initAgeCalculator();
-  initYouTubeModal();
-  initConstellationCanvas();
-  initCounterAnimation();
-  setFooterYear();
-});
-/* ─────────────────────────────────────────
-   1.  STAR FIELD CANVAS
-───────────────────────────────────────── */
-function initStarField() {
-  const canvas = document.getElementById('starCanvas');
-  const ctx    = canvas.getContext('2d');
-  let stars    = [];
-  let W, H;
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    buildStars();
-  }
-  function buildStars() {
-    stars = [];
-    const count = Math.min(Math.floor((W * H) / 4000), 300);
-    for (let i = 0; i < count; i++) {
-      stars.push({
-        x:   Math.random() * W,
-        y:   Math.random() * H,
-        r:   Math.random() * 1.4 + 0.2,
-        a:   Math.random(),
-        da:  (Math.random() - .5) * .004,
-        vx:  (Math.random() - .5) * .08,
-        vy:  (Math.random() - .5) * .08,
-        hue: Math.random() > .85 ? `${200 + Math.random() * 80}` : '240',
-      });
+{
+  "site": {
+    "title": "Multimedia & Authoring",
+    "subtitle": "BSIT-NS-2A",
+    "author": "Meriel N. Lanuza",
+    "subject": "Multimedia & Authoring",
+    "section": "NS-2A",
+    "program": "Bachelor of Science in Information Technology"
+  },
+
+  "nav": [
+    { "id": "home",        "label": "Home",      "href": "index.html" },
+    { "id": "roto",        "label": "Rotoscoping","href": "rotoscoping.html" },
+    { "id": "blender",     "label": "3D Blender", "href": "blender.html" },
+    { "id": "about",       "label": "About",      "href": "about.html" }
+  ],
+
+  "planets": [
+    {
+      "id": "multimedia",
+      "name": "MULTIMEDIA",
+      "subtitle": "& Authoring",
+      "eyebrow": "02 ——— MAIN ——— 02",
+      "desc": "Where art meets technology",
+      "color1": "#1a3a6e", "color2": "#0a1e45", "color3": "#030918",
+      "highlight": "#3a6ebb",
+      "rings": true,
+      "stats": [
+        { "label": "Technique",   "value": "Rotoscoping",   "sub": "Frame-by-frame" },
+        { "label": "Software",    "value": "Blender 3D",    "sub": "3D Modeling" },
+        { "label": "Duration",    "value": "12 Weeks",      "sub": "Progressive" },
+        { "label": "Format",      "value": "Animation",     "sub": "Digital" },
+        { "label": "Status",      "value": "ACTIVE",        "sub": "Ongoing" },
+        { "label": "Semester",    "value": "2nd Sem",       "sub": "2025–2026" }
+      ]
+    },
+    {
+      "id": "rotoscoping",
+      "name": "ROTOSCOPING",
+      "subtitle": "Frame by Frame",
+      "eyebrow": "02 ——— PROJECT 01 ——— 02",
+      "desc": "Tracing life, frame by frame",
+      "color1": "#0a3a5c", "color2": "#062240", "color3": "#020b18",
+      "highlight": "#00e5ff",
+      "rings": false,
+      "link": "rotoscoping.html",
+      "stats": [
+        { "label": "Technique",   "value": "Rotoscoping",   "sub": "Traced" },
+        { "label": "Weeks",       "value": "1 – 12",        "sub": "Progress" },
+        { "label": "Frames",      "value": "100+",          "sub": "Hand-drawn" },
+        { "label": "Software",    "value": "Adobe",         "sub": "After Effects" },
+        { "label": "Ref Video",   "value": "YouTube",       "sub": "Source" },
+        { "label": "Status",      "value": "ACTIVE",        "sub": "Wk 3 done" }
+      ]
+    },
+    {
+      "id": "blender",
+      "name": "3D BLENDER",
+      "subtitle": "Into the Void",
+      "eyebrow": "02 ——— PROJECT 02 ——— 02",
+      "desc": "Sculpting worlds from nothing",
+      "color1": "#3a1a6e", "color2": "#200a45", "color3": "#0a0318",
+      "highlight": "#cc00ff",
+      "rings": true,
+      "link": "blender.html",
+      "stats": [
+        { "label": "Software",    "value": "Blender",       "sub": "Open Source" },
+        { "label": "Technique",   "value": "3D Model",      "sub": "Mesh/Sculpt" },
+        { "label": "Render",      "value": "Cycles",        "sub": "/ EEVEE" },
+        { "label": "Lighting",    "value": "HDRI",          "sub": "+ Custom" },
+        { "label": "Texture",     "value": "PBR",           "sub": "UV Mapped" },
+        { "label": "Status",      "value": "SOON",          "sub": "Coming up" }
+      ]
     }
-  }
-  let shooters = [];
-  function spawnShooter() {
-    shooters.push({
-      x:   Math.random() * W * .7,
-      y:   Math.random() * H * .3,
-      vx:  6 + Math.random() * 8,
-      vy:  2 + Math.random() * 4,
-      len: 100 + Math.random() * 80,
-      a:   1,
-    });
-  }
-  setInterval(spawnShooter, 3500);
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    stars.forEach(s => {
-      s.a += s.da;
-      if (s.a > 1 || s.a < .1) s.da *= -1;
-      s.x += s.vx; s.y += s.vy;
-      if (s.x < 0) s.x = W; if (s.x > W) s.x = 0;
-      if (s.y < 0) s.y = H; if (s.y > H) s.y = 0;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${s.hue},80%,90%,${s.a})`;
-      ctx.fill();
-    });
-    shooters = shooters.filter(sh => {
-      sh.x += sh.vx; sh.y += sh.vy; sh.a -= .02;
-      if (sh.a <= 0) return false;
-      const grd = ctx.createLinearGradient(
-        sh.x - sh.vx * (sh.len / sh.vx),
-        sh.y - sh.vy * (sh.len / sh.vx),
-        sh.x, sh.y
-      );
-      grd.addColorStop(0, `rgba(185,127,255,0)`);
-      grd.addColorStop(1, `rgba(185,200,255,${sh.a})`);
-      ctx.beginPath();
-      ctx.moveTo(sh.x - sh.vx * 8, sh.y - sh.vy * 8);
-      ctx.lineTo(sh.x, sh.y);
-      ctx.strokeStyle = grd;
-      ctx.lineWidth   = 1.5;
-      ctx.stroke();
-      return true;
-    });
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
-}
-/* ─────────────────────────────────────────
-   2.  CLICK BURST CANVAS
-───────────────────────────────────────── */
-function initBurstCanvas() {
-  const canvas = document.getElementById('burstCanvas');
-  const ctx    = canvas.getContext('2d');
-  let particles = [];
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  document.addEventListener('click', e => {
-    const colors = ['#b97fff','#7ddeff','#ff7ec5','#ffc96b'];
-    for (let i = 0; i < 18; i++) {
-      const angle = (Math.PI * 2 / 18) * i;
-      const speed = 2 + Math.random() * 4;
-      particles.push({
-        x: e.clientX, y: e.clientY,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        r:  3 + Math.random() * 3,
-        a:  1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
-    }
-  });
-  function loop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles = particles.filter(p => {
-      p.x += p.vx; p.y += p.vy;
-      p.vy += .12; // gravity
-      p.a  -= .025;
-      if (p.a <= 0) return false;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + Math.round(p.a * 255).toString(16).padStart(2,'0');
-      ctx.fill();
-      return true;
-    });
-    requestAnimationFrame(loop);
-  }
-  loop();
-}
-/* ─────────────────────────────────────────
-   3.  CUSTOM CURSOR
-───────────────────────────────────────── */
-function initCustomCursor() {
-  const dot  = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = `${mx}px`;
-    dot.style.top  = `${my}px`;
-  });
-  (function animRing() {
-    rx += (mx - rx) * .18;
-    ry += (my - ry) * .18;
-    ring.style.left = `${rx}px`;
-    ring.style.top  = `${ry}px`;
-    requestAnimationFrame(animRing);
-  })();
-  const hover = document.querySelectorAll('a, button, .video-card, .port-tab, .flip-card, summary, input, .week-card');
-  hover.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.width  = '52px';
-      ring.style.height = '52px';
-      ring.style.borderColor = 'var(--accent-3)';
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.width  = '36px';
-      ring.style.height = '36px';
-      ring.style.borderColor = 'var(--accent-1)';
-    });
-  });
-  document.addEventListener('mouseleave', () => {
-    dot.style.opacity  = '0';
-    ring.style.opacity = '0';
-  });
-  document.addEventListener('mouseenter', () => {
-    dot.style.opacity  = '1';
-    ring.style.opacity = '0.5';
-  });
-}
-/* ─────────────────────────────────────────
-   4.  TYPING EFFECT
-───────────────────────────────────────── */
-function initTypingEffect() {
-  const el = document.getElementById('typingText');
-  const phrases = [
-    'Rotoscoping: where every frame is a universe ✨',
-    'Tracing life, one pixel at a time 🎨',
-    'Planets orbit, pencils draw — magic happens 🪐',
-    'From live-action footage to living animation 🎬',
-    'Space is infinite. So is creativity. 🌌',
-    'BSIT-NS-2A — where IT meets art 💫',
-  ];
-  let pi = 0, ci = 0, deleting = false;
-  function type() {
-    const phrase = phrases[pi];
-    if (!deleting) {
-      el.textContent = phrase.slice(0, ++ci);
-      if (ci === phrase.length) { deleting = true; setTimeout(type, 2000); return; }
-    } else {
-      el.textContent = phrase.slice(0, --ci);
-      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
-    }
-    setTimeout(type, deleting ? 30 : 55);
-  }
-  setTimeout(type, 800);
-}
-/* ─────────────────────────────────────────
-   5.  PARALLAX
-───────────────────────────────────────── */
-function initParallax() {
-  const layer = document.getElementById('parallaxLayer');
-  if (!layer) return;
-  document.addEventListener('mousemove', e => {
-    const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-    const dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
-    layer.style.transform = `translate(${dx * 18}px, ${dy * 12}px)`;
-    const ms = document.getElementById('miniSystem');
-    if (ms) ms.style.transform = `translateY(-50%) translate(${dx * -10}px, ${dy * -8}px)`;
-  });
-}
-/* ─────────────────────────────────────────
-   6.  MAGNETIC BUTTONS
-───────────────────────────────────────── */
-function initMagneticButtons() {
-  document.querySelectorAll('.magnetic-btn').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const r   = btn.getBoundingClientRect();
-      const dx  = e.clientX - (r.left + r.width  / 2);
-      const dy  = e.clientY - (r.top  + r.height / 2);
-      btn.style.transform = `translate(${dx * .22}px, ${dy * .22}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  });
-}
-/* ─────────────────────────────────────────
-   7.  HEADER / ACTIVE NAV
-───────────────────────────────────────── */
-function initHeader() {
-  const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
-  const sections = ['home', 'portfolio', 'about'];
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === id));
-      }
-    });
-  }, { threshold: .35 });
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) observer.observe(el);
-  });
-}
-/* ─────────────────────────────────────────
-   8.  MOBILE MENU
-───────────────────────────────────────── */
-function initMobileMenu() {
-  const btn   = document.getElementById('hamburger');
-  const menu  = document.getElementById('mobileMenu');
-  const links = menu.querySelectorAll('.mobile-link');
-  btn.addEventListener('click', () => {
-    const open = btn.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open);
-    menu.classList.toggle('open', open);
-    menu.setAttribute('aria-hidden', !open);
-    document.body.classList.toggle('menu-open', open);
-  });
-  links.forEach(l => l.addEventListener('click', () => {
-    btn.classList.remove('open');
-    btn.setAttribute('aria-expanded', false);
-    menu.classList.remove('open');
-    menu.setAttribute('aria-hidden', true);
-    document.body.classList.remove('menu-open');
-  }));
-}
-/* ─────────────────────────────────────────
-   9.  THEME TOGGLE
-───────────────────────────────────────── */
-function initThemeToggle() {
-  const btn  = document.getElementById('themeToggle');
-  const root = document.documentElement;
-  const saved = localStorage.getItem('roto-theme');
-  if (saved) root.setAttribute('data-theme', saved);
-  btn.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('roto-theme', next);
-  });
-}
-/* ─────────────────────────────────────────
-   10. PORTFOLIO TABS
-───────────────────────────────────────── */
-function initPortfolioTabs() {
-  const tabs   = document.querySelectorAll('.port-tab');
-  const panels = document.querySelectorAll('.port-panel');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
-      tabs.forEach(t => {
-        t.classList.toggle('active', t.dataset.tab === target);
-        t.setAttribute('aria-selected', t.dataset.tab === target);
-      });
-      panels.forEach(p => p.classList.toggle('active', p.id === `panel-${target}`));
-      if (target === 'solar') setTimeout(resizeSolarCanvas, 50);
-    });
-  });
-}
-/* ─────────────────────────────────────────
-   11. SCROLL REVEAL
-───────────────────────────────────────── */
-function initScrollReveal() {
-  const items = document.querySelectorAll('.reveal-up');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: .12 });
-  items.forEach(el => obs.observe(el));
-}
-/* ─────────────────────────────────────────
-   12. COUNTER ANIMATION (hero stats)
-───────────────────────────────────────── */
-function initCounterAnimation() {
-  const nums = document.querySelectorAll('.stat-num');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el     = e.target;
-      const target = parseInt(el.dataset.target, 10);
-      let cur = 0;
-      const step = () => {
-        cur = Math.min(cur + Math.ceil(target / 40), target);
-        el.textContent = cur;
-        if (cur < target) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-      obs.unobserve(el);
-    });
-  }, { threshold: .5 });
-  nums.forEach(n => obs.observe(n));
-}
-/* ─────────────────────────────────────────
-   13. SOLAR SYSTEM CANVAS
-───────────────────────────────────────── */
-const PLANETS = [
-  { name:'Mercury', emoji:'☿', color:'#b5b5b5', glow:'#aaa', radius:5,  dist:70,  speed:.047, angle:0,   label:'Mercury', yearDays:88    },
-  { name:'Venus',   emoji:'♀', color:'#e8c87a', glow:'#e8b', radius:8,  dist:110, speed:.035, angle:1,   label:'Venus',   yearDays:225   },
-  { name:'Earth',   emoji:'🌍', color:'#4b9fe4', glow:'#6af', radius:9,  dist:155, speed:.029, angle:2,   label:'Earth',   yearDays:365   },
-  { name:'Mars',    emoji:'♂', color:'#d16030', glow:'#e74', radius:7,  dist:205, speed:.024, angle:.5,  label:'Mars',    yearDays:687   },
-  { name:'Jupiter', emoji:'♃', color:'#c9956b', glow:'#db8', radius:16, dist:268, speed:.013, angle:3,   label:'Jupiter', yearDays:4333  },
-  { name:'Saturn',  emoji:'♄', color:'#e3c87a', glow:'#eca', radius:13, dist:330, speed:.009, angle:1.3, label:'Saturn',  yearDays:10759, rings:true },
-  { name:'Uranus',  emoji:'⛢', color:'#9de3e8', glow:'#7ee', radius:10, dist:385, speed:.006, angle:4,   label:'Uranus',  yearDays:30687 },
-  { name:'Neptune', emoji:'♆', color:'#4b7bec', glow:'#57f', radius:10, dist:430, speed:.005, angle:2.2, label:'Neptune', yearDays:60190 },
-];
-let solarCanvas, solarCtx;
-let mouseXS = 0, mouseYS = 0;
-let hoveredPlanet = null;
-const tooltip = document.getElementById('planetTooltip');
-function resizeSolarCanvas() {
-  if (!solarCanvas) return;
-  const rect = solarCanvas.getBoundingClientRect();
-  solarCanvas.width  = rect.width;
-  solarCanvas.height = rect.height;
-}
-function initSolarSystem() {
-  solarCanvas = document.getElementById('solarCanvas');
-  solarCtx    = solarCanvas.getContext('2d');
-  resizeSolarCanvas();
-  window.addEventListener('resize', resizeSolarCanvas);
-  solarCanvas.addEventListener('mousemove', e => {
-    const rect = solarCanvas.getBoundingClientRect();
-    mouseXS = e.clientX - rect.left;
-    mouseYS = e.clientY - rect.top;
-    checkHover(e.clientX, e.clientY);
-  });
-  solarCanvas.addEventListener('mouseleave', () => {
-    hoveredPlanet = null;
-    tooltip.classList.remove('visible');
-  });
-  const bgStars = buildSolarStars();
-  function loop() {
-    const W = solarCanvas.width, H = solarCanvas.height;
-    const cx = W / 2 + (mouseXS - W / 2) * .04;
-    const cy = H / 2 + (mouseYS - H / 2) * .04;
-    solarCtx.clearRect(0, 0, W, H);
-    bgStars.forEach(s => {
-      solarCtx.beginPath();
-      solarCtx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
-      solarCtx.fillStyle = `rgba(220,210,255,${s.a})`;
-      solarCtx.fill();
-    });
-    // Sun
-    const sunGrd = solarCtx.createRadialGradient(cx, cy, 0, cx, cy, 28);
-    sunGrd.addColorStop(0,  '#fff9a0');
-    sunGrd.addColorStop(.5, '#ffc96b');
-    sunGrd.addColorStop(1,  'rgba(255,140,0,0)');
-    solarCtx.beginPath();
-    solarCtx.arc(cx, cy, 18, 0, Math.PI * 2);
-    solarCtx.fillStyle = sunGrd;
-    solarCtx.fill();
-    const coroGrd = solarCtx.createRadialGradient(cx, cy, 10, cx, cy, 50);
-    coroGrd.addColorStop(0, 'rgba(255,200,50,.25)');
-    coroGrd.addColorStop(1, 'rgba(255,140,0,0)');
-    solarCtx.beginPath();
-    solarCtx.arc(cx, cy, 50, 0, Math.PI * 2);
-    solarCtx.fillStyle = coroGrd;
-    solarCtx.fill();
-    PLANETS.forEach(p => {
-      p.angle += p.speed * .016 * 6;
-      const px = cx + Math.cos(p.angle) * p.dist * (W / 960);
-      const py = cy + Math.sin(p.angle) * p.dist * (H / 540);
-      p._sx = px; p._sy = py;
-      solarCtx.beginPath();
-      solarCtx.ellipse(cx, cy, p.dist * (W / 960), p.dist * (H / 540), 0, 0, Math.PI * 2);
-      solarCtx.strokeStyle = hoveredPlanet === p ? `rgba(185,127,255,.35)` : `rgba(140,120,200,.12)`;
-      solarCtx.lineWidth   = hoveredPlanet === p ? 1.5 : .8;
-      solarCtx.stroke();
-      const pr   = p.radius * (W / 960);
-      const gGrd = solarCtx.createRadialGradient(px, py, 0, px, py, pr * 3);
-      gGrd.addColorStop(0, p.glow + '55');
-      gGrd.addColorStop(1, 'rgba(0,0,0,0)');
-      solarCtx.beginPath();
-      solarCtx.arc(px, py, pr * 3, 0, Math.PI * 2);
-      solarCtx.fillStyle = gGrd;
-      solarCtx.fill();
-      const pGrd = solarCtx.createRadialGradient(px - pr * .3, py - pr * .3, 0, px, py, pr);
-      pGrd.addColorStop(0, lighten(p.color));
-      pGrd.addColorStop(1, darken(p.color));
-      solarCtx.beginPath();
-      solarCtx.arc(px, py, Math.max(pr, 3), 0, Math.PI * 2);
-      solarCtx.fillStyle = pGrd;
-      solarCtx.fill();
-      if (p.rings) {
-        solarCtx.save();
-        solarCtx.translate(px, py);
-        solarCtx.scale(1, .3);
-        solarCtx.beginPath();
-        solarCtx.arc(0, 0, pr * 2.5, 0, Math.PI * 2);
-        solarCtx.strokeStyle = 'rgba(210,180,100,.55)';
-        solarCtx.lineWidth   = pr * .9;
-        solarCtx.stroke();
-        solarCtx.restore();
-      }
-      if (hoveredPlanet === p) {
-        solarCtx.fillStyle = 'rgba(220,200,255,.9)';
-        solarCtx.font      = `bold ${12 * (W / 960)}px 'Syne', sans-serif`;
-        solarCtx.textAlign = 'center';
-        solarCtx.fillText(p.label, px, py - pr * 2);
-      }
-    });
-    requestAnimationFrame(loop);
-  }
-  loop();
-}
-function buildSolarStars() {
-  const stars = [];
-  for (let i = 0; i < 180; i++) {
-    stars.push({ x:Math.random(), y:Math.random(), r:Math.random()*.9+.2, a:Math.random()*.6+.1 });
-  }
-  return stars;
-}
-function checkHover(cx, cy) {
-  const rect = solarCanvas.getBoundingClientRect();
-  const mx = cx - rect.left, my = cy - rect.top;
-  const W  = solarCanvas.width, H = solarCanvas.height;
-  hoveredPlanet = null;
-  PLANETS.forEach(p => {
-    if (!p._sx) return;
-    const dx = mx - p._sx, dy = my - p._sy;
-    const pr = p.radius * (W / 960);
-    if (Math.sqrt(dx * dx + dy * dy) < Math.max(pr, 12)) hoveredPlanet = p;
-  });
-  if (hoveredPlanet) {
-    tooltip.innerHTML = `<strong>${hoveredPlanet.emoji} ${hoveredPlanet.name}</strong><br>
-      Year: ${hoveredPlanet.yearDays} Earth days`;
-    tooltip.style.left = `${cx + 16}px`;
-    tooltip.style.top  = `${cy - 10}px`;
-    tooltip.classList.add('visible');
-  } else {
-    tooltip.classList.remove('visible');
-  }
-}
-function lighten(hex) {
-  const [r,g,b] = hexToRgb(hex);
-  return `rgb(${Math.min(r+50,255)},${Math.min(g+50,255)},${Math.min(b+50,255)})`;
-}
-function darken(hex) {
-  const [r,g,b] = hexToRgb(hex);
-  return `rgb(${Math.max(r-40,0)},${Math.max(g-40,0)},${Math.max(b-40,0)})`;
-}
-function hexToRgb(hex) {
-  const n = parseInt(hex.slice(1), 16);
-  return [(n>>16)&255, (n>>8)&255, n&255];
-}
-/* ─────────────────────────────────────────
-   14. PLANET AGE CALCULATOR
-───────────────────────────────────────── */
-/* ─────────────────────────────────────────
-   14. PLANET AGE CALCULATOR
-───────────────────────────────────────── */
-const PLANET_YEARS = [
-  { name: 'Mercury', emoji: '☿', period: 0.241  },
-  { name: 'Venus',   emoji: '♀', period: 0.615  },
-  { name: 'Mars',    emoji: '♂', period: 1.881  },
-  { name: 'Jupiter', emoji: '♃', period: 11.86  },
-  { name: 'Saturn',  emoji: '♄', period: 29.46  },
-  { name: 'Uranus',  emoji: '⛢', period: 84.01  },
-  { name: 'Neptune', emoji: '♆', period: 164.8  },
-];
+  ],
 
-function initAgeCalculator() {
-  const btn     = document.getElementById('calcBtn');
-  const input   = document.getElementById('earthAge');
-  const results = document.getElementById('ageResults');
+  "rotoscoping": {
+    "title": "Rotoscoping",
+    "desc": "Tracing life, frame by frame — transforming reality into animated art through meticulous digital craftsmanship.",
+    "reference": {
+      "youtube_id": "83X6PWqvnfE",
+      "title": "Reference Source Material"
+    },
+    "weeks": [
+      { "w": 1,  "youtube_id": "9jchSxiI1Wo", "title": "Foundation",   "done": true  },
+      { "w": 2,  "youtube_id": "BclVEvWFb5Q", "title": "Tracing",      "done": true  },
+      { "w": 3,  "youtube_id": "SJ9Qt4SAGp4", "title": "Motion",       "done": true  },
+      { "w": 4,  "youtube_id": null,           "title": "Coloring",     "done": false, "icon": "🖌️" },
+      { "w": 5,  "youtube_id": null,           "title": "Refinement",   "done": false, "icon": "✏️" },
+      { "w": 6,  "youtube_id": null,           "title": "Stylization",  "done": false, "icon": "🎨" },
+      { "w": 7,  "youtube_id": null,           "title": "Depth",        "done": false, "icon": "🔮" },
+      { "w": 8,  "youtube_id": null,           "title": "Effects",      "done": false, "icon": "⚡" },
+      { "w": 9,  "youtube_id": null,           "title": "Flow",         "done": false, "icon": "🌀" },
+      { "w": 10, "youtube_id": null,           "title": "Atmosphere",   "done": false, "icon": "🌌" },
+      { "w": 11, "youtube_id": null,           "title": "Compositing",  "done": false, "icon": "🎞️" },
+      { "w": 12, "youtube_id": null,           "title": "Final Cut",    "done": false, "icon": "🏆" }
+    ]
+  },
 
-  if (!btn || !input || !results) return; // safety guard
+  "blender": {
+    "title": "3D Blender",
+    "desc": "Sculpting dimensions from the void — building three-dimensional worlds with light, shadow, and imagination.",
+    "features": [
+      { "icon": "🧊", "title": "3D Modeling",  "desc": "Creating detailed 3D meshes and sculptures using Blender's powerful modeling tools and parametric modifiers." },
+      { "icon": "🎨", "title": "Texturing",    "desc": "Applying realistic materials, UV mapping, and procedural textures for lifelike, painterly surfaces." },
+      { "icon": "💡", "title": "Lighting",     "desc": "Dramatic lighting setups with HDRI environments, area lights, and custom rigs for cinematic mood." },
+      { "icon": "✨", "title": "Final Render", "desc": "Cycles and EEVEE final renders with post-processing compositing for breathtaking visual quality." }
+    ]
+  },
 
-  function calculate() {
-    const age = parseFloat(input.value);
-
-    if (!input.value || isNaN(age) || age <= 0 || age > 999) {
-      results.innerHTML = `<p style="
-        color: var(--accent-3);
-        font-family: var(--font-mono);
-        font-size: .85rem;
-        padding: 10px 0;
-        grid-column: 1 / -1;
-      ">Please enter a valid age between 1 and 999 🙏</p>`;
-      return;
-    }
-
-    results.innerHTML = ''; // clear previous results
-
-    PLANET_YEARS.forEach((p, i) => {
-      const planetAge = (age / p.period).toFixed(2);
-      const card = document.createElement('div');
-      card.className = 'planet-result';
-      card.style.animationDelay = `${i * 0.07}s`;
-      card.innerHTML = `
-        <div class="p-emoji">${p.emoji}</div>
-        <div class="p-name">${p.name}</div>
-        <div class="p-age">${planetAge}</div>
-        <div class="p-years">planet years old</div>
-      `;
-      results.appendChild(card);
-    });
+  "about": {
+    "skills": [
+      { "name": "Rotoscoping",          "pct": 75,  "status": "Active",    "variant": "cyan" },
+      { "name": "3D Modeling (Blender)","pct": 50,  "status": "Learning",  "variant": "magenta" },
+      { "name": "Video Editing",        "pct": 68,  "status": "Proficient","variant": "cyan" },
+      { "name": "Digital Animation",    "pct": 44,  "status": "Growing",   "variant": "magenta" },
+      { "name": "Creative Storytelling","pct": 82,  "status": "Strong",    "variant": "cyan" }
+    ]
   }
-
-  btn.addEventListener('click', calculate);
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') calculate();
-  });
 }
-/* ─────────────────────────────────────────
-   15. YOUTUBE MODAL
-───────────────────────────────────────── */
-function initYouTubeModal() {
-  const modal    = document.getElementById('ytModal');
-  const iframe   = document.getElementById('ytIframe');
-  const closeBtn = document.getElementById('ytClose');
-  const backdrop = document.getElementById('ytBackdrop');
-  function openModal(videoId) {
-    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    modal.removeAttribute('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    iframe.src = '';
-    modal.setAttribute('hidden', '');
-    document.body.style.overflow = '';
-  }
-  closeBtn.addEventListener('click',   closeModal);
-  backdrop.addEventListener('click',   closeModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-}
-/* ─────────────────────────────────────────
-   16. CONSTELLATION CANVAS (About bg)
-───────────────────────────────────────── */
-function initConstellationCanvas() {
-  const canvas = document.getElementById('constellationCanvas');
-  if (!canvas) return;
-  const ctx    = canvas.getContext('2d');
-  let pts      = [];
-  let W, H;
-  function resize() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    W = canvas.width  = rect.width;
-    H = canvas.height = rect.height;
-    buildPts();
-  }
-  function buildPts() {
-    pts = [];
-    const count = Math.floor((W * H) / 18000);
-    for (let i = 0; i < count; i++) {
-      pts.push({
-        x:  Math.random() * W,
-        y:  Math.random() * H,
-        vx: (Math.random() - .5) * .25,
-        vy: (Math.random() - .5) * .25,
-      });
-    }
-  }
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    pts.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(185,127,255,.4)';
-      ctx.fill();
-    });
-    // Draw lines between nearby points
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i + 1; j < pts.length; j++) {
-        const dx = pts[i].x - pts[j].x;
-        const dy = pts[i].y - pts[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < 120) {
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = `rgba(185,127,255,${.18 * (1 - d / 120)})`;
-          ctx.lineWidth   = .8;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
-}
-/* ─────────────────────────────────────────
-   17. FOOTER YEAR
-───────────────────────────────────────── */
-function setFooterYear() {
-  const el = document.getElementById('footerYear');
-  if (el) el.textContent = new Date().getFullYear();
-}
-/* ─────────────────────────────────────────
-   18. SMOOTH SCROLL
-───────────────────────────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});

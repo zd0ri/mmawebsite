@@ -662,6 +662,58 @@ ul     { list-style: none; }
 .reference-video__meta p  { color: #a8b6de; margin: 0; }
 .reference-video__meta small { color: #8390ba; }
 
+/* Shared media embed card structure */
+.media-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.media-card--reference {
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.07);
+  background: linear-gradient(180deg, rgba(7,8,17,.86), rgba(9,10,23,.94));
+}
+.media-embed {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 8px 28px rgba(0,0,0,.45);
+  background: #000;
+}
+.media-embed--wide { aspect-ratio: 16 / 9; }
+.media-embed--short {
+  aspect-ratio: 9 / 16;
+  max-height: 400px;
+}
+.media-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+.media-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 2px;
+}
+.media-title {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #e9ecff;
+}
+.media-desc {
+  color: #a8b6de;
+  font-size: .94rem;
+}
+.media-info small { color: #8390ba; }
+
 /* ── PROGRESS BANNER ── */
 .progress-banner {
   max-width: 920px;
@@ -740,6 +792,7 @@ ul     { list-style: none; }
   box-shadow: 0 12px 40px rgba(185,127,255,.2);
   border-color: var(--accent-1);
 }
+.week-card.week-done .media-card { padding-top: 8px; }
 
 /* Week badge */
 .week-badge {

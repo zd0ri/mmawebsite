@@ -257,7 +257,7 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .progress-summary{display:flex;align-items:center;gap:20px;padding:16px 24px;border-radius:14px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.1);margin-bottom:40px;}
 .prog-label{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);white-space:nowrap;}
 .prog-track{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;}
-.prog-fill{height:100%;background:linear-gradient(to right,var(--cyan),var(--magenta));border-radius:4px;width:25%;transition:width 1.5s cubic-bezier(.23,1,.32,1);position:relative;}
+.prog-fill{height:100%;background:linear-gradient(to right,var(--cyan),var(--magenta));border-radius:4px;width:83%;transition:width 1.5s cubic-bezier(.23,1,.32,1);position:relative;}
 .prog-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:barShimmer 2s ease-in-out infinite;}
 @keyframes barShimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
 .prog-count{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--white);white-space:nowrap;}
@@ -624,7 +624,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       <div class="stat-item"><div class="stat-label">Technique</div><div class="stat-value">Rotoscoping</div><div class="stat-sub">Frame-by-frame</div></div>
       <div class="stat-item"><div class="stat-label">Duration</div><div class="stat-value">12 Weeks</div><div class="stat-sub">Progressive</div></div>
       <div class="stat-item"><div class="stat-label">Software</div><div class="stat-value">Adobe</div><div class="stat-sub">After Effects / PS</div></div>
-      <div class="stat-item"><div class="stat-label">Status</div><div class="stat-value">ACTIVE</div><div class="stat-sub">Week 1–3 done</div></div>
+      <div class="stat-item"><div class="stat-label">Status</div><div class="stat-value">ACTIVE</div><div class="stat-sub">Week 1–10 done</div></div>
       <div class="stat-item"><div class="stat-label">Frames</div><div class="stat-value">100+</div><div class="stat-sub">Hand-traced</div></div>
     </div>
   </section>
@@ -698,7 +698,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
           <div class="cine-bar-tag">REFERENCE</div>
         </div>
         <div class="cine-embed">
-          <!-- FIX: switched from youtube-nocookie to youtube.com, removed origin=null -->
           <iframe src="https://www.youtube.com/embed/83X6PWqvnfE?rel=0&modestbranding=1&controls=1" title="Rotoscoping Reference Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
@@ -708,7 +707,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
     <div class="progress-summary reveal">
       <div class="prog-label">Overall Progress</div>
       <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
-      <div class="prog-count"><span>3</span> / 12 Weeks Complete</div>
+      <div class="prog-count"><span>10</span> / 12 Weeks Complete</div>
     </div>
     <div class="weeks-grid" id="weeks-grid">
       <!-- WEEK 1 -->
@@ -716,7 +715,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="week-topbar"></div>
         <div class="week-head"><span class="week-num-badge">Week 01</span><span class="week-status-dot">Live</span></div>
         <div class="week-video-area">
-          <!-- FIX: switched from youtube-nocookie to youtube.com -->
           <iframe src="https://www.youtube.com/embed/9jchSxiI1Wo?rel=0&modestbranding=1&controls=1" title="Week 1 — Foundation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
           <div class="week-corner"><div class="week-corner-num">01</div></div>
         </div>
@@ -730,7 +728,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="week-topbar"></div>
         <div class="week-head"><span class="week-num-badge">Week 02</span><span class="week-status-dot">Live</span></div>
         <div class="week-video-area">
-          <!-- FIX: switched from youtube-nocookie to youtube.com -->
           <iframe src="https://www.youtube.com/embed/BclVEvWFb5Q?rel=0&modestbranding=1&controls=1" title="Week 2 — Tracing" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
           <div class="week-corner"><div class="week-corner-num">02</div></div>
         </div>
@@ -744,7 +741,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="week-topbar"></div>
         <div class="week-head"><span class="week-num-badge">Week 03</span><span class="week-status-dot">Live</span></div>
         <div class="week-video-area">
-          <!-- FIX: switched from youtube-nocookie to youtube.com -->
           <iframe src="https://www.youtube.com/embed/SJ9Qt4SAGp4?rel=0&modestbranding=1&controls=1" title="Week 3 — Motion" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
           <div class="week-corner"><div class="week-corner-num">03</div></div>
         </div>
@@ -1107,7 +1103,7 @@ function navTo(id){
   },430);
 }
 function animProgressBar(){
-  var pf=document.getElementById('progFill');if(pf)setTimeout(function(){pf.style.width='25%';},300);
+  var pf=document.getElementById('progFill');if(pf)setTimeout(function(){pf.style.width='83%';},300);
 }
 
 /* ============================================================
@@ -1158,24 +1154,47 @@ function cycleLeft(){pIdx=(pIdx-1+PLANETS.length)%PLANETS.length;applyMainPlanet
 function cycleRight(){pIdx=(pIdx+1)%PLANETS.length;applyMainPlanet(pIdx);}
 
 /* ============================================================
-   BUILD PLACEHOLDER WEEKS 4-12
+   BUILD WEEKS 4-12 — with video embeds for weeks 4-10
    ============================================================ */
 var phWeeks=[
-  {w:4,icon:'🖌️',title:'Coloring',sub:'Fill & Hues'},
-  {w:5,icon:'✏️',title:'Refinement',sub:'Detail Pass'},
-  {w:6,icon:'🎨',title:'Stylization',sub:'Art Direction'},
-  {w:7,icon:'🔮',title:'Depth',sub:'Layering'},
-  {w:8,icon:'⚡',title:'Effects',sub:'FX & Filters'},
-  {w:9,icon:'🌀',title:'Flow',sub:'Timing'},
-  {w:10,icon:'🌌',title:'Atmosphere',sub:'Mood & Color'},
-  {w:11,icon:'🎞️',title:'Compositing',sub:'Final Comp'},
-  {w:12,icon:'🏆',title:'Final Cut',sub:'Delivery'},
+  {w:4,icon:'🖌️',title:'Coloring',sub:'Fill & Hues',vid:'nObBgy7ZT2o'},
+  {w:5,icon:'✏️',title:'Refinement',sub:'Detail Pass',vid:'Zxja62voWtc'},
+  {w:6,icon:'🎨',title:'Stylization',sub:'Art Direction',vid:'WxQqylJcTTw'},
+  {w:7,icon:'🔮',title:'Depth',sub:'Layering',vid:'HfMwOwuDUeU'},
+  {w:8,icon:'⚡',title:'Effects',sub:'FX & Filters',vid:'6NTr47gCzd8'},
+  {w:9,icon:'🌀',title:'Flow',sub:'Timing',vid:'KZl_ab6W7eY'},
+  {w:10,icon:'🌌',title:'Atmosphere',sub:'Mood & Color',vid:'0qrv69Um1TA'},
+  {w:11,icon:'🎞️',title:'Compositing',sub:'Final Comp',vid:null},
+  {w:12,icon:'🏆',title:'Final Cut',sub:'Delivery',vid:null},
 ];
 var grid=document.getElementById('weeks-grid');
 phWeeks.forEach(function(obj){
   var wn=String(obj.w).padStart(2,'0');
-  var el=document.createElement('div');el.className='week-frame reveal';el.dataset.week=obj.w;
-  el.innerHTML='<div class="week-topbar"></div><div class="week-head"><span class="week-num-badge">Week '+wn+'</span><span class="week-status-dot locked">Pending</span></div><div class="week-video-area"><div class="week-placeholder-area"><div class="week-ph-ring"></div><div class="week-ph-ring"></div><div class="week-placeholder-icon">'+obj.icon+'</div><div class="week-placeholder-text">Coming Soon</div></div><div class="week-corner"><div class="week-corner-num">'+wn+'</div></div></div><div class="week-foot"><div class="week-foot-left"><div class="week-foot-title">Week '+wn+' \u2014 '+obj.title+'</div><div class="week-foot-sub">'+obj.sub+'</div></div><div class="week-foot-right"><div class="week-foot-progress"><div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div></div></div></div>';
+  var isDone=!!obj.vid;
+  var el=document.createElement('div');
+  el.className='week-frame reveal'+(isDone?' done':'');
+  el.dataset.week=obj.w;
+  var statusHtml=isDone
+    ?'<span class="week-status-dot">Live</span>'
+    :'<span class="week-status-dot locked">Pending</span>';
+  var badgeHtml=isDone?'<div class="week-done-badge">Done</div>':'';
+  var videoAreaHtml=obj.vid
+    ?'<iframe src="https://www.youtube.com/embed/'+obj.vid+'?rel=0&modestbranding=1&controls=1" title="Week '+wn+' \u2014 '+obj.title+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>'
+    :'<div class="week-placeholder-area"><div class="week-ph-ring"></div><div class="week-ph-ring"></div><div class="week-placeholder-icon">'+obj.icon+'</div><div class="week-placeholder-text">Coming Soon</div></div>';
+  el.innerHTML=
+    '<div class="week-topbar"></div>'+
+    '<div class="week-head"><span class="week-num-badge">Week '+wn+'</span>'+statusHtml+'</div>'+
+    '<div class="week-video-area">'+videoAreaHtml+'<div class="week-corner"><div class="week-corner-num">'+wn+'</div></div></div>'+
+    '<div class="week-foot">'+
+      '<div class="week-foot-left">'+
+        '<div class="week-foot-title">Week '+wn+' \u2014 '+obj.title+'</div>'+
+        '<div class="week-foot-sub">'+obj.sub+'</div>'+
+      '</div>'+
+      '<div class="week-foot-right">'+
+        '<div class="week-foot-progress"><div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div></div>'+
+        badgeHtml+
+      '</div>'+
+    '</div>';
   grid.appendChild(el);
 });
 

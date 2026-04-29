@@ -468,9 +468,9 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .pcalc-result-idle{text-align:center;transition:all .4s;}
 .pcalc-result-idle-icon{font-size:48px;margin-bottom:12px;animation:pcalcIdleFloat 3s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(200,0,255,.3));}
 @keyframes pcalcIdleFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-8px) scale(1.05);}}
-.pcalc-result-idle-text{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
 .pcalc-result-main{display:none;text-align:center;animation:pcalcReveal .5s cubic-bezier(.23,1,.32,1);}
-@keyframes pcalcReveal{from{opacity:0;transform:scale(.😎 translateY(10px);}to{opacity:1;transform:none;}}
+/* FIX: corrected broken keyframe — was scale(.😎 which corrupted the CSS */
+@keyframes pcalcReveal{from{opacity:0;transform:scale(0.8) translateY(10px);}to{opacity:1;transform:none;}}
 .pcalc-result-main.show{display:block;}
 .pcalc-result-idle.hide{display:none;}
 .pcalc-result-planet-orb{width:72px;height:72px;border-radius:50%;margin:0 auto 16px;box-shadow:inset -10px -10px 24px rgba(0,0,0,.6),inset 4px 4px 14px rgba(255,255,255,.12);animation:pcalcResultOrb 4s ease-in-out infinite;}
@@ -516,10 +516,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .pcalc-age-result-value{font-family:'Orbitron',sans-serif;font-size:42px;font-weight:900;letter-spacing:2px;background:linear-gradient(135deg,#00e5ff,#c800ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(0,229,255,.4));margin-bottom:2px;}
 .pcalc-age-result-unit{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);margin-bottom:12px;}
 .pcalc-age-result-note{font-family:'Exo 2',sans-serif;font-size:13px;color:var(--muted);line-height:1.6;padding:10px 14px;border-radius:10px;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.1);margin:0 auto;}
-/* all-planets age bars */
 .pcalc-age-allbars{border-radius:16px;padding:20px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);}
 .pcalc-age-allbars-title{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:14px;}
-/* planet facts panel */
 .pcalc-facts-panel{border-radius:16px;padding:22px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);}
 .pcalc-facts-panel-title{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;color:var(--magenta);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .pcalc-facts-panel-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);}
@@ -1057,11 +1055,15 @@ document.addEventListener('click',function(e){
     document.body.appendChild(sp);setTimeout(function(){sp.remove();},800);
   }
 });
+
+/* ============================================================
+   MOUSE PARTICLES — FIX: replaced 😜 emoji back to semicolons
+   ============================================================ */
 var lastP=0;
 document.addEventListener('mousemove',function(e){
   var now=Date.now();if(now-lastP<90)return;lastP=now;if(Math.random()>.65)return;
-  var p=document.createElement('div');p.className='particle'😜.style.left=e.clientX+'px'😜.style.top=e.clientY+'px';
-  p.style.width=p.style.height=(2+Math.random()*3)+'px'😜.style.background=Math.random()>.5?'var(--cyan)':'var(--magenta)'😜.style.animationDuration=(1+Math.random()*1.5)+'s';
+  var p=document.createElement('div');p.className='particle';p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';
+  p.style.width=p.style.height=(2+Math.random()*3)+'px';p.style.background=Math.random()>.5?'var(--cyan)':'var(--magenta)';p.style.animationDuration=(1+Math.random()*1.5)+'s';
   document.body.appendChild(p);setTimeout(function(){p.remove();},2500);
 });
 
@@ -1440,6 +1442,7 @@ function pcalcShowFacts(p){
   });
 }
 
+/* FIX: replaced 😛 emoji back to semicolons in bar value string */
 function pcalcBuildBars(earthWeightKg){
   var c=document.getElementById('pcalcBars');if(!c)return;c.innerHTML='';
   var maxW=earthWeightKg?PCALC_PLANETS.reduce(function(m,p){return Math.max(m,earthWeightKg*p.gravity);},0):1;
@@ -1447,7 +1450,8 @@ function pcalcBuildBars(earthWeightKg){
   PCALC_PLANETS.forEach(function(p,i){
     var rKg=earthWeightKg?earthWeightKg*p.gravity:null,pct=earthWeightKg?(rKg/maxW*100):0,isSel=i===pcalcSelected;
     var row=document.createElement('div');row.className='pcalc-bar-row'+(isSel?' highlighted':'');
-    row.innerHTML='<div class="pcalc-bar-label">'+p.name+'</div><div class="pcalc-bar-track"><div class="pcalc-bar-fill" style="background:'+grads[i]+';width:0%"></div></div><div class="pcalc-bar-val">'+(rKg?rKg.toFixed(1)+'kg'😛.gravity+'g')+'</div>';
+    /* FIX: was  p.gravity+'g')  with 😛 before the semicolon */
+    row.innerHTML='<div class="pcalc-bar-label">'+p.name+'</div><div class="pcalc-bar-track"><div class="pcalc-bar-fill" style="background:'+grads[i]+';width:0%"></div></div><div class="pcalc-bar-val">'+(rKg?rKg.toFixed(1)+'kg':p.gravity+'g')+'</div>';
     c.appendChild(row);
     if(earthWeightKg){setTimeout(function(){var f=row.querySelector('.pcalc-bar-fill');if(f)f.style.width=pct.toFixed(1)+'%';},i*60+100);}
   });
@@ -1524,18 +1528,19 @@ function pcalcAnimateAgeValue(target){
   requestAnimationFrame(step);
 }
 
+/* FIX: replaced 😛 emoji back to semicolons in age bar value string */
 function pcalcBuildAgeBars(earthAge){
   var c=document.getElementById('pcalcAgeBars');if(!c)return;c.innerHTML='';
   var grads=['linear-gradient(to right,#a89070,#786050)','linear-gradient(to right,#d4a030,#a07018)','linear-gradient(to right,#1a5fa8,#00e5ff)','linear-gradient(to right,#d4552a,#b03818)','linear-gradient(to right,#c47820,#ffd600)','linear-gradient(to right,#c8a040,#906020)','linear-gradient(to right,#50d8b8,#2aa880)','linear-gradient(to right,#2ec4e8,#1480a8)'];
   var earthDays=earthAge?earthAge*365.25:null;
-  /* cap bar at 100% for the selected planet, scale others relatively */
   var maxVal=earthDays?PCALC_PLANETS.reduce(function(m,p){return Math.max(m,earthDays/p.yearDays);},0):1;
 
   PCALC_PLANETS.forEach(function(p,i){
     var ageOnPlanet=earthDays?earthDays/p.yearDays:null;
     var pct=earthDays?(ageOnPlanet/maxVal*100):0;
     var isSel=i===pcalcAgeSelected;
-    var valStr=ageOnPlanet?ageOnPlanet.toFixed(ageOnPlanet<10?2:ageOnPlanet<100?1:0)+' yrs'😛.yearDays.toFixed(0)+' d/yr';
+    /* FIX: was  p.yearDays.toFixed(0)+' d/yr'  with 😛 before the semicolon */
+    var valStr=ageOnPlanet?ageOnPlanet.toFixed(ageOnPlanet<10?2:ageOnPlanet<100?1:0)+' yrs':p.yearDays.toFixed(0)+' d/yr';
     var row=document.createElement('div');
     row.className='pcalc-bar-row'+(isSel?' highlighted':'');
     row.innerHTML='<div class="pcalc-bar-label">'+p.name+'</div><div class="pcalc-bar-track"><div class="pcalc-bar-fill" style="background:'+grads[i]+';width:0%"></div></div><div class="pcalc-bar-val">'+valStr+'</div>';

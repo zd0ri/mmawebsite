@@ -27,9 +27,7 @@ a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,var(--cyan),var(--magenta));border-radius:10px;}
 
-/* ============================================================
-   CURSOR
-   ============================================================ */
+/* ============================================================ CURSOR ============================================================ */
 #cursor{position:fixed;width:22px;height:22px;border:1.5px solid var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s,background .2s;mix-blend-mode:difference;}
 #cursor-dot{position:fixed;width:4px;height:4px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
 #cursor.hover{width:44px;height:44px;border-color:var(--magenta);background:rgba(200,0,255,.08);}
@@ -38,15 +36,11 @@ a{text-decoration:none;color:inherit;}
 .spark{position:fixed;pointer-events:none;z-index:9990;width:4px;height:4px;border-radius:50%;animation:sparkFly .7s ease-out forwards;}
 @keyframes sparkFly{0%{transform:translate(-50%,-50%) scale(1);opacity:1;}100%{transform:translate(var(--sx),var(--sy)) scale(0);opacity:0;}}
 
-/* ============================================================
-   STARFIELD
-   ============================================================ */
+/* ============================================================ STARFIELD ============================================================ */
 #starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);pointer-events:none;z-index:800;}
 
-/* ============================================================
-   LOADER
-   ============================================================ */
+/* ============================================================ LOADER ============================================================ */
 #loader{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s,visibility .5s;}
 #loader.done{opacity:0;visibility:hidden;}
 .loader-text{font-family:'Orbitron',sans-serif;font-size:clamp(22px,5vw,48px);letter-spacing:8px;text-transform:uppercase;color:var(--cyan);text-shadow:var(--glow-c);animation:glitch 1.2s infinite;}
@@ -55,18 +49,14 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .loader-sub{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--muted);}
 @keyframes glitch{0%,88%,100%{clip-path:none;transform:none;}90%{clip-path:polygon(0 10%,100% 10%,100% 30%,0 30%);transform:translateX(4px);}93%{clip-path:polygon(0 50%,100% 50%,100% 70%,0 70%);transform:translateX(-3px);}96%{clip-path:polygon(0 80%,100% 80%,100% 95%,0 95%);transform:translateX(2px);}}
 
-/* ============================================================
-   PAGE WIPE
-   ============================================================ */
+/* ============================================================ PAGE WIPE ============================================================ */
 #page-wipe{position:fixed;inset:0;z-index:9997;background:var(--bg2);clip-path:polygon(0 0,0 0,0 100%,0 100%);pointer-events:none;}
 #page-wipe.in{animation:wipeIn .42s cubic-bezier(.77,0,.18,1) forwards;}
 #page-wipe.out{animation:wipeOut .42s cubic-bezier(.77,0,.18,1) forwards;}
 @keyframes wipeIn{0%{clip-path:polygon(0 0,0 0,0 100%,0 100%);}100%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);}}
 @keyframes wipeOut{0%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);}100%{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%);}}
 
-/* ============================================================
-   NAV
-   ============================================================ */
+/* ============================================================ NAV ============================================================ */
 nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 50px;display:flex;align-items:center;justify-content:space-between;height:68px;background:rgba(4,6,15,.65);backdrop-filter:blur(24px);border-bottom:1px solid rgba(0,229,255,.08);transition:background .4s,border-color .4s;}
 nav.scrolled{background:rgba(4,6,15,.93);border-bottom-color:rgba(0,229,255,.18);}
 .nav-logo{display:flex;align-items:center;gap:14px;}
@@ -85,31 +75,24 @@ nav.scrolled{background:rgba(4,6,15,.93);border-bottom-color:rgba(0,229,255,.18)
 .nav-hamburger span:nth-child(2){width:14px;}
 .nav-hamburger span:nth-child(3){width:18px;}
 
-/* ============================================================
-   THEME TOGGLE
-   ============================================================ */
+/* ============================================================ THEME TOGGLE ============================================================ */
 .toggle-btn{position:fixed;bottom:30px;right:30px;z-index:2000;width:52px;height:52px;border-radius:50%;border:1px solid rgba(0,229,255,.3);background:rgba(4,6,15,.8);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:all .3s;box-shadow:var(--glow-c);}
 .toggle-btn:hover{transform:scale(1.15) rotate(20deg);background:rgba(0,229,255,.1);}
 .toggle-btn:active{transform:scale(.9);}
 body.light{--bg:#eef2ff;--bg2:#dde4ff;--white:#060b24;--muted:#5060a0;}
 body.light #starfield{opacity:.3;}
 body.light nav{background:rgba(238,242,255,.85);}
-body.light .week-frame,body.light .proj-card,body.light .about-card,body.light .rf-card,body.light .cine-frame,body.light .pcalc-container{background:rgba(255,255,255,.9);border-color:rgba(0,100,220,.15);}
+body.light .week-frame,body.light .proj-card,body.light .about-card,body.light .rf-card,body.light .cine-frame,body.light .pcalc-container,body.light .planet-embed-card{background:rgba(255,255,255,.9);border-color:rgba(0,100,220,.15);}
 body.light .hero-stats,body.light footer{background:rgba(238,242,255,.9);}
 body.light .disclaimer-box{background:rgba(0,50,150,.07);}
-body.light .weekly-card{background:rgba(255,255,255,.85);}
 
-/* ============================================================
-   PAGES
-   ============================================================ */
+/* ============================================================ PAGES ============================================================ */
 .page{display:none;min-height:100vh;position:relative;z-index:1;}
 .page.active{display:block;}
 .page.enter{animation:pageEnter .6s cubic-bezier(.23,1,.32,1) forwards;}
 @keyframes pageEnter{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
 
-/* ============================================================
-   HOME HERO
-   ============================================================ */
+/* ============================================================ HOME HERO ============================================================ */
 #home{padding-top:68px;}
 .hero-stage{position:relative;width:100%;height:calc(100vh - 68px);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .planet-bg{position:absolute;bottom:-10%;left:50%;transform:translateX(-50%);width:min(65vw,700px);height:min(65vw,700px);border-radius:50%;background:radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 68% 72%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%);box-shadow:inset -50px -50px 100px rgba(0,0,0,.7),inset 20px 20px 60px rgba(30,120,220,.15),0 0 140px rgba(0,229,255,.12);animation:planetFloat 8s ease-in-out infinite;transition:background 1.2s cubic-bezier(.23,1,.32,1),box-shadow .6s;cursor:pointer;overflow:hidden;}
@@ -159,17 +142,13 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .stat-item:hover .stat-value{color:var(--cyan);text-shadow:var(--glow-c);}
 .stat-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);}
 
-/* ============================================================
-   HOME ACADEMIC DISCLAIMER BANNER
-   ============================================================ */
+/* ============================================================ ACADEMIC BANNER ============================================================ */
 .academic-banner{background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(200,0,255,.04));border-bottom:1px solid rgba(0,229,255,.12);border-top:1px solid rgba(0,229,255,.08);padding:14px 50px;display:flex;align-items:center;justify-content:center;gap:14px;position:relative;z-index:5;}
 .academic-banner-icon{font-size:16px;filter:drop-shadow(0 0 6px var(--cyan));}
 .academic-banner-text{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);text-align:center;line-height:1.6;}
 .academic-banner-text strong{color:var(--cyan);font-size:11px;}
 
-/* ============================================================
-   HOME PROJECTS
-   ============================================================ */
+/* ============================================================ HOME PROJECTS ============================================================ */
 .home-projects{max-width:1200px;margin:0 auto;padding:80px 50px 100px;}
 .section-eyebrow{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;display:flex;align-items:center;gap:16px;}
 .section-eyebrow::after{content:'';flex:1;max-width:80px;height:1px;background:linear-gradient(to right,rgba(0,229,255,.5),transparent);}
@@ -206,9 +185,7 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .proj-card:hover .proj-glow{transform:translateX(-50%) scale(1.5);}
 .proj-card.magenta .proj-glow{background:radial-gradient(ellipse,rgba(200,0,255,.18),transparent 70%);}
 
-/* ============================================================
-   PAGE BANNER
-   ============================================================ */
+/* ============================================================ PAGE BANNER ============================================================ */
 .page-banner{position:relative;overflow:hidden;padding:80px 50px 60px;text-align:center;border-bottom:1px solid rgba(0,229,255,.07);}
 .page-banner::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,229,255,.1),transparent 65%);pointer-events:none;}
 .page-banner::after{content:'';position:absolute;top:0;width:200px;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scanLine 3s ease-in-out infinite;}
@@ -223,9 +200,7 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .block-label{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:16px;margin-bottom:26px;}
 .block-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(0,229,255,.4),transparent);}
 
-/* ============================================================
-   DISCLAIMER BOX
-   ============================================================ */
+/* ============================================================ DISCLAIMER BOX ============================================================ */
 .disclaimer-box{display:flex;align-items:flex-start;gap:14px;padding:16px 22px;border-radius:14px;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.2);margin-bottom:22px;position:relative;overflow:hidden;}
 .disclaimer-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--cyan),var(--magenta));}
 .disclaimer-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
@@ -233,9 +208,7 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .disclaimer-text{font-family:'Exo 2',sans-serif;font-size:13.5px;color:var(--muted);line-height:1.7;}
 .disclaimer-text em{color:rgba(232,238,255,.6);font-style:normal;}
 
-/* ============================================================
-   CINEMATIC VIDEO FRAME
-   ============================================================ */
+/* ============================================================ CINEMATIC VIDEO FRAME ============================================================ */
 .cine-frame{border-radius:18px;overflow:hidden;border:1px solid rgba(0,229,255,.15);background:#000;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,229,255,.05);transition:.4s;}
 .cine-frame:hover{border-color:rgba(0,229,255,.35);box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 50px rgba(0,229,255,.1);}
 .cine-bar{display:flex;align-items:center;gap:14px;padding:14px 20px;background:rgba(7,10,26,.9);border-bottom:1px solid rgba(0,229,255,.08);}
@@ -250,18 +223,21 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .cine-embed{position:relative;padding-bottom:52.7%;height:0;}
 .cine-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
 
-/* ============================================================
-   WEEKLY PROGRESS LOG
-   ============================================================ */
+/* ============================================================ WEEKLY PROGRESS ============================================================ */
 .weekly-intro{font-family:'Exo 2',sans-serif;font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:50px;max-width:700px;}
 .progress-summary{display:flex;align-items:center;gap:20px;padding:16px 24px;border-radius:14px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.1);margin-bottom:40px;}
 .prog-label{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);white-space:nowrap;}
 .prog-track{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;}
-.prog-fill{height:100%;background:linear-gradient(to right,var(--cyan),var(--magenta));border-radius:4px;width:83%;transition:width 1.5s cubic-bezier(.23,1,.32,1);position:relative;}
+.prog-fill{height:100%;background:linear-gradient(to right,var(--cyan),var(--magenta));border-radius:4px;width:0%;transition:width 1.8s cubic-bezier(.23,1,.32,1);position:relative;}
 .prog-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:barShimmer 2s ease-in-out infinite;}
 @keyframes barShimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
 .prog-count{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--white);white-space:nowrap;}
 .prog-count span{color:var(--cyan);}
+
+/* ── COMPLETE BADGE on progress bar ── */
+.prog-complete-badge{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:4px 14px;border-radius:30px;color:#39ff14;border:1px solid rgba(57,255,20,.4);background:rgba(57,255,20,.1);box-shadow:0 0 16px rgba(57,255,20,.2);animation:completePulse 2s ease-in-out infinite;}
+@keyframes completePulse{0%,100%{box-shadow:0 0 16px rgba(57,255,20,.2);}50%{box-shadow:0 0 30px rgba(57,255,20,.5),0 0 60px rgba(57,255,20,.15);}}
+
 .weeks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;}
 .week-frame[data-week="1"]{--wc:#00e5ff;--wc2:#0088ff;}
 .week-frame[data-week="2"]{--wc:#c800ff;--wc2:#7700cc;}
@@ -309,19 +285,11 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .week-frame.done .week-pip{background:var(--wc);box-shadow:0 0 6px var(--wc);}
 .week-done-badge{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:20px;color:var(--wc);border:1px solid color-mix(in srgb,var(--wc) 40%,transparent);background:color-mix(in srgb,var(--wc) 10%,transparent);}
 
-/* ============================================================
-   3D RENDERING PAGE
-   ============================================================ */
+/* ============================================================ 3D RENDERING PAGE ============================================================ */
 #rendering .page-banner::before{background:radial-gradient(ellipse at 50% 0%,rgba(200,0,255,.1),transparent 65%);}
 #rendering .page-banner-title{background:linear-gradient(135deg,#c800ff,#ff6220);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px rgba(200,0,255,.3));}
 #rendering .page-banner-label{color:var(--magenta);}
 #rendering .page-banner-label::before,#rendering .page-banner-label::after{background:linear-gradient(to right,transparent,rgba(200,0,255,.5));}
-.render-status{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:420px;border:1px solid rgba(200,0,255,.15);border-radius:22px;background:radial-gradient(ellipse at 50% 0%,rgba(200,0,255,.06),transparent 70%),rgba(7,10,26,.7);text-align:center;padding:70px 40px;position:relative;overflow:hidden;margin-bottom:70px;transition:.4s;}
-.render-status:hover{border-color:rgba(200,0,255,.4);box-shadow:0 0 80px rgba(200,0,255,.15);}
-.rs-planet{font-size:90px;margin-bottom:24px;animation:planetFloat 5s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(200,0,255,.4));cursor:pointer;transition:.3s;}
-.rs-planet:hover{transform:scale(1.12);filter:drop-shadow(0 0 60px rgba(200,0,255,.7));}
-.rs-title{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:900;letter-spacing:4px;color:var(--magenta);text-shadow:var(--glow-m);margin-bottom:14px;}
-.rs-desc{font-family:'Exo 2',sans-serif;font-size:16px;color:var(--muted);max-width:520px;line-height:1.75;margin:0 auto;}
 .render-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px;}
 .rf-card{padding:32px 28px;border-radius:16px;border:1px solid rgba(255,255,255,.06);background:rgba(7,10,26,.8);transition:all .4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;cursor:pointer;}
 .rf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent-c,var(--magenta)),transparent);}
@@ -338,372 +306,396 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .rf-desc{font-family:'Exo 2',sans-serif;font-size:13px;color:var(--muted);line-height:1.7;}
 
 /* ============================================================
-   BLENDER VIDEO PLACEHOLDER — NEW STYLES
+   ★ NEW: 8 PLANET VIDEO EMBED SECTION
    ============================================================ */
 
-/* Entrance animation for the whole section */
-@keyframes blenderSectionReveal{
-  0%{opacity:0;transform:translateY(60px) scale(.96);}
-  60%{opacity:1;transform:translateY(-6px) scale(1.01);}
-  100%{opacity:1;transform:translateY(0) scale(1);}
+/* Animations */
+@keyframes planetEmbedReveal{
+  0%{opacity:0;transform:translateY(50px) scale(.94);}
+  70%{opacity:1;transform:translateY(-4px) scale(1.01);}
+  100%{opacity:1;transform:none;}
 }
-@keyframes hologramFlicker{
-  0%,95%,100%{opacity:1;}
-  96%{opacity:.5;}
-  97%{opacity:1;}
-  98%{opacity:.3;}
-  99%{opacity:1;}
+@keyframes embedCardFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
 }
-@keyframes scanSweep{
-  0%{transform:translateY(-100%);opacity:0;}
-  5%{opacity:1;}
-  95%{opacity:1;}
-  100%{transform:translateY(100vh);opacity:0;}
+@keyframes embedScanSweep{
+  0%{left:-60%;opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{left:160%;opacity:0;}
 }
-@keyframes cornerPulse{
-  0%,100%{opacity:.4;transform:scale(1);}
-  50%{opacity:1;transform:scale(1.08);}
-}
-@keyframes glitchSlice{
-  0%,90%,100%{clip-path:none;transform:none;}
-  91%{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translateX(6px);}
-  93%{clip-path:polygon(0 60%,100% 60%,100% 75%,0 75%);transform:translateX(-4px);}
-  95%{clip-path:polygon(0 5%,100% 5%,100% 18%,0 18%);transform:translateX(3px);}
-}
-@keyframes orbitRing{
+@keyframes embedOrbSpin{
   from{transform:rotate(0deg);}
   to{transform:rotate(360deg);}
 }
-@keyframes orbitRingReverse{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(-360deg);}
+@keyframes embedOrbPulse{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 12px var(--ec,rgba(200,0,255,.5)));}
+  50%{transform:scale(1.08);filter:drop-shadow(0 0 28px var(--ec,rgba(200,0,255,.8)));}
 }
-@keyframes dataPulse{
-  0%,100%{opacity:.3;transform:scaleX(0);}
-  50%{opacity:1;transform:scaleX(1);}
+@keyframes embedTagBounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-3px);}
 }
-@keyframes typeIn{
-  from{width:0;opacity:0;}
-  to{width:100%;opacity:1;}
+@keyframes embedFrameGlow{
+  0%,100%{box-shadow:0 0 0 1px rgba(200,0,255,.1),0 20px 60px rgba(0,0,0,.5);}
+  50%{box-shadow:0 0 0 1px rgba(200,0,255,.35),0 20px 80px rgba(0,0,0,.7),0 0 40px rgba(200,0,255,.1);}
 }
-@keyframes pulseGlowM{
-  0%,100%{box-shadow:0 0 20px rgba(200,0,255,.15),0 0 0 1px rgba(200,0,255,.12);}
-  50%{box-shadow:0 0 60px rgba(200,0,255,.35),0 0 0 1px rgba(200,0,255,.35),0 0 120px rgba(200,0,255,.1);}
-}
-@keyframes videoReveal{
-  0%{opacity:0;transform:scale(.92) rotateX(8deg);}
-  100%{opacity:1;transform:scale(1) rotateX(0deg);}
-}
-@keyframes haloSpin{
-  from{transform:translate(-50%,-50%) rotate(0deg);}
-  to{transform:translate(-50%,-50%) rotate(360deg);}
-}
-@keyframes statusBlink{
+@keyframes embedHudBlink{
   0%,100%{opacity:1;}
-  50%{opacity:.2;}
+  50%{opacity:.3;}
 }
-@keyframes particleDrift{
-  0%{transform:translate(0,0) scale(1);opacity:.8;}
-  100%{transform:translate(var(--pdx),var(--pdy)) scale(0);opacity:0;}
+@keyframes embedVideoReveal{
+  0%{opacity:0;transform:scaleY(.85) translateY(10px);}
+  100%{opacity:1;transform:none;}
+}
+@keyframes embedPlaceholderPulse{
+  0%,100%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+}
+@keyframes embedCornerRotate{
+  0%,100%{opacity:.5;transform:rotate(0deg) scale(1);}
+  50%{opacity:1;transform:rotate(5deg) scale(1.1);}
+}
+@keyframes embedStaggerIn{
+  0%{opacity:0;transform:translateY(30px) scale(.95);}
+  100%{opacity:1;transform:none;}
+}
+@keyframes embedLabelType{
+  from{width:0;overflow:hidden;}
+  to{width:100%;overflow:visible;}
+}
+@keyframes embedWarpLine{
+  0%{transform:translateX(-100%) skewX(-12deg);opacity:0;}
+  20%{opacity:1;}
+  80%{opacity:1;}
+  100%{transform:translateX(300%) skewX(-12deg);opacity:0;}
 }
 
-.blender-video-section{
-  margin-bottom:70px;
-  animation:blenderSectionReveal .9s cubic-bezier(.23,1,.32,1) both;
-  animation-delay:.15s;
+/* Section wrapper */
+.planet-embed-section{
+  margin-top:80px;margin-bottom:70px;
+  animation:planetEmbedReveal .9s cubic-bezier(.23,1,.32,1) both;
+  animation-delay:.1s;
 }
 
-/* HUD header row */
-.blender-hud-header{
-  display:flex;align-items:center;gap:16px;margin-bottom:24px;
-  padding:14px 22px;border-radius:14px;
-  background:rgba(200,0,255,.04);
-  border:1px solid rgba(200,0,255,.15);
-  position:relative;overflow:hidden;
+/* Header row */
+.planet-embed-header{
+  display:flex;align-items:center;gap:18px;
+  padding:18px 26px;border-radius:16px;
+  border:1px solid rgba(200,0,255,.18);
+  background:linear-gradient(135deg,rgba(200,0,255,.06),rgba(0,229,255,.03));
+  margin-bottom:32px;position:relative;overflow:hidden;
 }
-.blender-hud-header::before{
+.planet-embed-header::before{
   content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(to bottom,var(--magenta),var(--cyan));
+  background:linear-gradient(to bottom,var(--magenta),var(--cyan),var(--orange));
+  border-radius:2px;
 }
-.blender-hud-header::after{
-  content:'';position:absolute;top:0;left:-100%;width:40%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(200,0,255,.08),transparent);
-  animation:pcalcScan 4s ease-in-out infinite;
+.planet-embed-header::after{
+  content:'';position:absolute;top:0;left:-60%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(200,0,255,.09),transparent);
+  animation:embedScanSweep 3.5s ease-in-out infinite;
 }
-.blender-hud-dot{
-  width:10px;height:10px;border-radius:50%;
-  background:var(--magenta);box-shadow:0 0 12px var(--magenta);
-  animation:statusBlink 1.8s ease-in-out infinite;flex-shrink:0;
+.peh-icon{
+  width:46px;height:46px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(200,0,255,.3),rgba(0,229,255,.15));
+  border:1px solid rgba(200,0,255,.35);display:flex;align-items:center;
+  justify-content:center;font-size:22px;
+  box-shadow:0 0 20px rgba(200,0,255,.2);
+  animation:embedOrbPulse 3s ease-in-out infinite;
+  --ec:rgba(200,0,255,.5);
 }
-.blender-hud-label{
-  font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;
-  text-transform:uppercase;color:var(--magenta);
-}
-.blender-hud-title{
-  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:2px;color:var(--white);
-}
-.blender-hud-spacer{flex:1;}
-.blender-hud-badge{
-  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;
-  color:var(--muted);padding:4px 12px;border-radius:20px;
-  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);
-}
+.peh-text{flex:1;}
+.peh-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);margin-bottom:4px;}
+.peh-title{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:var(--white);}
+.peh-badge{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);padding:4px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);}
 
-/* Main video wrapper */
-.blender-cine-wrap{
-  position:relative;
-  border-radius:22px;overflow:hidden;
-  border:1px solid rgba(200,0,255,.2);
-  background:#000;
-  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(200,0,255,.07);
-  transition:border-color .5s,box-shadow .5s;
-  animation:pulseGlowM 4s ease-in-out infinite;
+/* Instruction strip */
+.planet-embed-instruction{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;border-radius:10px;
+  background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.12);
+  margin-bottom:28px;
 }
-.blender-cine-wrap:hover{
-  border-color:rgba(200,0,255,.5);
-  box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 80px rgba(200,0,255,.2),0 0 0 1px rgba(200,0,255,.3);
+.pei-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex-shrink:0;animation:embedHudBlink 2s ease-in-out infinite;}
+.pei-text{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);}
+.pei-text strong{color:var(--cyan);}
+
+/* Planet cards grid */
+.planet-embed-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+@media(max-width:1100px){.planet-embed-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.planet-embed-grid{grid-template-columns:1fr;}}
+
+/* Individual planet embed card */
+.planet-embed-card{
+  border-radius:18px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(7,10,26,.88);
+  backdrop-filter:blur(16px);
+  transition:all .5s cubic-bezier(.23,1,.32,1);
+  position:relative;
+  cursor:pointer;
+  animation:embedFrameGlow 4s ease-in-out infinite;
+}
+.planet-embed-card:hover{
+  border-color:var(--pec,rgba(200,0,255,.5));
+  transform:translateY(-12px) scale(1.02);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 50px var(--pec-glow,rgba(200,0,255,.15));
   animation:none;
 }
+.planet-embed-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--pec-soft,rgba(200,0,255,.05)),transparent 55%);
+  opacity:0;transition:.4s;z-index:0;
+}
+.planet-embed-card:hover::before{opacity:1;}
+/* Warp shimmer on hover */
+.planet-embed-card::after{
+  content:'';position:absolute;top:0;left:-100%;width:45%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);
+  transition:left .6s ease;z-index:2;pointer-events:none;
+}
+.planet-embed-card:hover::after{left:150%;}
 
-/* Topbar chrome */
-.blender-cine-bar{
-  display:flex;align-items:center;gap:12px;
-  padding:14px 20px;
-  background:rgba(7,10,26,.95);
-  border-bottom:1px solid rgba(200,0,255,.12);
+/* Card header stripe */
+.pec-topbar{height:3px;background:linear-gradient(to right,var(--pec,var(--magenta)),var(--pec2,var(--cyan)),transparent);transition:height .3s;}
+.planet-embed-card:hover .pec-topbar{height:4px;}
+
+/* Card chrome bar */
+.pec-bar{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;
+  background:rgba(4,6,15,.9);
+  border-bottom:1px solid rgba(255,255,255,.05);
   position:relative;overflow:hidden;
+  z-index:1;
 }
-.blender-cine-bar::after{
+.pec-bar::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--magenta),var(--cyan),transparent);
-  animation:scanLine 4s ease-in-out infinite;
+  background:linear-gradient(90deg,transparent,var(--pec,var(--magenta)),transparent);
+  opacity:.6;
 }
+.pec-dots{display:flex;gap:5px;}
+.pec-dot{width:9px;height:9px;border-radius:50%;}
+.pec-dot:nth-child(1){background:#ff5f57;}
+.pec-dot:nth-child(2){background:#febc2e;}
+.pec-dot:nth-child(3){background:#28c840;}
+.pec-planet-tag{
+  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;
+  padding:2px 9px;border-radius:16px;
+  color:var(--pec,var(--magenta));
+  border:1px solid var(--pec,rgba(200,0,255,.3));
+  background:rgba(var(--pec-rgb,200,0,255),.07);
+  margin-left:auto;
+}
+
+/* Planet orb + title area */
+.pec-identity{
+  display:flex;flex-direction:column;align-items:center;
+  padding:20px 16px 14px;
+  position:relative;z-index:1;
+  background:radial-gradient(ellipse at 50% 0%,var(--pec-soft,rgba(200,0,255,.06)),transparent 70%);
+}
+.pec-orb-wrap{
+  position:relative;width:70px;height:70px;margin-bottom:12px;
+}
+.pec-orb-ring{
+  position:absolute;top:50%;left:50%;border-radius:50%;
+  border:1px solid var(--pec,rgba(200,0,255,.3));
+  width:90px;height:90px;margin:-45px 0 0 -45px;
+  animation:embedOrbSpin 12s linear infinite;
+  opacity:.3;
+}
+.pec-orb{
+  width:70px;height:70px;border-radius:50%;
+  box-shadow:inset -8px -8px 18px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.12),0 0 24px var(--pec-glow,rgba(200,0,255,.3));
+  transition:all .4s;
+  animation:embedOrbPulse 4s ease-in-out infinite;
+  --ec:var(--pec-glow,rgba(200,0,255,.3));
+}
+.planet-embed-card:hover .pec-orb{
+  transform:scale(1.12) rotate(8deg);
+  box-shadow:inset -8px -8px 18px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.12),0 0 40px var(--pec-glow,rgba(200,0,255,.4));
+}
+.pec-planet-name{
+  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;
+  color:var(--white);margin-bottom:3px;text-align:center;
+}
+.pec-planet-type{
+  font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;
+  color:var(--pec,var(--magenta));text-transform:uppercase;text-align:center;
+}
+
+/* Video / placeholder area */
+.pec-video-wrap{
+  position:relative;aspect-ratio:16/9;overflow:hidden;
+  background:#000;z-index:1;
+}
+.pec-video-wrap iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:none;display:block;
+  animation:embedVideoReveal .6s ease both;
+}
+.pec-placeholder{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:
+    radial-gradient(ellipse at 50% 40%,var(--pec-soft,rgba(200,0,255,.1)) 0%,transparent 65%),
+    linear-gradient(180deg,rgba(4,6,15,.98),rgba(2,3,8,1));
+  cursor:pointer;overflow:hidden;
+}
+/* Grid overlay on placeholder */
+.pec-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--pec-ultra,rgba(200,0,255,.04)) 1px,transparent 1px),
+    linear-gradient(90deg,var(--pec-ultra,rgba(200,0,255,.04)) 1px,transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+/* Warp line sweep */
+.pec-placeholder::after{
+  content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);
+  animation:embedWarpLine 3s ease-in-out infinite;
+  pointer-events:none;
+}
+.pec-ph-icon{font-size:32px;filter:drop-shadow(0 0 16px var(--pec,rgba(200,0,255,.6)));animation:floatIcon 3.5s ease-in-out infinite;z-index:2;position:relative;}
+.pec-ph-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);z-index:2;position:relative;}
+.pec-ph-id-badge{
+  font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;
+  padding:4px 12px;border-radius:20px;
+  border:1px solid var(--pec,rgba(200,0,255,.3));
+  background:var(--pec-soft,rgba(200,0,255,.07));
+  color:var(--pec,var(--magenta));
+  z-index:2;position:relative;
+  animation:embedTagBounce 2.5s ease-in-out infinite;
+}
+
+/* Card footer */
+.pec-footer{
+  padding:10px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,.05);
+  background:rgba(4,6,15,.6);
+  z-index:1;position:relative;
+}
+.pec-footer-num{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.15);}
+.pec-footer-hint{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:rgba(90,106,153,.5);}
+.pec-footer-status{
+  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;
+  padding:3px 8px;border-radius:16px;
+  color:var(--pec,var(--magenta));
+  border:1px solid color-mix(in srgb,var(--pec,var(--magenta)) 35%,transparent);
+  background:color-mix(in srgb,var(--pec,var(--magenta)) 8%,transparent);
+}
+
+/* Stagger animation delays per card */
+.planet-embed-card:nth-child(1){animation-delay:.05s;}
+.planet-embed-card:nth-child(2){animation-delay:.12s;}
+.planet-embed-card:nth-child(3){animation-delay:.19s;}
+.planet-embed-card:nth-child(4){animation-delay:.26s;}
+.planet-embed-card:nth-child(5){animation-delay:.33s;}
+.planet-embed-card:nth-child(6){animation-delay:.40s;}
+.planet-embed-card:nth-child(7){animation-delay:.47s;}
+.planet-embed-card:nth-child(8){animation-delay:.54s;}
+
+/* ============================================================ BLENDER VIDEO SECTION ============================================================ */
+@keyframes blenderSectionReveal{0%{opacity:0;transform:translateY(60px) scale(.96);}60%{opacity:1;transform:translateY(-6px) scale(1.01);}100%{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes hologramFlicker{0%,95%,100%{opacity:1;}96%{opacity:.5;}97%{opacity:1;}98%{opacity:.3;}99%{opacity:1;}}
+@keyframes scanSweep{0%{transform:translateY(-100%);opacity:0;}5%{opacity:1;}95%{opacity:1;}100%{transform:translateY(100vh);opacity:0;}}
+@keyframes cornerPulse{0%,100%{opacity:.4;transform:scale(1);}50%{opacity:1;transform:scale(1.08);}}
+@keyframes glitchSlice{0%,90%,100%{clip-path:none;transform:none;}91%{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translateX(6px);}93%{clip-path:polygon(0 60%,100% 60%,100% 75%,0 75%);transform:translateX(-4px);}95%{clip-path:polygon(0 5%,100% 5%,100% 18%,0 18%);transform:translateX(3px);}}
+@keyframes orbitRing{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes orbitRingReverse{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
+@keyframes dataPulse{0%,100%{opacity:.3;transform:scaleX(0);}50%{opacity:1;transform:scaleX(1);}}
+@keyframes typeIn{from{width:0;opacity:0;}to{width:100%;opacity:1;}}
+@keyframes pulseGlowM{0%,100%{box-shadow:0 0 20px rgba(200,0,255,.15),0 0 0 1px rgba(200,0,255,.12);}50%{box-shadow:0 0 60px rgba(200,0,255,.35),0 0 0 1px rgba(200,0,255,.35),0 0 120px rgba(200,0,255,.1);}}
+@keyframes videoReveal{0%{opacity:0;transform:scale(.92) rotateX(8deg);}100%{opacity:1;transform:scale(1) rotateX(0deg);}}
+@keyframes statusBlink{0%,100%{opacity:1;}50%{opacity:.2;}}
+@keyframes pcalcScan{0%{left:-100%;}100%{left:200%;}}
+
+.blender-video-section{margin-bottom:70px;animation:blenderSectionReveal .9s cubic-bezier(.23,1,.32,1) both;animation-delay:.15s;}
+.blender-hud-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:14px 22px;border-radius:14px;background:rgba(200,0,255,.04);border:1px solid rgba(200,0,255,.15);position:relative;overflow:hidden;}
+.blender-hud-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--magenta),var(--cyan));}
+.blender-hud-header::after{content:'';position:absolute;top:0;left:-100%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(200,0,255,.08),transparent);animation:pcalcScan 4s ease-in-out infinite;}
+.blender-hud-dot{width:10px;height:10px;border-radius:50%;background:var(--magenta);box-shadow:0 0 12px var(--magenta);animation:statusBlink 1.8s ease-in-out infinite;flex-shrink:0;}
+.blender-hud-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);}
+.blender-hud-title{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--white);}
+.blender-hud-spacer{flex:1;}
+.blender-hud-badge{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);}
+.blender-cine-wrap{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(200,0,255,.2);background:#000;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(200,0,255,.07);transition:border-color .5s,box-shadow .5s;animation:pulseGlowM 4s ease-in-out infinite;}
+.blender-cine-wrap:hover{border-color:rgba(200,0,255,.5);box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 80px rgba(200,0,255,.2),0 0 0 1px rgba(200,0,255,.3);animation:none;}
+.blender-cine-bar{display:flex;align-items:center;gap:12px;padding:14px 20px;background:rgba(7,10,26,.95);border-bottom:1px solid rgba(200,0,255,.12);position:relative;overflow:hidden;}
+.blender-cine-bar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),var(--cyan),transparent);animation:scanLine 4s ease-in-out infinite;}
 .blender-cine-dots{display:flex;gap:7px;}
 .blender-cine-dot{width:11px;height:11px;border-radius:50%;transition:.3s;cursor:pointer;}
 .blender-cine-dot:hover{transform:scale(1.3);}
 .blender-cine-dot:nth-child(1){background:#ff5f57;}
 .blender-cine-dot:nth-child(2){background:#febc2e;}
 .blender-cine-dot:nth-child(3){background:#28c840;}
-.blender-cine-bar-title{
-  flex:1;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);
-  overflow:hidden;white-space:nowrap;
-}
-.blender-cine-bar-title span{
-  display:inline-block;
-  animation:typeIn 1.5s steps(40) both;
-  animation-delay:.5s;
-}
+.blender-cine-bar-title{flex:1;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);overflow:hidden;white-space:nowrap;}
+.blender-cine-bar-title span{display:inline-block;animation:typeIn 1.5s steps(40) both;animation-delay:.5s;}
 .blender-cine-tags{display:flex;gap:8px;}
-.blender-cine-tag{
-  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;
-  text-transform:uppercase;padding:3px 10px;border-radius:20px;
-}
-.blender-cine-tag.magenta{
-  color:var(--magenta);border:1px solid rgba(200,0,255,.3);background:rgba(200,0,255,.07);
-}
-.blender-cine-tag.orange{
-  color:var(--orange);border:1px solid rgba(255,98,32,.3);background:rgba(255,98,32,.07);
-}
-
-/* Corner HUD decorations */
-.blender-corner{
-  position:absolute;width:28px;height:28px;pointer-events:none;z-index:5;
-}
-.blender-corner.tl{top:58px;left:0;border-top:2px solid var(--magenta);border-left:2px solid var(--magenta);border-top-left-radius:0;}
-.blender-corner.tr{top:58px;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);border-top-right-radius:0;}
+.blender-cine-tag{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
+.blender-cine-tag.magenta{color:var(--magenta);border:1px solid rgba(200,0,255,.3);background:rgba(200,0,255,.07);}
+.blender-cine-tag.orange{color:var(--orange);border:1px solid rgba(255,98,32,.3);background:rgba(255,98,32,.07);}
+.blender-corner{position:absolute;width:28px;height:28px;pointer-events:none;z-index:5;}
+.blender-corner.tl{top:58px;left:0;border-top:2px solid var(--magenta);border-left:2px solid var(--magenta);}
+.blender-corner.tr{top:58px;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);}
 .blender-corner.bl{bottom:0;left:0;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
 .blender-corner.br{bottom:0;right:0;border-bottom:2px solid var(--magenta);border-right:2px solid var(--magenta);}
 .blender-corner{animation:cornerPulse 3s ease-in-out infinite;}
 .blender-corner.tr{animation-delay:.75s;}
 .blender-corner.bl{animation-delay:1.5s;}
 .blender-corner.br{animation-delay:2.25s;}
-
-/* Video embed / placeholder */
-.blender-embed{
-  position:relative;padding-bottom:52.7%;height:0;
-  animation:videoReveal .8s cubic-bezier(.23,1,.32,1) both;
-  animation-delay:.3s;
-}
-.blender-embed iframe{
-  position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;
-}
-
-/* Holographic placeholder (shown when no real video) */
-.blender-placeholder{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:
-    radial-gradient(ellipse at 50% 50%,rgba(200,0,255,.08) 0%,transparent 60%),
-    radial-gradient(ellipse at 30% 30%,rgba(0,229,255,.04) 0%,transparent 50%),
-    #030509;
-  animation:hologramFlicker 8s ease-in-out infinite;
-  cursor:pointer;
-  overflow:hidden;
-}
-/* Scan line sweep */
-.blender-placeholder::before{
-  content:'';position:absolute;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(200,0,255,.6),var(--cyan),rgba(200,0,255,.6),transparent);
-  animation:scanSweep 3s ease-in-out infinite;
-  z-index:2;
-}
-/* Grid overlay */
-.blender-placeholder::after{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(200,0,255,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(200,0,255,.04) 1px,transparent 1px);
-  background-size:40px 40px;
-  animation:hologramFlicker 12s ease-in-out infinite;
-  pointer-events:none;
-}
-
-/* Orbit rings */
-.blender-orbit-wrap{
-  position:relative;width:180px;height:180px;flex-shrink:0;
-  margin-bottom:28px;
-}
-.blender-orbit-ring{
-  position:absolute;top:50%;left:50%;border-radius:50%;border-style:solid;
-}
-.blender-orbit-ring:nth-child(1){
-  width:180px;height:180px;
-  border-width:1px;border-color:rgba(200,0,255,.25);
-  margin:-90px 0 0 -90px;
-  animation:orbitRing 8s linear infinite;
-}
-.blender-orbit-ring:nth-child(2){
-  width:130px;height:130px;
-  border-width:1px;border-color:rgba(0,229,255,.2);
-  margin:-65px 0 0 -65px;
-  animation:orbitRingReverse 5s linear infinite;
-}
-.blender-orbit-ring:nth-child(3){
-  width:80px;height:80px;
-  border-width:1px;border-color:rgba(255,98,32,.15);
-  margin:-40px 0 0 -40px;
-  animation:orbitRing 3s linear infinite;
-}
-/* Dot on first ring */
-.blender-orbit-ring:nth-child(1)::after{
-  content:'';position:absolute;top:-4px;left:50%;width:7px;height:7px;
-  border-radius:50%;background:var(--magenta);
-  box-shadow:0 0 12px var(--magenta),0 0 24px var(--magenta);
-  transform:translateX(-50%);
-}
-.blender-orbit-ring:nth-child(2)::after{
-  content:'';position:absolute;bottom:-4px;left:50%;width:5px;height:5px;
-  border-radius:50%;background:var(--cyan);
-  box-shadow:0 0 10px var(--cyan),0 0 20px var(--cyan);
-  transform:translateX(-50%);
-}
-/* Center icon */
-.blender-orbit-center{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-size:52px;filter:drop-shadow(0 0 30px rgba(200,0,255,.6));
-  animation:planetFloat 4s ease-in-out infinite;
-  z-index:3;
-}
-
-.blender-ph-title{
-  font-family:'Orbitron',sans-serif;font-size:clamp(16px,3vw,26px);font-weight:900;
-  letter-spacing:4px;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--magenta),var(--cyan));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:10px;z-index:3;position:relative;
-  animation:glitchSlice 6s ease-in-out infinite;
-}
-.blender-ph-sub{
-  font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;
-  color:var(--muted);text-transform:uppercase;margin-bottom:28px;
-  z-index:3;position:relative;
-}
-.blender-ph-progress{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  z-index:3;position:relative;width:min(320px,80%);
-}
-.blender-ph-progress-label{
-  display:flex;justify-content:space-between;width:100%;
-  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);
-}
-.blender-ph-track{
-  width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;
-}
-.blender-ph-fill{
-  height:100%;width:0%;border-radius:4px;
-  background:linear-gradient(to right,var(--magenta),var(--cyan));
-  transition:width 2s cubic-bezier(.23,1,.32,1);
-  position:relative;overflow:hidden;
-}
-.blender-ph-fill::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
-  animation:barShimmer 1.8s ease-in-out infinite;
-}
-.blender-ph-tags{
-  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
-  margin-top:22px;z-index:3;position:relative;
-}
-.blender-ph-tag{
-  font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;
-  text-transform:uppercase;padding:6px 16px;border-radius:30px;cursor:default;
-  transition:all .3s;
-}
+.blender-embed{position:relative;padding-bottom:52.7%;height:0;animation:videoReveal .8s cubic-bezier(.23,1,.32,1) both;animation-delay:.3s;}
+.blender-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;}
+.blender-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 50%,rgba(200,0,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 30% 30%,rgba(0,229,255,.04) 0%,transparent 50%),#030509;animation:hologramFlicker 8s ease-in-out infinite;cursor:pointer;overflow:hidden;}
+.blender-placeholder::before{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,0,255,.6),var(--cyan),rgba(200,0,255,.6),transparent);animation:scanSweep 3s ease-in-out infinite;z-index:2;}
+.blender-placeholder::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(200,0,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,0,255,.04) 1px,transparent 1px);background-size:40px 40px;animation:hologramFlicker 12s ease-in-out infinite;pointer-events:none;}
+.blender-orbit-wrap{position:relative;width:180px;height:180px;flex-shrink:0;margin-bottom:28px;}
+.blender-orbit-ring{position:absolute;top:50%;left:50%;border-radius:50%;border-style:solid;}
+.blender-orbit-ring:nth-child(1){width:180px;height:180px;border-width:1px;border-color:rgba(200,0,255,.25);margin:-90px 0 0 -90px;animation:orbitRing 8s linear infinite;}
+.blender-orbit-ring:nth-child(2){width:130px;height:130px;border-width:1px;border-color:rgba(0,229,255,.2);margin:-65px 0 0 -65px;animation:orbitRingReverse 5s linear infinite;}
+.blender-orbit-ring:nth-child(3){width:80px;height:80px;border-width:1px;border-color:rgba(255,98,32,.15);margin:-40px 0 0 -40px;animation:orbitRing 3s linear infinite;}
+.blender-orbit-ring:nth-child(1)::after{content:'';position:absolute;top:-4px;left:50%;width:7px;height:7px;border-radius:50%;background:var(--magenta);box-shadow:0 0 12px var(--magenta),0 0 24px var(--magenta);transform:translateX(-50%);}
+.blender-orbit-ring:nth-child(2)::after{content:'';position:absolute;bottom:-4px;left:50%;width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan),0 0 20px var(--cyan);transform:translateX(-50%);}
+.blender-orbit-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:52px;filter:drop-shadow(0 0 30px rgba(200,0,255,.6));animation:planetFloat 4s ease-in-out infinite;z-index:3;}
+.blender-ph-title{font-family:'Orbitron',sans-serif;font-size:clamp(16px,3vw,26px);font-weight:900;letter-spacing:4px;text-transform:uppercase;background:linear-gradient(135deg,var(--magenta),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;z-index:3;position:relative;animation:glitchSlice 6s ease-in-out infinite;}
+.blender-ph-sub{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:28px;z-index:3;position:relative;}
+.blender-ph-progress{display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3;position:relative;width:min(320px,80%);}
+.blender-ph-progress-label{display:flex;justify-content:space-between;width:100%;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);}
+.blender-ph-track{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
+.blender-ph-fill{height:100%;width:0%;border-radius:4px;background:linear-gradient(to right,var(--magenta),var(--cyan));transition:width 2s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;}
+.blender-ph-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:barShimmer 1.8s ease-in-out infinite;}
+.blender-ph-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px;z-index:3;position:relative;}
+.blender-ph-tag{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:30px;cursor:default;transition:all .3s;}
 .blender-ph-tag:nth-child(1){color:var(--magenta);border:1px solid rgba(200,0,255,.3);background:rgba(200,0,255,.07);}
 .blender-ph-tag:nth-child(2){color:var(--cyan);border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.07);}
 .blender-ph-tag:nth-child(3){color:var(--orange);border:1px solid rgba(255,98,32,.3);background:rgba(255,98,32,.07);}
 .blender-ph-tag:hover{transform:scale(1.08);}
-.blender-ph-tag:nth-child(1):hover{box-shadow:var(--glow-m);}
-.blender-ph-tag:nth-child(2):hover{box-shadow:var(--glow-c);}
-.blender-ph-tag:nth-child(3):hover{box-shadow:var(--glow-o);}
-
-/* Data stream strips below the frame */
-.blender-data-strips{
-  display:flex;gap:8px;padding:10px 20px;
-  background:rgba(7,10,26,.9);border-top:1px solid rgba(200,0,255,.06);
-}
-.blender-data-strip{
-  flex:1;height:2px;border-radius:2px;overflow:hidden;
-  background:rgba(255,255,255,.04);
-}
-.blender-data-strip-fill{
-  height:100%;border-radius:2px;transform-origin:left;
-}
+.blender-data-strips{display:flex;gap:8px;padding:10px 20px;background:rgba(7,10,26,.9);border-top:1px solid rgba(200,0,255,.06);}
+.blender-data-strip{flex:1;height:2px;border-radius:2px;overflow:hidden;background:rgba(255,255,255,.04);}
+.blender-data-strip-fill{height:100%;border-radius:2px;transform-origin:left;}
 .blender-data-strip:nth-child(1) .blender-data-strip-fill{background:var(--magenta);animation:dataPulse 2.1s ease-in-out infinite;}
 .blender-data-strip:nth-child(2) .blender-data-strip-fill{background:var(--cyan);animation:dataPulse 2.1s ease-in-out infinite .4s;}
 .blender-data-strip:nth-child(3) .blender-data-strip-fill{background:var(--orange);animation:dataPulse 2.1s ease-in-out infinite .8s;}
 .blender-data-strip:nth-child(4) .blender-data-strip-fill{background:var(--magenta);animation:dataPulse 2.1s ease-in-out infinite 1.2s;}
 .blender-data-strip:nth-child(5) .blender-data-strip-fill{background:var(--cyan);animation:dataPulse 2.1s ease-in-out infinite 1.6s;}
-
-/* Stats row below the video */
-.blender-meta-row{
-  display:flex;gap:0;
-  background:rgba(7,10,26,.85);backdrop-filter:blur(16px);
-  border-top:1px solid rgba(200,0,255,.08);
-}
-.blender-meta-item{
-  flex:1;padding:14px 20px;
-  border-right:1px solid rgba(255,255,255,.05);
-  transition:.3s;cursor:default;
-}
+.blender-meta-row{display:flex;gap:0;background:rgba(7,10,26,.85);backdrop-filter:blur(16px);border-top:1px solid rgba(200,0,255,.08);}
+.blender-meta-item{flex:1;padding:14px 20px;border-right:1px solid rgba(255,255,255,.05);transition:.3s;cursor:default;}
 .blender-meta-item:last-child{border-right:none;}
 .blender-meta-item:hover{background:rgba(200,0,255,.04);}
-.blender-meta-label{
-  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--magenta);margin-bottom:4px;
-}
-.blender-meta-value{
-  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;
-  color:var(--white);letter-spacing:1px;
-}
-.blender-meta-sub{
-  font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);
-}
+.blender-meta-label{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);margin-bottom:4px;}
+.blender-meta-value{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--white);letter-spacing:1px;}
+.blender-meta-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);}
 
-/* ============================================================
-   ABOUT PAGE
-   ============================================================ */
+/* ============================================================ ABOUT PAGE ============================================================ */
 #about .page-banner-title{background:linear-gradient(135deg,#00e5ff,#ffd600);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
 .about-card{border-radius:20px;padding:44px;border:1px solid rgba(0,229,255,.1);background:rgba(7,10,26,.8);backdrop-filter:blur(16px);transition:all .4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;}
@@ -728,34 +720,7 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .skill-bar-fill{height:100%;border-radius:10px;background:linear-gradient(to right,var(--cyan),var(--magenta));width:0;transition:width 1.4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;}
 .skill-bar-fill::after{content:'';position:absolute;top:0;left:0;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:barShimmer 2s ease-in-out infinite;}
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padding:40px;text-align:center;background:rgba(4,6,15,.85);backdrop-filter:blur(20px);}
-.footer-line{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--cyan),transparent);margin:14px auto;}
-.footer-name{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
-.footer-name span{color:var(--cyan);}
-.footer-sub{font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(90,106,153,.6);letter-spacing:3px;text-transform:uppercase;margin-top:6px;}
-.footer-academic{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(90,106,153,.5);letter-spacing:1px;margin-top:8px;}
-
-/* ============================================================
-   MOUSE PARTICLES
-   ============================================================ */
-.particle{position:fixed;pointer-events:none;z-index:2;border-radius:50%;animation:particleFade linear forwards;}
-@keyframes particleFade{0%{transform:translateY(0) scale(1);opacity:.8;}100%{transform:translateY(-180px) scale(0);opacity:0;}}
-
-/* ============================================================
-   SHARED ANIMATIONS
-   ============================================================ */
-@keyframes spin{from{transform:rotate(0);}to{transform:rotate(360deg);}}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-@keyframes floatIcon{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.23,1,.32,1);}
-.reveal.revealed{opacity:1;transform:none;}
-
-/* ============================================================
-   PLANET CALCULATOR — SHARED WRAPPER & HEADER
-   ============================================================ */
+/* ============================================================ PLANET CALCULATOR ============================================================ */
 .pcalc-wrapper{margin-top:80px;position:relative;}
 .pcalc-orbital-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;width:700px;height:700px;}
 .pcalc-orbital-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid rgba(200,0,255,.06);transform:translate(-50%,-50%);animation:orbRingPulse 4s ease-in-out infinite;}
@@ -767,7 +732,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .pcalc-container:hover{box-shadow:0 40px 120px rgba(0,0,0,.7),0 0 60px rgba(200,0,255,.12),0 0 0 1px rgba(200,0,255,.2);}
 .pcalc-header{padding:28px 36px 24px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:18px;background:rgba(200,0,255,.04);position:relative;overflow:hidden;}
 .pcalc-header::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(200,0,255,.07),transparent);animation:pcalcScan 3s ease-in-out infinite;}
-@keyframes pcalcScan{0%{left:-100%;}100%{left:200%;}}
 .pcalc-header-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(200,0,255,.25),rgba(0,229,255,.15));border:1px solid rgba(200,0,255,.3);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 0 20px rgba(200,0,255,.2);flex-shrink:0;animation:pcalcIconFloat 4s ease-in-out infinite;}
 @keyframes pcalcIconFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-4px) rotate(5deg);}}
 .pcalc-header-title{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;letter-spacing:3px;background:linear-gradient(135deg,#c800ff,#00e5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
@@ -777,10 +741,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .pcalc-header-dot:nth-child(1){background:#ff5f57;}
 .pcalc-header-dot:nth-child(2){background:#febc2e;}
 .pcalc-header-dot:nth-child(3){background:#28c840;}
-
-/* ============================================================
-   CALCULATOR TABS
-   ============================================================ */
 .pcalc-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.2);}
 .pcalc-tab{flex:1;padding:14px 20px;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);background:transparent;border:none;cursor:pointer;transition:all .3s;position:relative;outline:none;}
 .pcalc-tab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--cyan),var(--magenta));transform:scaleX(0);transition:transform .3s;}
@@ -789,10 +749,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .pcalc-tab.active::after{transform:scaleX(1);}
 .pcalc-tab-panel{display:none;}
 .pcalc-tab-panel.active{display:block;}
-
-/* ============================================================
-   WEIGHT CALCULATOR PANEL
-   ============================================================ */
 .pcalc-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
 .pcalc-left{padding:32px 28px 32px 36px;border-right:1px solid rgba(255,255,255,.05);}
 .pcalc-section-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
@@ -856,10 +812,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .pcalc-bar-val{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--muted);width:52px;flex-shrink:0;text-align:right;}
 .pcalc-bar-row.highlighted .pcalc-bar-label{color:var(--white);}
 .pcalc-bar-row.highlighted .pcalc-bar-val{color:var(--magenta);}
-
-/* ============================================================
-   AGE CALCULATOR PANEL
-   ============================================================ */
 .pcalc-age-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
 .pcalc-age-left{padding:32px 28px 32px 36px;border-right:1px solid rgba(255,255,255,.05);}
 .pcalc-age-right{padding:32px 36px 32px 28px;display:flex;flex-direction:column;gap:20px;}
@@ -889,17 +841,30 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .pcalc-fact-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);flex-shrink:0;margin-top:5px;}
 .pcalc-fact-text{font-family:'Exo 2',sans-serif;font-size:13px;color:var(--muted);line-height:1.6;}
 .pcalc-fact-text strong{color:var(--white);}
-
-/* ============================================================
-   CALCULATOR FOOTER
-   ============================================================ */
 .pcalc-footer{padding:14px 36px;border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.2);}
 .pcalc-footer-note{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(90,106,153,.5);text-transform:uppercase;}
 .pcalc-footer-badge{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;padding:4px 12px;border-radius:20px;color:var(--magenta);border:1px solid rgba(200,0,255,.25);background:rgba(200,0,255,.07);text-transform:uppercase;}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* ============================================================ FOOTER ============================================================ */
+footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padding:40px;text-align:center;background:rgba(4,6,15,.85);backdrop-filter:blur(20px);}
+.footer-line{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--cyan),transparent);margin:14px auto;}
+.footer-name{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.footer-name span{color:var(--cyan);}
+.footer-sub{font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(90,106,153,.6);letter-spacing:3px;text-transform:uppercase;margin-top:6px;}
+.footer-academic{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(90,106,153,.5);letter-spacing:1px;margin-top:8px;}
+
+/* ============================================================ MOUSE PARTICLES ============================================================ */
+.particle{position:fixed;pointer-events:none;z-index:2;border-radius:50%;animation:particleFade linear forwards;}
+@keyframes particleFade{0%{transform:translateY(0) scale(1);opacity:.8;}100%{transform:translateY(-180px) scale(0);opacity:0;}}
+
+/* ============================================================ SHARED ANIMATIONS ============================================================ */
+@keyframes spin{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes floatIcon{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.23,1,.32,1);}
+.reveal.revealed{opacity:1;transform:none;}
+
+/* ============================================================ RESPONSIVE ============================================================ */
 @media(max-width:900px){
   .proj-grid,.about-layout{grid-template-columns:1fr;}
   .hero-stats{flex-wrap:wrap;}
@@ -915,6 +880,10 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   .pcalc-header,.pcalc-left,.pcalc-right,.pcalc-age-left,.pcalc-age-right{padding:22px;}
   .blender-meta-row{flex-wrap:wrap;}
   .blender-meta-item{min-width:50%;}
+  .planet-embed-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:500px){
+  .planet-embed-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -955,9 +924,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   <div class="nav-hamburger"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- ================================================================
-     HOME
-     ================================================================ -->
+<!-- ================================================================ HOME ================================================================ -->
 <div class="page active" id="home">
   <section class="hero-stage">
     <div class="planet-bg" id="mainPlanet">
@@ -977,11 +944,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
     <div class="hero-arrow hero-arrow-left" onclick="cycleLeft()">&#8592;</div>
     <div class="hero-arrow hero-arrow-right" onclick="cycleRight()">&#8594;</div>
     <div class="hero-text">
-      <div class="hero-eyebrow">
-        <div class="hero-eyebrow-line"></div>
-        <span id="heroEyebrow">Project 01 — Rotoscoping</span>
-        <div class="hero-eyebrow-line"></div>
-      </div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span id="heroEyebrow">Project 01 — Rotoscoping</span><div class="hero-eyebrow-line"></div></div>
       <div class="hero-title" id="heroTitle">ROTOSCOPING</div>
       <div class="hero-sub" id="heroSub">Frame by Frame</div>
       <a class="hero-cta" id="heroCta" href="#" onclick="navTo('rotoscoping');return false;">VIEW MORE</a>
@@ -990,7 +953,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       <div class="stat-item"><div class="stat-label">Technique</div><div class="stat-value">Rotoscoping</div><div class="stat-sub">Frame-by-frame</div></div>
       <div class="stat-item"><div class="stat-label">Duration</div><div class="stat-value">12 Weeks</div><div class="stat-sub">Progressive</div></div>
       <div class="stat-item"><div class="stat-label">Software</div><div class="stat-value">Adobe</div><div class="stat-sub">After Effects / PS</div></div>
-      <div class="stat-item"><div class="stat-label">Status</div><div class="stat-value">ACTIVE</div><div class="stat-sub">Week 1–10 done</div></div>
+      <div class="stat-item"><div class="stat-label">Status</div><div class="stat-value" style="color:#39ff14;">COMPLETE</div><div class="stat-sub">All 12 weeks done</div></div>
       <div class="stat-item"><div class="stat-label">Frames</div><div class="stat-value">100+</div><div class="stat-sub">Hand-traced</div></div>
     </div>
   </section>
@@ -1036,9 +999,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   </footer>
 </div>
 
-<!-- ================================================================
-     ROTOSCOPING
-     ================================================================ -->
+<!-- ================================================================ ROTOSCOPING ================================================================ -->
 <div class="page" id="rotoscoping">
   <div class="page-banner">
     <div class="page-banner-label">Project 01</div>
@@ -1052,9 +1013,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="disclaimer-icon">⚠️</div>
         <div class="disclaimer-content">
           <div class="disclaimer-title">Educational Use Disclaimer</div>
-          <div class="disclaimer-text">
-            This video is embedded solely for <em>academic and educational reference purposes</em> as part of the course requirement for <em>Multimedia &amp; Authoring (BSIT-NS-2A)</em>. All rights to the original content belong to their respective creators and copyright holders. No commercial use, redistribution, or reproduction is intended. This is displayed under the principles of <em>fair use for educational study, commentary, and reference only</em>.
-          </div>
+          <div class="disclaimer-text">This video is embedded solely for <em>academic and educational reference purposes</em> as part of the course requirement for <em>Multimedia &amp; Authoring (BSIT-NS-2A)</em>. All rights to the original content belong to their respective creators and copyright holders. No commercial use, redistribution, or reproduction is intended. This is displayed under the principles of <em>fair use for educational study, commentary, and reference only</em>.</div>
         </div>
       </div>
       <div class="cine-frame">
@@ -1068,13 +1027,18 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         </div>
       </div>
     </div>
+
     <div class="block-label reveal">Weekly Progress Log</div>
-    <p class="weekly-intro reveal">A 12-week journey of rotoscoping mastery — each week building upon the last, refining technique and artistic vision frame by frame.</p>
+    <p class="weekly-intro reveal">A 12-week journey of rotoscoping mastery — each week building upon the last, refining technique and artistic vision frame by frame. <strong style="color:#39ff14;">All 12 weeks complete! 🏆</strong></p>
+
+    <!-- UPDATED: 12/12 complete progress bar -->
     <div class="progress-summary reveal">
       <div class="prog-label">Overall Progress</div>
       <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
       <div class="prog-count"><span>12</span> / 12 Weeks Complete</div>
+      <div class="prog-complete-badge">✓ COMPLETE</div>
     </div>
+
     <div class="weeks-grid" id="weeks-grid">
       <!-- WEEK 1 -->
       <div class="week-frame done reveal" data-week="1">
@@ -1126,9 +1090,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   </footer>
 </div>
 
-<!-- ================================================================
-     3D BLENDER
-     ================================================================ -->
+<!-- ================================================================ 3D BLENDER ================================================================ -->
 <div class="page" id="rendering">
   <div class="page-banner">
     <div class="page-banner-label" style="color:var(--magenta);">Project 02</div>
@@ -1137,15 +1099,12 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   </div>
   <div class="page-content">
 
-    <!-- ===== 3D BLENDER VIDEO SECTION (NEW) ===== -->
+    <!-- ===== MAIN BLENDER VIDEO SECTION ===== -->
     <div class="block-label reveal" style="margin-bottom:28px;">
       <span style="color:var(--magenta);">Project Showcase</span>
       <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div>
     </div>
-
     <div class="blender-video-section reveal">
-
-      <!-- HUD Header -->
       <div class="blender-hud-header">
         <div class="blender-hud-dot"></div>
         <div>
@@ -1155,61 +1114,25 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="blender-hud-spacer"></div>
         <div class="blender-hud-badge">BSIT-NS-2A · PROJECT 02</div>
       </div>
-
-      <!-- Disclaimer -->
       <div class="disclaimer-box" style="margin-bottom:22px;">
         <div class="disclaimer-icon">⚠️</div>
         <div class="disclaimer-content">
           <div class="disclaimer-title">Educational Use Disclaimer</div>
-          <div class="disclaimer-text">
-            This video is embedded solely for <em>academic and educational reference purposes</em> as part of <em>Multimedia &amp; Authoring (BSIT-NS-2A)</em>. All rights to original content belong to their respective creators. No commercial use or redistribution is intended. Displayed under <em>fair use for educational study and reference only</em>.
-          </div>
+          <div class="disclaimer-text">This video is embedded solely for <em>academic and educational reference purposes</em> as part of <em>Multimedia &amp; Authoring (BSIT-NS-2A)</em>. All rights to original content belong to their respective creators. No commercial use or redistribution is intended. Displayed under <em>fair use for educational study and reference only</em>.</div>
         </div>
       </div>
-
-      <!-- Main cinematic frame -->
       <div class="blender-cine-wrap" id="blenderCineWrap">
-
-        <!-- Corner HUD brackets -->
         <div class="blender-corner tl"></div>
         <div class="blender-corner tr"></div>
         <div class="blender-corner bl"></div>
         <div class="blender-corner br"></div>
-
-        <!-- Chrome bar -->
         <div class="blender-cine-bar">
-          <div class="blender-cine-dots">
-            <div class="blender-cine-dot"></div>
-            <div class="blender-cine-dot"></div>
-            <div class="blender-cine-dot"></div>
-          </div>
-          <div class="blender-cine-bar-title">
-            <span>3D Blender Render · Project Showcase · BSIT-NS-2A</span>
-          </div>
-          <div class="blender-cine-tags">
-            <span class="blender-cine-tag magenta">BLENDER</span>
-            <span class="blender-cine-tag orange">3D RENDER</span>
-          </div>
+          <div class="blender-cine-dots"><div class="blender-cine-dot"></div><div class="blender-cine-dot"></div><div class="blender-cine-dot"></div></div>
+          <div class="blender-cine-bar-title"><span>3D Blender Render · Project Showcase · BSIT-NS-2A</span></div>
+          <div class="blender-cine-tags"><span class="blender-cine-tag magenta">BLENDER</span><span class="blender-cine-tag orange">3D RENDER</span></div>
         </div>
-
-        <!-- Video embed area: replace VIDEO_ID below with your actual YouTube video ID -->
         <div class="blender-embed">
-          <!-- ══════════════════════════════════════════════════════
-               PLACEHOLDER — replace VIDEO_ID with your real YouTube ID
-               Standard embed format: https://www.youtube.com/embed/VIDEO_ID
-               Example: https://www.youtube.com/embed/dQw4w9WgXcQ
-               ══════════════════════════════════════════════════════ -->
-          <iframe
-            id="blenderMainIframe"
-            src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1&controls=1&color=white"
-            title="3D Blender Project — Meriel N. Lanuza · BSIT-NS-2A"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            loading="lazy"
-            style="display:none;">
-          </iframe>
-
-          <!-- Holographic placeholder shown until real VIDEO_ID is set -->
+          <iframe id="blenderMainIframe" src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1&controls=1&color=white" title="3D Blender Project — Meriel N. Lanuza · BSIT-NS-2A" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" style="display:none;"></iframe>
           <div class="blender-placeholder" id="blenderPlaceholder">
             <div class="blender-orbit-wrap">
               <div class="blender-orbit-ring"></div>
@@ -1220,23 +1143,12 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
             <div class="blender-ph-title">Render In Progress</div>
             <div class="blender-ph-sub">Replace VIDEO_ID with your YouTube link</div>
             <div class="blender-ph-progress">
-              <div class="blender-ph-progress-label">
-                <span>SCULPTING DIMENSIONS</span>
-                <span id="blenderPct">0%</span>
-              </div>
-              <div class="blender-ph-track">
-                <div class="blender-ph-fill" id="blenderFill"></div>
-              </div>
+              <div class="blender-ph-progress-label"><span>SCULPTING DIMENSIONS</span><span id="blenderPct">0%</span></div>
+              <div class="blender-ph-track"><div class="blender-ph-fill" id="blenderFill"></div></div>
             </div>
-            <div class="blender-ph-tags">
-              <span class="blender-ph-tag">🧊 Modeling</span>
-              <span class="blender-ph-tag">💡 Lighting</span>
-              <span class="blender-ph-tag">✨ Rendering</span>
-            </div>
+            <div class="blender-ph-tags"><span class="blender-ph-tag">🧊 Modeling</span><span class="blender-ph-tag">💡 Lighting</span><span class="blender-ph-tag">✨ Rendering</span></div>
           </div>
         </div>
-
-        <!-- Data stream strips -->
         <div class="blender-data-strips">
           <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
           <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
@@ -1244,34 +1156,46 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
           <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
           <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
         </div>
-
-        <!-- Meta stats row -->
         <div class="blender-meta-row">
-          <div class="blender-meta-item">
-            <div class="blender-meta-label">Engine</div>
-            <div class="blender-meta-value">Blender</div>
-            <div class="blender-meta-sub">Cycles / EEVEE</div>
-          </div>
-          <div class="blender-meta-item">
-            <div class="blender-meta-label">Project</div>
-            <div class="blender-meta-value">3D Render</div>
-            <div class="blender-meta-sub">Project 02</div>
-          </div>
-          <div class="blender-meta-item">
-            <div class="blender-meta-label">Status</div>
-            <div class="blender-meta-value" style="color:var(--magenta);">In Progress</div>
-            <div class="blender-meta-sub">Uploading Soon</div>
-          </div>
-          <div class="blender-meta-item">
-            <div class="blender-meta-label">Course</div>
-            <div class="blender-meta-value">BSIT-NS-2A</div>
-            <div class="blender-meta-sub">Multimedia &amp; Authoring</div>
-          </div>
+          <div class="blender-meta-item"><div class="blender-meta-label">Engine</div><div class="blender-meta-value">Blender</div><div class="blender-meta-sub">Cycles / EEVEE</div></div>
+          <div class="blender-meta-item"><div class="blender-meta-label">Project</div><div class="blender-meta-value">3D Render</div><div class="blender-meta-sub">Project 02</div></div>
+          <div class="blender-meta-item"><div class="blender-meta-label">Status</div><div class="blender-meta-value" style="color:var(--magenta);">In Progress</div><div class="blender-meta-sub">Uploading Soon</div></div>
+          <div class="blender-meta-item"><div class="blender-meta-label">Course</div><div class="blender-meta-value">BSIT-NS-2A</div><div class="blender-meta-sub">Multimedia &amp; Authoring</div></div>
         </div>
+      </div>
+    </div>
 
-      </div><!-- /blender-cine-wrap -->
-    </div><!-- /blender-video-section -->
-    <!-- ===== END 3D BLENDER VIDEO SECTION ===== -->
+    <!-- ★★★ NEW: 8 PLANET VIDEO EMBED SECTION ★★★ -->
+    <div class="block-label reveal" style="margin-top:80px;">
+      <span style="color:var(--magenta);">Planet Video Slots</span>
+      <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div>
+    </div>
+
+    <div class="planet-embed-section reveal">
+
+      <!-- Section header HUD -->
+      <div class="planet-embed-header">
+        <div class="peh-icon">🌌</div>
+        <div class="peh-text">
+          <div class="peh-label">Solar System · Video Archive</div>
+          <div class="peh-title">8 Planet Render Slots — Awaiting Upload</div>
+        </div>
+        <div class="peh-badge">8 SLOTS · BSIT-NS-2A</div>
+      </div>
+
+      <!-- Instruction strip -->
+      <div class="planet-embed-instruction">
+        <div class="pei-dot"></div>
+        <div class="pei-text">Replace each <strong>PLANET_VIDEO_ID</strong> in the HTML source with your actual YouTube video ID to activate a slot — e.g. <strong>dQw4w9WgXcQ</strong></div>
+      </div>
+
+      <!-- 8 Planet Cards Grid -->
+      <div class="planet-embed-grid" id="planetEmbedGrid">
+        <!-- Injected by JS -->
+      </div>
+
+    </div>
+    <!-- ★★★ END 8 PLANET VIDEO EMBED SECTION ★★★ -->
 
     <div class="block-label reveal" style="margin-top:70px;"><span style="color:var(--magenta);">What to Expect</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
     <div class="render-features reveal">
@@ -1283,7 +1207,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 
     <!-- ===== PLANET CALCULATOR ===== -->
     <div class="block-label reveal" style="margin-top:80px;"><span style="color:var(--magenta);">Planet Calculator</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
-
     <div class="pcalc-wrapper reveal">
       <div class="pcalc-orbital-bg">
         <div class="pcalc-orbital-ring"></div>
@@ -1291,27 +1214,18 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="pcalc-orbital-ring"></div>
       </div>
       <div class="pcalc-container">
-
-        <!-- Header -->
         <div class="pcalc-header">
           <div class="pcalc-header-icon">&#x1FA90;</div>
           <div>
             <div class="pcalc-header-title">Planet Calculator</div>
             <div class="pcalc-header-sub">Weight &amp; Age Converter &middot; Solar System</div>
           </div>
-          <div class="pcalc-header-dots">
-            <div class="pcalc-header-dot"></div>
-            <div class="pcalc-header-dot"></div>
-            <div class="pcalc-header-dot"></div>
-          </div>
+          <div class="pcalc-header-dots"><div class="pcalc-header-dot"></div><div class="pcalc-header-dot"></div><div class="pcalc-header-dot"></div></div>
         </div>
-
-        <!-- Tabs -->
         <div class="pcalc-tabs">
           <button class="pcalc-tab active" id="tab-weight" onclick="pcalcSwitchTab('weight')">⚡ Weight Calculator</button>
           <button class="pcalc-tab" id="tab-age" onclick="pcalcSwitchTab('age')">🕰 Age Calculator</button>
         </div>
-
         <!-- ── WEIGHT PANEL ── -->
         <div class="pcalc-tab-panel active" id="panel-weight">
           <div class="pcalc-body">
@@ -1320,11 +1234,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
               <div class="pcalc-planet-grid" id="pcalcPlanetGrid"></div>
               <div class="pcalc-selected-planet">
                 <div class="pcalc-sel-orb" id="pcalcSelOrb"></div>
-                <div>
-                  <div class="pcalc-sel-name" id="pcalcSelName">Mercury</div>
-                  <div class="pcalc-sel-type" id="pcalcSelType">Terrestrial Planet</div>
-                  <div class="pcalc-sel-grav" id="pcalcSelGrav">Gravity: 0.38g (&times;Earth)</div>
-                </div>
+                <div><div class="pcalc-sel-name" id="pcalcSelName">Mercury</div><div class="pcalc-sel-type" id="pcalcSelType">Terrestrial Planet</div><div class="pcalc-sel-grav" id="pcalcSelGrav">Gravity: 0.38g (&times;Earth)</div></div>
               </div>
               <div class="pcalc-section-label">Your Weight on Earth</div>
               <div class="pcalc-input-group">
@@ -1341,10 +1251,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
             <div class="pcalc-right">
               <div class="pcalc-section-label">Results</div>
               <div class="pcalc-result-display" id="pcalcResultDisplay">
-                <div class="pcalc-result-idle" id="pcalcIdle">
-                  <div class="pcalc-result-idle-icon">&#x1F30C;</div>
-                  <div class="pcalc-result-idle-text">Enter weight &amp; select planet</div>
-                </div>
+                <div class="pcalc-result-idle" id="pcalcIdle"><div class="pcalc-result-idle-icon">&#x1F30C;</div><div class="pcalc-result-idle-text">Enter weight &amp; select planet</div></div>
                 <div class="pcalc-result-main" id="pcalcResultMain">
                   <div class="pcalc-result-planet-orb" id="pcalcResultOrb"></div>
                   <div class="pcalc-result-label">Your weight on <span id="pcalcResultPlanetName">&#x2014;</span></div>
@@ -1354,52 +1261,32 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
                 </div>
               </div>
               <div class="pcalc-facts" id="pcalcFacts"></div>
-              <div class="pcalc-compare">
-                <div class="pcalc-compare-title">Weight Across All Planets</div>
-                <div id="pcalcBars"></div>
-              </div>
+              <div class="pcalc-compare"><div class="pcalc-compare-title">Weight Across All Planets</div><div id="pcalcBars"></div></div>
             </div>
           </div>
         </div>
-
         <!-- ── AGE PANEL ── -->
         <div class="pcalc-tab-panel" id="panel-age">
           <div class="pcalc-age-body">
-            <!-- Left -->
             <div class="pcalc-age-left">
               <div class="pcalc-section-label">Select Planet</div>
               <div class="pcalc-age-planet-grid" id="pcalcAgePlanetGrid"></div>
               <div class="pcalc-age-selected">
                 <div class="pcalc-age-sel-orb" id="pcalcAgeSelOrb"></div>
-                <div>
-                  <div class="pcalc-age-sel-name" id="pcalcAgeSelName">Mercury</div>
-                  <div class="pcalc-sel-type" id="pcalcAgeSelType">Terrestrial Planet</div>
-                  <div class="pcalc-age-sel-period" id="pcalcAgeSelPeriod">1 year = 87.97 Earth days</div>
-                </div>
+                <div><div class="pcalc-age-sel-name" id="pcalcAgeSelName">Mercury</div><div class="pcalc-sel-type" id="pcalcAgeSelType">Terrestrial Planet</div><div class="pcalc-age-sel-period" id="pcalcAgeSelPeriod">1 year = 87.97 Earth days</div></div>
               </div>
               <div class="pcalc-section-label">Your Age on Earth</div>
-              <div class="pcalc-input-group">
-                <div class="pcalc-input-row">
-                  <input type="number" class="pcalc-input" id="pcalcAge" placeholder="20" min="0" max="150" style="width:100%;">
-                </div>
-              </div>
+              <div class="pcalc-input-group"><div class="pcalc-input-row"><input type="number" class="pcalc-input" id="pcalcAge" placeholder="20" min="0" max="150" style="width:100%;"></div></div>
               <button class="pcalc-calc-btn" onclick="pcalcCalculateAge()">&#x1F30C; Calculate Planetary Age</button>
-
-              <!-- Planet Facts in left panel -->
               <div class="pcalc-facts-panel" style="margin-top:24px;" id="pcalcFactsPanel">
                 <div class="pcalc-facts-panel-title">Planet Facts</div>
                 <div id="pcalcFactsList"></div>
               </div>
             </div>
-
-            <!-- Right -->
             <div class="pcalc-age-right">
               <div class="pcalc-section-label">Your Age Result</div>
               <div class="pcalc-age-result-box" id="pcalcAgeResultBox">
-                <div id="pcalcAgeIdle">
-                  <div class="pcalc-age-idle-icon">⏳</div>
-                  <div class="pcalc-age-idle-text">Enter age &amp; select planet</div>
-                </div>
+                <div id="pcalcAgeIdle"><div class="pcalc-age-idle-icon">⏳</div><div class="pcalc-age-idle-text">Enter age &amp; select planet</div></div>
                 <div class="pcalc-age-result-inner" id="pcalcAgeResultInner">
                   <div class="pcalc-age-result-orb" id="pcalcAgeResultOrb"></div>
                   <div class="pcalc-age-result-label">Your age on <span id="pcalcAgeResultPlanetName">—</span></div>
@@ -1408,22 +1295,14 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
                   <div class="pcalc-age-result-note" id="pcalcAgeResultNote">—</div>
                 </div>
               </div>
-
-              <!-- All-planet age bars -->
-              <div class="pcalc-age-allbars">
-                <div class="pcalc-age-allbars-title">Age Across All Planets</div>
-                <div id="pcalcAgeBars"></div>
-              </div>
+              <div class="pcalc-age-allbars"><div class="pcalc-age-allbars-title">Age Across All Planets</div><div id="pcalcAgeBars"></div></div>
             </div>
           </div>
         </div>
-
-        <!-- Footer -->
         <div class="pcalc-footer">
           <div class="pcalc-footer-note">Based on surface gravity &amp; orbital periods &middot; Educational use only</div>
           <div class="pcalc-footer-badge">Blender Project Tool</div>
         </div>
-
       </div>
     </div>
     <!-- ===== END PLANET CALCULATOR ===== -->
@@ -1438,9 +1317,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   </footer>
 </div>
 
-<!-- ================================================================
-     ABOUT
-     ================================================================ -->
+<!-- ================================================================ ABOUT ================================================================ -->
 <div class="page" id="about">
   <div class="page-banner">
     <div class="page-banner-label">Mission Control</div>
@@ -1462,7 +1339,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       </div>
       <div class="about-card skills-card reveal">
         <div class="skill-title">Creative Toolkit</div>
-        <div class="skill-row"><div class="skill-row-head"><span>Rotoscoping</span><span style="color:var(--cyan);">Active</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75%"></div></div></div>
+        <div class="skill-row"><div class="skill-row-head"><span>Rotoscoping</span><span style="color:var(--cyan);">Complete</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="100%"></div></div></div>
         <div class="skill-row"><div class="skill-row-head"><span>3D Modeling (Blender)</span><span style="color:var(--magenta);">Learning</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="50%" style="background:linear-gradient(to right,var(--magenta),var(--orange));"></div></div></div>
         <div class="skill-row"><div class="skill-row-head"><span>Video Editing</span><span style="color:var(--cyan);">Proficient</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="65%"></div></div></div>
         <div class="skill-row"><div class="skill-row-head"><span>Digital Animation</span><span style="color:var(--magenta);">Growing</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-w="45%" style="background:linear-gradient(to right,var(--magenta),var(--orange));"></div></div></div>
@@ -1479,13 +1356,9 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   </footer>
 </div>
 
-<!-- ================================================================
-     JAVASCRIPT
-     ================================================================ -->
+<!-- ================================================================ JAVASCRIPT ================================================================ -->
 <script>
-/* ============================================================
-   PLANET DATA
-   ============================================================ */
+/* ============================================================ PLANET DATA (homepage carousel) ============================================================ */
 var PLANETS=[
   {id:'rotoscoping',name:'ROTOSCOPING',sub:'Frame by Frame',eyebrow:'Project 01 — Rotoscoping',page:'rotoscoping',bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 68% 72%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',shadow:'0 0 140px rgba(0,229,255,.15)',atmosphere:'0 0 40px 12px rgba(0,229,255,.18),0 0 80px 24px rgba(0,100,255,.1)',cloudTint:'rgba(200,230,255,.05)'},
   {id:'rendering',name:'3D BLENDER',sub:'Into the Void',eyebrow:'Project 02 — 3D Rendering',page:'rendering',bg:'radial-gradient(ellipse at 30% 28%,rgba(255,210,160,.25) 0%,transparent 35%),radial-gradient(ellipse at 65% 70%,rgba(0,0,0,.35) 0%,transparent 42%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 48%,#2a1204 72%,#0a0501 100%)',shadow:'0 0 140px rgba(200,100,20,.15)',atmosphere:'0 0 40px 12px rgba(200,100,20,.2),0 0 80px 24px rgba(180,80,10,.1)',cloudTint:'rgba(255,200,100,.04)'},
@@ -1502,9 +1375,103 @@ var SIDE_RIGHT=[
   {label:'Uranus',bg:'radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 65% 65%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%)',glow:'rgba(40,180,140,.35)'}
 ];
 
-/* ============================================================
-   STARFIELD
-   ============================================================ */
+/* ============================================================ 8 PLANET EMBED DATA ============================================================ */
+var PLANET_EMBEDS=[
+  {
+    num:'01',name:'Mercury',type:'Terrestrial Planet',icon:'☿',
+    videoId:'MERCURY_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 32% 28%,rgba(200,180,160,.2) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#a89070 0%,#786050 22%,#484030 50%,#201810 80%,#080604 100%)',
+    ec:'#a89070',ec2:'#786050',ecGlow:'rgba(168,144,112,.35)',ecSoft:'rgba(168,144,112,.08)',ecUltra:'rgba(168,144,112,.04)'
+  },
+  {
+    num:'02',name:'Venus',type:'Terrestrial Planet',icon:'♀',
+    videoId:'VENUS_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 32% 28%,rgba(255,230,140,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#d4a030 0%,#a07018 22%,#6a4808 50%,#302004 80%,#100a00 100%)',
+    ec:'#d4a030',ec2:'#a07018',ecGlow:'rgba(210,150,30,.35)',ecSoft:'rgba(210,150,30,.08)',ecUltra:'rgba(210,150,30,.04)'
+  },
+  {
+    num:'03',name:'Earth',type:'Terrestrial Planet',icon:'🌍',
+    videoId:'EARTH_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',
+    ec:'#00e5ff',ec2:'#0088ff',ecGlow:'rgba(0,229,255,.35)',ecSoft:'rgba(0,229,255,.08)',ecUltra:'rgba(0,229,255,.04)'
+  },
+  {
+    num:'04',name:'Mars',type:'Terrestrial Planet',icon:'♂',
+    videoId:'MARS_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 32% 28%,rgba(255,200,150,.25) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#d4552a 0%,#b03818 22%,#7a2010 50%,#3d0e06 80%,#1a0503 100%)',
+    ec:'#ff6220',ec2:'#cc3300',ecGlow:'rgba(220,80,30,.35)',ecSoft:'rgba(220,80,30,.08)',ecUltra:'rgba(220,80,30,.04)'
+  },
+  {
+    num:'05',name:'Jupiter',type:'Gas Giant',icon:'♃',
+    videoId:'JUPITER_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 30% 25%,rgba(255,210,160,.22) 0%,transparent 36%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 50%,#2a1204 80%,#0a0501 100%)',
+    ec:'#ffd600',ec2:'#cc9900',ecGlow:'rgba(200,150,0,.35)',ecSoft:'rgba(200,150,0,.08)',ecUltra:'rgba(200,150,0,.04)'
+  },
+  {
+    num:'06',name:'Saturn',type:'Gas Giant',icon:'♄',
+    videoId:'SATURN_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 30% 25%,rgba(255,230,180,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#c8a040 0%,#906020 22%,#5a3a08 50%,#281804 80%,#0a0500 100%)',
+    ec:'#c8a040',ec2:'#906020',ecGlow:'rgba(200,150,40,.35)',ecSoft:'rgba(200,150,40,.08)',ecUltra:'rgba(200,150,40,.04)'
+  },
+  {
+    num:'07',name:'Uranus',type:'Ice Giant',icon:'⛢',
+    videoId:'URANUS_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%)',
+    ec:'#50d8b8',ec2:'#2aa880',ecGlow:'rgba(40,180,140,.35)',ecSoft:'rgba(40,180,140,.08)',ecUltra:'rgba(40,180,140,.04)'
+  },
+  {
+    num:'08',name:'Neptune',type:'Ice Giant',icon:'♆',
+    videoId:'NEPTUNE_VIDEO_ID',
+    bg:'radial-gradient(ellipse at 30% 25%,rgba(150,230,255,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#2ec4e8 0%,#1480a8 22%,#0a4a70 50%,#041e38 80%,#010810 100%)',
+    ec:'#2ec4e8',ec2:'#1480a8',ecGlow:'rgba(30,160,220,.35)',ecSoft:'rgba(30,160,220,.08)',ecUltra:'rgba(30,160,220,.04)'
+  }
+];
+
+/* ============================================================ BUILD PLANET EMBED GRID ============================================================ */
+function buildPlanetEmbedGrid(){
+  var grid=document.getElementById('planetEmbedGrid');
+  if(!grid)return;
+  grid.innerHTML='';
+  PLANET_EMBEDS.forEach(function(p,i){
+    var hasVideo=(p.videoId.indexOf('_VIDEO_ID')===-1&&p.videoId.length>0);
+    var card=document.createElement('div');
+    card.className='planet-embed-card';
+    card.style.setProperty('--pec',p.ec);
+    card.style.setProperty('--pec2',p.ec2);
+    card.style.setProperty('--pec-glow',p.ecGlow);
+    card.style.setProperty('--pec-soft',p.ecSoft);
+    card.style.setProperty('--pec-ultra',p.ecUltra);
+
+    var videoContent=hasVideo
+      ?'<iframe src="https://www.youtube.com/embed/'+p.videoId+'?rel=0&modestbranding=1&controls=1" title="'+p.name+' — 3D Blender Render" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>'
+      :'<div class="pec-placeholder"><div class="pec-ph-icon">'+p.icon+'</div><div class="pec-ph-label">Awaiting Upload</div><div class="pec-ph-id-badge">'+p.name.toUpperCase()+'_VIDEO_ID</div></div>';
+
+    card.innerHTML=
+      '<div class="pec-topbar"></div>'+
+      '<div class="pec-bar">'+
+        '<div class="pec-dots"><div class="pec-dot"></div><div class="pec-dot"></div><div class="pec-dot"></div></div>'+
+        '<div class="pec-planet-tag">'+p.name+'</div>'+
+      '</div>'+
+      '<div class="pec-identity">'+
+        '<div class="pec-orb-wrap">'+
+          '<div class="pec-orb-ring"></div>'+
+          '<div class="pec-orb" style="background:'+p.bg+'"></div>'+
+        '</div>'+
+        '<div class="pec-planet-name">'+p.name+'</div>'+
+        '<div class="pec-planet-type">'+p.type+'</div>'+
+      '</div>'+
+      '<div class="pec-video-wrap">'+videoContent+'</div>'+
+      '<div class="pec-footer">'+
+        '<div class="pec-footer-num">#'+p.num+'</div>'+
+        '<div class="pec-footer-hint">Replace '+p.name.toUpperCase()+'_VIDEO_ID</div>'+
+        '<div class="pec-footer-status">'+(hasVideo?'✓ Live':'Pending')+'</div>'+
+      '</div>';
+
+    grid.appendChild(card);
+  });
+}
+
+/* ============================================================ STARFIELD ============================================================ */
 (function(){
   var c=document.getElementById('starfield'),ctx=c.getContext('2d'),W,H,stars=[],shooters=[];
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
@@ -1522,24 +1489,20 @@ var SIDE_RIGHT=[
   loop();
 })();
 
-/* ============================================================
-   CURSOR
-   ============================================================ */
+/* ============================================================ CURSOR ============================================================ */
 var curEl=document.getElementById('cursor'),dotEl=document.getElementById('cursor-dot'),mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
 (function animCursor(){cx+=(mx-cx)*.14;cy+=(my-cy)*.14;curEl.style.left=cx+'px';curEl.style.top=cy+'px';dotEl.style.left=mx+'px';dotEl.style.top=my+'px';requestAnimationFrame(animCursor);})();
 document.addEventListener('mousedown',function(){curEl.style.transform='translate(-50%,-50%) scale(.7)';});
 document.addEventListener('mouseup',function(){curEl.style.transform='translate(-50%,-50%) scale(1)';});
 function bindHover(){
-  document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.toggle-btn,.rs-planet,.about-avatar,.stat-item,.cine-dot,.blender-cine-dot,.disclaimer-box,.pcalc-planet-btn,.pcalc-calc-btn,.pcalc-fact-pill,.pcalc-tab,.blender-ph-tag,.blender-meta-item,.blender-cine-wrap').forEach(function(el){
+  document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.toggle-btn,.about-avatar,.stat-item,.cine-dot,.blender-cine-dot,.disclaimer-box,.pcalc-planet-btn,.pcalc-calc-btn,.pcalc-fact-pill,.pcalc-tab,.blender-ph-tag,.blender-meta-item,.blender-cine-wrap,.planet-embed-card').forEach(function(el){
     el.addEventListener('mouseenter',function(){curEl.classList.add('hover');});
     el.addEventListener('mouseleave',function(){curEl.classList.remove('hover');});
   });
 }
 
-/* ============================================================
-   CLICK EFFECTS
-   ============================================================ */
+/* ============================================================ CLICK EFFECTS ============================================================ */
 document.addEventListener('click',function(e){
   var r=document.createElement('div');r.className='ripple-burst';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.appendChild(r);setTimeout(function(){r.remove();},700);
   for(var i=0;i<8;i++){
@@ -1552,9 +1515,7 @@ document.addEventListener('click',function(e){
   }
 });
 
-/* ============================================================
-   MOUSE PARTICLES
-   ============================================================ */
+/* ============================================================ MOUSE PARTICLES ============================================================ */
 var lastP=0;
 document.addEventListener('mousemove',function(e){
   var now=Date.now();if(now-lastP<90)return;lastP=now;if(Math.random()>.65)return;
@@ -1563,54 +1524,40 @@ document.addEventListener('mousemove',function(e){
   document.body.appendChild(p);setTimeout(function(){p.remove();},2500);
 });
 
-/* ============================================================
-   LOADER
-   ============================================================ */
+/* ============================================================ LOADER ============================================================ */
 var LTEXTS=['INITIALIZING','LOADING ASSETS','CALIBRATING','LAUNCH READY'];
 var LSUBS=['LOADING MULTIMEDIA SYSTEMS...','BUILDING STARFIELD...','SYNCING MODULES...','ENGAGING WARP DRIVE...'];
 var lp=0,lbar=document.getElementById('loaderBar'),ltext=document.getElementById('loaderText'),lsub=document.getElementById('loaderSub');
 function runLoader(){
-  if(lp>100){document.getElementById('loader').classList.add('done');setTimeout(function(){bindHover();triggerReveal();animProgressBar();pcalcInit();initBlenderPlaceholder();},200);return;}
+  if(lp>100){
+    document.getElementById('loader').classList.add('done');
+    setTimeout(function(){bindHover();triggerReveal();animProgressBar();pcalcInit();initBlenderPlaceholder();buildPlanetEmbedGrid();},200);
+    return;
+  }
   lbar.style.width=lp+'%';var idx=Math.min(Math.floor(lp/33),LTEXTS.length-1);ltext.textContent=LTEXTS[idx];lsub.textContent=LSUBS[idx];lp+=Math.random()*4+1.5;setTimeout(runLoader,25+Math.random()*35);
 }
 runLoader();
 
-/* ============================================================
-   BLENDER PLACEHOLDER ANIMATION
-   ============================================================ */
+/* ============================================================ BLENDER PLACEHOLDER ============================================================ */
 function initBlenderPlaceholder(){
-  /* Animate fake render progress bar */
-  var fill=document.getElementById('blenderFill');
-  var pct=document.getElementById('blenderPct');
+  var fill=document.getElementById('blenderFill');var pct=document.getElementById('blenderPct');
   if(!fill||!pct)return;
   var p=0;
   function tick(){
     if(p>=100){fill.style.width='100%';pct.textContent='100%';return;}
-    p+=Math.random()*0.4+0.1;
-    if(p>100)p=100;
-    fill.style.width=p.toFixed(1)+'%';
-    pct.textContent=Math.floor(p)+'%';
+    p+=Math.random()*0.4+0.1;if(p>100)p=100;
+    fill.style.width=p.toFixed(1)+'%';pct.textContent=Math.floor(p)+'%';
     setTimeout(tick,120+Math.random()*180);
   }
   setTimeout(tick,800);
-
-  /* Check if the iframe has a real VIDEO_ID set and toggle accordingly */
-  var iframe=document.getElementById('blenderMainIframe');
-  var placeholder=document.getElementById('blenderPlaceholder');
+  var iframe=document.getElementById('blenderMainIframe');var placeholder=document.getElementById('blenderPlaceholder');
   if(iframe&&placeholder){
     var src=iframe.getAttribute('src')||'';
-    if(src.indexOf('VIDEO_ID')===-1){
-      /* Real video ID is set — show iframe, hide placeholder */
-      iframe.style.display='block';
-      placeholder.style.display='none';
-    }
-    /* Otherwise placeholder stays visible */
+    if(src.indexOf('VIDEO_ID')===-1){iframe.style.display='block';placeholder.style.display='none';}
   }
 }
 
-/* ============================================================
-   PAGE TRANSITION
-   ============================================================ */
+/* ============================================================ PAGE TRANSITION ============================================================ */
 var wipe=document.getElementById('page-wipe'),transitioning=false;
 function navTo(id){
   if(transitioning)return;
@@ -1628,17 +1575,18 @@ function navTo(id){
       setTimeout(function(){triggerReveal();bindHover();},100);
       if(id==='about')setTimeout(function(){document.querySelectorAll('.skill-bar-fill').forEach(function(el){el.style.width=el.dataset.w||'0%';});},500);
       if(id==='rotoscoping')setTimeout(function(){animProgressBar();},400);
-      if(id==='rendering')setTimeout(function(){pcalcInit();initBlenderPlaceholder();},400);
+      if(id==='rendering')setTimeout(function(){pcalcInit();initBlenderPlaceholder();buildPlanetEmbedGrid();},400);
     },430);
   },430);
 }
+
+/* ── Progress bar: 100% complete ── */
 function animProgressBar(){
-  var pf=document.getElementById('progFill');if(pf)setTimeout(function(){pf.style.width='83%';},300);
+  var pf=document.getElementById('progFill');
+  if(pf)setTimeout(function(){pf.style.width='100%';},300);
 }
 
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
+/* ============================================================ SCROLL REVEAL ============================================================ */
 function triggerReveal(){
   document.querySelectorAll('.page.active .reveal').forEach(function(el,i){
     var r=el.getBoundingClientRect();if(r.top<window.innerHeight-50)setTimeout(function(){el.classList.add('revealed');},i*65);
@@ -1649,9 +1597,7 @@ window.addEventListener('scroll',function(){
   triggerReveal();
 });
 
-/* ============================================================
-   PLANET CAROUSEL
-   ============================================================ */
+/* ============================================================ PLANET CAROUSEL ============================================================ */
 var pIdx=0;
 function applyMainPlanet(i){
   var p=PLANETS[i];
@@ -1668,14 +1614,8 @@ function applyMainPlanet(i){
     document.getElementById('heroEyebrow').textContent=p.eyebrow;
     document.getElementById('heroCta').onclick=function(){navTo(p.page);return false;};
     var li=(i+SIDE_LEFT.length)%SIDE_LEFT.length,ri=i%SIDE_RIGHT.length;
-    var leftOrb=document.getElementById('leftOrb');
-    leftOrb.style.background=SIDE_LEFT[li].bg;
-    leftOrb.style.setProperty('--planet-glow',SIDE_LEFT[li].glow);
-    document.getElementById('leftLabel').textContent=SIDE_LEFT[li].label;
-    var rightOrb=document.getElementById('rightOrb');
-    rightOrb.style.background=SIDE_RIGHT[ri].bg;
-    rightOrb.style.setProperty('--planet-glow',SIDE_RIGHT[ri].glow);
-    document.getElementById('rightLabel').textContent=SIDE_RIGHT[ri].label;
+    var leftOrb=document.getElementById('leftOrb');leftOrb.style.background=SIDE_LEFT[li].bg;leftOrb.style.setProperty('--planet-glow',SIDE_LEFT[li].glow);document.getElementById('leftLabel').textContent=SIDE_LEFT[li].label;
+    var rightOrb=document.getElementById('rightOrb');rightOrb.style.background=SIDE_RIGHT[ri].bg;rightOrb.style.setProperty('--planet-glow',SIDE_RIGHT[ri].glow);document.getElementById('rightLabel').textContent=SIDE_RIGHT[ri].label;
     tEl.style.opacity='1';tEl.style.transform='none';setTimeout(function(){tEl.style.transition='';},400);
   },250);
 }
@@ -1683,9 +1623,7 @@ applyMainPlanet(0);
 function cycleLeft(){pIdx=(pIdx-1+PLANETS.length)%PLANETS.length;applyMainPlanet(pIdx);}
 function cycleRight(){pIdx=(pIdx+1)%PLANETS.length;applyMainPlanet(pIdx);}
 
-/* ============================================================
-   BUILD WEEKS 4-12
-   ============================================================ */
+/* ============================================================ BUILD WEEKS 4–12 ============================================================ */
 var phWeeks=[
   {w:4,icon:'🖌️',title:'Coloring',sub:'Fill & Hues',vid:'XzHlTeA2VSM'},
   {w:5,icon:'✏️',title:'Refinement',sub:'Detail Pass',vid:'XxQ-Q8QOOAU'},
@@ -1704,9 +1642,7 @@ phWeeks.forEach(function(obj){
   var el=document.createElement('div');
   el.className='week-frame reveal'+(isDone?' done':'');
   el.dataset.week=obj.w;
-  var statusHtml=isDone
-    ?'<span class="week-status-dot">Live</span>'
-    :'<span class="week-status-dot locked">Pending</span>';
+  var statusHtml=isDone?'<span class="week-status-dot">Live</span>':'<span class="week-status-dot locked">Pending</span>';
   var badgeHtml=isDone?'<div class="week-done-badge">Done</div>':'';
   var videoAreaHtml=obj.vid
     ?'<iframe src="https://www.youtube.com/embed/'+obj.vid+'?rel=0&modestbranding=1&controls=1" title="Week '+wn+' \u2014 '+obj.title+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>'
@@ -1716,398 +1652,66 @@ phWeeks.forEach(function(obj){
     '<div class="week-head"><span class="week-num-badge">Week '+wn+'</span>'+statusHtml+'</div>'+
     '<div class="week-video-area">'+videoAreaHtml+'<div class="week-corner"><div class="week-corner-num">'+wn+'</div></div></div>'+
     '<div class="week-foot">'+
-      '<div class="week-foot-left">'+
-        '<div class="week-foot-title">Week '+wn+' \u2014 '+obj.title+'</div>'+
-        '<div class="week-foot-sub">'+obj.sub+'</div>'+
-      '</div>'+
-      '<div class="week-foot-right">'+
-        '<div class="week-foot-progress"><div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div></div>'+
-        badgeHtml+
-      '</div>'+
+      '<div class="week-foot-left"><div class="week-foot-title">Week '+wn+' \u2014 '+obj.title+'</div><div class="week-foot-sub">'+obj.sub+'</div></div>'+
+      '<div class="week-foot-right"><div class="week-foot-progress"><div class="week-pip"></div><div class="week-pip"></div><div class="week-pip"></div></div>'+badgeHtml+'</div>'+
     '</div>';
   grid.appendChild(el);
 });
 
-/* ============================================================
-   3D CARD TILT
-   ============================================================ */
+/* ============================================================ 3D CARD TILT ============================================================ */
 document.addEventListener('mousemove',function(e){
-  document.querySelectorAll('.proj-card,.week-frame,.rf-card,.about-card').forEach(function(card){
+  document.querySelectorAll('.proj-card,.week-frame,.rf-card,.about-card,.planet-embed-card').forEach(function(card){
     var r=card.getBoundingClientRect();
     var inside=e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
-    if(inside){var x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;card.style.transform='perspective(900px) rotateY('+(x/32)+'deg) rotateX('+(-y/32)+'deg) translateY(-10px)';}
+    if(inside){var x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;card.style.transform='perspective(900px) rotateY('+(x/36)+'deg) rotateX('+(-y/36)+'deg) translateY(-10px)';}
     else card.style.transform='';
   });
 });
 
-/* ============================================================
-   THEME TOGGLE
-   ============================================================ */
+/* ============================================================ THEME TOGGLE ============================================================ */
 var isLight=false;
 function toggleTheme(){isLight=!isLight;document.body.classList.toggle('light',isLight);document.getElementById('themeBtn').textContent=isLight?'🌑':'🌙';}
 
-/* ============================================================
-   PLANET CALCULATOR DATA
-   ============================================================ */
+/* ============================================================ PLANET CALCULATOR DATA ============================================================ */
 var PCALC_PLANETS=[
-  {
-    id:'mercury',name:'Mercury',gravity:.38,type:'Terrestrial Planet',
-    yearDays:87.97,
-    bg:'radial-gradient(ellipse at 32% 28%,rgba(200,180,160,.2) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#a89070 0%,#786050 22%,#484030 50%,#201810 80%,#080604 100%)',
-    glow:'rgba(168,144,112,.4)',
-    facts:['0.38\u00D7 Earth gravity','No real atmosphere','Temp: -180 to 430\u00B0C','Smallest planet','88 Earth-day orbit'],
-    deepFacts:[
-      {t:'Surface Temperature',d:'Mercury swings between <strong>-180\u00B0C at night</strong> and <strong>430\u00B0C during the day</strong> \u2014 the largest temperature range of any planet, due to its almost nonexistent atmosphere.'},
-      {t:'Orbit & Year',d:'One Mercury year lasts only <strong>87.97 Earth days</strong>, making it the fastest-orbiting planet. It travels at 47 km/s around the Sun.'},
-      {t:'Size & Structure',d:'Mercury is the <strong>smallest planet</strong> in our Solar System \u2014 only slightly larger than Earth\'s Moon. Its iron core makes up 85% of its radius.'},
-      {t:'Unique Feature',d:'Despite being closest to the Sun, Mercury is <strong>not the hottest planet</strong>. Venus holds that record due to its greenhouse atmosphere.'},
-      {t:'Fun Fact',d:'A day on Mercury (sunrise to sunrise) lasts <strong>176 Earth days</strong> \u2014 twice as long as its own year!'}
-    ]
-  },
-  {
-    id:'venus',name:'Venus',gravity:.91,type:'Terrestrial Planet',
-    yearDays:224.7,
-    bg:'radial-gradient(ellipse at 32% 28%,rgba(255,230,140,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#d4a030 0%,#a07018 22%,#6a4808 50%,#302004 80%,#100a00 100%)',
-    glow:'rgba(210,150,30,.4)',
-    facts:['0.91\u00D7 Earth gravity','Hottest planet: 462\u00B0C','Rotates backwards','Dense CO\u2082 atmosphere','225 Earth-day year'],
-    deepFacts:[
-      {t:'Extreme Heat',d:'Venus is the <strong>hottest planet</strong> at a crushing average of <strong>462\u00B0C</strong>, hot enough to melt lead. Its thick CO\u2082 atmosphere traps heat like a runaway greenhouse effect.'},
-      {t:'Backwards Rotation',d:'Venus rotates <strong>clockwise</strong> (retrograde), opposite to most planets. On Venus, the Sun rises in the west and sets in the east.'},
-      {t:'Longest Day',d:'A Venusian day lasts <strong>243 Earth days</strong> \u2014 longer than its year of 225 Earth days. You\'d age faster in years than in days!'},
-      {t:'Orbit & Year',d:'Venus completes one orbit around the Sun every <strong>224.7 Earth days</strong>. Its orbit is the most circular of all planets.'},
-      {t:'Fun Fact',d:'Venus is sometimes called Earth\'s twin due to similar size and mass \u2014 but its surface conditions are completely alien, with crushing 90-bar atmospheric pressure.'}
-    ]
-  },
-  {
-    id:'earth',name:'Earth',gravity:1.00,type:'Terrestrial Planet',
-    yearDays:365.25,
-    bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',
-    glow:'rgba(0,229,255,.4)',
-    facts:['Reference: 1.00g','71% water surface','Only known life','1 natural moon','365.25-day year'],
-    deepFacts:[
-      {t:'The Reference Planet',d:'Earth is the <strong>baseline for all planetary comparisons</strong>. Its surface gravity of 9.8 m/s\u00B2 is what we call "1g" \u2014 the standard unit used for all weight calculations.'},
-      {t:'A Year on Earth',d:'Earth takes <strong>365.25 days</strong> to orbit the Sun, which is why we add a leap day every 4 years. Its orbital speed is about 29.78 km/s.'},
-      {t:'Life-Sustaining Conditions',d:'Earth is the only known planet with <strong>confirmed life</strong>. Its liquid water, oxygen atmosphere, and magnetic field shield all make it uniquely habitable.'},
-      {t:'The Moon\'s Influence',d:'Earth\'s single large Moon stabilizes its <strong>axial tilt at 23.5\u00B0</strong>, creating stable seasons and contributing to the climate conditions that support life.'},
-      {t:'Fun Fact',d:'Earth is the <strong>densest planet</strong> in the Solar System. Its iron-nickel core generates the magnetic field that protects us from harmful solar radiation.'}
-    ]
-  },
-  {
-    id:'mars',name:'Mars',gravity:.38,type:'Terrestrial Planet',
-    yearDays:686.97,
-    bg:'radial-gradient(ellipse at 32% 28%,rgba(255,200,150,.25) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#d4552a 0%,#b03818 22%,#7a2010 50%,#3d0e06 80%,#1a0503 100%)',
-    glow:'rgba(220,80,30,.4)',
-    facts:['0.38\u00D7 Earth gravity','Largest volcano','Red iron oxide surface','Two tiny moons','687 Earth-day year'],
-    deepFacts:[
-      {t:'Low Gravity',d:'Mars has only <strong>38% of Earth\'s gravity</strong>. You could jump nearly 3 times higher on Mars \u2014 and a 70 kg person would weigh just 26.6 kg there.'},
-      {t:'Orbit & Year',d:'A Martian year lasts <strong>686.97 Earth days</strong> \u2014 almost two Earth years. Mars is farther from the Sun, traveling at 24.07 km/s.'},
-      {t:'Olympus Mons',d:'Mars hosts <strong>Olympus Mons</strong>, the tallest volcano in the Solar System at 21.9 km \u2014 nearly 3\u00D7 the height of Mount Everest.'},
-      {t:'Moons',d:'Mars has two small, irregularly shaped moons: <strong>Phobos</strong> and <strong>Deimos</strong>. Phobos orbits so close it rises and sets twice per Martian day.'},
-      {t:'Fun Fact',d:'A Martian day (sol) is <strong>24 hours and 37 minutes</strong> \u2014 remarkably close to Earth\'s day length. Mars is the most Earth-like planet in terms of daily cycles.'}
-    ]
-  },
-  {
-    id:'jupiter',name:'Jupiter',gravity:2.36,type:'Gas Giant',
-    yearDays:4332.59,
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(255,210,160,.22) 0%,transparent 36%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 50%,#2a1204 80%,#0a0501 100%)',
-    glow:'rgba(200,100,20,.4)',
-    facts:['2.36\u00D7 Earth gravity','Largest planet','Great Red Spot storm','95 known moons','10-hour day'],
-    deepFacts:[
-      {t:'Crushing Gravity',d:'Jupiter\'s surface gravity is <strong>2.36\u00D7 Earth\'s</strong> \u2014 the strongest of any planet. A 70 kg person would weigh 165 kg there, struggling to even stand.'},
-      {t:'Massive Year',d:'Jupiter takes <strong>11.86 Earth years</strong> (4,332 Earth days) to orbit the Sun. If you were born on Jupiter-time, you\'d celebrate your first birthday at nearly 12 Earth years old!'},
-      {t:'The Great Red Spot',d:'Jupiter\'s famous storm \u2014 the <strong>Great Red Spot</strong> \u2014 has been raging for over 350 years. It is wider than Earth itself, though it has been slowly shrinking.'},
-      {t:'King of Moons',d:'Jupiter has <strong>95 confirmed moons</strong>, the most of any planet. Its four large Galilean moons (Io, Europa, Ganymede, Callisto) were discovered in 1610.'},
-      {t:'Fun Fact',d:'Jupiter is so massive that <strong>all other planets combined</strong> would fit inside it with room to spare. It acts as a cosmic shield, deflecting many asteroids away from Earth.'}
-    ]
-  },
-  {
-    id:'saturn',name:'Saturn',gravity:.92,type:'Gas Giant',
-    yearDays:10759.22,
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(255,230,180,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#c8a040 0%,#906020 22%,#5a3a08 50%,#281804 80%,#0a0500 100%)',
-    glow:'rgba(200,150,40,.4)',
-    facts:['0.92\u00D7 Earth gravity','Iconic ring system','Least dense planet','83 known moons','29.4-year orbit'],
-    deepFacts:[
-      {t:'Near-Earth Gravity',d:'Despite being a gas giant, Saturn\'s surface gravity is only <strong>0.92\u00D7 Earth\'s</strong> \u2014 you\'d feel slightly lighter there. This is because Saturn is much less dense than rocky planets.'},
-      {t:'Long Year',d:'Saturn takes <strong>29.4 Earth years</strong> to orbit the Sun. A child born today would be nearly 30 before Saturn completes a single year!'},
-      {t:'The Rings',d:'Saturn\'s iconic ring system spans <strong>282,000 km</strong> but is only about 10 meters thick. The rings are made of billions of ice and rock particles.'},
-      {t:'Least Dense Planet',d:'Saturn is the <strong>least dense planet</strong> in the Solar System \u2014 less dense than water. If you could find an ocean big enough, Saturn would float!'},
-      {t:'Fun Fact',d:'Saturn\'s largest moon, <strong>Titan</strong>, has a thick nitrogen atmosphere and lakes of liquid methane. It\'s one of the most Earth-like places in the Solar System \u2014 just extremely cold.'}
-    ]
-  },
-  {
-    id:'uranus',name:'Uranus',gravity:.89,type:'Ice Giant',
-    yearDays:30688.5,
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%)',
-    glow:'rgba(40,180,140,.4)',
-    facts:['0.89\u00D7 Earth gravity','Tilted 98\u00B0 on axis','Coldest: -224\u00B0C','27 known moons','84-year orbit'],
-    deepFacts:[
-      {t:'Sideways Planet',d:'Uranus is tilted at <strong>97.77\u00B0 on its axis</strong> \u2014 it essentially orbits the Sun on its side, rolling like a ball. This extreme tilt causes unusual 42-year-long seasons.'},
-      {t:'Very Long Year',d:'Uranus takes <strong>84 Earth years</strong> to complete one orbit. A person aged 84 on Earth would have lived exactly one Uranian year!'},
-      {t:'Coldest Atmosphere',d:'Despite not being the farthest planet, Uranus holds the record for the <strong>coldest planetary atmosphere</strong> at -224\u00B0C, partly due to very little internal heat.'},
-      {t:'Ice Giant',d:'Unlike Jupiter and Saturn, Uranus is an <strong>Ice Giant</strong> \u2014 its interior is mostly a slushy ocean of water, methane, and ammonia ices rather than gas.'},
-      {t:'Fun Fact',d:'All 27 of Uranus\'s moons are named after <strong>characters from Shakespeare and Alexander Pope</strong>, including Titania, Oberon, Ariel, and Puck.'}
-    ]
-  },
-  {
-    id:'neptune',name:'Neptune',gravity:1.12,type:'Ice Giant',
-    yearDays:60182,
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(150,230,255,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#2ec4e8 0%,#1480a8 22%,#0a4a70 50%,#041e38 80%,#010810 100%)',
-    glow:'rgba(30,160,220,.4)',
-    facts:['1.12\u00D7 Earth gravity','Winds: 2100 km/h','Farthest planet','14 known moons','165-year orbit'],
-    deepFacts:[
-      {t:'Slightly Stronger Gravity',d:'Neptune\'s gravity is <strong>1.12\u00D7 Earth\'s</strong> \u2014 you\'d feel about 12% heavier. A 70 kg person would weigh about 78.4 kg on Neptune\'s cloud tops.'},
-      {t:'Enormous Year',d:'Neptune takes <strong>164.8 Earth years</strong> to orbit the Sun. It has completed less than <strong>one full orbit</strong> since its discovery in 1846!'},
-      {t:'Fastest Winds',d:'Neptune has the <strong>strongest winds in the Solar System</strong>, reaching up to 2,100 km/h (faster than the speed of sound on Earth). Its Great Dark Spot is a massive storm system.'},
-      {t:'Mathematical Discovery',d:'Neptune was the first planet <strong>predicted by mathematics</strong> before being directly observed. Its existence was calculated from gravitational disturbances in Uranus\'s orbit in 1846.'},
-      {t:'Fun Fact',d:'Neptune\'s largest moon, <strong>Triton</strong>, orbits backwards (retrograde) and is slowly spiraling inward. In about 3.6 billion years, it will be torn apart and form a ring system.'}
-    ]
-  }
+  {id:'mercury',name:'Mercury',gravity:.38,type:'Terrestrial Planet',yearDays:87.97,bg:'radial-gradient(ellipse at 32% 28%,rgba(200,180,160,.2) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#a89070 0%,#786050 22%,#484030 50%,#201810 80%,#080604 100%)',glow:'rgba(168,144,112,.4)',facts:['0.38\u00D7 Earth gravity','No real atmosphere','Temp: -180 to 430\u00B0C','Smallest planet','88 Earth-day orbit'],deepFacts:[{t:'Surface Temperature',d:'Mercury swings between <strong>-180\u00B0C at night</strong> and <strong>430\u00B0C during the day</strong>.'},{t:'Orbit & Year',d:'One Mercury year lasts only <strong>87.97 Earth days</strong>, the fastest-orbiting planet.'},{t:'Size & Structure',d:'Mercury is the <strong>smallest planet</strong> \u2014 only slightly larger than Earth\'s Moon.'},{t:'Unique Feature',d:'Despite being closest to the Sun, Mercury is <strong>not the hottest planet</strong>.'},{t:'Fun Fact',d:'A day on Mercury lasts <strong>176 Earth days</strong> \u2014 twice as long as its own year!'}]},
+  {id:'venus',name:'Venus',gravity:.91,type:'Terrestrial Planet',yearDays:224.7,bg:'radial-gradient(ellipse at 32% 28%,rgba(255,230,140,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#d4a030 0%,#a07018 22%,#6a4808 50%,#302004 80%,#100a00 100%)',glow:'rgba(210,150,30,.4)',facts:['0.91\u00D7 Earth gravity','Hottest planet: 462\u00B0C','Rotates backwards','Dense CO\u2082 atmosphere','225 Earth-day year'],deepFacts:[{t:'Extreme Heat',d:'Venus is the <strong>hottest planet</strong> at a crushing average of <strong>462\u00B0C</strong>.'},{t:'Backwards Rotation',d:'Venus rotates <strong>clockwise</strong>, opposite to most planets.'},{t:'Longest Day',d:'A Venusian day lasts <strong>243 Earth days</strong> \u2014 longer than its year.'},{t:'Orbit & Year',d:'Venus completes one orbit every <strong>224.7 Earth days</strong>.'},{t:'Fun Fact',d:'Venus is sometimes called Earth\'s twin due to similar size and mass.'}]},
+  {id:'earth',name:'Earth',gravity:1.00,type:'Terrestrial Planet',yearDays:365.25,bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',glow:'rgba(0,229,255,.4)',facts:['Reference: 1.00g','71% water surface','Only known life','1 natural moon','365.25-day year'],deepFacts:[{t:'The Reference Planet',d:'Earth is the <strong>baseline for all planetary comparisons</strong>.'},{t:'A Year on Earth',d:'Earth takes <strong>365.25 days</strong> to orbit the Sun.'},{t:'Life-Sustaining',d:'Earth is the only known planet with <strong>confirmed life</strong>.'},{t:'The Moon',d:'Earth\'s Moon stabilizes its <strong>axial tilt at 23.5\u00B0</strong>.'},{t:'Fun Fact',d:'Earth is the <strong>densest planet</strong> in the Solar System.'}]},
+  {id:'mars',name:'Mars',gravity:.38,type:'Terrestrial Planet',yearDays:686.97,bg:'radial-gradient(ellipse at 32% 28%,rgba(255,200,150,.25) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#d4552a 0%,#b03818 22%,#7a2010 50%,#3d0e06 80%,#1a0503 100%)',glow:'rgba(220,80,30,.4)',facts:['0.38\u00D7 Earth gravity','Largest volcano','Red iron oxide surface','Two tiny moons','687 Earth-day year'],deepFacts:[{t:'Low Gravity',d:'Mars has only <strong>38% of Earth\'s gravity</strong>.'},{t:'Orbit & Year',d:'A Martian year lasts <strong>686.97 Earth days</strong>.'},{t:'Olympus Mons',d:'Mars hosts <strong>Olympus Mons</strong>, the tallest volcano in the Solar System.'},{t:'Moons',d:'Mars has two small moons: <strong>Phobos</strong> and <strong>Deimos</strong>.'},{t:'Fun Fact',d:'A Martian day is <strong>24 hours and 37 minutes</strong> \u2014 close to Earth\'s.'}]},
+  {id:'jupiter',name:'Jupiter',gravity:2.36,type:'Gas Giant',yearDays:4332.59,bg:'radial-gradient(ellipse at 30% 25%,rgba(255,210,160,.22) 0%,transparent 36%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 50%,#2a1204 80%,#0a0501 100%)',glow:'rgba(200,100,20,.4)',facts:['2.36\u00D7 Earth gravity','Largest planet','Great Red Spot storm','95 known moons','10-hour day'],deepFacts:[{t:'Crushing Gravity',d:'Jupiter\'s gravity is <strong>2.36\u00D7 Earth\'s</strong> \u2014 the strongest of any planet.'},{t:'Massive Year',d:'Jupiter takes <strong>11.86 Earth years</strong> to orbit the Sun.'},{t:'Great Red Spot',d:'Jupiter\'s storm has been raging for over <strong>350 years</strong>.'},{t:'King of Moons',d:'Jupiter has <strong>95 confirmed moons</strong>.'},{t:'Fun Fact',d:'All other planets combined would fit inside Jupiter.'}]},
+  {id:'saturn',name:'Saturn',gravity:.92,type:'Gas Giant',yearDays:10759.22,bg:'radial-gradient(ellipse at 30% 25%,rgba(255,230,180,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#c8a040 0%,#906020 22%,#5a3a08 50%,#281804 80%,#0a0500 100%)',glow:'rgba(200,150,40,.4)',facts:['0.92\u00D7 Earth gravity','Iconic ring system','Least dense planet','83 known moons','29.4-year orbit'],deepFacts:[{t:'Near-Earth Gravity',d:'Saturn\'s surface gravity is <strong>0.92\u00D7 Earth\'s</strong>.'},{t:'Long Year',d:'Saturn takes <strong>29.4 Earth years</strong> to orbit the Sun.'},{t:'The Rings',d:'Saturn\'s ring system spans <strong>282,000 km</strong> but is only ~10m thick.'},{t:'Least Dense',d:'Saturn is the <strong>least dense planet</strong> \u2014 less dense than water.'},{t:'Fun Fact',d:'Saturn\'s moon Titan has lakes of liquid methane.'}]},
+  {id:'uranus',name:'Uranus',gravity:.89,type:'Ice Giant',yearDays:30688.5,bg:'radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%)',glow:'rgba(40,180,140,.4)',facts:['0.89\u00D7 Earth gravity','Tilted 98\u00B0 on axis','Coldest: -224\u00B0C','27 known moons','84-year orbit'],deepFacts:[{t:'Sideways Planet',d:'Uranus is tilted at <strong>97.77\u00B0</strong> \u2014 it orbits the Sun on its side.'},{t:'Very Long Year',d:'Uranus takes <strong>84 Earth years</strong> to complete one orbit.'},{t:'Coldest Atmosphere',d:'Uranus holds the record for the <strong>coldest planetary atmosphere</strong> at -224\u00B0C.'},{t:'Ice Giant',d:'Uranus\'s interior is mostly a slushy ocean of water, methane, and ammonia.'},{t:'Fun Fact',d:'All 27 moons are named after Shakespeare and Alexander Pope characters.'}]},
+  {id:'neptune',name:'Neptune',gravity:1.12,type:'Ice Giant',yearDays:60182,bg:'radial-gradient(ellipse at 30% 25%,rgba(150,230,255,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#2ec4e8 0%,#1480a8 22%,#0a4a70 50%,#041e38 80%,#010810 100%)',glow:'rgba(30,160,220,.4)',facts:['1.12\u00D7 Earth gravity','Winds: 2100 km/h','Farthest planet','14 known moons','165-year orbit'],deepFacts:[{t:'Slightly Stronger',d:'Neptune\'s gravity is <strong>1.12\u00D7 Earth\'s</strong>.'},{t:'Enormous Year',d:'Neptune takes <strong>164.8 Earth years</strong> to orbit the Sun.'},{t:'Fastest Winds',d:'Neptune has the <strong>strongest winds</strong>, reaching 2,100 km/h.'},{t:'Mathematical Discovery',d:'Neptune was <strong>predicted by mathematics</strong> before being observed.'},{t:'Fun Fact',d:'Triton orbits backwards and will form a ring system in ~3.6 billion years.'}]}
 ];
 
 var pcalcSelected=0,pcalcAgeSelected=0,pcalcUnit='kg',pcalcInited=false,pcalcActiveTab='weight';
 
-/* ============================================================
-   INIT
-   ============================================================ */
 function pcalcInit(){
-  if(pcalcInited)return;
-  pcalcInited=true;
-
+  if(pcalcInited)return;pcalcInited=true;
   var g=document.getElementById('pcalcPlanetGrid');
-  PCALC_PLANETS.forEach(function(p,i){
-    var b=document.createElement('div');
-    b.className='pcalc-planet-btn'+(i===0?' selected':'');
-    b.onclick=function(){pcalcSelectPlanet(i);};
-    b.innerHTML='<div class="pcalc-planet-orb" style="background:'+p.bg+';--porb-glow:'+p.glow+'"></div><div class="pcalc-planet-name">'+p.name+'</div>';
-    g.appendChild(b);
-  });
-  pcalcUpdateSelected(0);
-  pcalcBuildBars(null);
-
+  PCALC_PLANETS.forEach(function(p,i){var b=document.createElement('div');b.className='pcalc-planet-btn'+(i===0?' selected':'');b.onclick=function(){pcalcSelectPlanet(i);};b.innerHTML='<div class="pcalc-planet-orb" style="background:'+p.bg+';--porb-glow:'+p.glow+'"></div><div class="pcalc-planet-name">'+p.name+'</div>';g.appendChild(b);});
+  pcalcUpdateSelected(0);pcalcBuildBars(null);
   var ag=document.getElementById('pcalcAgePlanetGrid');
-  PCALC_PLANETS.forEach(function(p,i){
-    var b=document.createElement('div');
-    b.className='pcalc-planet-btn'+(i===0?' selected':'');
-    b.onclick=function(){pcalcAgeSelectPlanet(i);};
-    b.innerHTML='<div class="pcalc-planet-orb" style="background:'+p.bg+';--porb-glow:'+p.glow+'"></div><div class="pcalc-planet-name">'+p.name+'</div>';
-    ag.appendChild(b);
-  });
-  pcalcAgeUpdateSelected(0);
-  pcalcBuildAgeBars(null);
-  pcalcRenderFacts(0);
-
-  var wi=document.getElementById('pcalcWeight');
-  if(wi)wi.addEventListener('keydown',function(e){if(e.key==='Enter')pcalcCalculate();});
-  var ai=document.getElementById('pcalcAge');
-  if(ai)ai.addEventListener('keydown',function(e){if(e.key==='Enter')pcalcCalculateAge();});
+  PCALC_PLANETS.forEach(function(p,i){var b=document.createElement('div');b.className='pcalc-planet-btn'+(i===0?' selected':'');b.onclick=function(){pcalcAgeSelectPlanet(i);};b.innerHTML='<div class="pcalc-planet-orb" style="background:'+p.bg+';--porb-glow:'+p.glow+'"></div><div class="pcalc-planet-name">'+p.name+'</div>';ag.appendChild(b);});
+  pcalcAgeUpdateSelected(0);pcalcBuildAgeBars(null);pcalcRenderFacts(0);
+  var wi=document.getElementById('pcalcWeight');if(wi)wi.addEventListener('keydown',function(e){if(e.key==='Enter')pcalcCalculate();});
+  var ai=document.getElementById('pcalcAge');if(ai)ai.addEventListener('keydown',function(e){if(e.key==='Enter')pcalcCalculateAge();});
 }
-
-/* ============================================================
-   TAB SWITCHING
-   ============================================================ */
-function pcalcSwitchTab(tab){
-  pcalcActiveTab=tab;
-  document.getElementById('tab-weight').classList.toggle('active',tab==='weight');
-  document.getElementById('tab-age').classList.toggle('active',tab==='age');
-  document.getElementById('panel-weight').classList.toggle('active',tab==='weight');
-  document.getElementById('panel-age').classList.toggle('active',tab==='age');
-}
-
-/* ============================================================
-   WEIGHT CALCULATOR
-   ============================================================ */
-function pcalcSelectPlanet(idx){
-  pcalcSelected=idx;
-  document.querySelectorAll('#pcalcPlanetGrid .pcalc-planet-btn').forEach(function(b,i){b.classList.toggle('selected',i===idx);});
-  pcalcUpdateSelected(idx);
-  var w=parseFloat(document.getElementById('pcalcWeight').value);
-  if(!isNaN(w)&&w>0)pcalcCalculate();else pcalcBuildBars(null);
-}
-
-function pcalcUpdateSelected(idx){
-  var p=PCALC_PLANETS[idx];
-  var o=document.getElementById('pcalcSelOrb');if(!o)return;
-  o.style.background=p.bg;
-  o.style.boxShadow='inset -8px -8px 20px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.1),0 0 30px '+p.glow;
-  document.getElementById('pcalcSelName').textContent=p.name;
-  document.getElementById('pcalcSelType').textContent=p.type;
-  document.getElementById('pcalcSelGrav').textContent='Gravity: '+p.gravity+'g (\u00D7Earth)';
-}
-
-function pcalcSetUnit(u){
-  pcalcUnit=u;
-  document.getElementById('pcalcKg').classList.toggle('active',u==='kg');
-  document.getElementById('pcalcLbs').classList.toggle('active',u==='lbs');
-  var w=parseFloat(document.getElementById('pcalcWeight').value);
-  if(!isNaN(w)&&w>0)pcalcCalculate();
-}
-
-function pcalcCalculate(){
-  var raw=parseFloat(document.getElementById('pcalcWeight').value);
-  if(isNaN(raw)||raw<=0){pcalcShowIdle();return;}
-  var weightKg=pcalcUnit==='lbs'?raw*0.453592:raw;
-  var p=PCALC_PLANETS[pcalcSelected];
-  var resultKg=weightKg*p.gravity;
-  var displayVal=pcalcUnit==='lbs'?resultKg/0.453592:resultKg;
-  var unitLabel=pcalcUnit==='lbs'?'lbs':'kg';
-  var ratio=p.gravity;
-  var compText=ratio>1?'You\u2019d feel <strong style="color:var(--magenta)">'+(ratio).toFixed(2)+'\u00D7 heavier</strong> than on Earth.':ratio<1?'You\u2019d feel <strong style="color:var(--cyan)">'+(1/ratio).toFixed(2)+'\u00D7 lighter</strong> than on Earth.':'Same weight as on <strong style="color:var(--cyan)">Earth!</strong>';
-  var idle=document.getElementById('pcalcIdle'),main=document.getElementById('pcalcResultMain');
-  idle.classList.add('hide');main.classList.add('show');
-  document.getElementById('pcalcResultDisplay').classList.add('has-result');
-  var orbEl=document.getElementById('pcalcResultOrb');
-  orbEl.style.background=p.bg;
-  orbEl.style.boxShadow='inset -10px -10px 24px rgba(0,0,0,.6),inset 4px 4px 14px rgba(255,255,255,.12),0 0 30px '+p.glow;
-  document.getElementById('pcalcResultPlanetName').textContent=p.name;
-  document.getElementById('pcalcResultUnit').textContent=unitLabel+' (surface weight)';
-  document.getElementById('pcalcResultCompared').innerHTML=compText;
-  pcalcAnimateValue(displayVal);
-  pcalcShowFacts(p);
-  pcalcBuildBars(weightKg);
-}
-
-function pcalcAnimateValue(target){
-  var el=document.getElementById('pcalcResultValue'),start=0,dur=800,startTime=null;
-  function step(ts){if(!startTime)startTime=ts;var prog=Math.min((ts-startTime)/dur,1),ease=1-Math.pow(1-prog,3),cur=start+(target-start)*ease;el.textContent=cur.toFixed(2);if(prog<1)requestAnimationFrame(step);else el.textContent=target.toFixed(2);}
-  requestAnimationFrame(step);
-}
-
-function pcalcShowIdle(){
-  var idle=document.getElementById('pcalcIdle'),main=document.getElementById('pcalcResultMain');
-  if(idle)idle.classList.remove('hide');
-  if(main)main.classList.remove('show');
-  var rd=document.getElementById('pcalcResultDisplay');
-  if(rd)rd.classList.remove('has-result');
-  pcalcBuildBars(null);
-}
-
-function pcalcShowFacts(p){
-  var c=document.getElementById('pcalcFacts');c.innerHTML='';
-  var cols=['rgba(0,229,255,.35)','rgba(200,0,255,.3)','rgba(255,98,32,.28)','rgba(0,255,179,.25)','rgba(255,214,0,.25)'];
-  p.facts.forEach(function(f,i){
-    var pill=document.createElement('div');pill.className='pcalc-fact-pill';pill.textContent=f;
-    pill.style.animationDelay=(i*80)+'ms';pill.style.borderColor=cols[i%cols.length];
-    c.appendChild(pill);
-  });
-}
-
-function pcalcBuildBars(earthWeightKg){
-  var c=document.getElementById('pcalcBars');if(!c)return;c.innerHTML='';
-  var maxW=earthWeightKg?PCALC_PLANETS.reduce(function(m,p){return Math.max(m,earthWeightKg*p.gravity);},0):1;
-  var grads=['linear-gradient(to right,#a89070,#786050)','linear-gradient(to right,#d4a030,#a07018)','linear-gradient(to right,#1a5fa8,#00e5ff)','linear-gradient(to right,#d4552a,#b03818)','linear-gradient(to right,#c47820,#ffd600)','linear-gradient(to right,#c8a040,#906020)','linear-gradient(to right,#50d8b8,#2aa880)','linear-gradient(to right,#2ec4e8,#1480a8)'];
-  PCALC_PLANETS.forEach(function(p,i){
-    var rKg=earthWeightKg?earthWeightKg*p.gravity:null,pct=earthWeightKg?(rKg/maxW*100):0,isSel=i===pcalcSelected;
-    var row=document.createElement('div');row.className='pcalc-bar-row'+(isSel?' highlighted':'');
-    row.innerHTML='<div class="pcalc-bar-label">'+p.name+'</div><div class="pcalc-bar-track"><div class="pcalc-bar-fill" style="background:'+grads[i]+';width:0%"></div></div><div class="pcalc-bar-val">'+(rKg?rKg.toFixed(1)+'kg':p.gravity+'g')+'</div>';
-    c.appendChild(row);
-    if(earthWeightKg){setTimeout(function(){var f=row.querySelector('.pcalc-bar-fill');if(f)f.style.width=pct.toFixed(1)+'%';},i*60+100);}
-  });
-}
-
-/* ============================================================
-   AGE CALCULATOR
-   ============================================================ */
-function pcalcAgeSelectPlanet(idx){
-  pcalcAgeSelected=idx;
-  document.querySelectorAll('#pcalcAgePlanetGrid .pcalc-planet-btn').forEach(function(b,i){b.classList.toggle('selected',i===idx);});
-  pcalcAgeUpdateSelected(idx);
-  pcalcRenderFacts(idx);
-  var a=parseFloat(document.getElementById('pcalcAge').value);
-  if(!isNaN(a)&&a>0)pcalcCalculateAge();else pcalcBuildAgeBars(null);
-}
-
-function pcalcAgeUpdateSelected(idx){
-  var p=PCALC_PLANETS[idx];
-  var o=document.getElementById('pcalcAgeSelOrb');if(!o)return;
-  o.style.background=p.bg;
-  o.style.boxShadow='inset -8px -8px 20px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.1),0 0 30px '+p.glow;
-  document.getElementById('pcalcAgeSelName').textContent=p.name;
-  document.getElementById('pcalcAgeSelType').textContent=p.type;
-  var yrs=(p.yearDays/365.25).toFixed(2);
-  var label=p.yearDays<365?p.yearDays.toFixed(2)+' Earth days':yrs+' Earth years';
-  document.getElementById('pcalcAgeSelPeriod').textContent='1 year = '+label;
-}
-
-function pcalcCalculateAge(){
-  var raw=parseFloat(document.getElementById('pcalcAge').value);
-  if(isNaN(raw)||raw<=0){
-    document.getElementById('pcalcAgeIdle').style.display='block';
-    document.getElementById('pcalcAgeResultInner').classList.remove('show');
-    document.getElementById('pcalcAgeResultBox').classList.remove('has-result');
-    pcalcBuildAgeBars(null);
-    return;
-  }
-  var earthDays=raw*365.25;
-  var p=PCALC_PLANETS[pcalcAgeSelected];
-  var planetYears=earthDays/p.yearDays;
-  var yrsLabel=p.yearDays<365?p.yearDays.toFixed(2)+' Earth days':((p.yearDays/365.25).toFixed(2))+' Earth years';
-
-  var note='';
-  if(p.yearDays<365){
-    var bdays=Math.floor(planetYears);
-    note='You would have celebrated <strong>'+bdays+' birthdays</strong> on '+p.name+'! One '+p.name+' year = '+p.yearDays.toFixed(2)+' Earth days.';
-  } else if(planetYears<1){
-    var pct=Math.round(planetYears*100);
-    note='You haven\'t even completed <strong>one '+p.name+' year</strong> yet \u2014 you\'re only <strong>'+pct+'%</strong> of the way through your first '+p.name+' year ('+yrsLabel+').';
-  } else {
-    note='One '+p.name+' year = <strong>'+yrsLabel+'</strong>. You\'ve orbited the Sun on '+p.name+'\'s schedule '+Math.floor(planetYears)+' time(s).';
-  }
-
-  document.getElementById('pcalcAgeIdle').style.display='none';
-  var inner=document.getElementById('pcalcAgeResultInner');
-  inner.classList.add('show');
-  document.getElementById('pcalcAgeResultBox').classList.add('has-result');
-
-  var orbEl=document.getElementById('pcalcAgeResultOrb');
-  orbEl.style.background=p.bg;
-  orbEl.style.boxShadow='inset -8px -8px 20px rgba(0,0,0,.6),inset 4px 4px 14px rgba(255,255,255,.12),0 0 30px '+p.glow;
-  document.getElementById('pcalcAgeResultPlanetName').textContent=p.name;
-  document.getElementById('pcalcAgeResultNote').innerHTML=note;
-
-  pcalcAnimateAgeValue(planetYears);
-  pcalcBuildAgeBars(raw);
-}
-
-function pcalcAnimateAgeValue(target){
-  var el=document.getElementById('pcalcAgeResultValue'),start=0,dur=900,startTime=null;
-  var decimals=target<10?2:target<100?1:0;
-  function step(ts){if(!startTime)startTime=ts;var prog=Math.min((ts-startTime)/dur,1),ease=1-Math.pow(1-prog,3),cur=start+(target-start)*ease;el.textContent=cur.toFixed(decimals);if(prog<1)requestAnimationFrame(step);else el.textContent=target.toFixed(decimals);}
-  requestAnimationFrame(step);
-}
-
-function pcalcBuildAgeBars(earthAge){
-  var c=document.getElementById('pcalcAgeBars');if(!c)return;c.innerHTML='';
-  var grads=['linear-gradient(to right,#a89070,#786050)','linear-gradient(to right,#d4a030,#a07018)','linear-gradient(to right,#1a5fa8,#00e5ff)','linear-gradient(to right,#d4552a,#b03818)','linear-gradient(to right,#c47820,#ffd600)','linear-gradient(to right,#c8a040,#906020)','linear-gradient(to right,#50d8b8,#2aa880)','linear-gradient(to right,#2ec4e8,#1480a8)'];
-  var earthDays=earthAge?earthAge*365.25:null;
-  var maxVal=earthDays?PCALC_PLANETS.reduce(function(m,p){return Math.max(m,earthDays/p.yearDays);},0):1;
-
-  PCALC_PLANETS.forEach(function(p,i){
-    var ageOnPlanet=earthDays?earthDays/p.yearDays:null;
-    var pct=earthDays?(ageOnPlanet/maxVal*100):0;
-    var isSel=i===pcalcAgeSelected;
-    var valStr=ageOnPlanet?ageOnPlanet.toFixed(ageOnPlanet<10?2:ageOnPlanet<100?1:0)+' yrs':p.yearDays.toFixed(0)+' d/yr';
-    var row=document.createElement('div');
-    row.className='pcalc-bar-row'+(isSel?' highlighted':'');
-    row.innerHTML='<div class="pcalc-bar-label">'+p.name+'</div><div class="pcalc-bar-track"><div class="pcalc-bar-fill" style="background:'+grads[i]+';width:0%"></div></div><div class="pcalc-bar-val">'+valStr+'</div>';
-    c.appendChild(row);
-    if(earthDays){setTimeout(function(){var f=row.querySelector('.pcalc-bar-fill');if(f)f.style.width=Math.min(pct,100).toFixed(1)+'%';},i*55+80);}
-  });
-}
-
-/* ============================================================
-   PLANET DEEP FACTS RENDERER
-   ============================================================ */
-function pcalcRenderFacts(idx){
-  var p=PCALC_PLANETS[idx];
-  var list=document.getElementById('pcalcFactsList');
-  if(!list)return;
-  list.innerHTML='';
-  p.deepFacts.forEach(function(f){
-    var item=document.createElement('div');item.className='pcalc-fact-item';
-    item.innerHTML='<div class="pcalc-fact-dot"></div><div class="pcalc-fact-text"><strong>'+f.t+':</strong> '+f.d+'</div>';
-    list.appendChild(item);
-  });
-}
+function pcalcSwitchTab(tab){pcalcActiveTab=tab;document.getElementById('tab-weight').classList.toggle('active',tab==='weight');document.getElementById('tab-age').classList.toggle('active',tab==='age');document.getElementById('panel-weight').classList.toggle('active',tab==='weight');document.getElementById('panel-age').classList.toggle('active',tab==='age');}
+function pcalcSelectPlanet(idx){pcalcSelected=idx;document.querySelectorAll('#pcalcPlanetGrid .pcalc-planet-btn').forEach(function(b,i){b.classList.toggle('selected',i===idx);});pcalcUpdateSelected(idx);var w=parseFloat(document.getElementById('pcalcWeight').value);if(!isNaN(w)&&w>0)pcalcCalculate();else pcalcBuildBars(null);}
+function pcalcUpdateSelected(idx){var p=PCALC_PLANETS[idx];var o=document.getElementById('pcalcSelOrb');if(!o)return;o.style.background=p.bg;o.style.boxShadow='inset -8px -8px 20px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.1),0 0 30px '+p.glow;document.getElementById('pcalcSelName').textContent=p.name;document.getElementById('pcalcSelType').textContent=p.type;document.getElementById('pcalcSelGrav').textContent='Gravity: '+p.gravity+'g (\u00D7Earth)';}
+function pcalcSetUnit(u){pcalcUnit=u;document.getElementById('pcalcKg').classList.toggle('active',u==='kg');document.getElementById('pcalcLbs').classList.toggle('active',u==='lbs');var w=parseFloat(document.getElementById('pcalcWeight').value);if(!isNaN(w)&&w>0)pcalcCalculate();}
+function pcalcCalculate(){var raw=parseFloat(document.getElementById('pcalcWeight').value);if(isNaN(raw)||raw<=0){pcalcShowIdle();return;}var weightKg=pcalcUnit==='lbs'?raw*0.453592:raw;var p=PCALC_PLANETS[pcalcSelected];var resultKg=weightKg*p.gravity;var displayVal=pcalcUnit==='lbs'?resultKg/0.453592:resultKg;var unitLabel=pcalcUnit==='lbs'?'lbs':'kg';var ratio=p.gravity;var compText=ratio>1?'You\u2019d feel <strong style="color:var(--magenta)">'+(ratio).toFixed(2)+'\u00D7 heavier</strong> than on Earth.':ratio<1?'You\u2019d feel <strong style="color:var(--cyan)">'+(1/ratio).toFixed(2)+'\u00D7 lighter</strong> than on Earth.':'Same weight as on <strong style="color:var(--cyan)">Earth!</strong>';var idle=document.getElementById('pcalcIdle'),main=document.getElementById('pcalcResultMain');idle.classList.add('hide');main.classList.add('show');document.getElementById('pcalcResultDisplay').classList.add('has-result');var orbEl=document.getElementById('pcalcResultOrb');orbEl.style.background=p.bg;orbEl.style.boxShadow='inset -10px -10px 24px rgba(0,0,0,.6),inset 4px 4px 14px rgba(255,255,255,.12),0 0 30px '+p.glow;document.getElementById('pcalcResultPlanetName').textContent=p.name;document.getElementById('pcalcResultUnit').textContent=unitLabel+' (surface weight)';document.getElementById('pcalcResultCompared').innerHTML=compText;pcalcAnimateValue(displayVal);pcalcShowFacts(p);pcalcBuildBars(weightKg);}
+function pcalcAnimateValue(target){var el=document.getElementById('pcalcResultValue'),start=0,dur=800,startTime=null;function step(ts){if(!startTime)startTime=ts;var prog=Math.min((ts-startTime)/dur,1),ease=1-Math.pow(1-prog,3),cur=start+(target-start)*ease;el.textContent=cur.toFixed(2);if(prog<1)requestAnimationFrame(step);else el.textContent=target.toFixed(2);}requestAnimationFrame(step);}
+function pcalcShowIdle(){var idle=document.getElementById('pcalcIdle'),main=document.getElementById('pcalcResultMain');if(idle)idle.classList.remove('hide');if(main)main.classList.remove('show');var rd=document.getElementById('pcalcResultDisplay');if(rd)rd.classList.remove('has-result');pcalcBuildBars(null);}
+function pcalcShowFacts(p){var c=document.getElementById('pcalcFacts');c.innerHTML='';var cols=['rgba(0,229,255,.35)','rgba(200,0,255,.3)','rgba(255,98,32,.28)','rgba(0,255,179,.25)','rgba(255,214,0,.25)'];p.facts.forEach(function(f,i){var pill=document.createElement('div');pill.className='pcalc-fact-pill';pill.textContent=f;pill.style.animationDelay=(i*80)+'ms';pill.style.borderColor=cols[i%cols.length];c.appendChild(pill);});}
+function pcalcBuildBars(earthWeightKg){var c=document.getElementById('pcalcBars');if(!c)return;c.innerHTML='';var maxW=earthWeightKg?PCALC_PLANETS.reduce(function(m,p){return Math.max(m,earthWeightKg*p.gravity);},0):1;var grads=['linear-gradient(to right,#a89070,#786050)','linear-gradient(to right,#d4a030,#a07018)','linear-gradient(to right,#1a5fa8,#00e5ff)','linear-gradient(to right,#d4552a,#b03818)','linear-gradient(to right,#c47820,#ffd600)','linear-gradient(to right,#c8a040,#906020)','linear-gradient(to right,#50d8b8,#2aa880)','linear-gradient(to right,#2ec4e8,#1480a8)'];PCALC_PLANETS.forEach(function(p,i){var rKg=earthWeightKg?earthWeightKg*p.gravity:null,pct=earthWeightKg?(rKg/maxW*100):0,isSel=i===pcalcSelected;var row=document.createElement('div');row.className='pcalc-bar-row'+(isSel?' highlighted':'');row.innerHTML='<div class="pcalc-bar-label">'+p.name+'</div><div class="pcalc-bar-track"><div class="pcalc-bar-fill" style="background:'+grads[i]+';width:0%"></div></div><div class="pcalc-bar-val">'+(rKg?rKg.toFixed(1)+'kg':p.gravity+'g')+'</div>';c.appendChild(row);if(earthWeightKg){setTimeout(function(){var f=row.querySelector('.pcalc-bar-fill');if(f)f.style.width=pct.toFixed(1)+'%';},i*60+100);}});}
+function pcalcAgeSelectPlanet(idx){pcalcAgeSelected=idx;document.querySelectorAll('#pcalcAgePlanetGrid .pcalc-planet-btn').forEach(function(b,i){b.classList.toggle('selected',i===idx);});pcalcAgeUpdateSelected(idx);pcalcRenderFacts(idx);var a=parseFloat(document.getElementById('pcalcAge').value);if(!isNaN(a)&&a>0)pcalcCalculateAge();else pcalcBuildAgeBars(null);}
+function pcalcAgeUpdateSelected(idx){var p=PCALC_PLANETS[idx];var o=document.getElementById('pcalcAgeSelOrb');if(!o)return;o.style.background=p.bg;o.style.boxShadow='inset -8px -8px 20px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.1),0 0 30px '+p.glow;document.getElementById('pcalcAgeSelName').textContent=p.name;document.getElementById('pcalcAgeSelType').textContent=p.type;var yrs=(p.yearDays/365.25).toFixed(2);var label=p.yearDays<365?p.yearDays.toFixed(2)+' Earth days':yrs+' Earth years';document.getElementById('pcalcAgeSelPeriod').textContent='1 year = '+label;}
+function pcalcCalculateAge(){var raw=parseFloat(document.getElementById('pcalcAge').value);if(isNaN(raw)||raw<=0){document.getElementById('pcalcAgeIdle').style.display='block';document.getElementById('pcalcAgeResultInner').classList.remove('show');document.getElementById('pcalcAgeResultBox').classList.remove('has-result');pcalcBuildAgeBars(null);return;}var earthDays=raw*365.25;var p=PCALC_PLANETS[pcalcAgeSelected];var planetYears=earthDays/p.yearDays;var yrsLabel=p.yearDays<365?p.yearDays.toFixed(2)+' Earth days':((p.yearDays/365.25).toFixed(2))+' Earth years';var note='';if(p.yearDays<365){var bdays=Math.floor(planetYears);note='You would have celebrated <strong>'+bdays+' birthdays</strong> on '+p.name+'!';}else if(planetYears<1){var pct=Math.round(planetYears*100);note='You haven\'t completed <strong>one '+p.name+' year</strong> yet \u2014 only <strong>'+pct+'%</strong> through ('+yrsLabel+').';}else{note='One '+p.name+' year = <strong>'+yrsLabel+'</strong>. You\'ve orbited '+Math.floor(planetYears)+' time(s).';}document.getElementById('pcalcAgeIdle').style.display='none';var inner=document.getElementById('pcalcAgeResultInner');inner.classList.add('show');document.getElementById('pcalcAgeResultBox').classList.add('has-result');var orbEl=document.getElementById('pcalcAgeResultOrb');orbEl.style.background=p.bg;orbEl.style.boxShadow='inset -8px -8px 20px rgba(0,0,0,.6),inset 4px 4px 14px rgba(255,255,255,.12),0 0 30px '+p.glow;document.getElementById('pcalcAgeResultPlanetName').textContent=p.name;document.getElementById('pcalcAgeResultNote').innerHTML=note;pcalcAnimateAgeValue(planetYears);pcalcBuildAgeBars(raw);}
+function pcalcAnimateAgeValue(target){var el=document.getElementById('pcalcAgeResultValue'),start=0,dur=900,startTime=null;var decimals=target<10?2:target<100?1:0;function step(ts){if(!startTime)startTime=ts;var prog=Math.min((ts-startTime)/dur,1),ease=1-Math.pow(1-prog,3),cur=start+(target-start)*ease;el.textContent=cur.toFixed(decimals);if(prog<1)requestAnimationFrame(step);else el.textContent=target.toFixed(decimals);}requestAnimationFrame(step);}
+function pcalcBuildAgeBars(earthAge){var c=document.getElementById('pcalcAgeBars');if(!c)return;c.innerHTML='';var grads=['linear-gradient(to right,#a89070,#786050)','linear-gradient(to right,#d4a030,#a07018)','linear-gradient(to right,#1a5fa8,#00e5ff)','linear-gradient(to right,#d4552a,#b03818)','linear-gradient(to right,#c47820,#ffd600)','linear-gradient(to right,#c8a040,#906020)','linear-gradient(to right,#50d8b8,#2aa880)','linear-gradient(to right,#2ec4e8,#1480a8)'];var earthDays=earthAge?earthAge*365.25:null;var maxVal=earthDays?PCALC_PLANETS.reduce(function(m,p){return Math.max(m,earthDays/p.yearDays);},0):1;PCALC_PLANETS.forEach(function(p,i){var ageOnPlanet=earthDays?earthDays/p.yearDays:null;var pct=earthDays?(ageOnPlanet/maxVal*100):0;var isSel=i===pcalcAgeSelected;var valStr=ageOnPlanet?ageOnPlanet.toFixed(ageOnPlanet<10?2:ageOnPlanet<100?1:0)+' yrs':p.yearDays.toFixed(0)+' d/yr';var row=document.createElement('div');row.className='pcalc-bar-row'+(isSel?' highlighted':'');row.innerHTML='<div class="pcalc-bar-label">'+p.name+'</div><div class="pcalc-bar-track"><div class="pcalc-bar-fill" style="background:'+grads[i]+';width:0%"></div></div><div class="pcalc-bar-val">'+valStr+'</div>';c.appendChild(row);if(earthDays){setTimeout(function(){var f=row.querySelector('.pcalc-bar-fill');if(f)f.style.width=Math.min(pct,100).toFixed(1)+'%';},i*55+80);}});}
+function pcalcRenderFacts(idx){var p=PCALC_PLANETS[idx];var list=document.getElementById('pcalcFactsList');if(!list)return;list.innerHTML='';p.deepFacts.forEach(function(f){var item=document.createElement('div');item.className='pcalc-fact-item';item.innerHTML='<div class="pcalc-fact-dot"></div><div class="pcalc-fact-text"><strong>'+f.t+':</strong> '+f.d+'</div>';list.appendChild(item);});}
 </script>
 </body>
 </html>

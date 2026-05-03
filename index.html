@@ -338,6 +338,370 @@ body.light .weekly-card{background:rgba(255,255,255,.85);}
 .rf-desc{font-family:'Exo 2',sans-serif;font-size:13px;color:var(--muted);line-height:1.7;}
 
 /* ============================================================
+   BLENDER VIDEO PLACEHOLDER — NEW STYLES
+   ============================================================ */
+
+/* Entrance animation for the whole section */
+@keyframes blenderSectionReveal{
+  0%{opacity:0;transform:translateY(60px) scale(.96);}
+  60%{opacity:1;transform:translateY(-6px) scale(1.01);}
+  100%{opacity:1;transform:translateY(0) scale(1);}
+}
+@keyframes hologramFlicker{
+  0%,95%,100%{opacity:1;}
+  96%{opacity:.5;}
+  97%{opacity:1;}
+  98%{opacity:.3;}
+  99%{opacity:1;}
+}
+@keyframes scanSweep{
+  0%{transform:translateY(-100%);opacity:0;}
+  5%{opacity:1;}
+  95%{opacity:1;}
+  100%{transform:translateY(100vh);opacity:0;}
+}
+@keyframes cornerPulse{
+  0%,100%{opacity:.4;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.08);}
+}
+@keyframes glitchSlice{
+  0%,90%,100%{clip-path:none;transform:none;}
+  91%{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translateX(6px);}
+  93%{clip-path:polygon(0 60%,100% 60%,100% 75%,0 75%);transform:translateX(-4px);}
+  95%{clip-path:polygon(0 5%,100% 5%,100% 18%,0 18%);transform:translateX(3px);}
+}
+@keyframes orbitRing{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+@keyframes orbitRingReverse{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(-360deg);}
+}
+@keyframes dataPulse{
+  0%,100%{opacity:.3;transform:scaleX(0);}
+  50%{opacity:1;transform:scaleX(1);}
+}
+@keyframes typeIn{
+  from{width:0;opacity:0;}
+  to{width:100%;opacity:1;}
+}
+@keyframes pulseGlowM{
+  0%,100%{box-shadow:0 0 20px rgba(200,0,255,.15),0 0 0 1px rgba(200,0,255,.12);}
+  50%{box-shadow:0 0 60px rgba(200,0,255,.35),0 0 0 1px rgba(200,0,255,.35),0 0 120px rgba(200,0,255,.1);}
+}
+@keyframes videoReveal{
+  0%{opacity:0;transform:scale(.92) rotateX(8deg);}
+  100%{opacity:1;transform:scale(1) rotateX(0deg);}
+}
+@keyframes haloSpin{
+  from{transform:translate(-50%,-50%) rotate(0deg);}
+  to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+@keyframes statusBlink{
+  0%,100%{opacity:1;}
+  50%{opacity:.2;}
+}
+@keyframes particleDrift{
+  0%{transform:translate(0,0) scale(1);opacity:.8;}
+  100%{transform:translate(var(--pdx),var(--pdy)) scale(0);opacity:0;}
+}
+
+.blender-video-section{
+  margin-bottom:70px;
+  animation:blenderSectionReveal .9s cubic-bezier(.23,1,.32,1) both;
+  animation-delay:.15s;
+}
+
+/* HUD header row */
+.blender-hud-header{
+  display:flex;align-items:center;gap:16px;margin-bottom:24px;
+  padding:14px 22px;border-radius:14px;
+  background:rgba(200,0,255,.04);
+  border:1px solid rgba(200,0,255,.15);
+  position:relative;overflow:hidden;
+}
+.blender-hud-header::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--magenta),var(--cyan));
+}
+.blender-hud-header::after{
+  content:'';position:absolute;top:0;left:-100%;width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(200,0,255,.08),transparent);
+  animation:pcalcScan 4s ease-in-out infinite;
+}
+.blender-hud-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--magenta);box-shadow:0 0 12px var(--magenta);
+  animation:statusBlink 1.8s ease-in-out infinite;flex-shrink:0;
+}
+.blender-hud-label{
+  font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;
+  text-transform:uppercase;color:var(--magenta);
+}
+.blender-hud-title{
+  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:2px;color:var(--white);
+}
+.blender-hud-spacer{flex:1;}
+.blender-hud-badge{
+  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:var(--muted);padding:4px 12px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);
+}
+
+/* Main video wrapper */
+.blender-cine-wrap{
+  position:relative;
+  border-radius:22px;overflow:hidden;
+  border:1px solid rgba(200,0,255,.2);
+  background:#000;
+  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(200,0,255,.07);
+  transition:border-color .5s,box-shadow .5s;
+  animation:pulseGlowM 4s ease-in-out infinite;
+}
+.blender-cine-wrap:hover{
+  border-color:rgba(200,0,255,.5);
+  box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 80px rgba(200,0,255,.2),0 0 0 1px rgba(200,0,255,.3);
+  animation:none;
+}
+
+/* Topbar chrome */
+.blender-cine-bar{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 20px;
+  background:rgba(7,10,26,.95);
+  border-bottom:1px solid rgba(200,0,255,.12);
+  position:relative;overflow:hidden;
+}
+.blender-cine-bar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--magenta),var(--cyan),transparent);
+  animation:scanLine 4s ease-in-out infinite;
+}
+.blender-cine-dots{display:flex;gap:7px;}
+.blender-cine-dot{width:11px;height:11px;border-radius:50%;transition:.3s;cursor:pointer;}
+.blender-cine-dot:hover{transform:scale(1.3);}
+.blender-cine-dot:nth-child(1){background:#ff5f57;}
+.blender-cine-dot:nth-child(2){background:#febc2e;}
+.blender-cine-dot:nth-child(3){background:#28c840;}
+.blender-cine-bar-title{
+  flex:1;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);
+  overflow:hidden;white-space:nowrap;
+}
+.blender-cine-bar-title span{
+  display:inline-block;
+  animation:typeIn 1.5s steps(40) both;
+  animation-delay:.5s;
+}
+.blender-cine-tags{display:flex;gap:8px;}
+.blender-cine-tag{
+  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;
+  text-transform:uppercase;padding:3px 10px;border-radius:20px;
+}
+.blender-cine-tag.magenta{
+  color:var(--magenta);border:1px solid rgba(200,0,255,.3);background:rgba(200,0,255,.07);
+}
+.blender-cine-tag.orange{
+  color:var(--orange);border:1px solid rgba(255,98,32,.3);background:rgba(255,98,32,.07);
+}
+
+/* Corner HUD decorations */
+.blender-corner{
+  position:absolute;width:28px;height:28px;pointer-events:none;z-index:5;
+}
+.blender-corner.tl{top:58px;left:0;border-top:2px solid var(--magenta);border-left:2px solid var(--magenta);border-top-left-radius:0;}
+.blender-corner.tr{top:58px;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);border-top-right-radius:0;}
+.blender-corner.bl{bottom:0;left:0;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.blender-corner.br{bottom:0;right:0;border-bottom:2px solid var(--magenta);border-right:2px solid var(--magenta);}
+.blender-corner{animation:cornerPulse 3s ease-in-out infinite;}
+.blender-corner.tr{animation-delay:.75s;}
+.blender-corner.bl{animation-delay:1.5s;}
+.blender-corner.br{animation-delay:2.25s;}
+
+/* Video embed / placeholder */
+.blender-embed{
+  position:relative;padding-bottom:52.7%;height:0;
+  animation:videoReveal .8s cubic-bezier(.23,1,.32,1) both;
+  animation-delay:.3s;
+}
+.blender-embed iframe{
+  position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;
+}
+
+/* Holographic placeholder (shown when no real video) */
+.blender-placeholder{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse at 50% 50%,rgba(200,0,255,.08) 0%,transparent 60%),
+    radial-gradient(ellipse at 30% 30%,rgba(0,229,255,.04) 0%,transparent 50%),
+    #030509;
+  animation:hologramFlicker 8s ease-in-out infinite;
+  cursor:pointer;
+  overflow:hidden;
+}
+/* Scan line sweep */
+.blender-placeholder::before{
+  content:'';position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(200,0,255,.6),var(--cyan),rgba(200,0,255,.6),transparent);
+  animation:scanSweep 3s ease-in-out infinite;
+  z-index:2;
+}
+/* Grid overlay */
+.blender-placeholder::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(200,0,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,0,255,.04) 1px,transparent 1px);
+  background-size:40px 40px;
+  animation:hologramFlicker 12s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* Orbit rings */
+.blender-orbit-wrap{
+  position:relative;width:180px;height:180px;flex-shrink:0;
+  margin-bottom:28px;
+}
+.blender-orbit-ring{
+  position:absolute;top:50%;left:50%;border-radius:50%;border-style:solid;
+}
+.blender-orbit-ring:nth-child(1){
+  width:180px;height:180px;
+  border-width:1px;border-color:rgba(200,0,255,.25);
+  margin:-90px 0 0 -90px;
+  animation:orbitRing 8s linear infinite;
+}
+.blender-orbit-ring:nth-child(2){
+  width:130px;height:130px;
+  border-width:1px;border-color:rgba(0,229,255,.2);
+  margin:-65px 0 0 -65px;
+  animation:orbitRingReverse 5s linear infinite;
+}
+.blender-orbit-ring:nth-child(3){
+  width:80px;height:80px;
+  border-width:1px;border-color:rgba(255,98,32,.15);
+  margin:-40px 0 0 -40px;
+  animation:orbitRing 3s linear infinite;
+}
+/* Dot on first ring */
+.blender-orbit-ring:nth-child(1)::after{
+  content:'';position:absolute;top:-4px;left:50%;width:7px;height:7px;
+  border-radius:50%;background:var(--magenta);
+  box-shadow:0 0 12px var(--magenta),0 0 24px var(--magenta);
+  transform:translateX(-50%);
+}
+.blender-orbit-ring:nth-child(2)::after{
+  content:'';position:absolute;bottom:-4px;left:50%;width:5px;height:5px;
+  border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan),0 0 20px var(--cyan);
+  transform:translateX(-50%);
+}
+/* Center icon */
+.blender-orbit-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:52px;filter:drop-shadow(0 0 30px rgba(200,0,255,.6));
+  animation:planetFloat 4s ease-in-out infinite;
+  z-index:3;
+}
+
+.blender-ph-title{
+  font-family:'Orbitron',sans-serif;font-size:clamp(16px,3vw,26px);font-weight:900;
+  letter-spacing:4px;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--magenta),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:10px;z-index:3;position:relative;
+  animation:glitchSlice 6s ease-in-out infinite;
+}
+.blender-ph-sub{
+  font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;
+  color:var(--muted);text-transform:uppercase;margin-bottom:28px;
+  z-index:3;position:relative;
+}
+.blender-ph-progress{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  z-index:3;position:relative;width:min(320px,80%);
+}
+.blender-ph-progress-label{
+  display:flex;justify-content:space-between;width:100%;
+  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);
+}
+.blender-ph-track{
+  width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;
+}
+.blender-ph-fill{
+  height:100%;width:0%;border-radius:4px;
+  background:linear-gradient(to right,var(--magenta),var(--cyan));
+  transition:width 2s cubic-bezier(.23,1,.32,1);
+  position:relative;overflow:hidden;
+}
+.blender-ph-fill::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:barShimmer 1.8s ease-in-out infinite;
+}
+.blender-ph-tags{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+  margin-top:22px;z-index:3;position:relative;
+}
+.blender-ph-tag{
+  font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;
+  text-transform:uppercase;padding:6px 16px;border-radius:30px;cursor:default;
+  transition:all .3s;
+}
+.blender-ph-tag:nth-child(1){color:var(--magenta);border:1px solid rgba(200,0,255,.3);background:rgba(200,0,255,.07);}
+.blender-ph-tag:nth-child(2){color:var(--cyan);border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.07);}
+.blender-ph-tag:nth-child(3){color:var(--orange);border:1px solid rgba(255,98,32,.3);background:rgba(255,98,32,.07);}
+.blender-ph-tag:hover{transform:scale(1.08);}
+.blender-ph-tag:nth-child(1):hover{box-shadow:var(--glow-m);}
+.blender-ph-tag:nth-child(2):hover{box-shadow:var(--glow-c);}
+.blender-ph-tag:nth-child(3):hover{box-shadow:var(--glow-o);}
+
+/* Data stream strips below the frame */
+.blender-data-strips{
+  display:flex;gap:8px;padding:10px 20px;
+  background:rgba(7,10,26,.9);border-top:1px solid rgba(200,0,255,.06);
+}
+.blender-data-strip{
+  flex:1;height:2px;border-radius:2px;overflow:hidden;
+  background:rgba(255,255,255,.04);
+}
+.blender-data-strip-fill{
+  height:100%;border-radius:2px;transform-origin:left;
+}
+.blender-data-strip:nth-child(1) .blender-data-strip-fill{background:var(--magenta);animation:dataPulse 2.1s ease-in-out infinite;}
+.blender-data-strip:nth-child(2) .blender-data-strip-fill{background:var(--cyan);animation:dataPulse 2.1s ease-in-out infinite .4s;}
+.blender-data-strip:nth-child(3) .blender-data-strip-fill{background:var(--orange);animation:dataPulse 2.1s ease-in-out infinite .8s;}
+.blender-data-strip:nth-child(4) .blender-data-strip-fill{background:var(--magenta);animation:dataPulse 2.1s ease-in-out infinite 1.2s;}
+.blender-data-strip:nth-child(5) .blender-data-strip-fill{background:var(--cyan);animation:dataPulse 2.1s ease-in-out infinite 1.6s;}
+
+/* Stats row below the video */
+.blender-meta-row{
+  display:flex;gap:0;
+  background:rgba(7,10,26,.85);backdrop-filter:blur(16px);
+  border-top:1px solid rgba(200,0,255,.08);
+}
+.blender-meta-item{
+  flex:1;padding:14px 20px;
+  border-right:1px solid rgba(255,255,255,.05);
+  transition:.3s;cursor:default;
+}
+.blender-meta-item:last-child{border-right:none;}
+.blender-meta-item:hover{background:rgba(200,0,255,.04);}
+.blender-meta-label{
+  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--magenta);margin-bottom:4px;
+}
+.blender-meta-value{
+  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;
+  color:var(--white);letter-spacing:1px;
+}
+.blender-meta-sub{
+  font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);
+}
+
+/* ============================================================
    ABOUT PAGE
    ============================================================ */
 #about .page-banner-title{background:linear-gradient(135deg,#00e5ff,#ffd600);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -549,6 +913,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   .pcalc-body,.pcalc-age-body{grid-template-columns:1fr;}
   .pcalc-left,.pcalc-age-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.05);}
   .pcalc-header,.pcalc-left,.pcalc-right,.pcalc-age-left,.pcalc-age-right{padding:22px;}
+  .blender-meta-row{flex-wrap:wrap;}
+  .blender-meta-item{min-width:50%;}
 }
 </style>
 </head>
@@ -770,13 +1136,144 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
     <p class="page-banner-desc">Sculpting dimensions from the void — building three-dimensional worlds with light, shadow, and imagination using Blender's powerhouse tools.</p>
   </div>
   <div class="page-content">
-    <div class="block-label reveal"><span style="color:var(--magenta);">Project Status</span></div>
-    <div class="render-status reveal">
-      <div class="rs-planet">🪐</div>
-      <div class="rs-title">Coming Soon</div>
-      <div class="rs-desc">3D Blender renders are currently being sculpted in the creative nebula. Check back soon for stunning artwork and weekly progress updates.</div>
+
+    <!-- ===== 3D BLENDER VIDEO SECTION (NEW) ===== -->
+    <div class="block-label reveal" style="margin-bottom:28px;">
+      <span style="color:var(--magenta);">Project Showcase</span>
+      <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div>
     </div>
-    <div class="block-label reveal"><span style="color:var(--magenta);">What to Expect</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
+
+    <div class="blender-video-section reveal">
+
+      <!-- HUD Header -->
+      <div class="blender-hud-header">
+        <div class="blender-hud-dot"></div>
+        <div>
+          <div class="blender-hud-label">Transmission Active</div>
+          <div class="blender-hud-title">3D Blender — Project Render Feed</div>
+        </div>
+        <div class="blender-hud-spacer"></div>
+        <div class="blender-hud-badge">BSIT-NS-2A · PROJECT 02</div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="disclaimer-box" style="margin-bottom:22px;">
+        <div class="disclaimer-icon">⚠️</div>
+        <div class="disclaimer-content">
+          <div class="disclaimer-title">Educational Use Disclaimer</div>
+          <div class="disclaimer-text">
+            This video is embedded solely for <em>academic and educational reference purposes</em> as part of <em>Multimedia &amp; Authoring (BSIT-NS-2A)</em>. All rights to original content belong to their respective creators. No commercial use or redistribution is intended. Displayed under <em>fair use for educational study and reference only</em>.
+          </div>
+        </div>
+      </div>
+
+      <!-- Main cinematic frame -->
+      <div class="blender-cine-wrap" id="blenderCineWrap">
+
+        <!-- Corner HUD brackets -->
+        <div class="blender-corner tl"></div>
+        <div class="blender-corner tr"></div>
+        <div class="blender-corner bl"></div>
+        <div class="blender-corner br"></div>
+
+        <!-- Chrome bar -->
+        <div class="blender-cine-bar">
+          <div class="blender-cine-dots">
+            <div class="blender-cine-dot"></div>
+            <div class="blender-cine-dot"></div>
+            <div class="blender-cine-dot"></div>
+          </div>
+          <div class="blender-cine-bar-title">
+            <span>3D Blender Render · Project Showcase · BSIT-NS-2A</span>
+          </div>
+          <div class="blender-cine-tags">
+            <span class="blender-cine-tag magenta">BLENDER</span>
+            <span class="blender-cine-tag orange">3D RENDER</span>
+          </div>
+        </div>
+
+        <!-- Video embed area: replace VIDEO_ID below with your actual YouTube video ID -->
+        <div class="blender-embed">
+          <!-- ══════════════════════════════════════════════════════
+               PLACEHOLDER — replace VIDEO_ID with your real YouTube ID
+               Standard embed format: https://www.youtube.com/embed/VIDEO_ID
+               Example: https://www.youtube.com/embed/dQw4w9WgXcQ
+               ══════════════════════════════════════════════════════ -->
+          <iframe
+            id="blenderMainIframe"
+            src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1&controls=1&color=white"
+            title="3D Blender Project — Meriel N. Lanuza · BSIT-NS-2A"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+            style="display:none;">
+          </iframe>
+
+          <!-- Holographic placeholder shown until real VIDEO_ID is set -->
+          <div class="blender-placeholder" id="blenderPlaceholder">
+            <div class="blender-orbit-wrap">
+              <div class="blender-orbit-ring"></div>
+              <div class="blender-orbit-ring"></div>
+              <div class="blender-orbit-ring"></div>
+              <div class="blender-orbit-center">🪐</div>
+            </div>
+            <div class="blender-ph-title">Render In Progress</div>
+            <div class="blender-ph-sub">Replace VIDEO_ID with your YouTube link</div>
+            <div class="blender-ph-progress">
+              <div class="blender-ph-progress-label">
+                <span>SCULPTING DIMENSIONS</span>
+                <span id="blenderPct">0%</span>
+              </div>
+              <div class="blender-ph-track">
+                <div class="blender-ph-fill" id="blenderFill"></div>
+              </div>
+            </div>
+            <div class="blender-ph-tags">
+              <span class="blender-ph-tag">🧊 Modeling</span>
+              <span class="blender-ph-tag">💡 Lighting</span>
+              <span class="blender-ph-tag">✨ Rendering</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data stream strips -->
+        <div class="blender-data-strips">
+          <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
+          <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
+          <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
+          <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
+          <div class="blender-data-strip"><div class="blender-data-strip-fill"></div></div>
+        </div>
+
+        <!-- Meta stats row -->
+        <div class="blender-meta-row">
+          <div class="blender-meta-item">
+            <div class="blender-meta-label">Engine</div>
+            <div class="blender-meta-value">Blender</div>
+            <div class="blender-meta-sub">Cycles / EEVEE</div>
+          </div>
+          <div class="blender-meta-item">
+            <div class="blender-meta-label">Project</div>
+            <div class="blender-meta-value">3D Render</div>
+            <div class="blender-meta-sub">Project 02</div>
+          </div>
+          <div class="blender-meta-item">
+            <div class="blender-meta-label">Status</div>
+            <div class="blender-meta-value" style="color:var(--magenta);">In Progress</div>
+            <div class="blender-meta-sub">Uploading Soon</div>
+          </div>
+          <div class="blender-meta-item">
+            <div class="blender-meta-label">Course</div>
+            <div class="blender-meta-value">BSIT-NS-2A</div>
+            <div class="blender-meta-sub">Multimedia &amp; Authoring</div>
+          </div>
+        </div>
+
+      </div><!-- /blender-cine-wrap -->
+    </div><!-- /blender-video-section -->
+    <!-- ===== END 3D BLENDER VIDEO SECTION ===== -->
+
+    <div class="block-label reveal" style="margin-top:70px;"><span style="color:var(--magenta);">What to Expect</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
     <div class="render-features reveal">
       <div class="rf-card"><div class="rf-icon">🧊</div><div class="rf-title">3D Modeling</div><div class="rf-desc">Creating detailed 3D meshes and sculptures using Blender's powerful modeling tools and modifiers.</div></div>
       <div class="rf-card"><div class="rf-icon">🎨</div><div class="rf-title">Texturing</div><div class="rf-desc">Applying realistic materials, UV mapping, and procedural textures for lifelike, painterly surfaces.</div></div>
@@ -1034,7 +1531,7 @@ document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
 document.addEventListener('mousedown',function(){curEl.style.transform='translate(-50%,-50%) scale(.7)';});
 document.addEventListener('mouseup',function(){curEl.style.transform='translate(-50%,-50%) scale(1)';});
 function bindHover(){
-  document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.toggle-btn,.rs-planet,.about-avatar,.stat-item,.cine-dot,.disclaimer-box,.pcalc-planet-btn,.pcalc-calc-btn,.pcalc-fact-pill,.pcalc-tab').forEach(function(el){
+  document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.toggle-btn,.rs-planet,.about-avatar,.stat-item,.cine-dot,.blender-cine-dot,.disclaimer-box,.pcalc-planet-btn,.pcalc-calc-btn,.pcalc-fact-pill,.pcalc-tab,.blender-ph-tag,.blender-meta-item,.blender-cine-wrap').forEach(function(el){
     el.addEventListener('mouseenter',function(){curEl.classList.add('hover');});
     el.addEventListener('mouseleave',function(){curEl.classList.remove('hover');});
   });
@@ -1073,10 +1570,43 @@ var LTEXTS=['INITIALIZING','LOADING ASSETS','CALIBRATING','LAUNCH READY'];
 var LSUBS=['LOADING MULTIMEDIA SYSTEMS...','BUILDING STARFIELD...','SYNCING MODULES...','ENGAGING WARP DRIVE...'];
 var lp=0,lbar=document.getElementById('loaderBar'),ltext=document.getElementById('loaderText'),lsub=document.getElementById('loaderSub');
 function runLoader(){
-  if(lp>100){document.getElementById('loader').classList.add('done');setTimeout(function(){bindHover();triggerReveal();animProgressBar();pcalcInit();},200);return;}
+  if(lp>100){document.getElementById('loader').classList.add('done');setTimeout(function(){bindHover();triggerReveal();animProgressBar();pcalcInit();initBlenderPlaceholder();},200);return;}
   lbar.style.width=lp+'%';var idx=Math.min(Math.floor(lp/33),LTEXTS.length-1);ltext.textContent=LTEXTS[idx];lsub.textContent=LSUBS[idx];lp+=Math.random()*4+1.5;setTimeout(runLoader,25+Math.random()*35);
 }
 runLoader();
+
+/* ============================================================
+   BLENDER PLACEHOLDER ANIMATION
+   ============================================================ */
+function initBlenderPlaceholder(){
+  /* Animate fake render progress bar */
+  var fill=document.getElementById('blenderFill');
+  var pct=document.getElementById('blenderPct');
+  if(!fill||!pct)return;
+  var p=0;
+  function tick(){
+    if(p>=100){fill.style.width='100%';pct.textContent='100%';return;}
+    p+=Math.random()*0.4+0.1;
+    if(p>100)p=100;
+    fill.style.width=p.toFixed(1)+'%';
+    pct.textContent=Math.floor(p)+'%';
+    setTimeout(tick,120+Math.random()*180);
+  }
+  setTimeout(tick,800);
+
+  /* Check if the iframe has a real VIDEO_ID set and toggle accordingly */
+  var iframe=document.getElementById('blenderMainIframe');
+  var placeholder=document.getElementById('blenderPlaceholder');
+  if(iframe&&placeholder){
+    var src=iframe.getAttribute('src')||'';
+    if(src.indexOf('VIDEO_ID')===-1){
+      /* Real video ID is set — show iframe, hide placeholder */
+      iframe.style.display='block';
+      placeholder.style.display='none';
+    }
+    /* Otherwise placeholder stays visible */
+  }
+}
 
 /* ============================================================
    PAGE TRANSITION
@@ -1098,7 +1628,7 @@ function navTo(id){
       setTimeout(function(){triggerReveal();bindHover();},100);
       if(id==='about')setTimeout(function(){document.querySelectorAll('.skill-bar-fill').forEach(function(el){el.style.width=el.dataset.w||'0%';});},500);
       if(id==='rotoscoping')setTimeout(function(){animProgressBar();},400);
-      if(id==='rendering')setTimeout(function(){pcalcInit();},400);
+      if(id==='rendering')setTimeout(function(){pcalcInit();initBlenderPlaceholder();},400);
     },430);
   },430);
 }
@@ -1154,7 +1684,7 @@ function cycleLeft(){pIdx=(pIdx-1+PLANETS.length)%PLANETS.length;applyMainPlanet
 function cycleRight(){pIdx=(pIdx+1)%PLANETS.length;applyMainPlanet(pIdx);}
 
 /* ============================================================
-   BUILD WEEKS 4-12 — with video embeds for weeks 4-10
+   BUILD WEEKS 4-12
    ============================================================ */
 var phWeeks=[
   {w:4,icon:'🖌️',title:'Coloring',sub:'Fill & Hues',vid:'XzHlTeA2VSM'},
@@ -1343,7 +1873,6 @@ function pcalcInit(){
   if(pcalcInited)return;
   pcalcInited=true;
 
-  /* Weight planet grid */
   var g=document.getElementById('pcalcPlanetGrid');
   PCALC_PLANETS.forEach(function(p,i){
     var b=document.createElement('div');
@@ -1355,7 +1884,6 @@ function pcalcInit(){
   pcalcUpdateSelected(0);
   pcalcBuildBars(null);
 
-  /* Age planet grid */
   var ag=document.getElementById('pcalcAgePlanetGrid');
   PCALC_PLANETS.forEach(function(p,i){
     var b=document.createElement('div');
@@ -1368,7 +1896,6 @@ function pcalcInit(){
   pcalcBuildAgeBars(null);
   pcalcRenderFacts(0);
 
-  /* Keyboard enter */
   var wi=document.getElementById('pcalcWeight');
   if(wi)wi.addEventListener('keydown',function(e){if(e.key==='Enter')pcalcCalculate();});
   var ai=document.getElementById('pcalcAge');

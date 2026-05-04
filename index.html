@@ -233,8 +233,6 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 @keyframes barShimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
 .prog-count{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--white);white-space:nowrap;}
 .prog-count span{color:var(--cyan);}
-
-/* ── COMPLETE BADGE on progress bar ── */
 .prog-complete-badge{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:4px 14px;border-radius:30px;color:#39ff14;border:1px solid rgba(57,255,20,.4);background:rgba(57,255,20,.1);box-shadow:0 0 16px rgba(57,255,20,.2);animation:completePulse 2s ease-in-out infinite;}
 @keyframes completePulse{0%,100%{box-shadow:0 0 16px rgba(57,255,20,.2);}50%{box-shadow:0 0 30px rgba(57,255,20,.5),0 0 60px rgba(57,255,20,.15);}}
 
@@ -305,296 +303,125 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .rf-title{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;margin-bottom:10px;color:var(--accent-c,var(--magenta));}
 .rf-desc{font-family:'Exo 2',sans-serif;font-size:13px;color:var(--muted);line-height:1.7;}
 
-/* ============================================================
-   ★ NEW: 8 PLANET VIDEO EMBED SECTION
-   ============================================================ */
+/* ============================================================ MEDIA CARD (local mp4 video embed) ============================================================ */
+.media-card{
+  border-radius:18px;overflow:hidden;
+  border:1px solid rgba(0,229,255,.15);
+  background:rgba(7,10,26,.88);
+  backdrop-filter:blur(16px);
+  transition:all .5s cubic-bezier(.23,1,.32,1);
+  position:relative;
+}
+.media-card:hover{
+  border-color:rgba(0,229,255,.4);
+  transform:translateY(-8px);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 50px rgba(0,229,255,.18);
+}
+.media-card::after{
+  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);
+  transition:left .6s ease;pointer-events:none;
+}
+.media-card:hover::after{left:150%;}
+.media-embed{
+  position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;
+}
+.media-embed video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+}
+.media-info{
+  padding:18px 22px;
+  background:rgba(4,6,15,.75);
+  border-top:1px solid rgba(0,229,255,.08);
+  display:flex;flex-direction:column;gap:5px;
+}
+.media-title{
+  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:2px;color:var(--white);
+}
+.media-desc{
+  font-family:'Share Tech Mono',monospace;font-size:10px;
+  letter-spacing:2px;color:var(--muted);
+}
+.media-cards-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  margin-top:48px;margin-bottom:50px;
+}
+@media(max-width:700px){.media-cards-row{grid-template-columns:1fr;}}
 
-/* Animations */
+/* ============================================================ PLANET EMBED SECTION ============================================================ */
 @keyframes planetEmbedReveal{
   0%{opacity:0;transform:translateY(50px) scale(.94);}
   70%{opacity:1;transform:translateY(-4px) scale(1.01);}
   100%{opacity:1;transform:none;}
 }
-@keyframes embedCardFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-6px);}
-}
-@keyframes embedScanSweep{
-  0%{left:-60%;opacity:0;}
-  10%{opacity:1;}
-  90%{opacity:1;}
-  100%{left:160%;opacity:0;}
-}
-@keyframes embedOrbSpin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
-}
-@keyframes embedOrbPulse{
-  0%,100%{transform:scale(1);filter:drop-shadow(0 0 12px var(--ec,rgba(200,0,255,.5)));}
-  50%{transform:scale(1.08);filter:drop-shadow(0 0 28px var(--ec,rgba(200,0,255,.8)));}
-}
-@keyframes embedTagBounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-3px);}
-}
-@keyframes embedFrameGlow{
-  0%,100%{box-shadow:0 0 0 1px rgba(200,0,255,.1),0 20px 60px rgba(0,0,0,.5);}
-  50%{box-shadow:0 0 0 1px rgba(200,0,255,.35),0 20px 80px rgba(0,0,0,.7),0 0 40px rgba(200,0,255,.1);}
-}
-@keyframes embedHudBlink{
-  0%,100%{opacity:1;}
-  50%{opacity:.3;}
-}
-@keyframes embedVideoReveal{
-  0%{opacity:0;transform:scaleY(.85) translateY(10px);}
-  100%{opacity:1;transform:none;}
-}
-@keyframes embedPlaceholderPulse{
-  0%,100%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-}
-@keyframes embedCornerRotate{
-  0%,100%{opacity:.5;transform:rotate(0deg) scale(1);}
-  50%{opacity:1;transform:rotate(5deg) scale(1.1);}
-}
-@keyframes embedStaggerIn{
-  0%{opacity:0;transform:translateY(30px) scale(.95);}
-  100%{opacity:1;transform:none;}
-}
-@keyframes embedLabelType{
-  from{width:0;overflow:hidden;}
-  to{width:100%;overflow:visible;}
-}
-@keyframes embedWarpLine{
-  0%{transform:translateX(-100%) skewX(-12deg);opacity:0;}
-  20%{opacity:1;}
-  80%{opacity:1;}
-  100%{transform:translateX(300%) skewX(-12deg);opacity:0;}
-}
+@keyframes embedCardFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes embedScanSweep{0%{left:-60%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{left:160%;opacity:0;}}
+@keyframes embedOrbSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes embedOrbPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 12px var(--ec,rgba(200,0,255,.5)));}50%{transform:scale(1.08);filter:drop-shadow(0 0 28px var(--ec,rgba(200,0,255,.8)));}}
+@keyframes embedTagBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes embedFrameGlow{0%,100%{box-shadow:0 0 0 1px rgba(200,0,255,.1),0 20px 60px rgba(0,0,0,.5);}50%{box-shadow:0 0 0 1px rgba(200,0,255,.35),0 20px 80px rgba(0,0,0,.7),0 0 40px rgba(200,0,255,.1);}}
+@keyframes embedHudBlink{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes embedVideoReveal{0%{opacity:0;transform:scaleY(.85) translateY(10px);}100%{opacity:1;transform:none;}}
+@keyframes embedPlaceholderPulse{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+@keyframes embedCornerRotate{0%,100%{opacity:.5;transform:rotate(0deg) scale(1);}50%{opacity:1;transform:rotate(5deg) scale(1.1);}}
+@keyframes embedStaggerIn{0%{opacity:0;transform:translateY(30px) scale(.95);}100%{opacity:1;transform:none;}}
+@keyframes embedLabelType{from{width:0;overflow:hidden;}to{width:100%;overflow:visible;}}
+@keyframes embedWarpLine{0%{transform:translateX(-100%) skewX(-12deg);opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{transform:translateX(300%) skewX(-12deg);opacity:0;}}
 
-/* Section wrapper */
-.planet-embed-section{
-  margin-top:80px;margin-bottom:70px;
-  animation:planetEmbedReveal .9s cubic-bezier(.23,1,.32,1) both;
-  animation-delay:.1s;
-}
-
-/* Header row */
-.planet-embed-header{
-  display:flex;align-items:center;gap:18px;
-  padding:18px 26px;border-radius:16px;
-  border:1px solid rgba(200,0,255,.18);
-  background:linear-gradient(135deg,rgba(200,0,255,.06),rgba(0,229,255,.03));
-  margin-bottom:32px;position:relative;overflow:hidden;
-}
-.planet-embed-header::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(to bottom,var(--magenta),var(--cyan),var(--orange));
-  border-radius:2px;
-}
-.planet-embed-header::after{
-  content:'';position:absolute;top:0;left:-60%;width:50%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(200,0,255,.09),transparent);
-  animation:embedScanSweep 3.5s ease-in-out infinite;
-}
-.peh-icon{
-  width:46px;height:46px;border-radius:12px;flex-shrink:0;
-  background:linear-gradient(135deg,rgba(200,0,255,.3),rgba(0,229,255,.15));
-  border:1px solid rgba(200,0,255,.35);display:flex;align-items:center;
-  justify-content:center;font-size:22px;
-  box-shadow:0 0 20px rgba(200,0,255,.2);
-  animation:embedOrbPulse 3s ease-in-out infinite;
-  --ec:rgba(200,0,255,.5);
-}
+.planet-embed-section{margin-top:80px;margin-bottom:70px;animation:planetEmbedReveal .9s cubic-bezier(.23,1,.32,1) both;animation-delay:.1s;}
+.planet-embed-header{display:flex;align-items:center;gap:18px;padding:18px 26px;border-radius:16px;border:1px solid rgba(200,0,255,.18);background:linear-gradient(135deg,rgba(200,0,255,.06),rgba(0,229,255,.03));margin-bottom:32px;position:relative;overflow:hidden;}
+.planet-embed-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--magenta),var(--cyan),var(--orange));border-radius:2px;}
+.planet-embed-header::after{content:'';position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(200,0,255,.09),transparent);animation:embedScanSweep 3.5s ease-in-out infinite;}
+.peh-icon{width:46px;height:46px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,rgba(200,0,255,.3),rgba(0,229,255,.15));border:1px solid rgba(200,0,255,.35);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 20px rgba(200,0,255,.2);animation:embedOrbPulse 3s ease-in-out infinite;--ec:rgba(200,0,255,.5);}
 .peh-text{flex:1;}
 .peh-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);margin-bottom:4px;}
 .peh-title{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;color:var(--white);}
 .peh-badge{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);padding:4px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);}
-
-/* Instruction strip */
-.planet-embed-instruction{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 20px;border-radius:10px;
-  background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.12);
-  margin-bottom:28px;
-}
+.planet-embed-instruction{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:10px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.12);margin-bottom:28px;}
 .pei-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex-shrink:0;animation:embedHudBlink 2s ease-in-out infinite;}
 .pei-text{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);}
 .pei-text strong{color:var(--cyan);}
-
-/* Planet cards grid */
-.planet-embed-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-}
+.planet-embed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
 @media(max-width:1100px){.planet-embed-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:600px){.planet-embed-grid{grid-template-columns:1fr;}}
-
-/* Individual planet embed card */
-.planet-embed-card{
-  border-radius:18px;overflow:hidden;
-  border:1px solid rgba(255,255,255,.07);
-  background:rgba(7,10,26,.88);
-  backdrop-filter:blur(16px);
-  transition:all .5s cubic-bezier(.23,1,.32,1);
-  position:relative;
-  cursor:pointer;
-  animation:embedFrameGlow 4s ease-in-out infinite;
-}
-.planet-embed-card:hover{
-  border-color:var(--pec,rgba(200,0,255,.5));
-  transform:translateY(-12px) scale(1.02);
-  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 50px var(--pec-glow,rgba(200,0,255,.15));
-  animation:none;
-}
-.planet-embed-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--pec-soft,rgba(200,0,255,.05)),transparent 55%);
-  opacity:0;transition:.4s;z-index:0;
-}
+.planet-embed-card{border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:rgba(7,10,26,.88);backdrop-filter:blur(16px);transition:all .5s cubic-bezier(.23,1,.32,1);position:relative;cursor:pointer;animation:embedFrameGlow 4s ease-in-out infinite;}
+.planet-embed-card:hover{border-color:var(--pec,rgba(200,0,255,.5));transform:translateY(-12px) scale(1.02);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 50px var(--pec-glow,rgba(200,0,255,.15));animation:none;}
+.planet-embed-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--pec-soft,rgba(200,0,255,.05)),transparent 55%);opacity:0;transition:.4s;z-index:0;}
 .planet-embed-card:hover::before{opacity:1;}
-/* Warp shimmer on hover */
-.planet-embed-card::after{
-  content:'';position:absolute;top:0;left:-100%;width:45%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);
-  transition:left .6s ease;z-index:2;pointer-events:none;
-}
+.planet-embed-card::after{content:'';position:absolute;top:0;left:-100%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);transition:left .6s ease;z-index:2;pointer-events:none;}
 .planet-embed-card:hover::after{left:150%;}
-
-/* Card header stripe */
 .pec-topbar{height:3px;background:linear-gradient(to right,var(--pec,var(--magenta)),var(--pec2,var(--cyan)),transparent);transition:height .3s;}
 .planet-embed-card:hover .pec-topbar{height:4px;}
-
-/* Card chrome bar */
-.pec-bar{
-  display:flex;align-items:center;gap:10px;
-  padding:11px 14px;
-  background:rgba(4,6,15,.9);
-  border-bottom:1px solid rgba(255,255,255,.05);
-  position:relative;overflow:hidden;
-  z-index:1;
-}
-.pec-bar::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--pec,var(--magenta)),transparent);
-  opacity:.6;
-}
+.pec-bar{display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(4,6,15,.9);border-bottom:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;z-index:1;}
+.pec-bar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pec,var(--magenta)),transparent);opacity:.6;}
 .pec-dots{display:flex;gap:5px;}
 .pec-dot{width:9px;height:9px;border-radius:50%;}
 .pec-dot:nth-child(1){background:#ff5f57;}
 .pec-dot:nth-child(2){background:#febc2e;}
 .pec-dot:nth-child(3){background:#28c840;}
-.pec-planet-tag{
-  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;
-  padding:2px 9px;border-radius:16px;
-  color:var(--pec,var(--magenta));
-  border:1px solid var(--pec,rgba(200,0,255,.3));
-  background:rgba(var(--pec-rgb,200,0,255),.07);
-  margin-left:auto;
-}
-
-/* Planet orb + title area */
-.pec-identity{
-  display:flex;flex-direction:column;align-items:center;
-  padding:20px 16px 14px;
-  position:relative;z-index:1;
-  background:radial-gradient(ellipse at 50% 0%,var(--pec-soft,rgba(200,0,255,.06)),transparent 70%);
-}
-.pec-orb-wrap{
-  position:relative;width:70px;height:70px;margin-bottom:12px;
-}
-.pec-orb-ring{
-  position:absolute;top:50%;left:50%;border-radius:50%;
-  border:1px solid var(--pec,rgba(200,0,255,.3));
-  width:90px;height:90px;margin:-45px 0 0 -45px;
-  animation:embedOrbSpin 12s linear infinite;
-  opacity:.3;
-}
-.pec-orb{
-  width:70px;height:70px;border-radius:50%;
-  box-shadow:inset -8px -8px 18px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.12),0 0 24px var(--pec-glow,rgba(200,0,255,.3));
-  transition:all .4s;
-  animation:embedOrbPulse 4s ease-in-out infinite;
-  --ec:var(--pec-glow,rgba(200,0,255,.3));
-}
-.planet-embed-card:hover .pec-orb{
-  transform:scale(1.12) rotate(8deg);
-  box-shadow:inset -8px -8px 18px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.12),0 0 40px var(--pec-glow,rgba(200,0,255,.4));
-}
-.pec-planet-name{
-  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;
-  color:var(--white);margin-bottom:3px;text-align:center;
-}
-.pec-planet-type{
-  font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;
-  color:var(--pec,var(--magenta));text-transform:uppercase;text-align:center;
-}
-
-/* Video / placeholder area */
-.pec-video-wrap{
-  position:relative;aspect-ratio:16/9;overflow:hidden;
-  background:#000;z-index:1;
-}
-.pec-video-wrap iframe{
-  position:absolute;inset:0;width:100%;height:100%;border:none;display:block;
-  animation:embedVideoReveal .6s ease both;
-}
-.pec-placeholder{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  background:
-    radial-gradient(ellipse at 50% 40%,var(--pec-soft,rgba(200,0,255,.1)) 0%,transparent 65%),
-    linear-gradient(180deg,rgba(4,6,15,.98),rgba(2,3,8,1));
-  cursor:pointer;overflow:hidden;
-}
-/* Grid overlay on placeholder */
-.pec-placeholder::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(var(--pec-ultra,rgba(200,0,255,.04)) 1px,transparent 1px),
-    linear-gradient(90deg,var(--pec-ultra,rgba(200,0,255,.04)) 1px,transparent 1px);
-  background-size:28px 28px;
-  pointer-events:none;
-}
-/* Warp line sweep */
-.pec-placeholder::after{
-  content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);
-  animation:embedWarpLine 3s ease-in-out infinite;
-  pointer-events:none;
-}
+.pec-planet-tag{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:2px 9px;border-radius:16px;color:var(--pec,var(--magenta));border:1px solid var(--pec,rgba(200,0,255,.3));background:rgba(var(--pec-rgb,200,0,255),.07);margin-left:auto;}
+.pec-identity{display:flex;flex-direction:column;align-items:center;padding:20px 16px 14px;position:relative;z-index:1;background:radial-gradient(ellipse at 50% 0%,var(--pec-soft,rgba(200,0,255,.06)),transparent 70%);}
+.pec-orb-wrap{position:relative;width:70px;height:70px;margin-bottom:12px;}
+.pec-orb-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid var(--pec,rgba(200,0,255,.3));width:90px;height:90px;margin:-45px 0 0 -45px;animation:embedOrbSpin 12s linear infinite;opacity:.3;}
+.pec-orb{width:70px;height:70px;border-radius:50%;box-shadow:inset -8px -8px 18px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.12),0 0 24px var(--pec-glow,rgba(200,0,255,.3));transition:all .4s;animation:embedOrbPulse 4s ease-in-out infinite;--ec:var(--pec-glow,rgba(200,0,255,.3));}
+.planet-embed-card:hover .pec-orb{transform:scale(1.12) rotate(8deg);box-shadow:inset -8px -8px 18px rgba(0,0,0,.6),inset 4px 4px 12px rgba(255,255,255,.12),0 0 40px var(--pec-glow,rgba(200,0,255,.4));}
+.pec-planet-name{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;color:var(--white);margin-bottom:3px;text-align:center;}
+.pec-planet-type{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--pec,var(--magenta));text-transform:uppercase;text-align:center;}
+.pec-video-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;z-index:1;}
+.pec-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block;animation:embedVideoReveal .6s ease both;}
+/* Local mp4 inside planet card */
+.pec-video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.pec-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(ellipse at 50% 40%,var(--pec-soft,rgba(200,0,255,.1)) 0%,transparent 65%),linear-gradient(180deg,rgba(4,6,15,.98),rgba(2,3,8,1));cursor:pointer;overflow:hidden;}
+.pec-placeholder::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--pec-ultra,rgba(200,0,255,.04)) 1px,transparent 1px),linear-gradient(90deg,var(--pec-ultra,rgba(200,0,255,.04)) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.pec-placeholder::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);animation:embedWarpLine 3s ease-in-out infinite;pointer-events:none;}
 .pec-ph-icon{font-size:32px;filter:drop-shadow(0 0 16px var(--pec,rgba(200,0,255,.6)));animation:floatIcon 3.5s ease-in-out infinite;z-index:2;position:relative;}
 .pec-ph-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);z-index:2;position:relative;}
-.pec-ph-id-badge{
-  font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;
-  padding:4px 12px;border-radius:20px;
-  border:1px solid var(--pec,rgba(200,0,255,.3));
-  background:var(--pec-soft,rgba(200,0,255,.07));
-  color:var(--pec,var(--magenta));
-  z-index:2;position:relative;
-  animation:embedTagBounce 2.5s ease-in-out infinite;
-}
-
-/* Card footer */
-.pec-footer{
-  padding:10px 14px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid rgba(255,255,255,.05);
-  background:rgba(4,6,15,.6);
-  z-index:1;position:relative;
-}
+.pec-ph-id-badge{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 12px;border-radius:20px;border:1px solid var(--pec,rgba(200,0,255,.3));background:var(--pec-soft,rgba(200,0,255,.07));color:var(--pec,var(--magenta));z-index:2;position:relative;animation:embedTagBounce 2.5s ease-in-out infinite;}
+.pec-footer{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05);background:rgba(4,6,15,.6);z-index:1;position:relative;}
 .pec-footer-num{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.15);}
 .pec-footer-hint{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:rgba(90,106,153,.5);}
-.pec-footer-status{
-  font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;
-  padding:3px 8px;border-radius:16px;
-  color:var(--pec,var(--magenta));
-  border:1px solid color-mix(in srgb,var(--pec,var(--magenta)) 35%,transparent);
-  background:color-mix(in srgb,var(--pec,var(--magenta)) 8%,transparent);
-}
-
-/* Stagger animation delays per card */
+.pec-footer-status{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:16px;color:var(--pec,var(--magenta));border:1px solid color-mix(in srgb,var(--pec,var(--magenta)) 35%,transparent);background:color-mix(in srgb,var(--pec,var(--magenta)) 8%,transparent);}
 .planet-embed-card:nth-child(1){animation-delay:.05s;}
 .planet-embed-card:nth-child(2){animation-delay:.12s;}
 .planet-embed-card:nth-child(3){animation-delay:.19s;}
@@ -618,7 +445,6 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 @keyframes videoReveal{0%{opacity:0;transform:scale(.92) rotateX(8deg);}100%{opacity:1;transform:scale(1) rotateX(0deg);}}
 @keyframes statusBlink{0%,100%{opacity:1;}50%{opacity:.2;}}
 @keyframes pcalcScan{0%{left:-100%;}100%{left:200%;}}
-
 .blender-video-section{margin-bottom:70px;animation:blenderSectionReveal .9s cubic-bezier(.23,1,.32,1) both;animation-delay:.15s;}
 .blender-hud-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:14px 22px;border-radius:14px;background:rgba(200,0,255,.04);border:1px solid rgba(200,0,255,.15);position:relative;overflow:hidden;}
 .blender-hud-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--magenta),var(--cyan));}
@@ -881,6 +707,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   .blender-meta-row{flex-wrap:wrap;}
   .blender-meta-item{min-width:50%;}
   .planet-embed-grid{grid-template-columns:repeat(2,1fr);}
+  .media-cards-row{grid-template-columns:1fr;}
 }
 @media(max-width:500px){
   .planet-embed-grid{grid-template-columns:1fr;}
@@ -1031,7 +858,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
     <div class="block-label reveal">Weekly Progress Log</div>
     <p class="weekly-intro reveal">A 12-week journey of rotoscoping mastery — each week building upon the last, refining technique and artistic vision frame by frame. <strong style="color:#39ff14;">All 12 weeks complete! 🏆</strong></p>
 
-    <!-- UPDATED: 12/12 complete progress bar -->
     <div class="progress-summary reveal">
       <div class="prog-label">Overall Progress</div>
       <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
@@ -1165,15 +991,13 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       </div>
     </div>
 
-    <!-- ★★★ NEW: 8 PLANET VIDEO EMBED SECTION ★★★ -->
+    <!-- ★★★ 8 PLANET VIDEO EMBED SECTION ★★★ -->
     <div class="block-label reveal" style="margin-top:80px;">
       <span style="color:var(--magenta);">Planet Video Slots</span>
       <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div>
     </div>
 
     <div class="planet-embed-section reveal">
-
-      <!-- Section header HUD -->
       <div class="planet-embed-header">
         <div class="peh-icon">🌌</div>
         <div class="peh-text">
@@ -1182,17 +1006,48 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         </div>
         <div class="peh-badge">8 SLOTS · BSIT-NS-2A</div>
       </div>
-
-      <!-- Instruction strip -->
       <div class="planet-embed-instruction">
         <div class="pei-dot"></div>
         <div class="pei-text">Replace each <strong>PLANET_VIDEO_ID</strong> in the HTML source with your actual YouTube video ID to activate a slot — e.g. <strong>dQw4w9WgXcQ</strong></div>
       </div>
-
-      <!-- 8 Planet Cards Grid -->
       <div class="planet-embed-grid" id="planetEmbedGrid">
         <!-- Injected by JS -->
       </div>
+
+      <!-- ★★★ LOCAL MP4 VIDEO CARDS — Earth & Mercury ★★★ -->
+      <div class="block-label" style="margin-top:60px;margin-bottom:24px;">
+        <span style="color:var(--cyan);">Local Render Files</span>
+        <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(0,229,255,.4),transparent);margin-left:16px;"></div>
+      </div>
+
+      <div class="media-cards-row reveal">
+
+        <div class="media-card">
+          <div class="media-embed">
+            <video autoplay muted loop playsinline>
+              <source src="earth.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="media-info">
+            <div class="media-title">🌍 Earth Blender Animation</div>
+            <div class="media-desc">The rendered Earth animation output.</div>
+          </div>
+        </div>
+
+        <div class="media-card">
+          <div class="media-embed">
+            <video autoplay muted loop playsinline>
+              <source src="mercury.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="media-info">
+            <div class="media-title">☿ Mercury Blender Animation</div>
+            <div class="media-desc">The rendered Mercury animation output.</div>
+          </div>
+        </div>
+
+      </div>
+      <!-- ★★★ END LOCAL MP4 VIDEO CARDS ★★★ -->
 
     </div>
     <!-- ★★★ END 8 PLANET VIDEO EMBED SECTION ★★★ -->
@@ -1226,7 +1081,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
           <button class="pcalc-tab active" id="tab-weight" onclick="pcalcSwitchTab('weight')">⚡ Weight Calculator</button>
           <button class="pcalc-tab" id="tab-age" onclick="pcalcSwitchTab('age')">🕰 Age Calculator</button>
         </div>
-        <!-- ── WEIGHT PANEL ── -->
         <div class="pcalc-tab-panel active" id="panel-weight">
           <div class="pcalc-body">
             <div class="pcalc-left">
@@ -1265,7 +1119,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
             </div>
           </div>
         </div>
-        <!-- ── AGE PANEL ── -->
         <div class="pcalc-tab-panel" id="panel-age">
           <div class="pcalc-age-body">
             <div class="pcalc-age-left">
@@ -1305,7 +1158,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         </div>
       </div>
     </div>
-    <!-- ===== END PLANET CALCULATOR ===== -->
 
   </div>
   <footer>
@@ -1358,7 +1210,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 
 <!-- ================================================================ JAVASCRIPT ================================================================ -->
 <script>
-/* ============================================================ PLANET DATA (homepage carousel) ============================================================ */
+/* ============================================================ PLANET DATA ============================================================ */
 var PLANETS=[
   {id:'rotoscoping',name:'ROTOSCOPING',sub:'Frame by Frame',eyebrow:'Project 01 — Rotoscoping',page:'rotoscoping',bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 68% 72%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',shadow:'0 0 140px rgba(0,229,255,.15)',atmosphere:'0 0 40px 12px rgba(0,229,255,.18),0 0 80px 24px rgba(0,100,255,.1)',cloudTint:'rgba(200,230,255,.05)'},
   {id:'rendering',name:'3D BLENDER',sub:'Into the Void',eyebrow:'Project 02 — 3D Rendering',page:'rendering',bg:'radial-gradient(ellipse at 30% 28%,rgba(255,210,160,.25) 0%,transparent 35%),radial-gradient(ellipse at 65% 70%,rgba(0,0,0,.35) 0%,transparent 42%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 48%,#2a1204 72%,#0a0501 100%)',shadow:'0 0 140px rgba(200,100,20,.15)',atmosphere:'0 0 40px 12px rgba(200,100,20,.2),0 0 80px 24px rgba(180,80,10,.1)',cloudTint:'rgba(255,200,100,.04)'},
@@ -1377,54 +1229,14 @@ var SIDE_RIGHT=[
 
 /* ============================================================ 8 PLANET EMBED DATA ============================================================ */
 var PLANET_EMBEDS=[
-  {
-    num:'01',name:'Mercury',type:'Terrestrial Planet',icon:'☿',
-    videoId:'MERCURY_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 32% 28%,rgba(200,180,160,.2) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#a89070 0%,#786050 22%,#484030 50%,#201810 80%,#080604 100%)',
-    ec:'#a89070',ec2:'#786050',ecGlow:'rgba(168,144,112,.35)',ecSoft:'rgba(168,144,112,.08)',ecUltra:'rgba(168,144,112,.04)'
-  },
-  {
-    num:'02',name:'Venus',type:'Terrestrial Planet',icon:'♀',
-    videoId:'VENUS_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 32% 28%,rgba(255,230,140,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#d4a030 0%,#a07018 22%,#6a4808 50%,#302004 80%,#100a00 100%)',
-    ec:'#d4a030',ec2:'#a07018',ecGlow:'rgba(210,150,30,.35)',ecSoft:'rgba(210,150,30,.08)',ecUltra:'rgba(210,150,30,.04)'
-  },
-  {
-    num:'03',name:'Earth',type:'Terrestrial Planet',icon:'🌍',
-    videoId:'EARTH_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',
-    ec:'#00e5ff',ec2:'#0088ff',ecGlow:'rgba(0,229,255,.35)',ecSoft:'rgba(0,229,255,.08)',ecUltra:'rgba(0,229,255,.04)'
-  },
-  {
-    num:'04',name:'Mars',type:'Terrestrial Planet',icon:'♂',
-    videoId:'MARS_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 32% 28%,rgba(255,200,150,.25) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#d4552a 0%,#b03818 22%,#7a2010 50%,#3d0e06 80%,#1a0503 100%)',
-    ec:'#ff6220',ec2:'#cc3300',ecGlow:'rgba(220,80,30,.35)',ecSoft:'rgba(220,80,30,.08)',ecUltra:'rgba(220,80,30,.04)'
-  },
-  {
-    num:'05',name:'Jupiter',type:'Gas Giant',icon:'♃',
-    videoId:'JUPITER_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(255,210,160,.22) 0%,transparent 36%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 50%,#2a1204 80%,#0a0501 100%)',
-    ec:'#ffd600',ec2:'#cc9900',ecGlow:'rgba(200,150,0,.35)',ecSoft:'rgba(200,150,0,.08)',ecUltra:'rgba(200,150,0,.04)'
-  },
-  {
-    num:'06',name:'Saturn',type:'Gas Giant',icon:'♄',
-    videoId:'SATURN_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(255,230,180,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#c8a040 0%,#906020 22%,#5a3a08 50%,#281804 80%,#0a0500 100%)',
-    ec:'#c8a040',ec2:'#906020',ecGlow:'rgba(200,150,40,.35)',ecSoft:'rgba(200,150,40,.08)',ecUltra:'rgba(200,150,40,.04)'
-  },
-  {
-    num:'07',name:'Uranus',type:'Ice Giant',icon:'⛢',
-    videoId:'URANUS_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%)',
-    ec:'#50d8b8',ec2:'#2aa880',ecGlow:'rgba(40,180,140,.35)',ecSoft:'rgba(40,180,140,.08)',ecUltra:'rgba(40,180,140,.04)'
-  },
-  {
-    num:'08',name:'Neptune',type:'Ice Giant',icon:'♆',
-    videoId:'NEPTUNE_VIDEO_ID',
-    bg:'radial-gradient(ellipse at 30% 25%,rgba(150,230,255,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#2ec4e8 0%,#1480a8 22%,#0a4a70 50%,#041e38 80%,#010810 100%)',
-    ec:'#2ec4e8',ec2:'#1480a8',ecGlow:'rgba(30,160,220,.35)',ecSoft:'rgba(30,160,220,.08)',ecUltra:'rgba(30,160,220,.04)'
-  }
+  {num:'01',name:'Mercury',type:'Terrestrial Planet',icon:'☿',videoId:'MERCURY_VIDEO_ID',bg:'radial-gradient(ellipse at 32% 28%,rgba(200,180,160,.2) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#a89070 0%,#786050 22%,#484030 50%,#201810 80%,#080604 100%)',ec:'#a89070',ec2:'#786050',ecGlow:'rgba(168,144,112,.35)',ecSoft:'rgba(168,144,112,.08)',ecUltra:'rgba(168,144,112,.04)'},
+  {num:'02',name:'Venus',type:'Terrestrial Planet',icon:'♀',videoId:'VENUS_VIDEO_ID',bg:'radial-gradient(ellipse at 32% 28%,rgba(255,230,140,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#d4a030 0%,#a07018 22%,#6a4808 50%,#302004 80%,#100a00 100%)',ec:'#d4a030',ec2:'#a07018',ecGlow:'rgba(210,150,30,.35)',ecSoft:'rgba(210,150,30,.08)',ecUltra:'rgba(210,150,30,.04)'},
+  {num:'03',name:'Earth',type:'Terrestrial Planet',icon:'🌍',videoId:'EARTH_VIDEO_ID',bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',ec:'#00e5ff',ec2:'#0088ff',ecGlow:'rgba(0,229,255,.35)',ecSoft:'rgba(0,229,255,.08)',ecUltra:'rgba(0,229,255,.04)'},
+  {num:'04',name:'Mars',type:'Terrestrial Planet',icon:'♂',videoId:'MARS_VIDEO_ID',bg:'radial-gradient(ellipse at 32% 28%,rgba(255,200,150,.25) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#d4552a 0%,#b03818 22%,#7a2010 50%,#3d0e06 80%,#1a0503 100%)',ec:'#ff6220',ec2:'#cc3300',ecGlow:'rgba(220,80,30,.35)',ecSoft:'rgba(220,80,30,.08)',ecUltra:'rgba(220,80,30,.04)'},
+  {num:'05',name:'Jupiter',type:'Gas Giant',icon:'♃',videoId:'JUPITER_VIDEO_ID',bg:'radial-gradient(ellipse at 30% 25%,rgba(255,210,160,.22) 0%,transparent 36%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 50%,#2a1204 80%,#0a0501 100%)',ec:'#ffd600',ec2:'#cc9900',ecGlow:'rgba(200,150,0,.35)',ecSoft:'rgba(200,150,0,.08)',ecUltra:'rgba(200,150,0,.04)'},
+  {num:'06',name:'Saturn',type:'Gas Giant',icon:'♄',videoId:'SATURN_VIDEO_ID',bg:'radial-gradient(ellipse at 30% 25%,rgba(255,230,180,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#c8a040 0%,#906020 22%,#5a3a08 50%,#281804 80%,#0a0500 100%)',ec:'#c8a040',ec2:'#906020',ecGlow:'rgba(200,150,40,.35)',ecSoft:'rgba(200,150,40,.08)',ecUltra:'rgba(200,150,40,.04)'},
+  {num:'07',name:'Uranus',type:'Ice Giant',icon:'⛢',videoId:'URANUS_VIDEO_ID',bg:'radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%)',ec:'#50d8b8',ec2:'#2aa880',ecGlow:'rgba(40,180,140,.35)',ecSoft:'rgba(40,180,140,.08)',ecUltra:'rgba(40,180,140,.04)'},
+  {num:'08',name:'Neptune',type:'Ice Giant',icon:'♆',videoId:'NEPTUNE_VIDEO_ID',bg:'radial-gradient(ellipse at 30% 25%,rgba(150,230,255,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#2ec4e8 0%,#1480a8 22%,#0a4a70 50%,#041e38 80%,#010810 100%)',ec:'#2ec4e8',ec2:'#1480a8',ecGlow:'rgba(30,160,220,.35)',ecSoft:'rgba(30,160,220,.08)',ecUltra:'rgba(30,160,220,.04)'}
 ];
 
 /* ============================================================ BUILD PLANET EMBED GRID ============================================================ */
@@ -1441,11 +1253,9 @@ function buildPlanetEmbedGrid(){
     card.style.setProperty('--pec-glow',p.ecGlow);
     card.style.setProperty('--pec-soft',p.ecSoft);
     card.style.setProperty('--pec-ultra',p.ecUltra);
-
     var videoContent=hasVideo
       ?'<iframe src="https://www.youtube.com/embed/'+p.videoId+'?rel=0&modestbranding=1&controls=1" title="'+p.name+' — 3D Blender Render" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>'
       :'<div class="pec-placeholder"><div class="pec-ph-icon">'+p.icon+'</div><div class="pec-ph-label">Awaiting Upload</div><div class="pec-ph-id-badge">'+p.name.toUpperCase()+'_VIDEO_ID</div></div>';
-
     card.innerHTML=
       '<div class="pec-topbar"></div>'+
       '<div class="pec-bar">'+
@@ -1466,7 +1276,6 @@ function buildPlanetEmbedGrid(){
         '<div class="pec-footer-hint">Replace '+p.name.toUpperCase()+'_VIDEO_ID</div>'+
         '<div class="pec-footer-status">'+(hasVideo?'✓ Live':'Pending')+'</div>'+
       '</div>';
-
     grid.appendChild(card);
   });
 }
@@ -1496,7 +1305,7 @@ document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
 document.addEventListener('mousedown',function(){curEl.style.transform='translate(-50%,-50%) scale(.7)';});
 document.addEventListener('mouseup',function(){curEl.style.transform='translate(-50%,-50%) scale(1)';});
 function bindHover(){
-  document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.toggle-btn,.about-avatar,.stat-item,.cine-dot,.blender-cine-dot,.disclaimer-box,.pcalc-planet-btn,.pcalc-calc-btn,.pcalc-fact-pill,.pcalc-tab,.blender-ph-tag,.blender-meta-item,.blender-cine-wrap,.planet-embed-card').forEach(function(el){
+  document.querySelectorAll('a,button,.proj-card,.week-frame,.rf-card,.about-card,.side-planet,.hero-arrow,.hero-cta,.proj-btn,.toggle-btn,.about-avatar,.stat-item,.cine-dot,.blender-cine-dot,.disclaimer-box,.pcalc-planet-btn,.pcalc-calc-btn,.pcalc-fact-pill,.pcalc-tab,.blender-ph-tag,.blender-meta-item,.blender-cine-wrap,.planet-embed-card,.media-card').forEach(function(el){
     el.addEventListener('mouseenter',function(){curEl.classList.add('hover');});
     el.addEventListener('mouseleave',function(){curEl.classList.remove('hover');});
   });
@@ -1580,7 +1389,6 @@ function navTo(id){
   },430);
 }
 
-/* ── Progress bar: 100% complete ── */
 function animProgressBar(){
   var pf=document.getElementById('progFill');
   if(pf)setTimeout(function(){pf.style.width='100%';},300);
@@ -1660,7 +1468,7 @@ phWeeks.forEach(function(obj){
 
 /* ============================================================ 3D CARD TILT ============================================================ */
 document.addEventListener('mousemove',function(e){
-  document.querySelectorAll('.proj-card,.week-frame,.rf-card,.about-card,.planet-embed-card').forEach(function(card){
+  document.querySelectorAll('.proj-card,.week-frame,.rf-card,.about-card,.planet-embed-card,.media-card').forEach(function(card){
     var r=card.getBoundingClientRect();
     var inside=e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
     if(inside){var x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;card.style.transform='perspective(900px) rotateY('+(x/36)+'deg) rotateX('+(-y/36)+'deg) translateY(-10px)';}

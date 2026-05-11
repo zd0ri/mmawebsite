@@ -79,6 +79,35 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .page.enter{animation:pageEnter .6s cubic-bezier(.23,1,.32,1) forwards;}
 @keyframes pageEnter{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
 
+/* ── HERO SUPER TITLE ── */
+.hero-super-title{
+  position:relative;z-index:5;
+  text-align:center;
+  padding-top:clamp(20px,4vh,48px);
+  pointer-events:none;
+  animation:fadeInDown .7s ease both;
+}
+.hero-super-label{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:clamp(9px,1.6vw,14px);
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--cyan);
+  text-shadow:var(--glow-c);
+  padding:8px 24px;
+  border:1px solid rgba(0,229,255,.25);
+  border-radius:40px;
+  background:rgba(0,229,255,.06);
+  backdrop-filter:blur(8px);
+}
+.hero-super-label::before,
+.hero-super-label::after{
+  content:'';width:28px;height:1px;
+  background:linear-gradient(to right,transparent,var(--cyan));
+}
+.hero-super-label::after{transform:scaleX(-1);}
+
 #home{padding-top:68px;}
 .hero-stage{position:relative;width:100%;height:calc(100vh - 68px);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .planet-bg{position:absolute;bottom:-10%;left:50%;transform:translateX(-50%);width:min(65vw,700px);height:min(65vw,700px);border-radius:50%;background:radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 68% 72%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%);box-shadow:inset -50px -50px 100px rgba(0,0,0,.7),inset 20px 20px 60px rgba(30,120,220,.15),0 0 140px rgba(0,229,255,.12);animation:planetFloat 8s ease-in-out infinite;transition:background 1.2s cubic-bezier(.23,1,.32,1),box-shadow .6s;cursor:pointer;overflow:hidden;}
@@ -345,6 +374,7 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .planet-video-card:nth-child(2){animation-delay:.12s;}
 .planet-video-card:nth-child(3){animation-delay:.20s;}
 .planet-video-card:nth-child(4){animation-delay:.28s;}
+.planet-video-card:nth-child(5){animation-delay:.36s;}
 
 @keyframes blenderSectionReveal{0%{opacity:0;transform:translateY(60px) scale(.96);}60%{opacity:1;transform:translateY(-6px) scale(1.01);}100%{opacity:1;transform:translateY(0) scale(1);}}
 @keyframes hologramFlicker{0%,95%,100%{opacity:1;}96%{opacity:.5;}97%{opacity:1;}98%{opacity:.3;}99%{opacity:1;}}
@@ -637,7 +667,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 <nav id="mainNav">
   <div class="nav-logo">
     <div class="nav-logo-circle">M&amp;A</div>
-    <div class="nav-logo-text">Studio</div>
+    <div class="nav-logo-text">Multimedia &amp; Authoring</div>
   </div>
   <ul class="nav-links">
     <li><a href="#" onclick="navTo('home');return false;" class="active" id="nav-home">Home</a></li>
@@ -666,6 +696,12 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       </div>
       <div class="hero-arrow hero-arrow-left" onclick="cycleLeft()">&#8592;</div>
       <div class="hero-arrow hero-arrow-right" onclick="cycleRight()">&#8594;</div>
+
+      <!-- ★ SUPER TITLE — "Multimedia and Authoring" ★ -->
+      <div class="hero-super-title">
+        <span class="hero-super-label">✦ Multimedia and Authoring ✦</span>
+      </div>
+
       <div class="hero-text">
         <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span id="heroEyebrow">Project 01 — Rotoscoping</span><div class="hero-eyebrow-line"></div></div>
         <div class="hero-title" id="heroTitle">ROTOSCOPING</div>
@@ -886,12 +922,13 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="pvsh-icon">🌌</div>
         <div>
           <div class="pvsh-label">Solar System · Local Render Archive</div>
-          <div class="pvsh-title">4 Planet Blender Animations</div>
+          <div class="pvsh-title">5 Planet Blender Animations</div>
         </div>
-        <div class="pvsh-badge">4 PLANETS · BSIT-NS-2A</div>
+        <div class="pvsh-badge">5 PLANETS · BSIT-NS-2A</div>
       </div>
 
       <div class="planet-video-grid">
+
         <!-- EARTH -->
         <div class="planet-video-card" style="--pc-color:#00e5ff;--pc-color2:#0088ff;--pc-border:rgba(0,229,255,.18);--pc-border-bright:rgba(0,229,255,.5);--pc-glow:rgba(0,229,255,.22);">
           <div class="pvc-topbar"></div>
@@ -1007,8 +1044,38 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
             <div class="pvc-footer-hint">Blender · Cycles Render</div>
           </div>
         </div>
-      </div>
-    </div>
+
+        <!-- ★ MARS — NEW CARD ★ -->
+        <div class="planet-video-card" style="--pc-color:#d4552a;--pc-color2:#b03818;--pc-border:rgba(212,85,42,.18);--pc-border-bright:rgba(212,85,42,.5);--pc-glow:rgba(212,85,42,.22);">
+          <div class="pvc-topbar"></div>
+          <div class="pvc-bar">
+            <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
+            <div class="pvc-title-bar">mars.blender · render-output</div>
+            <div class="pvc-status">✓ Live</div>
+          </div>
+          <div class="pvc-identity">
+            <div class="pvc-orb-ring">
+              <div class="pvc-orb" style="background:radial-gradient(ellipse at 32% 28%,rgba(255,200,150,.25) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#d4552a 0%,#b03818 22%,#7a2010 50%,#3d0e06 80%,#1a0503 100%);--pc-glow:rgba(212,85,42,.3);"></div>
+            </div>
+            <div class="pvc-info">
+              <div class="pvc-planet-name">Mars</div>
+              <div class="pvc-planet-type">Terrestrial Planet</div>
+              <div class="pvc-planet-file">planets/Mars.mp4</div>
+            </div>
+          </div>
+          <div class="pvc-video-wrap">
+            <video autoplay muted loop playsinline>
+              <source src="planets/Mars.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="pvc-footer">
+            <div class="pvc-footer-label">Planet 04 · Sol System</div>
+            <div class="pvc-footer-hint">Blender · Cycles Render</div>
+          </div>
+        </div>
+
+      </div><!-- /planet-video-grid -->
+    </div><!-- /planet-video-section -->
 
     <div class="block-label reveal" style="margin-top:70px;"><span style="color:var(--magenta);">What to Expect</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
     <div class="render-features reveal">

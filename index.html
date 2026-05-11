@@ -304,7 +304,7 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 
 .planet-video-card{border-radius:18px;overflow:hidden;border:1px solid var(--pc-border,rgba(0,229,255,.15));background:rgba(7,10,26,.92);backdrop-filter:blur(16px);transition:all .5s cubic-bezier(.23,1,.32,1);position:relative;animation:planetCardReveal .7s cubic-bezier(.23,1,.32,1) both,pcardGlow 4s ease-in-out infinite;--pc-glow:rgba(0,229,255,.2);--pc-border:rgba(0,229,255,.15);--pc-border-bright:rgba(0,229,255,.4);}
 .planet-video-card:hover{border-color:var(--pc-border-bright);transform:translateY(-12px) scale(1.015);box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 60px var(--pc-glow);animation:none;}
-.planet-video-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(var(--pc-rgb,0,229,255),.06),transparent 55%);opacity:0;transition:.4s;z-index:0;}
+.planet-video-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--pc-color,#00e5ff) 6%,transparent),transparent 55%);opacity:0;transition:.4s;z-index:0;}
 .planet-video-card:hover::before{opacity:1;}
 .planet-video-card::after{content:'';position:absolute;top:0;left:-100%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);transition:left .6s ease;z-index:2;pointer-events:none;}
 .planet-video-card:hover::after{left:150%;}

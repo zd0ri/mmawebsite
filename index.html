@@ -82,6 +82,7 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .page.enter{animation:pageEnter .6s cubic-bezier(.23,1,.32,1) forwards;}
 @keyframes pageEnter{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
 
+/* FIX: .hero-stage is now a div — no section heading warning */
 #home{padding-top:68px;}
 .hero-stage{position:relative;width:100%;height:calc(100vh - 68px);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .planet-bg{position:absolute;bottom:-10%;left:50%;transform:translateX(-50%);width:min(65vw,700px);height:min(65vw,700px);border-radius:50%;background:radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 68% 72%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%);box-shadow:inset -50px -50px 100px rgba(0,0,0,.7),inset 20px 20px 60px rgba(30,120,220,.15),0 0 140px rgba(0,229,255,.12);animation:planetFloat 8s ease-in-out infinite;transition:background 1.2s cubic-bezier(.23,1,.32,1),box-shadow .6s;cursor:pointer;overflow:hidden;}
@@ -285,7 +286,6 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .rf-title{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;margin-bottom:10px;color:var(--accent-c,var(--magenta));}
 .rf-desc{font-family:'Exo 2',sans-serif;font-size:13px;color:var(--muted);line-height:1.7;}
 
-/* ===== PLANET VIDEO CARDS ===== */
 @keyframes planetCardReveal{0%{opacity:0;transform:translateY(40px) scale(.95);}70%{opacity:1;transform:translateY(-4px) scale(1.01);}100%{opacity:1;transform:none;}}
 @keyframes pcardScan{0%{left:-100%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{left:200%;opacity:0;}}
 @keyframes pcardOrbPulse{0%,100%{transform:scale(1);box-shadow:inset -6px -6px 14px rgba(0,0,0,.6),inset 3px 3px 8px rgba(255,255,255,.12),0 0 20px var(--pc-glow);}50%{transform:scale(1.06);box-shadow:inset -6px -6px 14px rgba(0,0,0,.6),inset 3px 3px 8px rgba(255,255,255,.12),0 0 40px var(--pc-glow);}}
@@ -306,35 +306,11 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .planet-video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
 @media(max-width:700px){.planet-video-grid{grid-template-columns:1fr;}}
 
-.planet-video-card{
-  border-radius:18px;overflow:hidden;
-  border:1px solid var(--pc-border,rgba(0,229,255,.15));
-  background:rgba(7,10,26,.92);
-  backdrop-filter:blur(16px);
-  transition:all .5s cubic-bezier(.23,1,.32,1);
-  position:relative;
-  animation:planetCardReveal .7s cubic-bezier(.23,1,.32,1) both, pcardGlow 4s ease-in-out infinite;
-  --pc-glow:rgba(0,229,255,.2);
-  --pc-border:rgba(0,229,255,.15);
-  --pc-border-bright:rgba(0,229,255,.4);
-}
-.planet-video-card:hover{
-  border-color:var(--pc-border-bright);
-  transform:translateY(-12px) scale(1.015);
-  box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 60px var(--pc-glow);
-  animation:none;
-}
-.planet-video-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(var(--pc-rgb,0,229,255),.06),transparent 55%);
-  opacity:0;transition:.4s;z-index:0;
-}
+.planet-video-card{border-radius:18px;overflow:hidden;border:1px solid var(--pc-border,rgba(0,229,255,.15));background:rgba(7,10,26,.92);backdrop-filter:blur(16px);transition:all .5s cubic-bezier(.23,1,.32,1);position:relative;animation:planetCardReveal .7s cubic-bezier(.23,1,.32,1) both,pcardGlow 4s ease-in-out infinite;--pc-glow:rgba(0,229,255,.2);--pc-border:rgba(0,229,255,.15);--pc-border-bright:rgba(0,229,255,.4);}
+.planet-video-card:hover{border-color:var(--pc-border-bright);transform:translateY(-12px) scale(1.015);box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 60px var(--pc-glow);animation:none;}
+.planet-video-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(var(--pc-rgb,0,229,255),.06),transparent 55%);opacity:0;transition:.4s;z-index:0;}
 .planet-video-card:hover::before{opacity:1;}
-.planet-video-card::after{
-  content:'';position:absolute;top:0;left:-100%;width:45%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);
-  transition:left .6s ease;z-index:2;pointer-events:none;
-}
+.planet-video-card::after{content:'';position:absolute;top:0;left:-100%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);transition:left .6s ease;z-index:2;pointer-events:none;}
 .planet-video-card:hover::after{left:150%;}
 
 .pvc-topbar{height:3px;background:linear-gradient(to right,var(--pc-color,var(--cyan)),var(--pc-color2,var(--magenta)),transparent);transition:height .3s;animation:pcardTopbar 3s ease-in-out infinite;}
@@ -374,7 +350,6 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .planet-video-card:nth-child(3){animation-delay:.20s;}
 .planet-video-card:nth-child(4){animation-delay:.28s;}
 
-/* ===== BLENDER VIDEO SECTION ===== */
 @keyframes blenderSectionReveal{0%{opacity:0;transform:translateY(60px) scale(.96);}60%{opacity:1;transform:translateY(-6px) scale(1.01);}100%{opacity:1;transform:translateY(0) scale(1);}}
 @keyframes hologramFlicker{0%,95%,100%{opacity:1;}96%{opacity:.5;}97%{opacity:1;}98%{opacity:.3;}99%{opacity:1;}}
 @keyframes scanSweep{0%{transform:translateY(-100%);opacity:0;}5%{opacity:1;}95%{opacity:1;}100%{transform:translateY(100vh);opacity:0;}}
@@ -680,65 +655,74 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 
 <!-- HOME -->
 <div class="page active" id="home">
-  <section class="hero-stage">
-    <div class="planet-bg" id="mainPlanet">
-      <div class="planet-clouds"></div>
-      <div class="planet-ring"></div><div class="planet-ring"></div><div class="planet-ring"></div>
+  <div id="home-inner" style="padding-top:68px;">
+
+    <!-- FIX: was <section class="hero-stage"> — changed to <div> since it has no heading element -->
+    <div class="hero-stage">
+      <div class="planet-bg" id="mainPlanet">
+        <div class="planet-clouds"></div>
+        <div class="planet-ring"></div><div class="planet-ring"></div><div class="planet-ring"></div>
+      </div>
+      <div class="side-planet side-planet-left" onclick="cycleLeft()">
+        <div class="side-orb" id="leftOrb"></div>
+        <div class="side-label" id="leftLabel">Mars</div>
+      </div>
+      <div class="side-planet side-planet-right" onclick="cycleRight()">
+        <div class="side-orb" id="rightOrb"></div>
+        <div class="side-label" id="rightLabel">Neptune</div>
+      </div>
+      <div class="hero-arrow hero-arrow-left" onclick="cycleLeft()">&#8592;</div>
+      <div class="hero-arrow hero-arrow-right" onclick="cycleRight()">&#8594;</div>
+      <div class="hero-text">
+        <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span id="heroEyebrow">Project 01 — Rotoscoping</span><div class="hero-eyebrow-line"></div></div>
+        <div class="hero-title" id="heroTitle">ROTOSCOPING</div>
+        <div class="hero-sub" id="heroSub">Frame by Frame</div>
+        <a class="hero-cta" id="heroCta" href="#" onclick="navTo('rotoscoping');return false;">VIEW MORE</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-label">Technique</div><div class="stat-value">Rotoscoping</div><div class="stat-sub">Frame-by-frame</div></div>
+        <div class="stat-item"><div class="stat-label">Duration</div><div class="stat-value">12 Weeks</div><div class="stat-sub">Progressive</div></div>
+        <div class="stat-item"><div class="stat-label">Software</div><div class="stat-value">Adobe</div><div class="stat-sub">After Effects / PS</div></div>
+        <div class="stat-item"><div class="stat-label">Status</div><div class="stat-value" style="color:#39ff14;">COMPLETE</div><div class="stat-sub">All 12 weeks done</div></div>
+        <div class="stat-item"><div class="stat-label">Frames</div><div class="stat-value">100+</div><div class="stat-sub">Hand-traced</div></div>
+      </div>
     </div>
-    <div class="side-planet side-planet-left" onclick="cycleLeft()">
-      <div class="side-orb" id="leftOrb"></div>
-      <div class="side-label" id="leftLabel">Mars</div>
+    <!-- END hero-stage div -->
+
+    <div class="academic-banner reveal">
+      <div class="academic-banner-icon">🎓</div>
+      <div class="academic-banner-text">
+        <strong>Academic Use Only</strong> — This portfolio is created solely for educational and academic purposes in partial fulfillment of the course <strong>Multimedia &amp; Authoring</strong> (BSIT-NS-2A). All referenced media and materials are used under the principles of fair use for academic study and demonstration only.
+      </div>
     </div>
-    <div class="side-planet side-planet-right" onclick="cycleRight()">
-      <div class="side-orb" id="rightOrb"></div>
-      <div class="side-label" id="rightLabel">Neptune</div>
-    </div>
-    <div class="hero-arrow hero-arrow-left" onclick="cycleLeft()">&#8592;</div>
-    <div class="hero-arrow hero-arrow-right" onclick="cycleRight()">&#8594;</div>
-    <div class="hero-text">
-      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span id="heroEyebrow">Project 01 — Rotoscoping</span><div class="hero-eyebrow-line"></div></div>
-      <div class="hero-title" id="heroTitle">ROTOSCOPING</div>
-      <div class="hero-sub" id="heroSub">Frame by Frame</div>
-      <a class="hero-cta" id="heroCta" href="#" onclick="navTo('rotoscoping');return false;">VIEW MORE</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item"><div class="stat-label">Technique</div><div class="stat-value">Rotoscoping</div><div class="stat-sub">Frame-by-frame</div></div>
-      <div class="stat-item"><div class="stat-label">Duration</div><div class="stat-value">12 Weeks</div><div class="stat-sub">Progressive</div></div>
-      <div class="stat-item"><div class="stat-label">Software</div><div class="stat-value">Adobe</div><div class="stat-sub">After Effects / PS</div></div>
-      <div class="stat-item"><div class="stat-label">Status</div><div class="stat-value" style="color:#39ff14;">COMPLETE</div><div class="stat-sub">All 12 weeks done</div></div>
-      <div class="stat-item"><div class="stat-label">Frames</div><div class="stat-value">100+</div><div class="stat-sub">Hand-traced</div></div>
-    </div>
-  </section>
-  <div class="academic-banner reveal">
-    <div class="academic-banner-icon">🎓</div>
-    <div class="academic-banner-text">
-      <strong>Academic Use Only</strong> — This portfolio is created solely for educational and academic purposes in partial fulfillment of the course <strong>Multimedia &amp; Authoring</strong> (BSIT-NS-2A). All referenced media and materials are used under the principles of fair use for academic study and demonstration only.
-    </div>
+
+    <!-- home-projects is a <section> with an h2 inside — valid, no change needed -->
+    <section class="home-projects">
+      <div class="section-eyebrow reveal">✦ Featured Projects</div>
+      <h2 class="section-heading reveal">Explore the Cosmos</h2>
+      <div class="proj-grid">
+        <div class="proj-card reveal" onclick="navTo('rotoscoping')">
+          <div class="proj-num">01</div>
+          <div class="proj-icon">🎬</div>
+          <span class="proj-tag">Project 01</span>
+          <h3 class="proj-title">Rotoscoping</h3>
+          <p class="proj-desc">Frame-by-frame animation technique tracing over live-action footage, creating fluid, lifelike movement infused with artistic interpretation across 12 progressive weeks.</p>
+          <a class="proj-btn" href="#" onclick="event.stopPropagation();navTo('rotoscoping');return false;">Explore →</a>
+          <div class="proj-glow"></div>
+        </div>
+        <div class="proj-card magenta reveal" onclick="navTo('rendering')">
+          <div class="proj-num">02</div>
+          <div class="proj-icon">🪐</div>
+          <span class="proj-tag">Project 02</span>
+          <h3 class="proj-title">3D Blender</h3>
+          <p class="proj-desc">Three-dimensional modeling, texturing, lighting, and rendering using Blender's powerful toolset to sculpt and illuminate imagined worlds with cinematic quality.</p>
+          <a class="proj-btn" href="#" onclick="event.stopPropagation();navTo('rendering');return false;">Explore →</a>
+          <div class="proj-glow"></div>
+        </div>
+      </div>
+    </section>
+
   </div>
-  <section class="home-projects">
-    <div class="section-eyebrow reveal">✦ Featured Projects</div>
-    <h2 class="section-heading reveal">Explore the Cosmos</h2>
-    <div class="proj-grid">
-      <div class="proj-card reveal" onclick="navTo('rotoscoping')">
-        <div class="proj-num">01</div>
-        <div class="proj-icon">🎬</div>
-        <span class="proj-tag">Project 01</span>
-        <h3 class="proj-title">Rotoscoping</h3>
-        <p class="proj-desc">Frame-by-frame animation technique tracing over live-action footage, creating fluid, lifelike movement infused with artistic interpretation across 12 progressive weeks.</p>
-        <a class="proj-btn" href="#" onclick="event.stopPropagation();navTo('rotoscoping');return false;">Explore →</a>
-        <div class="proj-glow"></div>
-      </div>
-      <div class="proj-card magenta reveal" onclick="navTo('rendering')">
-        <div class="proj-num">02</div>
-        <div class="proj-icon">🪐</div>
-        <span class="proj-tag">Project 02</span>
-        <h3 class="proj-title">3D Blender</h3>
-        <p class="proj-desc">Three-dimensional modeling, texturing, lighting, and rendering using Blender's powerful toolset to sculpt and illuminate imagined worlds with cinematic quality.</p>
-        <a class="proj-btn" href="#" onclick="event.stopPropagation();navTo('rendering');return false;">Explore →</a>
-        <div class="proj-glow"></div>
-      </div>
-    </div>
-  </section>
   <footer>
     <div class="footer-line"></div>
     <div class="footer-name">Crafted by <span>Meriel N. Lanuza</span></div>
@@ -841,7 +825,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   </div>
   <div class="page-content">
 
-    <!-- MAIN BLENDER VIDEO -->
     <div class="block-label reveal" style="margin-bottom:28px;">
       <span style="color:var(--magenta);">Project Showcase</span>
       <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div>
@@ -902,7 +885,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       </div>
     </div>
 
-    <!-- PLANET VIDEO CARDS — replacing the 8-slot YouTube section -->
     <div class="block-label reveal" style="margin-top:80px;">
       <span style="color:var(--cyan);">Planet Render Files</span>
       <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(0,229,255,.4),transparent);margin-left:16px;"></div>
@@ -919,10 +901,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       </div>
 
       <div class="planet-video-grid">
-
         <!-- EARTH -->
-        <div class="planet-video-card"
-             style="--pc-color:#00e5ff;--pc-color2:#0088ff;--pc-border:rgba(0,229,255,.18);--pc-border-bright:rgba(0,229,255,.5);--pc-glow:rgba(0,229,255,.22);">
+        <div class="planet-video-card" style="--pc-color:#00e5ff;--pc-color2:#0088ff;--pc-border:rgba(0,229,255,.18);--pc-border-bright:rgba(0,229,255,.5);--pc-glow:rgba(0,229,255,.22);">
           <div class="pvc-topbar"></div>
           <div class="pvc-bar">
             <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
@@ -951,8 +931,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         </div>
 
         <!-- MERCURY -->
-        <div class="planet-video-card"
-             style="--pc-color:#a89070;--pc-color2:#786050;--pc-border:rgba(168,144,112,.18);--pc-border-bright:rgba(168,144,112,.5);--pc-glow:rgba(168,144,112,.22);">
+        <div class="planet-video-card" style="--pc-color:#a89070;--pc-color2:#786050;--pc-border:rgba(168,144,112,.18);--pc-border-bright:rgba(168,144,112,.5);--pc-glow:rgba(168,144,112,.22);">
           <div class="pvc-topbar"></div>
           <div class="pvc-bar">
             <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
@@ -981,8 +960,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         </div>
 
         <!-- VENUS -->
-        <div class="planet-video-card"
-             style="--pc-color:#d4a030;--pc-color2:#a07018;--pc-border:rgba(210,150,30,.18);--pc-border-bright:rgba(210,150,30,.5);--pc-glow:rgba(210,150,30,.22);">
+        <div class="planet-video-card" style="--pc-color:#d4a030;--pc-color2:#a07018;--pc-border:rgba(210,150,30,.18);--pc-border-bright:rgba(210,150,30,.5);--pc-glow:rgba(210,150,30,.22);">
           <div class="pvc-topbar"></div>
           <div class="pvc-bar">
             <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
@@ -1011,8 +989,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         </div>
 
         <!-- JUPITER -->
-        <div class="planet-video-card"
-             style="--pc-color:#ffd600;--pc-color2:#c47820;--pc-border:rgba(200,150,0,.18);--pc-border-bright:rgba(200,150,0,.5);--pc-glow:rgba(200,150,0,.22);">
+        <div class="planet-video-card" style="--pc-color:#ffd600;--pc-color2:#c47820;--pc-border:rgba(200,150,0,.18);--pc-border-bright:rgba(200,150,0,.5);--pc-glow:rgba(200,150,0,.22);">
           <div class="pvc-topbar"></div>
           <div class="pvc-bar">
             <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
@@ -1039,9 +1016,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
             <div class="pvc-footer-hint">Blender · Cycles Render</div>
           </div>
         </div>
-
-      </div><!-- end planet-video-grid -->
-    </div><!-- end planet-video-section -->
+      </div>
+    </div>
 
     <div class="block-label reveal" style="margin-top:70px;"><span style="color:var(--magenta);">What to Expect</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
     <div class="render-features reveal">
@@ -1051,7 +1027,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       <div class="rf-card"><div class="rf-icon">✨</div><div class="rf-title">Final Render</div><div class="rf-desc">Cycles / EEVEE final renders with post-processing compositing for breathtaking visual quality.</div></div>
     </div>
 
-    <!-- PLANET CALCULATOR -->
     <div class="block-label reveal" style="margin-top:80px;"><span style="color:var(--magenta);">Planet Calculator</span><div style="flex:1;height:1px;background:linear-gradient(to right,rgba(200,0,255,.4),transparent);margin-left:16px;"></div></div>
     <div class="pcalc-wrapper reveal">
       <div class="pcalc-orbital-bg">
@@ -1198,7 +1173,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 </div>
 
 <script>
-/* ============================================================ PLANET DATA ============================================================ */
 var PLANETS=[
   {id:'rotoscoping',name:'ROTOSCOPING',sub:'Frame by Frame',eyebrow:'Project 01 — Rotoscoping',page:'rotoscoping',bg:'radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.22) 0%,transparent 38%),radial-gradient(ellipse at 68% 72%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#1a5fa8 0%,#0e3d78 22%,#082458 45%,#041228 70%,#000 100%)',shadow:'0 0 140px rgba(0,229,255,.15)',atmosphere:'0 0 40px 12px rgba(0,229,255,.18),0 0 80px 24px rgba(0,100,255,.1)',cloudTint:'rgba(200,230,255,.05)'},
   {id:'rendering',name:'3D BLENDER',sub:'Into the Void',eyebrow:'Project 02 — 3D Rendering',page:'rendering',bg:'radial-gradient(ellipse at 30% 28%,rgba(255,210,160,.25) 0%,transparent 35%),radial-gradient(ellipse at 65% 70%,rgba(0,0,0,.35) 0%,transparent 42%),radial-gradient(ellipse at 35% 35%,#c47820 0%,#8a4c10 22%,#5a2e08 48%,#2a1204 72%,#0a0501 100%)',shadow:'0 0 140px rgba(200,100,20,.15)',atmosphere:'0 0 40px 12px rgba(200,100,20,.2),0 0 80px 24px rgba(180,80,10,.1)',cloudTint:'rgba(255,200,100,.04)'},
@@ -1215,7 +1189,6 @@ var SIDE_RIGHT=[
   {label:'Uranus',bg:'radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 65% 65%,rgba(0,0,0,.3) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%)',glow:'rgba(40,180,140,.35)'}
 ];
 
-/* ============================================================ STARFIELD ============================================================ */
 (function(){
   var c=document.getElementById('starfield'),ctx=c.getContext('2d'),W,H,stars=[],shooters=[];
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
@@ -1233,7 +1206,6 @@ var SIDE_RIGHT=[
   loop();
 })();
 
-/* ============================================================ CURSOR ============================================================ */
 var curEl=document.getElementById('cursor'),dotEl=document.getElementById('cursor-dot'),mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
 (function animCursor(){cx+=(mx-cx)*.14;cy+=(my-cy)*.14;curEl.style.left=cx+'px';curEl.style.top=cy+'px';dotEl.style.left=mx+'px';dotEl.style.top=my+'px';requestAnimationFrame(animCursor);})();
@@ -1246,7 +1218,6 @@ function bindHover(){
   });
 }
 
-/* ============================================================ CLICK EFFECTS ============================================================ */
 document.addEventListener('click',function(e){
   var r=document.createElement('div');r.className='ripple-burst';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.appendChild(r);setTimeout(function(){r.remove();},700);
   for(var i=0;i<8;i++){
@@ -1259,7 +1230,6 @@ document.addEventListener('click',function(e){
   }
 });
 
-/* ============================================================ MOUSE PARTICLES ============================================================ */
 var lastP=0;
 document.addEventListener('mousemove',function(e){
   var now=Date.now();if(now-lastP<90)return;lastP=now;if(Math.random()>.65)return;
@@ -1268,7 +1238,6 @@ document.addEventListener('mousemove',function(e){
   document.body.appendChild(p);setTimeout(function(){p.remove();},2500);
 });
 
-/* ============================================================ LOADER ============================================================ */
 var LTEXTS=['INITIALIZING','LOADING ASSETS','CALIBRATING','LAUNCH READY'];
 var LSUBS=['LOADING MULTIMEDIA SYSTEMS...','BUILDING STARFIELD...','SYNCING MODULES...','ENGAGING WARP DRIVE...'];
 var lp=0,lbar=document.getElementById('loaderBar'),ltext=document.getElementById('loaderText'),lsub=document.getElementById('loaderSub');
@@ -1278,7 +1247,6 @@ function runLoader(){
 }
 runLoader();
 
-/* ============================================================ BLENDER PLACEHOLDER ============================================================ */
 function initBlenderPlaceholder(){
   var fill=document.getElementById('blenderFill'),pct=document.getElementById('blenderPct');
   if(!fill||!pct)return;
@@ -1289,7 +1257,6 @@ function initBlenderPlaceholder(){
   if(iframe&&placeholder){var src=iframe.getAttribute('src')||'';if(src.indexOf('VIDEO_ID')===-1){iframe.style.display='block';placeholder.style.display='none';}}
 }
 
-/* ============================================================ PAGE TRANSITION ============================================================ */
 var wipe=document.getElementById('page-wipe'),transitioning=false;
 function navTo(id){
   if(transitioning)return;
@@ -1313,7 +1280,6 @@ function navTo(id){
 }
 function animProgressBar(){var pf=document.getElementById('progFill');if(pf)setTimeout(function(){pf.style.width='100%';},300);}
 
-/* ============================================================ SCROLL REVEAL ============================================================ */
 function triggerReveal(){
   document.querySelectorAll('.page.active .reveal').forEach(function(el,i){
     var r=el.getBoundingClientRect();if(r.top<window.innerHeight-50)setTimeout(function(){el.classList.add('revealed');},i*65);
@@ -1324,7 +1290,6 @@ window.addEventListener('scroll',function(){
   triggerReveal();
 });
 
-/* ============================================================ PLANET CAROUSEL ============================================================ */
 var pIdx=0;
 function applyMainPlanet(i){
   var p=PLANETS[i];
@@ -1348,7 +1313,6 @@ applyMainPlanet(0);
 function cycleLeft(){pIdx=(pIdx-1+PLANETS.length)%PLANETS.length;applyMainPlanet(pIdx);}
 function cycleRight(){pIdx=(pIdx+1)%PLANETS.length;applyMainPlanet(pIdx);}
 
-/* ============================================================ BUILD WEEKS 4–12 ============================================================ */
 var phWeeks=[
   {w:4,icon:'🖌️',title:'Coloring',sub:'Fill & Hues',vid:'XzHlTeA2VSM'},
   {w:5,icon:'✏️',title:'Refinement',sub:'Detail Pass',vid:'XxQ-Q8QOOAU'},
@@ -1371,7 +1335,6 @@ phWeeks.forEach(function(obj){
   grid.appendChild(el);
 });
 
-/* ============================================================ 3D CARD TILT ============================================================ */
 document.addEventListener('mousemove',function(e){
   document.querySelectorAll('.proj-card,.week-frame,.rf-card,.about-card,.planet-video-card').forEach(function(card){
     var r=card.getBoundingClientRect();
@@ -1381,11 +1344,9 @@ document.addEventListener('mousemove',function(e){
   });
 });
 
-/* ============================================================ THEME TOGGLE ============================================================ */
 var isLight=false;
 function toggleTheme(){isLight=!isLight;document.body.classList.toggle('light',isLight);document.getElementById('themeBtn').textContent=isLight?'🌑':'🌙';}
 
-/* ============================================================ PLANET CALCULATOR DATA — includes Pluto ============================================================ */
 var PCALC_PLANETS=[
   {id:'mercury',name:'Mercury',gravity:.38,type:'Terrestrial Planet',yearDays:87.97,
    bg:'radial-gradient(ellipse at 32% 28%,rgba(200,180,160,.2) 0%,transparent 40%),radial-gradient(ellipse at 35% 35%,#a89070 0%,#786050 22%,#484030 50%,#201810 80%,#080604 100%)',
@@ -1427,7 +1388,6 @@ var PCALC_PLANETS=[
    glow:'rgba(30,160,220,.4)',
    facts:['1.12\u00D7 Earth gravity','Winds: 2100 km/h','Farthest planet','14 known moons','165-year orbit'],
    deepFacts:[{t:'Slightly Stronger',d:'Neptune\'s gravity is <strong>1.12\u00D7 Earth\'s</strong>.'},{t:'Enormous Year',d:'Neptune takes <strong>164.8 Earth years</strong> to orbit the Sun.'},{t:'Fastest Winds',d:'Neptune has the <strong>strongest winds</strong>, reaching 2,100 km/h.'},{t:'Discovery',d:'Neptune was <strong>predicted by mathematics</strong> before being observed.'},{t:'Fun Fact',d:'Triton orbits backwards and will form a ring system in ~3.6 billion years.'}]},
-  /* ★ PLUTO ★ */
   {id:'pluto',name:'Pluto',gravity:.063,type:'Dwarf Planet',yearDays:90560,
    bg:'radial-gradient(ellipse at 32% 28%,rgba(210,190,170,.18) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#9e8878 0%,#6e5848 22%,#4a3830 50%,#201810 80%,#080604 100%)',
    glow:'rgba(158,136,120,.4)',
@@ -1435,7 +1395,6 @@ var PCALC_PLANETS=[
    deepFacts:[{t:'Tiny Gravity',d:'Pluto\'s gravity is only <strong>6.3% of Earth\'s</strong> \u2014 you\'d weigh almost nothing!'},{t:'Enormous Year',d:'One Pluto year lasts <strong>248 Earth years</strong>.'},{t:'Tombaugh Regio',d:'Pluto features a massive <strong>heart-shaped nitrogen ice plain</strong> called Tombaugh Regio.'},{t:'Moons',d:'Pluto has 5 moons \u2014 the largest, <strong>Charon</strong>, is half Pluto\'s size.'},{t:'Fun Fact',d:'Pluto was discovered in <strong>1930</strong> and reclassified as a dwarf planet in <strong>2006</strong>.'}]}
 ];
 
-/* Bar gradients for all 9 bodies */
 var PCALC_GRADS=[
   'linear-gradient(to right,#a89070,#786050)',
   'linear-gradient(to right,#d4a030,#a07018)',

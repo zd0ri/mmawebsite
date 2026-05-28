@@ -113,7 +113,7 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .planet-bg::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:transparent;box-shadow:0 0 40px 12px rgba(0,229,255,.18),0 0 80px 24px rgba(0,100,255,.1);pointer-events:none;transition:.8s;}
 .planet-bg::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 30% 28%,rgba(255,255,255,.18) 0%,transparent 50%);pointer-events:none;}
 .planet-bg:hover{box-shadow:inset -50px -50px 100px rgba(0,0,0,.7),inset 20px 20px 60px rgba(30,120,220,.2),0 0 200px rgba(0,229,255,.35),0 0 80px rgba(200,0,255,.15);}
-.planet-clouds{position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(170deg,transparent 0%,transparent 12%,rgba(255,255,255,.04) 13%,rgba(255,255,255,.04) 14%,transparent 15%,transparent 25%,rgba(255,255,255,.03) 26%,rgba(255,255,255,.03) 27%,transparent 28%,transparent 40%,rgba(255,255,255,.02) 41%,rgba(255,255,255,.02) 42%,transparent 43%);pointer-events:none;animation:cloudDrift 30s linear infinite;}
+.planet-clouds{position:absolute;inset:0;border-radius:50%;pointer-events:none;animation:cloudDrift 30s linear infinite;}
 @keyframes cloudDrift{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 .planet-ring{position:absolute;top:50%;left:50%;border:1px solid rgba(0,229,255,.15);border-radius:50%;transform:translate(-50%,-50%) rotateX(75deg);pointer-events:none;animation:ringPulse 4s ease-in-out infinite;}
 .planet-ring:nth-child(2){width:110%;height:110%;}
@@ -426,7 +426,7 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .blender-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;}
 .blender-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 50%,rgba(200,0,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 30% 30%,rgba(0,229,255,.04) 0%,transparent 50%),#030509;animation:hologramFlicker 8s ease-in-out infinite;cursor:pointer;overflow:hidden;}
 .blender-placeholder::before{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,0,255,.6),var(--cyan),rgba(200,0,255,.6),transparent);animation:scanSweep 3s ease-in-out infinite;z-index:2;}
-.blender-placeholder::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(200,0,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,0,255,.04) 1px,transparent 1px);background-size:40px 40px;animation:hologramFlicker 12s ease-in-out infinite;pointer-events:none;}
+.blender-placeholder::after{content:'';position:absolute;inset:0;animation:hologramFlicker 12s ease-in-out infinite;pointer-events:none;}
 .blender-orbit-wrap{position:relative;width:180px;height:180px;flex-shrink:0;margin-bottom:28px;}
 .blender-orbit-ring{position:absolute;top:50%;left:50%;border-radius:50%;border-style:solid;}
 .blender-orbit-ring:nth-child(1){width:180px;height:180px;border-width:1px;border-color:rgba(200,0,255,.25);margin:-90px 0 0 -90px;animation:orbitRing 8s linear infinite;}
@@ -1386,8 +1386,6 @@ function applyMainPlanet(i){
     var planet=document.getElementById('mainPlanet');
     planet.style.background=p.bg;
     planet.style.boxShadow='inset -50px -50px 100px rgba(0,0,0,.7),inset 20px 20px 60px rgba(30,120,220,.15),'+p.shadow;
-    var clouds=planet.querySelector('.planet-clouds');
-    if(clouds)clouds.style.background='repeating-linear-gradient(170deg,transparent 0%,transparent 12%,'+p.cloudTint+' 13%,'+p.cloudTint+' 14%,transparent 15%,transparent 25%,'+p.cloudTint+' 26%,'+p.cloudTint+' 27%,transparent 28%)';
     tEl.textContent=p.name;document.getElementById('heroSub').textContent=p.sub;document.getElementById('heroEyebrow').textContent=p.eyebrow;
     document.getElementById('heroCta').onclick=function(){navTo(p.page);return false;};
     var li=(i+SIDE_LEFT.length)%SIDE_LEFT.length,ri=i%SIDE_RIGHT.length;

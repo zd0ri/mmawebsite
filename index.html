@@ -195,7 +195,18 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .disclaimer-text{font-family:'Exo 2',sans-serif;font-size:13.5px;color:var(--muted);line-height:1.7;}
 .disclaimer-text em{color:rgba(232,238,255,.6);font-style:normal;}
 
-.cine-frame{border-radius:18px;overflow:hidden;border:1px solid rgba(0,229,255,.15);background:#000;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,229,255,.05);transition:.4s;}
+.cine-frame {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 229, 255, .15);
+  background: #000;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(0, 229, 255, .05);
+  transition: .4s;
+  
+  /* ADD THESE TWO LINES */
+  margin: 0 auto 40px auto; 
+  max-width: 900px; 
+}
 .cine-frame:hover{border-color:rgba(0,229,255,.35);box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 50px rgba(0,229,255,.1);}
 .cine-bar{display:flex;align-items:center;gap:14px;padding:14px 20px;background:rgba(7,10,26,.9);border-bottom:1px solid rgba(0,229,255,.08);}
 .cine-dots{display:flex;gap:7px;}

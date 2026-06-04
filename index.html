@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,33 +79,9 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .page.enter{animation:pageEnter .6s cubic-bezier(.23,1,.32,1) forwards;}
 @keyframes pageEnter{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
 
-/* ── HERO SUPER TITLE ── */
-.hero-super-title{
-  position:relative;z-index:5;
-  text-align:center;
-  padding-top:clamp(20px,4vh,48px);
-  pointer-events:none;
-  animation:fadeInDown .7s ease both;
-}
-.hero-super-label{
-  display:inline-flex;align-items:center;gap:14px;
-  font-family:'Share Tech Mono',monospace;
-  font-size:clamp(9px,1.6vw,14px);
-  letter-spacing:6px;
-  text-transform:uppercase;
-  color:var(--cyan);
-  text-shadow:var(--glow-c);
-  padding:8px 24px;
-  border:1px solid rgba(0,229,255,.25);
-  border-radius:40px;
-  background:rgba(0,229,255,.06);
-  backdrop-filter:blur(8px);
-}
-.hero-super-label::before,
-.hero-super-label::after{
-  content:'';width:28px;height:1px;
-  background:linear-gradient(to right,transparent,var(--cyan));
-}
+.hero-super-title{position:relative;z-index:5;text-align:center;padding-top:clamp(20px,4vh,48px);pointer-events:none;animation:fadeInDown .7s ease both;}
+.hero-super-label{display:inline-flex;align-items:center;gap:14px;font-family:'Share Tech Mono',monospace;font-size:clamp(9px,1.6vw,14px);letter-spacing:6px;text-transform:uppercase;color:var(--cyan);text-shadow:var(--glow-c);padding:8px 24px;border:1px solid rgba(0,229,255,.25);border-radius:40px;background:rgba(0,229,255,.06);backdrop-filter:blur(8px);}
+.hero-super-label::before,.hero-super-label::after{content:'';width:28px;height:1px;background:linear-gradient(to right,transparent,var(--cyan));}
 .hero-super-label::after{transform:scaleX(-1);}
 
 #home{padding-top:68px;}
@@ -245,18 +222,18 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 @keyframes completePulse{0%,100%{box-shadow:0 0 16px rgba(57,255,20,.2);}50%{box-shadow:0 0 30px rgba(57,255,20,.5),0 0 60px rgba(57,255,20,.15);}}
 
 .weeks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;}
-.week-frame[data-week="1"]{--wc:#00e5ff;--wc2:#0088ff;color:inherit;}
-.week-frame[data-week="2"]{--wc:#c800ff;--wc2:#7700cc;color:inherit;}
-.week-frame[data-week="3"]{--wc:#ff6220;--wc2:#cc3300;color:inherit;}
-.week-frame[data-week="4"]{--wc:#00ffb3;--wc2:#00cc88;color:inherit;}
-.week-frame[data-week="5"]{--wc:#ff2d78;--wc2:#cc0055;color:inherit;}
-.week-frame[data-week="6"]{--wc:#ffd600;--wc2:#cc9900;color:inherit;}
-.week-frame[data-week="7"]{--wc:#00cfff;--wc2:#0099cc;color:inherit;}
-.week-frame[data-week="8"]{--wc:#aa00ff;--wc2:#7700cc;color:inherit;}
-.week-frame[data-week="9"]{--wc:#ff8c00;--wc2:#cc6600;color:inherit;}
-.week-frame[data-week="10"]{--wc:#39ff14;--wc2:#22cc00;color:inherit;}
-.week-frame[data-week="11"]{--wc:#ff1f8e;--wc2:#cc005f;color:inherit;}
-.week-frame[data-week="12"]{--wc:#c8ff00;--wc2:#99cc00;color:inherit;}
+.week-frame[data-week="1"]{--wc:#00e5ff;--wc2:#0088ff;}
+.week-frame[data-week="2"]{--wc:#c800ff;--wc2:#7700cc;}
+.week-frame[data-week="3"]{--wc:#ff6220;--wc2:#cc3300;}
+.week-frame[data-week="4"]{--wc:#00ffb3;--wc2:#00cc88;}
+.week-frame[data-week="5"]{--wc:#ff2d78;--wc2:#cc0055;}
+.week-frame[data-week="6"]{--wc:#ffd600;--wc2:#cc9900;}
+.week-frame[data-week="7"]{--wc:#00cfff;--wc2:#0099cc;}
+.week-frame[data-week="8"]{--wc:#aa00ff;--wc2:#7700cc;}
+.week-frame[data-week="9"]{--wc:#ff8c00;--wc2:#cc6600;}
+.week-frame[data-week="10"]{--wc:#39ff14;--wc2:#22cc00;}
+.week-frame[data-week="11"]{--wc:#ff1f8e;--wc2:#cc005f;}
+.week-frame[data-week="12"]{--wc:#c8ff00;--wc2:#99cc00;}
 .week-frame{position:relative;overflow:hidden;border-radius:16px;background:rgba(7,10,26,.85);border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(12px);transition:all .45s cubic-bezier(.23,1,.32,1);cursor:pointer;}
 .week-frame:hover{transform:translateY(-10px) scale(1.01);border-color:var(--wc);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px color-mix(in srgb,var(--wc) 20%,transparent);}
 .week-frame:active{transform:translateY(-4px) scale(.99);}
@@ -374,6 +351,10 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .planet-video-card:nth-child(3){animation-delay:.20s;}
 .planet-video-card:nth-child(4){animation-delay:.28s;}
 .planet-video-card:nth-child(5){animation-delay:.36s;}
+.planet-video-card:nth-child(6){animation-delay:.44s;}
+.planet-video-card:nth-child(7){animation-delay:.52s;}
+.planet-video-card:nth-child(8){animation-delay:.60s;}
+.planet-video-card:nth-child(9){animation-delay:.68s;}
 
 @keyframes blenderSectionReveal{0%{opacity:0;transform:translateY(60px) scale(.96);}60%{opacity:1;transform:translateY(-6px) scale(1.01);}100%{opacity:1;transform:translateY(0) scale(1);}}
 @keyframes hologramFlicker{0%,95%,100%{opacity:1;}96%{opacity:.5;}97%{opacity:1;}98%{opacity:.3;}99%{opacity:1;}}
@@ -426,7 +407,6 @@ body.light .disclaimer-box{background:rgba(0,50,150,.07);}
 .blender-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;}
 .blender-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 50%,rgba(200,0,255,.08) 0%,transparent 60%),radial-gradient(ellipse at 30% 30%,rgba(0,229,255,.04) 0%,transparent 50%),#030509;animation:hologramFlicker 8s ease-in-out infinite;cursor:pointer;overflow:hidden;}
 .blender-placeholder::before{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(200,0,255,.6),var(--cyan),rgba(200,0,255,.6),transparent);animation:scanSweep 3s ease-in-out infinite;z-index:2;}
-.blender-placeholder::after{content:'';position:absolute;inset:0;animation:hologramFlicker 12s ease-in-out infinite;pointer-events:none;}
 .blender-orbit-wrap{position:relative;width:180px;height:180px;flex-shrink:0;margin-bottom:28px;}
 .blender-orbit-ring{position:absolute;top:50%;left:50%;border-radius:50%;border-style:solid;}
 .blender-orbit-ring:nth-child(1){width:180px;height:180px;border-width:1px;border-color:rgba(200,0,255,.25);margin:-90px 0 0 -90px;animation:orbitRing 8s linear infinite;}
@@ -696,7 +676,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
       <div class="hero-arrow hero-arrow-left" onclick="cycleLeft()">&#8592;</div>
       <div class="hero-arrow hero-arrow-right" onclick="cycleRight()">&#8594;</div>
 
-      <!-- ★ SUPER TITLE — "Multimedia and Authoring" ★ -->
       <div class="hero-super-title">
         <span class="hero-super-label">✦ Multimedia and Authoring ✦</span>
       </div>
@@ -951,9 +930,9 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
         <div class="pvsh-icon">🌌</div>
         <div>
           <div class="pvsh-label">Solar System · Local Render Archive</div>
-          <div class="pvsh-title">5 Planet Blender Animations</div>
+          <div class="pvsh-title">9 Planet Blender Animations</div>
         </div>
-        <div class="pvsh-badge">5 PLANETS · BSIT-NS-2A</div>
+        <div class="pvsh-badge">9 PLANETS · BSIT-NS-2A</div>
       </div>
 
       <div class="planet-video-grid">
@@ -1074,7 +1053,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
           </div>
         </div>
 
-        <!-- ★ MARS — NEW CARD ★ -->
+        <!-- MARS -->
         <div class="planet-video-card" style="--pc-color:#d4552a;--pc-color2:#b03818;--pc-border:rgba(212,85,42,.18);--pc-border-bright:rgba(212,85,42,.5);--pc-glow:rgba(212,85,42,.22);">
           <div class="pvc-topbar"></div>
           <div class="pvc-bar">
@@ -1099,6 +1078,122 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
           </div>
           <div class="pvc-footer">
             <div class="pvc-footer-label">Planet 04 · Sol System</div>
+            <div class="pvc-footer-hint">Blender · Cycles Render</div>
+          </div>
+        </div>
+
+        <!-- SATURN -->
+        <div class="planet-video-card" style="--pc-color:#c8a040;--pc-color2:#906020;--pc-border:rgba(200,160,64,.18);--pc-border-bright:rgba(200,160,64,.5);--pc-glow:rgba(200,160,64,.22);">
+          <div class="pvc-topbar"></div>
+          <div class="pvc-bar">
+            <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
+            <div class="pvc-title-bar">saturn.blender · render-output</div>
+            <div class="pvc-status">✓ Live</div>
+          </div>
+          <div class="pvc-identity">
+            <div class="pvc-orb-ring">
+              <div class="pvc-orb" style="background:radial-gradient(ellipse at 30% 25%,rgba(255,230,180,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#c8a040 0%,#906020 22%,#5a3a08 50%,#281804 80%,#0a0500 100%);--pc-glow:rgba(200,160,64,.3);"></div>
+            </div>
+            <div class="pvc-info">
+              <div class="pvc-planet-name">Saturn</div>
+              <div class="pvc-planet-type">Gas Giant</div>
+              <div class="pvc-planet-file">planets/Saturn.mp4</div>
+            </div>
+          </div>
+          <div class="pvc-video-wrap">
+            <video autoplay muted loop playsinline>
+              <source src="planets/Saturn.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="pvc-footer">
+            <div class="pvc-footer-label">Planet 06 · Sol System</div>
+            <div class="pvc-footer-hint">Blender · Cycles Render</div>
+          </div>
+        </div>
+
+        <!-- URANUS -->
+        <div class="planet-video-card" style="--pc-color:#50d8b8;--pc-color2:#2aa880;--pc-border:rgba(80,216,184,.18);--pc-border-bright:rgba(80,216,184,.5);--pc-glow:rgba(80,216,184,.22);">
+          <div class="pvc-topbar"></div>
+          <div class="pvc-bar">
+            <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
+            <div class="pvc-title-bar">uranus.blender · render-output</div>
+            <div class="pvc-status">✓ Live</div>
+          </div>
+          <div class="pvc-identity">
+            <div class="pvc-orb-ring">
+              <div class="pvc-orb" style="background:radial-gradient(ellipse at 30% 25%,rgba(180,255,240,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#50d8b8 0%,#2aa880 22%,#127050 50%,#063020 80%,#010e08 100%);--pc-glow:rgba(80,216,184,.3);"></div>
+            </div>
+            <div class="pvc-info">
+              <div class="pvc-planet-name">Uranus</div>
+              <div class="pvc-planet-type">Ice Giant</div>
+              <div class="pvc-planet-file">planets/Uranus.mp4</div>
+            </div>
+          </div>
+          <div class="pvc-video-wrap">
+            <video autoplay muted loop playsinline>
+              <source src="planets/Uranus.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="pvc-footer">
+            <div class="pvc-footer-label">Planet 07 · Sol System</div>
+            <div class="pvc-footer-hint">Blender · Cycles Render</div>
+          </div>
+        </div>
+
+        <!-- NEPTUNE -->
+        <div class="planet-video-card" style="--pc-color:#2ec4e8;--pc-color2:#1480a8;--pc-border:rgba(46,196,232,.18);--pc-border-bright:rgba(46,196,232,.5);--pc-glow:rgba(46,196,232,.22);">
+          <div class="pvc-topbar"></div>
+          <div class="pvc-bar">
+            <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
+            <div class="pvc-title-bar">neptune.blender · render-output</div>
+            <div class="pvc-status">✓ Live</div>
+          </div>
+          <div class="pvc-identity">
+            <div class="pvc-orb-ring">
+              <div class="pvc-orb" style="background:radial-gradient(ellipse at 30% 25%,rgba(150,230,255,.2) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#2ec4e8 0%,#1480a8 22%,#0a4a70 50%,#041e38 80%,#010810 100%);--pc-glow:rgba(46,196,232,.3);"></div>
+            </div>
+            <div class="pvc-info">
+              <div class="pvc-planet-name">Neptune</div>
+              <div class="pvc-planet-type">Ice Giant</div>
+              <div class="pvc-planet-file">planets/Neptune.mp4</div>
+            </div>
+          </div>
+          <div class="pvc-video-wrap">
+            <video autoplay muted loop playsinline>
+              <source src="planets/Neptune.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="pvc-footer">
+            <div class="pvc-footer-label">Planet 08 · Sol System</div>
+            <div class="pvc-footer-hint">Blender · Cycles Render</div>
+          </div>
+        </div>
+
+        <!-- PLUTO -->
+        <div class="planet-video-card" style="--pc-color:#9e8878;--pc-color2:#6e5848;--pc-border:rgba(158,136,120,.18);--pc-border-bright:rgba(158,136,120,.5);--pc-glow:rgba(158,136,120,.22);">
+          <div class="pvc-topbar"></div>
+          <div class="pvc-bar">
+            <div class="pvc-dots"><div class="pvc-dot"></div><div class="pvc-dot"></div><div class="pvc-dot"></div></div>
+            <div class="pvc-title-bar">pluto.blender · render-output</div>
+            <div class="pvc-status">✓ Live</div>
+          </div>
+          <div class="pvc-identity">
+            <div class="pvc-orb-ring">
+              <div class="pvc-orb" style="background:radial-gradient(ellipse at 32% 28%,rgba(210,190,170,.18) 0%,transparent 38%),radial-gradient(ellipse at 35% 35%,#9e8878 0%,#6e5848 22%,#4a3830 50%,#201810 80%,#080604 100%);--pc-glow:rgba(158,136,120,.3);"></div>
+            </div>
+            <div class="pvc-info">
+              <div class="pvc-planet-name">Pluto</div>
+              <div class="pvc-planet-type">Dwarf Planet</div>
+              <div class="pvc-planet-file">planets/Pluto.mp4</div>
+            </div>
+          </div>
+          <div class="pvc-video-wrap">
+            <video autoplay muted loop playsinline>
+              <source src="planets/Pluto.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="pvc-footer">
+            <div class="pvc-footer-label">Dwarf Planet · Sol System</div>
             <div class="pvc-footer-hint">Blender · Cycles Render</div>
           </div>
         </div>
@@ -1523,3 +1618,6 @@ function pcalcRenderFacts(idx){var p=PCALC_PLANETS[idx];var list=document.getEle
 </script>
 </body>
 </html>
+
+
+

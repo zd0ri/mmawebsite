@@ -618,6 +618,38 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.23,1,.32,1);}
 .reveal.revealed{opacity:1;transform:none;}
 
+/* Tutorial step-by-step guide */
+.tutorial-steps{margin-top:22px;padding:30px 32px;border-radius:18px;background:rgba(7,10,26,.75);border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(12px);transition:border-color .4s,box-shadow .4s;}
+.tutorial-steps:hover{border-color:rgba(0,229,255,.25);box-shadow:0 20px 50px rgba(0,0,0,.35);}
+.tutorial-steps-title{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:22px;display:flex;align-items:center;gap:14px;}
+.tutorial-steps-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(0,229,255,.4),transparent);}
+.tutorial-step{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);transition:.3s;}
+.tutorial-step:last-child{border-bottom:none;padding-bottom:0;}
+.tutorial-step:first-child{padding-top:0;}
+.tutorial-step:hover{padding-left:6px;}
+.tutorial-step-num{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:900;color:rgba(0,229,255,.25);flex-shrink:0;width:36px;transition:.3s;}
+.tutorial-step:hover .tutorial-step-num{color:var(--cyan);text-shadow:var(--glow-c);}
+.tutorial-step-title{font-family:'Rajdhani',sans-serif;font-size:15.5px;font-weight:700;color:var(--white);margin-bottom:4px;letter-spacing:.5px;}
+.tutorial-step-desc{font-family:'Exo 2',sans-serif;font-size:13.5px;color:var(--muted);line-height:1.65;}
+.tutorial-steps.magenta .tutorial-steps-title{color:var(--magenta);}
+.tutorial-steps.magenta .tutorial-steps-title::after{background:linear-gradient(to right,rgba(200,0,255,.4),transparent);}
+.tutorial-steps.magenta:hover{border-color:rgba(200,0,255,.25);}
+.tutorial-steps.magenta .tutorial-step-num{color:rgba(200,0,255,.25);}
+.tutorial-steps.magenta .tutorial-step:hover .tutorial-step-num{color:var(--magenta);text-shadow:var(--glow-m);}
+
+/* Project files download card */
+.files-download-card{display:flex;align-items:center;gap:24px;padding:28px 32px;border-radius:20px;background:rgba(7,10,26,.85);border:1px solid rgba(0,229,255,.18);backdrop-filter:blur(16px);transition:all .4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;margin-bottom:60px;}
+.files-download-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.06),transparent 60%);opacity:0;transition:.5s;}
+.files-download-card:hover{border-color:rgba(0,229,255,.4);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(0,229,255,.12);}
+.files-download-card:hover::before{opacity:1;}
+.files-download-icon{width:60px;height:60px;flex-shrink:0;border-radius:16px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);display:flex;align-items:center;justify-content:center;font-size:28px;transition:.4s;}
+.files-download-card:hover .files-download-icon{transform:scale(1.08) rotate(4deg);box-shadow:var(--glow-c);}
+.files-download-info{flex:1;}
+.files-download-title{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:800;letter-spacing:1.5px;color:var(--white);margin-bottom:6px;}
+.files-download-desc{font-family:'Exo 2',sans-serif;font-size:13.5px;color:var(--muted);line-height:1.6;max-width:520px;}
+.files-download-btn{flex-shrink:0;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(0,229,255,.35);padding:12px 26px;border-radius:30px;background:rgba(0,229,255,.06);transition:all .3s;white-space:nowrap;}
+.files-download-btn:hover{box-shadow:var(--glow-c);background:rgba(0,229,255,.14);transform:scale(1.04);}
+
 @media(max-width:900px){
   .proj-grid,.about-layout{grid-template-columns:1fr;}
   .hero-stats{flex-wrap:wrap;}
@@ -635,6 +667,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
   .blender-meta-item{min-width:50%;}
   .planet-video-grid{grid-template-columns:1fr;}
   .pcalc-planet-grid,.pcalc-age-planet-grid{grid-template-columns:repeat(5,1fr);}
+  .files-download-card{flex-direction:column;text-align:center;}
 }
 @media(max-width:500px){
   .pcalc-planet-grid,.pcalc-age-planet-grid{grid-template-columns:repeat(3,1fr);}

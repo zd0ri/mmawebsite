@@ -639,7 +639,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(0,229,255,.06);padd
 
 /* Project files download card */
 .files-download-card{display:flex;align-items:center;gap:24px;padding:28px 32px;border-radius:20px;background:rgba(7,10,26,.85);border:1px solid rgba(0,229,255,.18);backdrop-filter:blur(16px);transition:all .4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;margin-bottom:60px;}
-.files-download-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.06),transparent 60%);opacity:0;transition:.5s;}
+.files-download-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.06),transparent 60%);opacity:0;transition:.5s;pointer-events:none;}
 .files-download-card:hover{border-color:rgba(0,229,255,.4);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(0,229,255,.12);}
 .files-download-card:hover::before{opacity:1;}
 .files-download-icon{width:60px;height:60px;flex-shrink:0;border-radius:16px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);display:flex;align-items:center;justify-content:center;font-size:28px;transition:.4s;}
